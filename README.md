@@ -1,4 +1,4 @@
-# tournamenteer
+# tourneyview
 
 Does things with tournament data.
 
@@ -48,7 +48,7 @@ When working without a builder, use the IIFE bundles of tourneyview (`dist/index
 ```html
 <head>
     <meta charset="UTF-8">
-    <title>tournamenteer-renderer</title>
+    <title>tourneyview</title>
     <!-- Import base styles -->
     <link rel="stylesheet" href="@tourneyview/renderer/css/base.css">
 </head>
