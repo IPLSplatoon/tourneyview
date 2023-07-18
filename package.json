@@ -1,0 +1,17 @@
+{
+  "name": "tourneyview",
+  "private": true,
+  "scripts": {
+    "serve": "vite --config vite.config.base.ts --port 8080 ./example"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.4.1",
+    "lerna": "^7.1.1",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.2",
+    "vite-plugin-dts": "^3.1.1"
+  }
+}

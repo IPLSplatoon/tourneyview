@@ -1,0 +1,20 @@
+{
+  "name": "@tourneyview/common",
+  "version": "0.1.0",
+  "description": "Common tourneyview types & functionality",
+  "main": "dist/index.iife.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && vite build --config ../../vite.config.base.ts"
+  },
+  "author": "inkfarer <inkfarer@inkfarer.com>",
+  "license": "MIT",
+  "files": [
+    "dist/**/*"
+  ],
+  "build": {
+    "libName": "TourneyviewCommon"
+  }
+}

@@ -1,0 +1,4417 @@
+[
+  {
+    "_id": "643c216cf767ca4a12cb3cd8",
+    "top": {
+      "seedNumber": 1,
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6435f9ecfc426841771e5f81",
+      "score": 2,
+      "team": {
+        "_id": "6435f9ecfc426841771e5f81",
+        "name": "Squids Ztrikes",
+        "pendingTeamID": "6435f9d76c341637fcdfe8c4",
+        "persistentTeamID": "63766230d67f505be84c2e0b",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "597519be0b4e18032eba3af9",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mitch45#7436"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2782-2804-8893"
+          }
+        ],
+        "ownerID": "597519be0b4e18032eba3af9",
+        "createdAt": "2023-04-12T00:23:08.317Z",
+        "playerIDs": [
+          "6435f9ecfc426841771e5f79",
+          "6435f9ecfc426841771e5f7c",
+          "6435f9ecfc426841771e5f7d",
+          "6435f9ecfc426841771e5f7e",
+          "6435f9ecfc426841771e5f7f",
+          "6435f9ecfc426841771e5f80",
+          "6435f9fdcda1431b4d4ba49b",
+          "6437905f19b7d706d3ca1a1f"
+        ],
+        "captainID": "6435f9ecfc426841771e5f80"
+      }
+    },
+    "bottom": {
+      "seedNumber": 16,
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6429ec31f249261f13c7ba53",
+      "score": 1,
+      "team": {
+        "_id": "6429ec31f249261f13c7ba53",
+        "name": "Photic Zone",
+        "pendingTeamID": "6429ebf5d686fc6085159286",
+        "persistentTeamID": "636d3f0d65908529d913ee14",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5d2e48612bf2e00944b63183",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "taco#4994"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "1325-5836-0605"
+          }
+        ],
+        "ownerID": "5d2e48612bf2e00944b63183",
+        "createdAt": "2023-04-02T20:57:21.534Z",
+        "playerIDs": [
+          "6429ec31f249261f13c7ba4f",
+          "6429ec31f249261f13c7ba50",
+          "6429ec31f249261f13c7ba51",
+          "6429ec31f249261f13c7ba52",
+          "642a4cf36d8dc22488c43de6"
+        ],
+        "captainID": "6429ec31f249261f13c7ba52"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 1,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ce0"
+      },
+      "loser": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ce7"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:29:32.005Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cd8",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:12:11.359Z",
+        "_id": "643c2c6b7ec5ae30d845c978"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cd8",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:29:29.921Z",
+        "_id": "643c3079be7dd86d3fc075fa"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cd8",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:29:31.995Z",
+        "_id": "643c307b22b7791b3c1d2972"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:29:32.005Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cd9",
+    "top": {
+      "seedNumber": 8,
+      "winner": false,
+      "disqualified": false,
+      "teamID": "642af8c65b31ba3e4e1b41b1",
+      "score": 0,
+      "team": {
+        "_id": "642af8c65b31ba3e4e1b41b1",
+        "name": "Kayo Calamari",
+        "pendingTeamID": "642af8acd686fc60851593ea",
+        "persistentTeamID": "6400ec6ab16f4c1c5cd32232",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5b69bec688f26a03c86d39cc",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Alice 🌼#4902"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-1217-9794-4795"
+          }
+        ],
+        "ownerID": "5b69bec688f26a03c86d39cc",
+        "createdAt": "2023-04-03T16:03:18.614Z",
+        "playerIDs": [
+          "642af8c65b31ba3e4e1b41a9",
+          "642af8c65b31ba3e4e1b41aa",
+          "642af8c65b31ba3e4e1b41ab",
+          "642af8c65b31ba3e4e1b41ad",
+          "642af8c65b31ba3e4e1b41b0",
+          "64335a44f767ca4a12cb2a82",
+          "643c284a898fdc5c6ba715b0"
+        ],
+        "captainID": "642af8c65b31ba3e4e1b41b0"
+      }
+    },
+    "bottom": {
+      "seedNumber": 9,
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6433c92f526024251b4688c0",
+      "score": 2,
+      "team": {
+        "_id": "6433c92f526024251b4688c0",
+        "name": "Orca Ballestra!",
+        "pendingTeamID": "6433c8dbc5222a06e5aba876",
+        "persistentTeamID": "63b5fb3ae0561f6b081a5a35",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6351be51bdbdfd4ad3eacf83",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "7231-2695-4324"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Soshi#1738"
+          }
+        ],
+        "ownerID": "6351be51bdbdfd4ad3eacf83",
+        "createdAt": "2023-04-10T08:30:39.884Z",
+        "playerIDs": [
+          "6433c92f526024251b4688b8",
+          "6433c92f526024251b4688bb",
+          "6433c92f526024251b4688bc",
+          "6433c92f526024251b4688bd",
+          "6433c92f526024251b4688be",
+          "6433c92f526024251b4688bf",
+          "6438d0d9f767ca4a12cb35ec"
+        ],
+        "captainID": "6433c92f526024251b4688bf"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 2,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ce0"
+      },
+      "loser": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ce7"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:21:18.955Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cd9",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:12:13.489Z",
+        "_id": "643c2c6d68a6c253bc6a60c9"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cd9",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:21:18.727Z",
+        "_id": "643c2e8e68a6c253bc6a60d8"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:21:18.955Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cda",
+    "top": {
+      "seedNumber": 4,
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6431d7339c292353b152b6f9",
+      "score": 0,
+      "team": {
+        "_id": "6431d7339c292353b152b6f9",
+        "name": "Benthic Brigade",
+        "pendingTeamID": "6431d68406a3d87c7a77ec1c",
+        "persistentTeamID": "635d9bd602b1c60a4d5f9721",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5f0cbcfa685620138a169448",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mr. Awesome#1848"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-6618-5912-9297"
+          }
+        ],
+        "ownerID": "5f0cbcfa685620138a169448",
+        "createdAt": "2023-04-08T21:05:55.235Z",
+        "playerIDs": [
+          "6431d7339c292353b152b6f4",
+          "6431d7339c292353b152b6f5",
+          "6431d7339c292353b152b6f6",
+          "6431d7339c292353b152b6f7",
+          "6431d7339c292353b152b6f8"
+        ],
+        "captainID": "6431d7339c292353b152b6f8"
+      }
+    },
+    "bottom": {
+      "seedNumber": 13,
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6429fc93f249261f13c7ba99",
+      "score": 2,
+      "team": {
+        "_id": "6429fc93f249261f13c7ba99",
+        "name": "Sea Drive",
+        "pendingTeamID": "6429fba3a2868609147a57f2",
+        "persistentTeamID": "63c451e9b17e3d43eee1e7ec",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6376da3b61bd4503fe7f7cf8",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "NBound#4207"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-0780-2761-9321"
+          }
+        ],
+        "ownerID": "6376da3b61bd4503fe7f7cf8",
+        "createdAt": "2023-04-02T22:07:15.735Z",
+        "playerIDs": [
+          "6429fc93f249261f13c7ba95",
+          "6429fc93f249261f13c7ba96",
+          "6429fc93f249261f13c7ba97",
+          "6429fc93f249261f13c7ba98"
+        ],
+        "captainID": "6429fc93f249261f13c7ba98"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 3,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ce1"
+      },
+      "loser": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ce8"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:17:16.265Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "isMarkedLive": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cda",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:09:33.007Z",
+        "_id": "643c2bcd19b7d706d3ca1fb1"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cda",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:17:16.061Z",
+        "_id": "643c2d9c76482e5c62e78a2f"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:17:16.265Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cdb",
+    "top": {
+      "seedNumber": 5,
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6431926506a3d87c7a77eaf3",
+      "score": 2,
+      "team": {
+        "_id": "6431926506a3d87c7a77eaf3",
+        "name": "MERO!",
+        "pendingTeamID": "6431924276482e5c62e77a2d",
+        "persistentTeamID": "639e56cf28079d6a88de50c0",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "61f9b1ba2aa86a367103d987",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "kizmo#2397"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "7599-3034-7893"
+          }
+        ],
+        "ownerID": "61f9b1ba2aa86a367103d987",
+        "createdAt": "2023-04-08T16:12:21.280Z",
+        "playerIDs": [
+          "6431926506a3d87c7a77eaec",
+          "6431926506a3d87c7a77eaed",
+          "6431926506a3d87c7a77eaee",
+          "6431926506a3d87c7a77eaef",
+          "6431926506a3d87c7a77eaf0",
+          "6431926506a3d87c7a77eaf1",
+          "6431926506a3d87c7a77eaf2"
+        ],
+        "captainID": "6431926506a3d87c7a77eaf2"
+      }
+    },
+    "bottom": {
+      "seedNumber": 12,
+      "winner": false,
+      "disqualified": false,
+      "teamID": "643345bab255cf30cf7df7d2",
+      "score": 0,
+      "team": {
+        "_id": "643345bab255cf30cf7df7d2",
+        "name": "Eminence Phantom",
+        "pendingTeamID": "64334530d828db3fff7cf5fa",
+        "persistentTeamID": "63ee63ccb4d88a34a2ee070e",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "60f6d799f37c2c3ce98e7a1e",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Finn#1054"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "1551 7074 6335"
+          }
+        ],
+        "ownerID": "60f6d799f37c2c3ce98e7a1e",
+        "createdAt": "2023-04-09T23:09:46.622Z",
+        "playerIDs": [
+          "643345bab255cf30cf7df7cc",
+          "643345bab255cf30cf7df7cd",
+          "643345bab255cf30cf7df7ce",
+          "643345bab255cf30cf7df7d0",
+          "643345bab255cf30cf7df7d1"
+        ],
+        "captainID": "643345bab255cf30cf7df7d1"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 4,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ce1"
+      },
+      "loser": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ce8"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:17:10.074Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cdb",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:17:08.885Z",
+        "_id": "643c2d94522013250ddd5f5f"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cdb",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:17:09.911Z",
+        "_id": "643c2d95522013250ddd5f60"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:17:10.074Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cdc",
+    "top": {
+      "seedNumber": 2,
+      "winner": true,
+      "disqualified": false,
+      "teamID": "643703b229d83437f3cc17d2",
+      "score": 2,
+      "team": {
+        "_id": "643703b229d83437f3cc17d2",
+        "name": "Matter of opinion",
+        "pendingTeamID": "6437016efd986a4a01e34c11",
+        "persistentTeamID": "6437016d14a6be5c7cadb3ee",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "608ba007a3b9bc11dc4f4d64",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mooni/Drago#4382"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-8370-5568-1025"
+          }
+        ],
+        "ownerID": "608ba007a3b9bc11dc4f4d64",
+        "createdAt": "2023-04-12T19:17:06.078Z",
+        "playerIDs": [
+          "643703b229d83437f3cc17ce",
+          "643703b229d83437f3cc17cf",
+          "643703b229d83437f3cc17d0",
+          "643703b229d83437f3cc17d1",
+          "6438146cac261c37ea514a7f"
+        ],
+        "captainID": "643703b229d83437f3cc17d1"
+      }
+    },
+    "bottom": {
+      "seedNumber": 15,
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6439750b0d33735c5ca99c92",
+      "score": 0,
+      "team": {
+        "_id": "6439750b0d33735c5ca99c92",
+        "name": "Team Biscuits",
+        "pendingTeamID": "64359af9725f8453aad174f2",
+        "persistentTeamID": "632264968c4d0f1159e8fea1",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5ad3ba3f1128ea0366d2ab24",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "smileyface#3833"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "3756-1811-5407"
+          }
+        ],
+        "ownerID": "5ad3ba3f1128ea0366d2ab24",
+        "createdAt": "2023-04-14T15:45:15.379Z",
+        "playerIDs": [
+          "6439750b0d33735c5ca99c8e",
+          "6439750b0d33735c5ca99c8f",
+          "6439750b0d33735c5ca99c90",
+          "6439750b0d33735c5ca99c91",
+          "6439bee58cf8ea6d595a97c1",
+          "6439c062c9208c6d39379889"
+        ],
+        "captainID": "6439750b0d33735c5ca99c91"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 5,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ce2"
+      },
+      "loser": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ce9"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:25:35.075Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cdc",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:20:01.198Z",
+        "_id": "643c2e4114a6be5c7cadba55"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cdc",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:25:36.546Z",
+        "_id": "643c2f902a11222491138fe3"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:25:35.075Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cdd",
+    "top": {
+      "seedNumber": 7,
+      "winner": true,
+      "disqualified": false,
+      "teamID": "642d8beebe7dd86d3fc05db8",
+      "score": 2,
+      "team": {
+        "_id": "642d8beebe7dd86d3fc05db8",
+        "name": "Secret Elixir",
+        "pendingTeamID": "642d8bd5227ec44112fb9994",
+        "persistentTeamID": "639826290705444936209d02",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6174b3b060084d21c4a86f84",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Kurta#6573"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-3120-7566-2044"
+          }
+        ],
+        "ownerID": "6174b3b060084d21c4a86f84",
+        "createdAt": "2023-04-05T14:55:42.643Z",
+        "playerIDs": [
+          "642d8beebe7dd86d3fc05db2",
+          "642d8beebe7dd86d3fc05db3",
+          "642d8beebe7dd86d3fc05db4",
+          "642d8beebe7dd86d3fc05db5",
+          "642d8beebe7dd86d3fc05db6",
+          "642d8beebe7dd86d3fc05db7"
+        ],
+        "captainID": "642d8beebe7dd86d3fc05db7"
+      }
+    },
+    "bottom": {
+      "seedNumber": 10,
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6434b9390d33735c5ca99763",
+      "score": 1,
+      "team": {
+        "_id": "6434b9390d33735c5ca99763",
+        "name": "Knight Sharks",
+        "pendingTeamID": "6434b92580c02f7c62520643",
+        "persistentTeamID": "631fc0e3adc76228b123e292",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "61aeb35788e13f4af42d8094",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Håkon#7211"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2114-9656-1710"
+          }
+        ],
+        "ownerID": "61aeb35788e13f4af42d8094",
+        "createdAt": "2023-04-11T01:34:49.205Z",
+        "playerIDs": [
+          "6434b9390d33735c5ca9975c",
+          "6434b9390d33735c5ca9975d",
+          "6434b9390d33735c5ca9975e",
+          "6434b9390d33735c5ca9975f",
+          "6434b9390d33735c5ca99762"
+        ],
+        "captainID": "6434b9390d33735c5ca99762"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 6,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ce2"
+      },
+      "loser": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ce9"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:24:31.692Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cdd",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:08:17.412Z",
+        "_id": "643c2b819c292353b152c518"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cdd",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:15:42.785Z",
+        "_id": "643c2d3e29d83437f3cc2027"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cdd",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:24:31.592Z",
+        "_id": "643c2f4f5a34c624fbaf4457"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:24:31.692Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cde",
+    "top": {
+      "seedNumber": 3,
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6431f0b022b7791b3c1d1d0d",
+      "score": 2,
+      "team": {
+        "_id": "6431f0b022b7791b3c1d1d0d",
+        "name": "Octoπ",
+        "pendingTeamID": "6431f08e80c02f7c625203f0",
+        "persistentTeamID": "63532657500acd19338161e8",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5acd64a64a13d1036feee852",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Rosearrow#7765"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-3927-1091-3807"
+          }
+        ],
+        "ownerID": "5acd64a64a13d1036feee852",
+        "createdAt": "2023-04-08T22:54:40.558Z",
+        "playerIDs": [
+          "6431f0b022b7791b3c1d1d08",
+          "6431f0b022b7791b3c1d1d09",
+          "6431f0b022b7791b3c1d1d0a",
+          "6431f0b022b7791b3c1d1d0b",
+          "6431f0b022b7791b3c1d1d0c"
+        ],
+        "captainID": "6431f0b022b7791b3c1d1d0c"
+      }
+    },
+    "bottom": {
+      "seedNumber": 14,
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6435f6cb5a34c624fbaf377c",
+      "score": 0,
+      "team": {
+        "_id": "6435f6cb5a34c624fbaf377c",
+        "name": "Trip Hazard",
+        "pendingTeamID": "6435f664f1170a380a3af9c5",
+        "persistentTeamID": "63cf0e19af264f65d9bc7d26",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "635f17c4f36121311c85268a",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Parx#1002"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-6740-1578-9598"
+          }
+        ],
+        "ownerID": "635f17c4f36121311c85268a",
+        "createdAt": "2023-04-12T00:09:47.026Z",
+        "playerIDs": [
+          "6435f6cb5a34c624fbaf3776",
+          "6435f6cb5a34c624fbaf3777",
+          "6435f6cb5a34c624fbaf3778",
+          "6435f6cb5a34c624fbaf3779",
+          "6435f6cb5a34c624fbaf377a",
+          "6435f6cb5a34c624fbaf377b"
+        ],
+        "captainID": "6435f6cb5a34c624fbaf377b"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 7,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ce3"
+      },
+      "loser": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3cea"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:13:09.421Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cde",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:10:44.368Z",
+        "_id": "643c2c1419b7d706d3ca1fb2"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cde",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:13:09.160Z",
+        "_id": "643c2ca562a24a49f81be121"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:13:09.421Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cdf",
+    "top": {
+      "seedNumber": 6,
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6434a724fe67157c6c02ca5e",
+      "score": 2,
+      "team": {
+        "_id": "6434a724fe67157c6c02ca5e",
+        "name": "0 luck found",
+        "pendingTeamID": "6434a6ceb255cf30cf7df8c5",
+        "persistentTeamID": "640f71507cbe9d55410d3d0d",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "580fb7b28f64ff77032d3c5c",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Zander#6598"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2796-9975-7764"
+          }
+        ],
+        "ownerID": "580fb7b28f64ff77032d3c5c",
+        "createdAt": "2023-04-11T00:17:40.793Z",
+        "playerIDs": [
+          "6434a724fe67157c6c02ca5a",
+          "6434a724fe67157c6c02ca5b",
+          "6434a724fe67157c6c02ca5c",
+          "6434a724fe67157c6c02ca5d"
+        ],
+        "captainID": "6434a724fe67157c6c02ca5d"
+      }
+    },
+    "bottom": {
+      "seedNumber": 11,
+      "winner": false,
+      "disqualified": false,
+      "teamID": "64319cad6c341637fcdfe33b",
+      "score": 0,
+      "team": {
+        "_id": "64319cad6c341637fcdfe33b",
+        "name": "Hydra",
+        "pendingTeamID": "64319c951358ad5c689615c6",
+        "persistentTeamID": "632504c1fcdac50a0c5a2ea9",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5c39286cc419a003e22de9b7",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Nessa#9072"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-1704-3362-0333"
+          }
+        ],
+        "ownerID": "5c39286cc419a003e22de9b7",
+        "createdAt": "2023-04-08T16:56:13.466Z",
+        "playerIDs": [
+          "64319cad6c341637fcdfe333",
+          "64319cad6c341637fcdfe334",
+          "64319cad6c341637fcdfe335",
+          "64319cad6c341637fcdfe336",
+          "64319cad6c341637fcdfe337",
+          "64319cad6c341637fcdfe338",
+          "64319cad6c341637fcdfe33a"
+        ],
+        "captainID": "64319cad6c341637fcdfe33a"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 8,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ce3"
+      },
+      "loser": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3cea"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:16:20.627Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cdf",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:16:20.386Z",
+        "_id": "643c2d6414a6be5c7cadba54"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cdf",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:16:32.339Z",
+        "_id": "643c2d7025dbb7247575655e"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:16:20.627Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ce0",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6435f9ecfc426841771e5f81",
+      "seedNumber": 1,
+      "score": 3,
+      "team": {
+        "_id": "6435f9ecfc426841771e5f81",
+        "name": "Squids Ztrikes",
+        "pendingTeamID": "6435f9d76c341637fcdfe8c4",
+        "persistentTeamID": "63766230d67f505be84c2e0b",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "597519be0b4e18032eba3af9",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mitch45#7436"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2782-2804-8893"
+          }
+        ],
+        "ownerID": "597519be0b4e18032eba3af9",
+        "createdAt": "2023-04-12T00:23:08.317Z",
+        "playerIDs": [
+          "6435f9ecfc426841771e5f79",
+          "6435f9ecfc426841771e5f7c",
+          "6435f9ecfc426841771e5f7d",
+          "6435f9ecfc426841771e5f7e",
+          "6435f9ecfc426841771e5f7f",
+          "6435f9ecfc426841771e5f80",
+          "6435f9fdcda1431b4d4ba49b",
+          "6437905f19b7d706d3ca1a1f"
+        ],
+        "captainID": "6435f9ecfc426841771e5f80"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6433c92f526024251b4688c0",
+      "seedNumber": 9,
+      "score": 2,
+      "team": {
+        "_id": "6433c92f526024251b4688c0",
+        "name": "Orca Ballestra!",
+        "pendingTeamID": "6433c8dbc5222a06e5aba876",
+        "persistentTeamID": "63b5fb3ae0561f6b081a5a35",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6351be51bdbdfd4ad3eacf83",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "7231-2695-4324"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Soshi#1738"
+          }
+        ],
+        "ownerID": "6351be51bdbdfd4ad3eacf83",
+        "createdAt": "2023-04-10T08:30:39.884Z",
+        "playerIDs": [
+          "6433c92f526024251b4688b8",
+          "6433c92f526024251b4688bb",
+          "6433c92f526024251b4688bc",
+          "6433c92f526024251b4688bd",
+          "6433c92f526024251b4688be",
+          "6433c92f526024251b4688bf",
+          "6438d0d9f767ca4a12cb35ec"
+        ],
+        "captainID": "6433c92f526024251b4688bf"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 9,
+    "roundNumber": 2,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ce4"
+      },
+      "loser": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3cee"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T18:18:04.864Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "isMarkedLive": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3ce0",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:00:38.785Z",
+        "_id": "643c37c6fdc709247b23500c"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce0",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:00:42.205Z",
+        "_id": "643c37caa9b8a841612d1132"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce0",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:01:29.563Z",
+        "_id": "643c37f906a3d87c7a77fa5f"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce0",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 4,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:09:11.509Z",
+        "_id": "643c39c776482e5c62e78a56"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce0",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 5,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:18:04.681Z",
+        "_id": "643c3bdce0bb805c7e35a699"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T18:18:04.864Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ce1",
+    "top": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6429fc93f249261f13c7ba99",
+      "seedNumber": 13,
+      "score": 2,
+      "team": {
+        "_id": "6429fc93f249261f13c7ba99",
+        "name": "Sea Drive",
+        "pendingTeamID": "6429fba3a2868609147a57f2",
+        "persistentTeamID": "63c451e9b17e3d43eee1e7ec",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6376da3b61bd4503fe7f7cf8",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "NBound#4207"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-0780-2761-9321"
+          }
+        ],
+        "ownerID": "6376da3b61bd4503fe7f7cf8",
+        "createdAt": "2023-04-02T22:07:15.735Z",
+        "playerIDs": [
+          "6429fc93f249261f13c7ba95",
+          "6429fc93f249261f13c7ba96",
+          "6429fc93f249261f13c7ba97",
+          "6429fc93f249261f13c7ba98"
+        ],
+        "captainID": "6429fc93f249261f13c7ba98"
+      }
+    },
+    "bottom": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6431926506a3d87c7a77eaf3",
+      "seedNumber": 5,
+      "score": 3,
+      "team": {
+        "_id": "6431926506a3d87c7a77eaf3",
+        "name": "MERO!",
+        "pendingTeamID": "6431924276482e5c62e77a2d",
+        "persistentTeamID": "639e56cf28079d6a88de50c0",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "61f9b1ba2aa86a367103d987",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "kizmo#2397"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "7599-3034-7893"
+          }
+        ],
+        "ownerID": "61f9b1ba2aa86a367103d987",
+        "createdAt": "2023-04-08T16:12:21.280Z",
+        "playerIDs": [
+          "6431926506a3d87c7a77eaec",
+          "6431926506a3d87c7a77eaed",
+          "6431926506a3d87c7a77eaee",
+          "6431926506a3d87c7a77eaef",
+          "6431926506a3d87c7a77eaf0",
+          "6431926506a3d87c7a77eaf1",
+          "6431926506a3d87c7a77eaf2"
+        ],
+        "captainID": "6431926506a3d87c7a77eaf2"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 10,
+    "roundNumber": 2,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ce4"
+      },
+      "loser": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ced"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:59:32.843Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3ce1",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:36:54.708Z",
+        "_id": "643c3236be7dd86d3fc075fd"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce1",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:39:32.176Z",
+        "_id": "643c32d4f767ca4a12cb3d47"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce1",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 4,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:50:27.831Z",
+        "_id": "643c35638e701c30ef48d8a3"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce1",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:50:55.188Z",
+        "_id": "643c357f522013250ddd5f6a"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce1",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 5,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:59:32.569Z",
+        "_id": "643c3784a4ae19416a2e29d0"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:59:32.843Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ce2",
+    "top": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "643703b229d83437f3cc17d2",
+      "seedNumber": 2,
+      "score": 0,
+      "team": {
+        "_id": "643703b229d83437f3cc17d2",
+        "name": "Matter of opinion",
+        "pendingTeamID": "6437016efd986a4a01e34c11",
+        "persistentTeamID": "6437016d14a6be5c7cadb3ee",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "608ba007a3b9bc11dc4f4d64",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mooni/Drago#4382"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-8370-5568-1025"
+          }
+        ],
+        "ownerID": "608ba007a3b9bc11dc4f4d64",
+        "createdAt": "2023-04-12T19:17:06.078Z",
+        "playerIDs": [
+          "643703b229d83437f3cc17ce",
+          "643703b229d83437f3cc17cf",
+          "643703b229d83437f3cc17d0",
+          "643703b229d83437f3cc17d1",
+          "6438146cac261c37ea514a7f"
+        ],
+        "captainID": "643703b229d83437f3cc17d1"
+      }
+    },
+    "bottom": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "642d8beebe7dd86d3fc05db8",
+      "seedNumber": 7,
+      "score": 3,
+      "team": {
+        "_id": "642d8beebe7dd86d3fc05db8",
+        "name": "Secret Elixir",
+        "pendingTeamID": "642d8bd5227ec44112fb9994",
+        "persistentTeamID": "639826290705444936209d02",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6174b3b060084d21c4a86f84",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Kurta#6573"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-3120-7566-2044"
+          }
+        ],
+        "ownerID": "6174b3b060084d21c4a86f84",
+        "createdAt": "2023-04-05T14:55:42.643Z",
+        "playerIDs": [
+          "642d8beebe7dd86d3fc05db2",
+          "642d8beebe7dd86d3fc05db3",
+          "642d8beebe7dd86d3fc05db4",
+          "642d8beebe7dd86d3fc05db5",
+          "642d8beebe7dd86d3fc05db6",
+          "642d8beebe7dd86d3fc05db7"
+        ],
+        "captainID": "642d8beebe7dd86d3fc05db7"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 11,
+    "roundNumber": 2,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ce5"
+      },
+      "loser": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3cec"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:45:14.225Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3ce2",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:38:04.771Z",
+        "_id": "643c327c4b3b69411fa1114d"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce2",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:39:37.823Z",
+        "_id": "643c32d9ce4ad25c62fd8903"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce2",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:45:34.793Z",
+        "_id": "643c343efdc709247b235001"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:45:14.225Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ce3",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6431f0b022b7791b3c1d1d0d",
+      "seedNumber": 3,
+      "score": 3,
+      "team": {
+        "_id": "6431f0b022b7791b3c1d1d0d",
+        "name": "Octoπ",
+        "pendingTeamID": "6431f08e80c02f7c625203f0",
+        "persistentTeamID": "63532657500acd19338161e8",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5acd64a64a13d1036feee852",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Rosearrow#7765"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-3927-1091-3807"
+          }
+        ],
+        "ownerID": "5acd64a64a13d1036feee852",
+        "createdAt": "2023-04-08T22:54:40.558Z",
+        "playerIDs": [
+          "6431f0b022b7791b3c1d1d08",
+          "6431f0b022b7791b3c1d1d09",
+          "6431f0b022b7791b3c1d1d0a",
+          "6431f0b022b7791b3c1d1d0b",
+          "6431f0b022b7791b3c1d1d0c"
+        ],
+        "captainID": "6431f0b022b7791b3c1d1d0c"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6434a724fe67157c6c02ca5e",
+      "seedNumber": 6,
+      "score": 1,
+      "team": {
+        "_id": "6434a724fe67157c6c02ca5e",
+        "name": "0 luck found",
+        "pendingTeamID": "6434a6ceb255cf30cf7df8c5",
+        "persistentTeamID": "640f71507cbe9d55410d3d0d",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "580fb7b28f64ff77032d3c5c",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Zander#6598"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2796-9975-7764"
+          }
+        ],
+        "ownerID": "580fb7b28f64ff77032d3c5c",
+        "createdAt": "2023-04-11T00:17:40.793Z",
+        "playerIDs": [
+          "6434a724fe67157c6c02ca5a",
+          "6434a724fe67157c6c02ca5b",
+          "6434a724fe67157c6c02ca5c",
+          "6434a724fe67157c6c02ca5d"
+        ],
+        "captainID": "6434a724fe67157c6c02ca5d"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 12,
+    "roundNumber": 2,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ce5"
+      },
+      "loser": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ceb"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:44:18.333Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3ce3",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:30:11.248Z",
+        "_id": "643c30a3402b034017318084"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce3",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:30:29.900Z",
+        "_id": "643c30b5c87e3e53ca6fbf12"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce3",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:39:58.519Z",
+        "_id": "643c32ee25dbb72475756565"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce3",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 4,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:44:40.593Z",
+        "_id": "643c34087ec5ae30d845ca08"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:44:18.333Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ce4",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6435f9ecfc426841771e5f81",
+      "seedNumber": 1,
+      "score": 3,
+      "team": {
+        "_id": "6435f9ecfc426841771e5f81",
+        "name": "Squids Ztrikes",
+        "pendingTeamID": "6435f9d76c341637fcdfe8c4",
+        "persistentTeamID": "63766230d67f505be84c2e0b",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "597519be0b4e18032eba3af9",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mitch45#7436"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2782-2804-8893"
+          }
+        ],
+        "ownerID": "597519be0b4e18032eba3af9",
+        "createdAt": "2023-04-12T00:23:08.317Z",
+        "playerIDs": [
+          "6435f9ecfc426841771e5f79",
+          "6435f9ecfc426841771e5f7c",
+          "6435f9ecfc426841771e5f7d",
+          "6435f9ecfc426841771e5f7e",
+          "6435f9ecfc426841771e5f7f",
+          "6435f9ecfc426841771e5f80",
+          "6435f9fdcda1431b4d4ba49b",
+          "6437905f19b7d706d3ca1a1f"
+        ],
+        "captainID": "6435f9ecfc426841771e5f80"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6431926506a3d87c7a77eaf3",
+      "seedNumber": 5,
+      "score": 1,
+      "team": {
+        "_id": "6431926506a3d87c7a77eaf3",
+        "name": "MERO!",
+        "pendingTeamID": "6431924276482e5c62e77a2d",
+        "persistentTeamID": "639e56cf28079d6a88de50c0",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "61f9b1ba2aa86a367103d987",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "kizmo#2397"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "7599-3034-7893"
+          }
+        ],
+        "ownerID": "61f9b1ba2aa86a367103d987",
+        "createdAt": "2023-04-08T16:12:21.280Z",
+        "playerIDs": [
+          "6431926506a3d87c7a77eaec",
+          "6431926506a3d87c7a77eaed",
+          "6431926506a3d87c7a77eaee",
+          "6431926506a3d87c7a77eaef",
+          "6431926506a3d87c7a77eaf0",
+          "6431926506a3d87c7a77eaf1",
+          "6431926506a3d87c7a77eaf2"
+        ],
+        "captainID": "6431926506a3d87c7a77eaf2"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 13,
+    "roundNumber": 3,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3ce6"
+      },
+      "loser": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3cf1"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T18:54:15.430Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3ce4",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:38:21.680Z",
+        "_id": "643c409d6c341637fcdff262"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce4",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:47:05.567Z",
+        "_id": "643c42a9522013250ddd5f83"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce4",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:48:15.320Z",
+        "_id": "643c42efc5222a06e5abb3e5"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce4",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 4,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:54:14.848Z",
+        "_id": "643c44564f089a250188f41d"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T18:54:15.430Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ce5",
+    "top": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "642d8beebe7dd86d3fc05db8",
+      "seedNumber": 7,
+      "score": 2,
+      "team": {
+        "_id": "642d8beebe7dd86d3fc05db8",
+        "name": "Secret Elixir",
+        "pendingTeamID": "642d8bd5227ec44112fb9994",
+        "persistentTeamID": "639826290705444936209d02",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6174b3b060084d21c4a86f84",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Kurta#6573"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-3120-7566-2044"
+          }
+        ],
+        "ownerID": "6174b3b060084d21c4a86f84",
+        "createdAt": "2023-04-05T14:55:42.643Z",
+        "playerIDs": [
+          "642d8beebe7dd86d3fc05db2",
+          "642d8beebe7dd86d3fc05db3",
+          "642d8beebe7dd86d3fc05db4",
+          "642d8beebe7dd86d3fc05db5",
+          "642d8beebe7dd86d3fc05db6",
+          "642d8beebe7dd86d3fc05db7"
+        ],
+        "captainID": "642d8beebe7dd86d3fc05db7"
+      }
+    },
+    "bottom": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6431f0b022b7791b3c1d1d0d",
+      "seedNumber": 3,
+      "score": 3,
+      "team": {
+        "_id": "6431f0b022b7791b3c1d1d0d",
+        "name": "Octoπ",
+        "pendingTeamID": "6431f08e80c02f7c625203f0",
+        "persistentTeamID": "63532657500acd19338161e8",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5acd64a64a13d1036feee852",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Rosearrow#7765"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-3927-1091-3807"
+          }
+        ],
+        "ownerID": "5acd64a64a13d1036feee852",
+        "createdAt": "2023-04-08T22:54:40.558Z",
+        "playerIDs": [
+          "6431f0b022b7791b3c1d1d08",
+          "6431f0b022b7791b3c1d1d09",
+          "6431f0b022b7791b3c1d1d0a",
+          "6431f0b022b7791b3c1d1d0b",
+          "6431f0b022b7791b3c1d1d0c"
+        ],
+        "captainID": "6431f0b022b7791b3c1d1d0c"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 14,
+    "roundNumber": 3,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ce6"
+      },
+      "loser": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3cf2"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T18:59:19.825Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "isMarkedLive": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3ce5",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:28:35.976Z",
+        "_id": "643c3e53c5222a06e5abb3de"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce5",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:39:20.887Z",
+        "_id": "643c40d822b7791b3c1d29ab"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce5",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:46:02.752Z",
+        "_id": "643c426a740c1e1b352c290f"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce5",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 4,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:50:26.531Z",
+        "_id": "643c43725c62eb49f2a0a617"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce5",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 5,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:59:19.649Z",
+        "_id": "643c4587f1170a380a3b0351"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T18:59:19.825Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ce6",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6435f9ecfc426841771e5f81",
+      "seedNumber": 1,
+      "score": 3,
+      "team": {
+        "_id": "6435f9ecfc426841771e5f81",
+        "name": "Squids Ztrikes",
+        "pendingTeamID": "6435f9d76c341637fcdfe8c4",
+        "persistentTeamID": "63766230d67f505be84c2e0b",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "597519be0b4e18032eba3af9",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mitch45#7436"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2782-2804-8893"
+          }
+        ],
+        "ownerID": "597519be0b4e18032eba3af9",
+        "createdAt": "2023-04-12T00:23:08.317Z",
+        "playerIDs": [
+          "6435f9ecfc426841771e5f79",
+          "6435f9ecfc426841771e5f7c",
+          "6435f9ecfc426841771e5f7d",
+          "6435f9ecfc426841771e5f7e",
+          "6435f9ecfc426841771e5f7f",
+          "6435f9ecfc426841771e5f80",
+          "6435f9fdcda1431b4d4ba49b",
+          "6437905f19b7d706d3ca1a1f"
+        ],
+        "captainID": "6435f9ecfc426841771e5f80"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6431f0b022b7791b3c1d1d0d",
+      "seedNumber": 3,
+      "score": 1,
+      "team": {
+        "_id": "6431f0b022b7791b3c1d1d0d",
+        "name": "Octoπ",
+        "pendingTeamID": "6431f08e80c02f7c625203f0",
+        "persistentTeamID": "63532657500acd19338161e8",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5acd64a64a13d1036feee852",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Rosearrow#7765"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-3927-1091-3807"
+          }
+        ],
+        "ownerID": "5acd64a64a13d1036feee852",
+        "createdAt": "2023-04-08T22:54:40.558Z",
+        "playerIDs": [
+          "6431f0b022b7791b3c1d1d08",
+          "6431f0b022b7791b3c1d1d09",
+          "6431f0b022b7791b3c1d1d0a",
+          "6431f0b022b7791b3c1d1d0b",
+          "6431f0b022b7791b3c1d1d0c"
+        ],
+        "captainID": "6431f0b022b7791b3c1d1d0c"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 15,
+    "roundNumber": 4,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3cf5"
+      },
+      "loser": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3cf4"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T19:33:55.125Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "isMarkedLive": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3ce6",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:11:46.491Z",
+        "_id": "643c487241a5bf1b2dae6f1d"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce6",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:26:09.881Z",
+        "_id": "643c4bd1740c1e1b352c291e"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce6",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:26:11.497Z",
+        "_id": "643c4bd3c9208c6d39379e18"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce6",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 4,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:33:54.951Z",
+        "_id": "643c4da2f1170a380a3b035f"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T19:33:55.125Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ce7",
+    "top": {
+      "teamID": "642af8c65b31ba3e4e1b41b1",
+      "seedNumber": 8,
+      "disqualified": false,
+      "winner": false,
+      "score": 1,
+      "team": {
+        "_id": "642af8c65b31ba3e4e1b41b1",
+        "name": "Kayo Calamari",
+        "pendingTeamID": "642af8acd686fc60851593ea",
+        "persistentTeamID": "6400ec6ab16f4c1c5cd32232",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5b69bec688f26a03c86d39cc",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Alice 🌼#4902"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-1217-9794-4795"
+          }
+        ],
+        "ownerID": "5b69bec688f26a03c86d39cc",
+        "createdAt": "2023-04-03T16:03:18.614Z",
+        "playerIDs": [
+          "642af8c65b31ba3e4e1b41a9",
+          "642af8c65b31ba3e4e1b41aa",
+          "642af8c65b31ba3e4e1b41ab",
+          "642af8c65b31ba3e4e1b41ad",
+          "642af8c65b31ba3e4e1b41b0",
+          "64335a44f767ca4a12cb2a82",
+          "643c284a898fdc5c6ba715b0"
+        ],
+        "captainID": "642af8c65b31ba3e4e1b41b0"
+      }
+    },
+    "bottom": {
+      "teamID": "6429ec31f249261f13c7ba53",
+      "seedNumber": 16,
+      "disqualified": false,
+      "winner": true,
+      "score": 2,
+      "team": {
+        "_id": "6429ec31f249261f13c7ba53",
+        "name": "Photic Zone",
+        "pendingTeamID": "6429ebf5d686fc6085159286",
+        "persistentTeamID": "636d3f0d65908529d913ee14",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5d2e48612bf2e00944b63183",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "taco#4994"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "1325-5836-0605"
+          }
+        ],
+        "ownerID": "5d2e48612bf2e00944b63183",
+        "createdAt": "2023-04-02T20:57:21.534Z",
+        "playerIDs": [
+          "6429ec31f249261f13c7ba4f",
+          "6429ec31f249261f13c7ba50",
+          "6429ec31f249261f13c7ba51",
+          "6429ec31f249261f13c7ba52",
+          "642a4cf36d8dc22488c43de6"
+        ],
+        "captainID": "6429ec31f249261f13c7ba52"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 1,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ceb"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:58:05.895Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:58:05.895Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ce8",
+    "top": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "643345bab255cf30cf7df7d2",
+      "seedNumber": 12,
+      "score": 0,
+      "team": {
+        "_id": "643345bab255cf30cf7df7d2",
+        "name": "Eminence Phantom",
+        "pendingTeamID": "64334530d828db3fff7cf5fa",
+        "persistentTeamID": "63ee63ccb4d88a34a2ee070e",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "60f6d799f37c2c3ce98e7a1e",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Finn#1054"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "1551 7074 6335"
+          }
+        ],
+        "ownerID": "60f6d799f37c2c3ce98e7a1e",
+        "createdAt": "2023-04-09T23:09:46.622Z",
+        "playerIDs": [
+          "643345bab255cf30cf7df7cc",
+          "643345bab255cf30cf7df7cd",
+          "643345bab255cf30cf7df7ce",
+          "643345bab255cf30cf7df7d0",
+          "643345bab255cf30cf7df7d1"
+        ],
+        "captainID": "643345bab255cf30cf7df7d1"
+      }
+    },
+    "bottom": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6431d7339c292353b152b6f9",
+      "seedNumber": 4,
+      "score": 2,
+      "team": {
+        "_id": "6431d7339c292353b152b6f9",
+        "name": "Benthic Brigade",
+        "pendingTeamID": "6431d68406a3d87c7a77ec1c",
+        "persistentTeamID": "635d9bd602b1c60a4d5f9721",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5f0cbcfa685620138a169448",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mr. Awesome#1848"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-6618-5912-9297"
+          }
+        ],
+        "ownerID": "5f0cbcfa685620138a169448",
+        "createdAt": "2023-04-08T21:05:55.235Z",
+        "playerIDs": [
+          "6431d7339c292353b152b6f4",
+          "6431d7339c292353b152b6f5",
+          "6431d7339c292353b152b6f6",
+          "6431d7339c292353b152b6f7",
+          "6431d7339c292353b152b6f8"
+        ],
+        "captainID": "6431d7339c292353b152b6f8"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 2,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3cec"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:31:35.428Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3ce8",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:25:39.011Z",
+        "_id": "643c2f93fe67157c6c02d375"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce8",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:31:35.214Z",
+        "_id": "643c30f715d19d7c5ae9be9b"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:31:35.428Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ce9",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6434b9390d33735c5ca99763",
+      "seedNumber": 10,
+      "score": 2,
+      "team": {
+        "_id": "6434b9390d33735c5ca99763",
+        "name": "Knight Sharks",
+        "pendingTeamID": "6434b92580c02f7c62520643",
+        "persistentTeamID": "631fc0e3adc76228b123e292",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "61aeb35788e13f4af42d8094",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Håkon#7211"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2114-9656-1710"
+          }
+        ],
+        "ownerID": "61aeb35788e13f4af42d8094",
+        "createdAt": "2023-04-11T01:34:49.205Z",
+        "playerIDs": [
+          "6434b9390d33735c5ca9975c",
+          "6434b9390d33735c5ca9975d",
+          "6434b9390d33735c5ca9975e",
+          "6434b9390d33735c5ca9975f",
+          "6434b9390d33735c5ca99762"
+        ],
+        "captainID": "6434b9390d33735c5ca99762"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6439750b0d33735c5ca99c92",
+      "seedNumber": 15,
+      "score": 0,
+      "team": {
+        "_id": "6439750b0d33735c5ca99c92",
+        "name": "Team Biscuits",
+        "pendingTeamID": "64359af9725f8453aad174f2",
+        "persistentTeamID": "632264968c4d0f1159e8fea1",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5ad3ba3f1128ea0366d2ab24",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "smileyface#3833"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "3756-1811-5407"
+          }
+        ],
+        "ownerID": "5ad3ba3f1128ea0366d2ab24",
+        "createdAt": "2023-04-14T15:45:15.379Z",
+        "playerIDs": [
+          "6439750b0d33735c5ca99c8e",
+          "6439750b0d33735c5ca99c8f",
+          "6439750b0d33735c5ca99c90",
+          "6439750b0d33735c5ca99c91",
+          "6439bee58cf8ea6d595a97c1",
+          "6439c062c9208c6d39379889"
+        ],
+        "captainID": "6439750b0d33735c5ca99c91"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 3,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3ced"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:42:26.722Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3ce9",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:35:22.606Z",
+        "_id": "643c31da5c62eb49f2a0a5c8"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ce9",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:42:26.585Z",
+        "_id": "643c3382cf6e92415b6c2b5a"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:42:26.722Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cea",
+    "top": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "64319cad6c341637fcdfe33b",
+      "seedNumber": 11,
+      "score": 0,
+      "team": {
+        "_id": "64319cad6c341637fcdfe33b",
+        "name": "Hydra",
+        "pendingTeamID": "64319c951358ad5c689615c6",
+        "persistentTeamID": "632504c1fcdac50a0c5a2ea9",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5c39286cc419a003e22de9b7",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Nessa#9072"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-1704-3362-0333"
+          }
+        ],
+        "ownerID": "5c39286cc419a003e22de9b7",
+        "createdAt": "2023-04-08T16:56:13.466Z",
+        "playerIDs": [
+          "64319cad6c341637fcdfe333",
+          "64319cad6c341637fcdfe334",
+          "64319cad6c341637fcdfe335",
+          "64319cad6c341637fcdfe336",
+          "64319cad6c341637fcdfe337",
+          "64319cad6c341637fcdfe338",
+          "64319cad6c341637fcdfe33a"
+        ],
+        "captainID": "64319cad6c341637fcdfe33a"
+      }
+    },
+    "bottom": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6435f6cb5a34c624fbaf377c",
+      "seedNumber": 14,
+      "score": 2,
+      "team": {
+        "_id": "6435f6cb5a34c624fbaf377c",
+        "name": "Trip Hazard",
+        "pendingTeamID": "6435f664f1170a380a3af9c5",
+        "persistentTeamID": "63cf0e19af264f65d9bc7d26",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "635f17c4f36121311c85268a",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Parx#1002"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-6740-1578-9598"
+          }
+        ],
+        "ownerID": "635f17c4f36121311c85268a",
+        "createdAt": "2023-04-12T00:09:47.026Z",
+        "playerIDs": [
+          "6435f6cb5a34c624fbaf3776",
+          "6435f6cb5a34c624fbaf3777",
+          "6435f6cb5a34c624fbaf3778",
+          "6435f6cb5a34c624fbaf3779",
+          "6435f6cb5a34c624fbaf377a",
+          "6435f6cb5a34c624fbaf377b"
+        ],
+        "captainID": "6435f6cb5a34c624fbaf377b"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 4,
+    "roundNumber": 1,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3cee"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T17:33:59.810Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cea",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:25:57.603Z",
+        "_id": "643c2fa506a3d87c7a77fa4f"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cea",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:33:59.642Z",
+        "_id": "643c31870d33735c5ca9a2c7"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T17:33:59.810Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ceb",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6434a724fe67157c6c02ca5e",
+      "seedNumber": 6,
+      "score": 2,
+      "team": {
+        "_id": "6434a724fe67157c6c02ca5e",
+        "name": "0 luck found",
+        "pendingTeamID": "6434a6ceb255cf30cf7df8c5",
+        "persistentTeamID": "640f71507cbe9d55410d3d0d",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "580fb7b28f64ff77032d3c5c",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Zander#6598"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2796-9975-7764"
+          }
+        ],
+        "ownerID": "580fb7b28f64ff77032d3c5c",
+        "createdAt": "2023-04-11T00:17:40.793Z",
+        "playerIDs": [
+          "6434a724fe67157c6c02ca5a",
+          "6434a724fe67157c6c02ca5b",
+          "6434a724fe67157c6c02ca5c",
+          "6434a724fe67157c6c02ca5d"
+        ],
+        "captainID": "6434a724fe67157c6c02ca5d"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "seedNumber": 16,
+      "teamID": "6429ec31f249261f13c7ba53",
+      "score": 0,
+      "team": {
+        "_id": "6429ec31f249261f13c7ba53",
+        "name": "Photic Zone",
+        "pendingTeamID": "6429ebf5d686fc6085159286",
+        "persistentTeamID": "636d3f0d65908529d913ee14",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5d2e48612bf2e00944b63183",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "taco#4994"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "1325-5836-0605"
+          }
+        ],
+        "ownerID": "5d2e48612bf2e00944b63183",
+        "createdAt": "2023-04-02T20:57:21.534Z",
+        "playerIDs": [
+          "6429ec31f249261f13c7ba4f",
+          "6429ec31f249261f13c7ba50",
+          "6429ec31f249261f13c7ba51",
+          "6429ec31f249261f13c7ba52",
+          "642a4cf36d8dc22488c43de6"
+        ],
+        "captainID": "6429ec31f249261f13c7ba52"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 5,
+    "roundNumber": 2,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3cef"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T18:15:08.196Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3ceb",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:07:00.556Z",
+        "_id": "643c3944e0bb805c7e35a690"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ceb",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:15:08.000Z",
+        "_id": "643c3b2c9c292353b152c527"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T18:15:08.196Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cec",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "643703b229d83437f3cc17d2",
+      "seedNumber": 2,
+      "score": 2,
+      "team": {
+        "_id": "643703b229d83437f3cc17d2",
+        "name": "Matter of opinion",
+        "pendingTeamID": "6437016efd986a4a01e34c11",
+        "persistentTeamID": "6437016d14a6be5c7cadb3ee",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "608ba007a3b9bc11dc4f4d64",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mooni/Drago#4382"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-8370-5568-1025"
+          }
+        ],
+        "ownerID": "608ba007a3b9bc11dc4f4d64",
+        "createdAt": "2023-04-12T19:17:06.078Z",
+        "playerIDs": [
+          "643703b229d83437f3cc17ce",
+          "643703b229d83437f3cc17cf",
+          "643703b229d83437f3cc17d0",
+          "643703b229d83437f3cc17d1",
+          "6438146cac261c37ea514a7f"
+        ],
+        "captainID": "643703b229d83437f3cc17d1"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6431d7339c292353b152b6f9",
+      "seedNumber": 4,
+      "score": 1,
+      "team": {
+        "_id": "6431d7339c292353b152b6f9",
+        "name": "Benthic Brigade",
+        "pendingTeamID": "6431d68406a3d87c7a77ec1c",
+        "persistentTeamID": "635d9bd602b1c60a4d5f9721",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5f0cbcfa685620138a169448",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mr. Awesome#1848"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-6618-5912-9297"
+          }
+        ],
+        "ownerID": "5f0cbcfa685620138a169448",
+        "createdAt": "2023-04-08T21:05:55.235Z",
+        "playerIDs": [
+          "6431d7339c292353b152b6f4",
+          "6431d7339c292353b152b6f5",
+          "6431d7339c292353b152b6f6",
+          "6431d7339c292353b152b6f7",
+          "6431d7339c292353b152b6f8"
+        ],
+        "captainID": "6431d7339c292353b152b6f8"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 6,
+    "roundNumber": 2,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3cef"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T18:13:50.673Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cec",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T17:58:06.596Z",
+        "_id": "643c372efe67157c6c02d388"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cec",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:04:19.778Z",
+        "_id": "643c38a341a5bf1b2dae6f02"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cec",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:13:58.162Z",
+        "_id": "643c3ae676482e5c62e78a7b"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T18:13:50.673Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3ced",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6429fc93f249261f13c7ba99",
+      "seedNumber": 13,
+      "score": 2,
+      "team": {
+        "_id": "6429fc93f249261f13c7ba99",
+        "name": "Sea Drive",
+        "pendingTeamID": "6429fba3a2868609147a57f2",
+        "persistentTeamID": "63c451e9b17e3d43eee1e7ec",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6376da3b61bd4503fe7f7cf8",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "NBound#4207"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-0780-2761-9321"
+          }
+        ],
+        "ownerID": "6376da3b61bd4503fe7f7cf8",
+        "createdAt": "2023-04-02T22:07:15.735Z",
+        "playerIDs": [
+          "6429fc93f249261f13c7ba95",
+          "6429fc93f249261f13c7ba96",
+          "6429fc93f249261f13c7ba97",
+          "6429fc93f249261f13c7ba98"
+        ],
+        "captainID": "6429fc93f249261f13c7ba98"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6434b9390d33735c5ca99763",
+      "seedNumber": 10,
+      "score": 0,
+      "team": {
+        "_id": "6434b9390d33735c5ca99763",
+        "name": "Knight Sharks",
+        "pendingTeamID": "6434b92580c02f7c62520643",
+        "persistentTeamID": "631fc0e3adc76228b123e292",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "61aeb35788e13f4af42d8094",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Håkon#7211"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2114-9656-1710"
+          }
+        ],
+        "ownerID": "61aeb35788e13f4af42d8094",
+        "createdAt": "2023-04-11T01:34:49.205Z",
+        "playerIDs": [
+          "6434b9390d33735c5ca9975c",
+          "6434b9390d33735c5ca9975d",
+          "6434b9390d33735c5ca9975e",
+          "6434b9390d33735c5ca9975f",
+          "6434b9390d33735c5ca99762"
+        ],
+        "captainID": "6434b9390d33735c5ca99762"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 7,
+    "roundNumber": 2,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3cf0"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T18:17:13.758Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3ced",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:06:58.993Z",
+        "_id": "643c3942fdc709247b23500f"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3ced",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:17:13.639Z",
+        "_id": "643c3ba915d19d7c5ae9bea6"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T18:17:13.758Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cee",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6433c92f526024251b4688c0",
+      "seedNumber": 9,
+      "score": 2,
+      "team": {
+        "_id": "6433c92f526024251b4688c0",
+        "name": "Orca Ballestra!",
+        "pendingTeamID": "6433c8dbc5222a06e5aba876",
+        "persistentTeamID": "63b5fb3ae0561f6b081a5a35",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6351be51bdbdfd4ad3eacf83",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "7231-2695-4324"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Soshi#1738"
+          }
+        ],
+        "ownerID": "6351be51bdbdfd4ad3eacf83",
+        "createdAt": "2023-04-10T08:30:39.884Z",
+        "playerIDs": [
+          "6433c92f526024251b4688b8",
+          "6433c92f526024251b4688bb",
+          "6433c92f526024251b4688bc",
+          "6433c92f526024251b4688bd",
+          "6433c92f526024251b4688be",
+          "6433c92f526024251b4688bf",
+          "6438d0d9f767ca4a12cb35ec"
+        ],
+        "captainID": "6433c92f526024251b4688bf"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6435f6cb5a34c624fbaf377c",
+      "seedNumber": 14,
+      "score": 0,
+      "team": {
+        "_id": "6435f6cb5a34c624fbaf377c",
+        "name": "Trip Hazard",
+        "pendingTeamID": "6435f664f1170a380a3af9c5",
+        "persistentTeamID": "63cf0e19af264f65d9bc7d26",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "635f17c4f36121311c85268a",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Parx#1002"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-6740-1578-9598"
+          }
+        ],
+        "ownerID": "635f17c4f36121311c85268a",
+        "createdAt": "2023-04-12T00:09:47.026Z",
+        "playerIDs": [
+          "6435f6cb5a34c624fbaf3776",
+          "6435f6cb5a34c624fbaf3777",
+          "6435f6cb5a34c624fbaf3778",
+          "6435f6cb5a34c624fbaf3779",
+          "6435f6cb5a34c624fbaf377a",
+          "6435f6cb5a34c624fbaf377b"
+        ],
+        "captainID": "6435f6cb5a34c624fbaf377b"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 8,
+    "roundNumber": 2,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3cf0"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T18:35:19.552Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cee",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:29:51.339Z",
+        "_id": "643c3e9f6c341637fcdff25f"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cee",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:35:19.397Z",
+        "_id": "643c3fe76de1092484cbbf5d"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T18:35:19.552Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cef",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6434a724fe67157c6c02ca5e",
+      "seedNumber": 6,
+      "score": 2,
+      "team": {
+        "_id": "6434a724fe67157c6c02ca5e",
+        "name": "0 luck found",
+        "pendingTeamID": "6434a6ceb255cf30cf7df8c5",
+        "persistentTeamID": "640f71507cbe9d55410d3d0d",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "580fb7b28f64ff77032d3c5c",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Zander#6598"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2796-9975-7764"
+          }
+        ],
+        "ownerID": "580fb7b28f64ff77032d3c5c",
+        "createdAt": "2023-04-11T00:17:40.793Z",
+        "playerIDs": [
+          "6434a724fe67157c6c02ca5a",
+          "6434a724fe67157c6c02ca5b",
+          "6434a724fe67157c6c02ca5c",
+          "6434a724fe67157c6c02ca5d"
+        ],
+        "captainID": "6434a724fe67157c6c02ca5d"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "643703b229d83437f3cc17d2",
+      "seedNumber": 2,
+      "score": 1,
+      "team": {
+        "_id": "643703b229d83437f3cc17d2",
+        "name": "Matter of opinion",
+        "pendingTeamID": "6437016efd986a4a01e34c11",
+        "persistentTeamID": "6437016d14a6be5c7cadb3ee",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "608ba007a3b9bc11dc4f4d64",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mooni/Drago#4382"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-8370-5568-1025"
+          }
+        ],
+        "ownerID": "608ba007a3b9bc11dc4f4d64",
+        "createdAt": "2023-04-12T19:17:06.078Z",
+        "playerIDs": [
+          "643703b229d83437f3cc17ce",
+          "643703b229d83437f3cc17cf",
+          "643703b229d83437f3cc17d0",
+          "643703b229d83437f3cc17d1",
+          "6438146cac261c37ea514a7f"
+        ],
+        "captainID": "643703b229d83437f3cc17d1"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 9,
+    "roundNumber": 3,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3cf1"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T18:36:36.095Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cef",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:23:43.465Z",
+        "_id": "643c3d2f2180b206f375060b"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cef",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:36:35.910Z",
+        "_id": "643c403315d19d7c5ae9beb0"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cef",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:39:28.377Z",
+        "_id": "643c40e08e701c30ef48d8be"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T18:36:36.095Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cf0",
+    "top": {
+      "teamID": "6429fc93f249261f13c7ba99",
+      "seedNumber": 13,
+      "disqualified": false,
+      "winner": true,
+      "score": 2,
+      "team": {
+        "_id": "6429fc93f249261f13c7ba99",
+        "name": "Sea Drive",
+        "pendingTeamID": "6429fba3a2868609147a57f2",
+        "persistentTeamID": "63c451e9b17e3d43eee1e7ec",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6376da3b61bd4503fe7f7cf8",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "NBound#4207"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-0780-2761-9321"
+          }
+        ],
+        "ownerID": "6376da3b61bd4503fe7f7cf8",
+        "createdAt": "2023-04-02T22:07:15.735Z",
+        "playerIDs": [
+          "6429fc93f249261f13c7ba95",
+          "6429fc93f249261f13c7ba96",
+          "6429fc93f249261f13c7ba97",
+          "6429fc93f249261f13c7ba98"
+        ],
+        "captainID": "6429fc93f249261f13c7ba98"
+      }
+    },
+    "bottom": {
+      "teamID": "6433c92f526024251b4688c0",
+      "seedNumber": 9,
+      "disqualified": false,
+      "winner": false,
+      "score": 1,
+      "team": {
+        "_id": "6433c92f526024251b4688c0",
+        "name": "Orca Ballestra!",
+        "pendingTeamID": "6433c8dbc5222a06e5aba876",
+        "persistentTeamID": "63b5fb3ae0561f6b081a5a35",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6351be51bdbdfd4ad3eacf83",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "7231-2695-4324"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Soshi#1738"
+          }
+        ],
+        "ownerID": "6351be51bdbdfd4ad3eacf83",
+        "createdAt": "2023-04-10T08:30:39.884Z",
+        "playerIDs": [
+          "6433c92f526024251b4688b8",
+          "6433c92f526024251b4688bb",
+          "6433c92f526024251b4688bc",
+          "6433c92f526024251b4688bd",
+          "6433c92f526024251b4688be",
+          "6433c92f526024251b4688bf",
+          "6438d0d9f767ca4a12cb35ec"
+        ],
+        "captainID": "6433c92f526024251b4688bf"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 10,
+    "roundNumber": 3,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3cf2"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T18:58:43.028Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cf0",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:51:37.721Z",
+        "_id": "643c43b98e701c30ef48d8c8"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf0",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:51:38.974Z",
+        "_id": "643c43ba68a6c253bc6a60ef"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf0",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T18:58:42.819Z",
+        "_id": "643c456276482e5c62e78a82"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T18:58:43.028Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cf1",
+    "top": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6431926506a3d87c7a77eaf3",
+      "seedNumber": 5,
+      "score": 1,
+      "team": {
+        "_id": "6431926506a3d87c7a77eaf3",
+        "name": "MERO!",
+        "pendingTeamID": "6431924276482e5c62e77a2d",
+        "persistentTeamID": "639e56cf28079d6a88de50c0",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "61f9b1ba2aa86a367103d987",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "kizmo#2397"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "7599-3034-7893"
+          }
+        ],
+        "ownerID": "61f9b1ba2aa86a367103d987",
+        "createdAt": "2023-04-08T16:12:21.280Z",
+        "playerIDs": [
+          "6431926506a3d87c7a77eaec",
+          "6431926506a3d87c7a77eaed",
+          "6431926506a3d87c7a77eaee",
+          "6431926506a3d87c7a77eaef",
+          "6431926506a3d87c7a77eaf0",
+          "6431926506a3d87c7a77eaf1",
+          "6431926506a3d87c7a77eaf2"
+        ],
+        "captainID": "6431926506a3d87c7a77eaf2"
+      }
+    },
+    "bottom": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6434a724fe67157c6c02ca5e",
+      "seedNumber": 6,
+      "score": 2,
+      "team": {
+        "_id": "6434a724fe67157c6c02ca5e",
+        "name": "0 luck found",
+        "pendingTeamID": "6434a6ceb255cf30cf7df8c5",
+        "persistentTeamID": "640f71507cbe9d55410d3d0d",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "580fb7b28f64ff77032d3c5c",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Zander#6598"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2796-9975-7764"
+          }
+        ],
+        "ownerID": "580fb7b28f64ff77032d3c5c",
+        "createdAt": "2023-04-11T00:17:40.793Z",
+        "playerIDs": [
+          "6434a724fe67157c6c02ca5a",
+          "6434a724fe67157c6c02ca5b",
+          "6434a724fe67157c6c02ca5c",
+          "6434a724fe67157c6c02ca5d"
+        ],
+        "captainID": "6434a724fe67157c6c02ca5d"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 11,
+    "roundNumber": 4,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3cf3"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T19:17:32.216Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cf1",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:01:37.289Z",
+        "_id": "643c4611c87e3e53ca6fbf27"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf1",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:10:08.297Z",
+        "_id": "643c4810c5222a06e5abb3f2"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf1",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:17:32.010Z",
+        "_id": "643c49cccda1431b4d4bb027"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T19:17:32.216Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cf2",
+    "top": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "642d8beebe7dd86d3fc05db8",
+      "seedNumber": 7,
+      "score": 1,
+      "team": {
+        "_id": "642d8beebe7dd86d3fc05db8",
+        "name": "Secret Elixir",
+        "pendingTeamID": "642d8bd5227ec44112fb9994",
+        "persistentTeamID": "639826290705444936209d02",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6174b3b060084d21c4a86f84",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Kurta#6573"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-3120-7566-2044"
+          }
+        ],
+        "ownerID": "6174b3b060084d21c4a86f84",
+        "createdAt": "2023-04-05T14:55:42.643Z",
+        "playerIDs": [
+          "642d8beebe7dd86d3fc05db2",
+          "642d8beebe7dd86d3fc05db3",
+          "642d8beebe7dd86d3fc05db4",
+          "642d8beebe7dd86d3fc05db5",
+          "642d8beebe7dd86d3fc05db6",
+          "642d8beebe7dd86d3fc05db7"
+        ],
+        "captainID": "642d8beebe7dd86d3fc05db7"
+      }
+    },
+    "bottom": {
+      "winner": true,
+      "disqualified": false,
+      "seedNumber": 13,
+      "teamID": "6429fc93f249261f13c7ba99",
+      "score": 2,
+      "team": {
+        "_id": "6429fc93f249261f13c7ba99",
+        "name": "Sea Drive",
+        "pendingTeamID": "6429fba3a2868609147a57f2",
+        "persistentTeamID": "63c451e9b17e3d43eee1e7ec",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6376da3b61bd4503fe7f7cf8",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "NBound#4207"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-0780-2761-9321"
+          }
+        ],
+        "ownerID": "6376da3b61bd4503fe7f7cf8",
+        "createdAt": "2023-04-02T22:07:15.735Z",
+        "playerIDs": [
+          "6429fc93f249261f13c7ba95",
+          "6429fc93f249261f13c7ba96",
+          "6429fc93f249261f13c7ba97",
+          "6429fc93f249261f13c7ba98"
+        ],
+        "captainID": "6429fc93f249261f13c7ba98"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 12,
+    "roundNumber": 4,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3cf3"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T19:29:55.448Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cf2",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:21:40.587Z",
+        "_id": "643c4ac46de1092484cbbfa1"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf2",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:21:41.684Z",
+        "_id": "643c4ac5f1170a380a3b035e"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf2",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:29:55.304Z",
+        "_id": "643c4cb319b7d706d3ca1fe5"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T19:29:55.448Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cf3",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6434a724fe67157c6c02ca5e",
+      "seedNumber": 6,
+      "score": 2,
+      "team": {
+        "_id": "6434a724fe67157c6c02ca5e",
+        "name": "0 luck found",
+        "pendingTeamID": "6434a6ceb255cf30cf7df8c5",
+        "persistentTeamID": "640f71507cbe9d55410d3d0d",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "580fb7b28f64ff77032d3c5c",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Zander#6598"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2796-9975-7764"
+          }
+        ],
+        "ownerID": "580fb7b28f64ff77032d3c5c",
+        "createdAt": "2023-04-11T00:17:40.793Z",
+        "playerIDs": [
+          "6434a724fe67157c6c02ca5a",
+          "6434a724fe67157c6c02ca5b",
+          "6434a724fe67157c6c02ca5c",
+          "6434a724fe67157c6c02ca5d"
+        ],
+        "captainID": "6434a724fe67157c6c02ca5d"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6429fc93f249261f13c7ba99",
+      "seedNumber": 13,
+      "score": 0,
+      "team": {
+        "_id": "6429fc93f249261f13c7ba99",
+        "name": "Sea Drive",
+        "pendingTeamID": "6429fba3a2868609147a57f2",
+        "persistentTeamID": "63c451e9b17e3d43eee1e7ec",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "6376da3b61bd4503fe7f7cf8",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "NBound#4207"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-0780-2761-9321"
+          }
+        ],
+        "ownerID": "6376da3b61bd4503fe7f7cf8",
+        "createdAt": "2023-04-02T22:07:15.735Z",
+        "playerIDs": [
+          "6429fc93f249261f13c7ba95",
+          "6429fc93f249261f13c7ba96",
+          "6429fc93f249261f13c7ba97",
+          "6429fc93f249261f13c7ba98"
+        ],
+        "captainID": "6429fc93f249261f13c7ba98"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 13,
+    "roundNumber": 5,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3cf4"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T19:48:43.551Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "isMarkedLive": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cf3",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:48:43.330Z",
+        "_id": "643c511b41e7ed4109b21238"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf3",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:48:45.064Z",
+        "_id": "643c511dcda1431b4d4bb02c"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T19:48:43.551Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cf4",
+    "top": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6431f0b022b7791b3c1d1d0d",
+      "seedNumber": 3,
+      "score": 2,
+      "team": {
+        "_id": "6431f0b022b7791b3c1d1d0d",
+        "name": "Octoπ",
+        "pendingTeamID": "6431f08e80c02f7c625203f0",
+        "persistentTeamID": "63532657500acd19338161e8",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "5acd64a64a13d1036feee852",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Rosearrow#7765"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-3927-1091-3807"
+          }
+        ],
+        "ownerID": "5acd64a64a13d1036feee852",
+        "createdAt": "2023-04-08T22:54:40.558Z",
+        "playerIDs": [
+          "6431f0b022b7791b3c1d1d08",
+          "6431f0b022b7791b3c1d1d09",
+          "6431f0b022b7791b3c1d1d0a",
+          "6431f0b022b7791b3c1d1d0b",
+          "6431f0b022b7791b3c1d1d0c"
+        ],
+        "captainID": "6431f0b022b7791b3c1d1d0c"
+      }
+    },
+    "bottom": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6434a724fe67157c6c02ca5e",
+      "seedNumber": 6,
+      "score": 3,
+      "team": {
+        "_id": "6434a724fe67157c6c02ca5e",
+        "name": "0 luck found",
+        "pendingTeamID": "6434a6ceb255cf30cf7df8c5",
+        "persistentTeamID": "640f71507cbe9d55410d3d0d",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "580fb7b28f64ff77032d3c5c",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Zander#6598"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2796-9975-7764"
+          }
+        ],
+        "ownerID": "580fb7b28f64ff77032d3c5c",
+        "createdAt": "2023-04-11T00:17:40.793Z",
+        "playerIDs": [
+          "6434a724fe67157c6c02ca5a",
+          "6434a724fe67157c6c02ca5b",
+          "6434a724fe67157c6c02ca5c",
+          "6434a724fe67157c6c02ca5d"
+        ],
+        "captainID": "6434a724fe67157c6c02ca5d"
+      }
+    },
+    "matchType": "loser",
+    "matchNumber": 14,
+    "roundNumber": 6,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3cf5"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T20:23:27.093Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "inConsolationBracket": true,
+    "isMarkedLive": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cf4",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T19:57:57.807Z",
+        "_id": "643c5345fdc709247b23502c"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf4",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T20:01:26.108Z",
+        "_id": "643c5416c5222a06e5abb43d"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf4",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T20:09:47.468Z",
+        "_id": "643c560bce4ad25c62fd895f"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf4",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 4,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T20:16:41.123Z",
+        "_id": "643c57a94b3b69411fa11183"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf4",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 5,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T20:23:26.884Z",
+        "_id": "643c593e41e7ed4109b21248"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T20:23:27.093Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cf5",
+    "top": {
+      "winner": true,
+      "disqualified": false,
+      "teamID": "6435f9ecfc426841771e5f81",
+      "seedNumber": 1,
+      "score": 3,
+      "team": {
+        "_id": "6435f9ecfc426841771e5f81",
+        "name": "Squids Ztrikes",
+        "pendingTeamID": "6435f9d76c341637fcdfe8c4",
+        "persistentTeamID": "63766230d67f505be84c2e0b",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "597519be0b4e18032eba3af9",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Mitch45#7436"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2782-2804-8893"
+          }
+        ],
+        "ownerID": "597519be0b4e18032eba3af9",
+        "createdAt": "2023-04-12T00:23:08.317Z",
+        "playerIDs": [
+          "6435f9ecfc426841771e5f79",
+          "6435f9ecfc426841771e5f7c",
+          "6435f9ecfc426841771e5f7d",
+          "6435f9ecfc426841771e5f7e",
+          "6435f9ecfc426841771e5f7f",
+          "6435f9ecfc426841771e5f80",
+          "6435f9fdcda1431b4d4ba49b",
+          "6437905f19b7d706d3ca1a1f"
+        ],
+        "captainID": "6435f9ecfc426841771e5f80"
+      }
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false,
+      "teamID": "6434a724fe67157c6c02ca5e",
+      "seedNumber": 6,
+      "score": null,
+      "team": {
+        "_id": "6434a724fe67157c6c02ca5e",
+        "name": "0 luck found",
+        "pendingTeamID": "6434a6ceb255cf30cf7df8c5",
+        "persistentTeamID": "640f71507cbe9d55410d3d0d",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "userID": "580fb7b28f64ff77032d3c5c",
+        "customFields": [
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9e",
+            "value": "Zander#6598"
+          },
+          {
+            "_id": "63b1f24b2395cc75cdfa7d9f",
+            "value": "SW-2796-9975-7764"
+          }
+        ],
+        "ownerID": "580fb7b28f64ff77032d3c5c",
+        "createdAt": "2023-04-11T00:17:40.793Z",
+        "playerIDs": [
+          "6434a724fe67157c6c02ca5a",
+          "6434a724fe67157c6c02ca5b",
+          "6434a724fe67157c6c02ca5c",
+          "6434a724fe67157c6c02ca5d"
+        ],
+        "captainID": "6434a724fe67157c6c02ca5d"
+      }
+    },
+    "matchType": "winner",
+    "matchNumber": 16,
+    "roundNumber": 5,
+    "isBye": false,
+    "next": {
+      "winner": {
+        "position": "top",
+        "matchID": "643c216cf767ca4a12cb3cf6"
+      },
+      "loser": {
+        "position": "bottom",
+        "matchID": "643c216cf767ca4a12cb3cf6"
+      }
+    },
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T21:04:19.414Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "isMarkedLive": true,
+    "stats": [
+      {
+        "matchID": "643c216cf767ca4a12cb3cf5",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 1,
+        "stats": {
+          "bottom": {
+            "winner": true
+          },
+          "top": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T20:42:38.954Z",
+        "_id": "643c5dbe6c341637fcdff2cb"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf5",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 2,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T20:49:58.375Z",
+        "_id": "643c5f764f089a250188f4d2"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf5",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 3,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T20:57:13.266Z",
+        "_id": "643c612914a6be5c7cadbad4"
+      },
+      {
+        "matchID": "643c216cf767ca4a12cb3cf5",
+        "gameID": "62f3f317e6035f56260f090f",
+        "tournamentID": "6429e8ed731d0308b9a20e4f",
+        "stageID": "643ad67d227ec44112fbaeb6",
+        "gameNumber": 4,
+        "stats": {
+          "top": {
+            "winner": true
+          },
+          "bottom": {
+            "winner": false
+          },
+          "isComplete": true
+        },
+        "createdAt": "2023-04-16T21:04:19.217Z",
+        "_id": "643c62d3fdc709247b235046"
+      }
+    ],
+    "isComplete": true,
+    "completedAt": "2023-04-16T21:04:19.414Z"
+  },
+  {
+    "_id": "643c216cf767ca4a12cb3cf6",
+    "top": {
+      "winner": false,
+      "disqualified": false
+    },
+    "bottom": {
+      "winner": false,
+      "disqualified": false
+    },
+    "matchType": "winner",
+    "matchNumber": 17,
+    "roundNumber": 6,
+    "isBye": false,
+    "createdAt": "2023-04-16T16:25:16.961Z",
+    "updatedAt": "2023-04-16T21:04:19.432Z",
+    "doubleLoss": false,
+    "stageID": "643ad67d227ec44112fbaeb6",
+    "isComplete": true
+  }
+]

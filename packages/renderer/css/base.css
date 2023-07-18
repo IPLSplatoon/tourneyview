@@ -1,0 +1,56 @@
+.elimination-renderer {
+    font-family: sans-serif;
+}
+
+.elimination-renderer__round-labels {
+    font-size: 1.3em;
+    display: grid;
+    grid-auto-flow: column;
+    text-align: center;
+}
+
+.elimination-renderer__bracket-title:not(:empty) ~ .elimination-renderer__round-labels > *:first-child {
+    text-align: left;
+}
+
+.elimination-renderer__bracket-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.bracket-link {
+    stroke-dasharray: 1;
+}
+
+.elimination-renderer .match-cell {
+    background-color: #444;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 45px;
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
+    overflow: hidden;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transform-origin: center left;
+}
+
+.match-cell__score-wrapper {
+    overflow: hidden;
+}
+
+.match-cell__score {
+    text-align: center;
+    font-size: 1.75em;
+    transform: translateY(1px);
+}
+
+.match-cell__team-name {
+    font-size: 1.25em;
+    margin-left: 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+}

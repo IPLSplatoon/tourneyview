@@ -1,0 +1,26 @@
+{
+  "name": "@tourneyview/importer",
+  "version": "0.1.0",
+  "description": "Import tournament data from various sources",
+  "main": "dist/index.iife.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && vite build"
+  },
+  "author": "inkfarer <inkfarer@inkfarer.com>",
+  "license": "MIT",
+  "files": [
+    "dist/**/*"
+  ],
+  "build": {
+    "libName": "TourneyviewImporter"
+  },
+  "peerDependencies": {
+    "axios": "^1.4.0"
+  },
+  "dependencies": {
+    "@tourneyview/common": "0.1.0"
+  }
+}
