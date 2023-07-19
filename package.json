@@ -2,7 +2,8 @@
   "name": "tourneyview",
   "private": true,
   "scripts": {
-    "serve": "vite --config vite.config.base.ts --port 8080 ./example"
+    "serve": "vite --config vite.config.base.ts --port 8080 ./example",
+    "watch": "lerna watch -- lerna run build --since"
   },
   "workspaces": [
     "packages/*"
