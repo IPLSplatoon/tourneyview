@@ -61,11 +61,6 @@ export class BattlefyImporter implements MatchImporter<string> {
             }
         }
 
-        // const matchList = {
-        //     data: JSON.parse(opts)
-        // }
-        // const bracketType = BracketType.DOUBLE_ELIMINATION;
-
         return {
             id: opts,
             matches: matchList.data
