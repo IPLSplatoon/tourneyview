@@ -3,5 +3,5 @@ export interface TextFormatter {
 
     formatTeamName(name: string | undefined | null): string
 
-    formatRoundNumber(roundNumber: number, maxRoundNumber: number): string
+    formatRoundNumber(roundNumber: number, maxRoundNumber: number, hasBracketReset: boolean): string
 }

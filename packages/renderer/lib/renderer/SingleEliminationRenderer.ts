@@ -8,6 +8,7 @@ import { TextFormatter } from '../formatter/TextFormatter';
 export type SingleEliminationRendererOpts = { animator: BracketAnimator, formatter: TextFormatter };
 type SingleEliminationRendererSetDataOpts = {
     hasThirdPlaceMatch: boolean
+    hasBracketReset?: boolean
     cellHeight: number
     cellWidth: number
     linkWidth: number
@@ -86,6 +87,7 @@ export class SingleEliminationRenderer {
         this.hierarchy = hierarchy;
 
         const cellOffset = opts.cellOffset ?? 0;
+        const hasBracketReset = opts.hasBracketReset ?? false;
 
         this.bracketTitle
             .text(opts.bracketTitle ?? '');
@@ -96,7 +98,7 @@ export class SingleEliminationRenderer {
             .join('div')
             .classed('round-label', true)
             .style('width', `${opts.cellWidth}px`)
-            .text(d => this.formatter.formatRoundNumber(d + 1, hierarchy.height));
+            .text(d => this.formatter.formatRoundNumber(d + 1, hierarchy.height, hasBracketReset));
 
         const headerSpacing = opts.bracketHeaderOffset ?? 8;
         const headerHeight = this.bracketHeader.node()?.offsetHeight ?? 0;

@@ -43,15 +43,15 @@ export class EliminationRenderer {
 
     private activeBracketId: string | null;
 
-    constructor(width: number, height: number, opts?: EliminationRendererOpts) {
+    constructor(width: number, height: number, opts: EliminationRendererOpts = {}) {
         this.width = width;
         this.height = height;
-        this.animator = opts?.animator ?? new DummyBracketAnimator();
-        this.formatter = opts?.formatter ?? new BaseTextFormatter();
-        this.linkWidth = opts?.linkWidth ?? 50;
-        this.cellHeight = opts?.cellHeight ?? 65;
-        this.minCellWidth = opts?.minCellWidth ?? 175;
-        this.maxCellWidth = opts?.maxCellWidth ?? 250;
+        this.animator = opts.animator ?? new DummyBracketAnimator();
+        this.formatter = opts.formatter ?? new BaseTextFormatter();
+        this.linkWidth = opts.linkWidth ?? 50;
+        this.cellHeight = opts.cellHeight ?? 65;
+        this.minCellWidth = opts.minCellWidth ?? 175;
+        this.maxCellWidth = opts.maxCellWidth ?? 250;
         this.activeBracketId = null;
 
         this.element = d3
@@ -137,6 +137,7 @@ export class EliminationRenderer {
                 linkWidth: this.linkWidth,
                 cellHeight: this.cellHeight,
                 hasThirdPlaceMatch: false,
+                hasBracketReset: true,
                 bracketTitle: 'Winners Bracket'
             });
             const losersRenderResult = this.losersRenderer!.setData(losersHierarchy, {

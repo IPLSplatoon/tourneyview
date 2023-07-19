@@ -9,7 +9,19 @@ export class BaseTextFormatter implements TextFormatter {
         return name == null ? '-' : name;
     }
 
-    formatRoundNumber(roundNumber: number, maxRoundNumber: number): string {
-        return roundNumber === maxRoundNumber ? 'Finals' : `Round ${roundNumber}`;
+    formatRoundNumber(roundNumber: number, maxRoundNumber: number, hasBracketReset: boolean): string {
+        if (hasBracketReset) {
+            if (roundNumber === maxRoundNumber - 1) {
+                return 'Finals';
+            } else if (roundNumber === maxRoundNumber) {
+                return 'Bracket Reset';
+            }
+        }
+
+        if (roundNumber === maxRoundNumber) {
+            return 'Finals';
+        }
+
+        return `Round ${roundNumber}`;
     }
 }
