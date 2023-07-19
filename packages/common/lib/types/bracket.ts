@@ -1,9 +1,9 @@
-import { Match } from './match';
+import { MatchGroup } from './match';
 
 export interface Bracket {
-    id: string
+    id?: string
     type: BracketType
-    matches: Match[]
+    matchGroups: MatchGroup[]
 }
 
 export enum BracketType {

@@ -62,22 +62,27 @@ export class BattlefyImporter implements MatchImporter<string> {
         }
 
         return {
-            id: opts,
-            matches: matchList.data
-                .map(match => ({
-                    id: match._id,
-                    nextMatchId: match.next?.winner?.matchID,
-                    roundNumber: match.roundNumber,
-                    type: match.matchType === 'winner' ? MatchType.WINNERS : MatchType.LOSERS,
-                    topTeam: {
-                        name: match.top.team?.name,
-                        score: match.top.score
-                    },
-                    bottomTeam: {
-                        name: match.bottom.team?.name,
-                        score: match.bottom.score
-                    }
-                })),
+            matchGroups: [
+                {
+                    id: opts,
+                    name: stageDetails.data.name,
+                    matches: matchList.data
+                        .map(match => ({
+                            id: match._id,
+                            nextMatchId: match.next?.winner?.matchID,
+                            roundNumber: match.roundNumber,
+                            type: match.matchType === 'winner' ? MatchType.WINNERS : MatchType.LOSERS,
+                            topTeam: {
+                                name: match.top.team?.name,
+                                score: match.top.score
+                            },
+                            bottomTeam: {
+                                name: match.bottom.team?.name,
+                                score: match.bottom.score
+                            }
+                        }))
+                }
+            ],
             type: bracketType
         }
     }

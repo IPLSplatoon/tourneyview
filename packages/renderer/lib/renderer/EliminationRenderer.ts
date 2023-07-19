@@ -91,6 +91,11 @@ export class EliminationRenderer {
     }
 
     async setData(data: Bracket) {
+        if (data.matchGroups.length !== 1) {
+            throw new Error(`Rendering elimination groups requires only one bracket group to be present! (Found ${data.matchGroups.length})`);
+        }
+
+        const matchGroup = data.matchGroups[0];
         const switchingBrackets = data.id !== this.activeBracketId;
         if (this.activeBracketId != null && switchingBrackets) {
             const element = this.getElement();
@@ -98,7 +103,7 @@ export class EliminationRenderer {
             element.style.visibility = 'hidden';
         }
 
-        this.activeBracketId = data.id;
+        this.activeBracketId = matchGroup.id;
 
         if (data.type === BracketType.SINGLE_ELIMINATION && this.losersRenderer != null) {
             this.losersRenderer.destroy();
@@ -112,20 +117,20 @@ export class EliminationRenderer {
         let bracketWidth: number;
 
         if (data.type === BracketType.SINGLE_ELIMINATION) {
-            const hierarchy = this.buildMatchHierarchy(data.matches);
+            const hierarchy = this.buildMatchHierarchy(matchGroup.matches);
             const cellSeparation = this.getCellSeparation(hierarchy.height);
             const renderResult = this.winnersRenderer.setData(hierarchy, {
                 cellWidth: this.getCellWidth(hierarchy),
                 cellSeparation,
                 linkWidth: this.linkWidth,
                 cellHeight: this.cellHeight,
-                hasThirdPlaceMatch: data.matches.some(match => match.type === MatchType.LOSERS)
+                hasThirdPlaceMatch: matchGroup.matches.some(match => match.type === MatchType.LOSERS)
             });
             bracketHeight = renderResult.height;
             bracketWidth = renderResult.width;
         } else {
-            const winnersHierarchy = this.buildMatchHierarchy(data.matches.filter(match => match.type === MatchType.WINNERS));
-            const losersHierarchy = this.buildMatchHierarchy(data.matches.filter(match => match.type === MatchType.LOSERS));
+            const winnersHierarchy = this.buildMatchHierarchy(matchGroup.matches.filter(match => match.type === MatchType.WINNERS));
+            const losersHierarchy = this.buildMatchHierarchy(matchGroup.matches.filter(match => match.type === MatchType.LOSERS));
 
             const cellWidth = Math.min(this.getCellWidth(winnersHierarchy), this.getCellWidth(losersHierarchy, true));
             const winnersCellSeparation = this.getCellSeparation(winnersHierarchy.height);

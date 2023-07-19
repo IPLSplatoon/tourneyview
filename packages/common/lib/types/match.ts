@@ -7,6 +7,15 @@ export interface Match {
     bottomTeam: MatchTeam
 }
 
+// A "Match Group" can represent:
+// From Battlefy, the contents of a single bracket
+// From start.gg, a single pool within a bracket
+export interface MatchGroup {
+    id: string
+    name: string
+    matches: Match[]
+}
+
 export enum MatchType {
     WINNERS,
     LOSERS
