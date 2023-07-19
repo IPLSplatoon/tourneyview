@@ -196,7 +196,7 @@ export class EliminationRenderer {
     }
 
     private buildMatchHierarchy(matches: Match[]): EliminationHierarchyNode {
-        const finalRoundNumber = Math.max(...matches.map(match => match.roundNumber));
+        const finalRoundNumber = Math.max(...matches.map(match => match.roundNumber ?? 0));
 
         return d3.hierarchy<{ isRoot: true } | Match>(
             { isRoot: true },

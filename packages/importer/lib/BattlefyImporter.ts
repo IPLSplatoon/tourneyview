@@ -37,53 +37,92 @@ interface BattlefyMatchListItem {
     matchNumber: number
     roundNumber: number
     isBye: boolean
-    next: {
+    next?: {
         winner: BattlefyMatchListNextNode
         loser?: BattlefyMatchListNextNode
     }
 }
 
-export class BattlefyImporter implements MatchImporter<string> {
-    async getMatches(opts: string): Promise<Bracket> {
-        const stageDetails = await axios.get<BattlefyStageDetails>(`https://api.battlefy.com/stages/${opts}`);
-        const matchList = await axios.get<BattlefyMatchListItem[]>(`https://api.battlefy.com/stages/${opts}/matches`);
+interface BattlefyStageGroupItem {
+    _id: string
+    name: string
+    matches: BattlefyMatchListItem[]
+}
+
+export class BattlefyImporter implements MatchImporter<{ id: string, roundNumber?: string }> {
+    async getMatches(opts: { id: string, roundNumber?: string }): Promise<Bracket> {
+        const stageDetails = await axios.get<BattlefyStageDetails>(`https://api.battlefy.com/stages/${opts.id}`);
 
         const bracketType = this.mapBracketType(stageDetails.data.bracket.type, stageDetails.data.bracket.style);
         if (bracketType == null) {
             throw new Error(`Failed to parse bracket type for input parameters (type=${stageDetails.data.bracket.type}, style=${stageDetails.data.bracket.style})`);
         }
 
-        if (bracketType === BracketType.SINGLE_ELIMINATION && stageDetails.data.bracket.hasThirdPlaceMatch) {
-            const maxRoundNumber = Math.max(...(matchList.data.map(match => match.roundNumber)));
-            const thirdPlaceMatch = matchList.data.find(match => match.matchType === 'loser');
-            if (thirdPlaceMatch != null) {
-                thirdPlaceMatch.roundNumber = maxRoundNumber;
-            }
+        if ((bracketType === BracketType.ROUND_ROBIN || bracketType === BracketType.SWISS) && opts.roundNumber == null) {
+            throw new Error(`A round number is required when importing brackets of type ${bracketType} from Battlefy.`);
         }
 
-        return {
-            matchGroups: [
-                {
-                    id: opts,
-                    name: stageDetails.data.name,
-                    matches: matchList.data
-                        .map(match => ({
-                            id: match._id,
-                            nextMatchId: match.next?.winner?.matchID,
-                            roundNumber: match.roundNumber,
-                            type: match.matchType === 'winner' ? MatchType.WINNERS : MatchType.LOSERS,
-                            topTeam: {
-                                name: match.top.team?.name,
-                                score: match.top.score
-                            },
-                            bottomTeam: {
-                                name: match.bottom.team?.name,
-                                score: match.bottom.score
-                            }
-                        }))
+        if (bracketType === BracketType.SINGLE_ELIMINATION || bracketType === BracketType.DOUBLE_ELIMINATION) {
+            const matchList = await axios.get<BattlefyMatchListItem[]>(`https://api.battlefy.com/stages/${opts.id}/matches`);
+
+            if (bracketType === BracketType.SINGLE_ELIMINATION && stageDetails.data.bracket.hasThirdPlaceMatch) {
+                const maxRoundNumber = Math.max(...(matchList.data.map(match => match.roundNumber)));
+                const thirdPlaceMatch = matchList.data.find(match => match.matchType === 'loser');
+                if (thirdPlaceMatch != null) {
+                    thirdPlaceMatch.roundNumber = maxRoundNumber;
                 }
-            ],
-            type: bracketType
+            }
+
+            return {
+                matchGroups: [
+                    {
+                        id: opts.id,
+                        name: stageDetails.data.name,
+                        matches: matchList.data
+                            .map(match => ({
+                                id: match._id,
+                                nextMatchId: match.next?.winner?.matchID,
+                                roundNumber: match.roundNumber,
+                                type: match.matchType === 'winner' ? MatchType.WINNERS : MatchType.LOSERS,
+                                topTeam: {
+                                    name: match.top.team?.name,
+                                    score: match.top.score
+                                },
+                                bottomTeam: {
+                                    name: match.bottom.team?.name,
+                                    score: match.bottom.score
+                                }
+                            }))
+                    }
+                ],
+                type: bracketType
+            }
+        } else if (bracketType === BracketType.ROUND_ROBIN) {
+            const groups = await axios.get<BattlefyStageGroupItem[]>(`https://api.battlefy.com/stages/${opts.id}/groups/round/${opts.roundNumber}`);
+
+            return {
+                type: bracketType,
+                matchGroups: groups.data.map(matchGroup => ({
+                    id: matchGroup._id,
+                    name: `Group ${matchGroup.name}`,
+                    matches: matchGroup.matches.map(match => ({
+                        id: match._id,
+                        topTeam: {
+                            name: match.top.team?.name,
+                            score: match.top.score
+                        },
+                        bottomTeam: {
+                            name: match.bottom.team?.name,
+                            score: match.bottom.score
+                        }
+                    }))
+                }))
+            }
+        } else {
+            return {
+                type: bracketType,
+                matchGroups: []
+            }
         }
     }
 

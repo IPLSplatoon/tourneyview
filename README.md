@@ -33,7 +33,7 @@ const renderer = new EliminationRenderer(1000, 1000, {
 });
 const importer = new BattlefyImporter();
 
-importer.getMatches('62fe9a5bc19ee145a2efa31a').then(matches => {
+importer.getMatches({ id: '62fe9a5bc19ee145a2efa31a' }).then(matches => {
    renderer.setData(matches); 
 });
 
@@ -66,7 +66,7 @@ When working without a builder, use the IIFE bundles of tourneyview (`dist/index
 
         const importer = new TourneyviewRenderer.BattlefyImporter();
 
-        importer.getMatches('643ad67d227ec44112fbaeb6').then(matches => {
+        importer.getMatches({ id: '643ad67d227ec44112fbaeb6' }).then(matches => {
             renderer.setData(matches);
         });
     </script>

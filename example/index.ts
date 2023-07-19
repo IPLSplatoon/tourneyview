@@ -19,7 +19,9 @@ const importData = async (data: string) => {
     // de 8 teams: 633ec84d04022f28a84f6809
     // de 12 teams: 62fe9a5bc19ee145a2efa31a
     // low ink de: 643ad67d227ec44112fbaeb6
-    renderer.setData(await importer.getMatches(data));
+    // sos rr: 64af308261c247675b6dbffb
+    // console.log(await importer.getMatches({ id: data, roundNumber: '1' }));
+    renderer.setData(await importer.getMatches({ id: data, roundNumber: '1' }));
 }
 
 document.body.appendChild(renderer.getElement());

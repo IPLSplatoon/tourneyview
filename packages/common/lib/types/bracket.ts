@@ -7,9 +7,9 @@ export interface Bracket {
 }
 
 export enum BracketType {
-    DOUBLE_ELIMINATION,
-    SINGLE_ELIMINATION,
-    LADDER,
-    SWISS,
-    ROUND_ROBIN
+    DOUBLE_ELIMINATION = 'DOUBLE_ELIMINATION',
+    SINGLE_ELIMINATION = 'SINGLE_ELIMINATION',
+    LADDER = 'LADDER',
+    SWISS = 'SWISS',
+    ROUND_ROBIN = 'ROUND_ROBIN'
 }

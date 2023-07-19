@@ -1,8 +1,8 @@
 export interface Match {
     id: string
     nextMatchId?: string | null
-    roundNumber: number
-    type: MatchType
+    roundNumber?: number
+    type?: MatchType
     topTeam: MatchTeam
     bottomTeam: MatchTeam
 }
