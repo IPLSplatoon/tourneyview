@@ -20,6 +20,7 @@ const importData = async (data: string) => {
     // de 12 teams: 62fe9a5bc19ee145a2efa31a
     // low ink de: 643ad67d227ec44112fbaeb6
     // sos rr: 64af308261c247675b6dbffb
+    // li swiss: 648dc6d95fbfa53423cdca58
     // console.log(await importer.getMatches({ id: data, roundNumber: '1' }));
     renderer.setData(await importer.getMatches({ id: data, roundNumber: '1' }));
 }
