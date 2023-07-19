@@ -74,6 +74,7 @@ export class BattlefyImporter implements MatchImporter<{ id: string, roundNumber
             }
 
             return {
+                name: stageDetails.data.name,
                 matchGroups: [
                     {
                         id: opts.id,
@@ -102,6 +103,7 @@ export class BattlefyImporter implements MatchImporter<{ id: string, roundNumber
 
             return {
                 type: bracketType,
+                name: stageDetails.data.name,
                 matchGroups: groups.data.map(matchGroup => ({
                     id: matchGroup._id,
                     name: `Group ${matchGroup.name}`,
@@ -121,6 +123,7 @@ export class BattlefyImporter implements MatchImporter<{ id: string, roundNumber
         } else {
             return {
                 type: bracketType,
+                name: stageDetails.data.name,
                 matchGroups: []
             }
         }

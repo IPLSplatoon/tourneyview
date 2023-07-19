@@ -3,6 +3,7 @@ import { MatchGroup } from './match';
 export interface Bracket {
     id?: string
     type: BracketType
+    name: string
     matchGroups: MatchGroup[]
 }
 
