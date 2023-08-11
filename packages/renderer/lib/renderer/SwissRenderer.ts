@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import { TextFormatter } from '../formatter/TextFormatter';
 import { Bracket, Match } from '@tourneyview/common';
 import { Autoscroller } from './Autoscroller';
+import { BracketRenderer } from '../types/renderer';
 
 type SwissRendererOpts = {
     formatter: TextFormatter
@@ -10,7 +11,7 @@ type SwissRendererOpts = {
     useScrollMask?: boolean
 };
 
-export class SwissRenderer {
+export class SwissRenderer implements BracketRenderer {
     private readonly element: d3.Selection<HTMLDivElement, undefined, null, undefined>;
 
     private readonly width: number;

@@ -7,6 +7,7 @@ import { BracketAnimator } from '../types/animator';
 import { TextFormatter } from '../formatter/TextFormatter';
 import { BaseTextFormatter } from '../formatter/BaseTextFormatter';
 import { DummyBracketAnimator } from '../animator/DummyBracketAnimator';
+import { BracketRenderer } from '../types/renderer';
 
 export type EliminationRendererOpts = Partial<{
     animator: BracketAnimator
@@ -20,7 +21,7 @@ export type EliminationRendererOpts = Partial<{
 export type EliminationHierarchyNodeData = { isRoot: true } | Match;
 export type EliminationHierarchyNode = d3.HierarchyNode<EliminationHierarchyNodeData>;
 
-export class EliminationRenderer {
+export class EliminationRenderer implements BracketRenderer {
     private readonly winnersRenderer: SingleEliminationRenderer;
     private losersRenderer: SingleEliminationRenderer | null;
 
