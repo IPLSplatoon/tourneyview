@@ -6,7 +6,7 @@ import { Match, MatchType } from '@tourneyview/common';
 import { BracketAnimator } from '../types/animator';
 import { TextFormatter } from '../formatter/TextFormatter';
 import { BaseTextFormatter } from '../formatter/BaseTextFormatter';
-import { DummyBracketAnimator } from '../animator/DummyBracketAnimator';
+import { DummyBracketAnimator } from '../animator/dummy/DummyBracketAnimator';
 import { BracketRenderer } from '../types/renderer';
 
 export type EliminationRendererOpts = Partial<{
@@ -100,7 +100,7 @@ export class EliminationRenderer implements BracketRenderer {
         const switchingBrackets = data.id !== this.activeBracketId;
         if (this.activeBracketId != null && switchingBrackets) {
             const element = this.getElement();
-            await this.animator.hideEliminationBracket(element, this);
+            await this.animator.eliminationAnimator.hide(element, this);
             element.style.visibility = 'hidden';
         }
 
@@ -174,9 +174,9 @@ export class EliminationRenderer implements BracketRenderer {
 
         if (switchingBrackets) {
             const element = this.getElement();
-            this.animator.beforeEliminationBracketReveal(element, this);
+            this.animator.eliminationAnimator.beforeReveal(element, this);
             element.style.visibility = 'visible';
-            await this.animator.revealEliminationBracket(element, this);
+            await this.animator.eliminationAnimator.reveal(element, this);
         }
     }
 

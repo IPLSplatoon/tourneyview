@@ -1,47 +1,11 @@
-import { BracketAnimator } from '../types/animator';
+import { EliminationBracketAnimator } from '../../types/animator';
 import * as d3 from 'd3';
 import { HierarchyPointLink, HierarchyPointNode } from 'd3';
+import { EliminationRenderer } from '../../renderer/EliminationRenderer';
 import { Match } from '@tourneyview/common';
-import { EliminationRenderer } from '../renderer/EliminationRenderer';
 
-export class D3BracketAnimator implements BracketAnimator {
-    updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string): void {
-        const width = element.getBoundingClientRect().width;
-        const direction = isNaN(oldValue) || oldValue < newValue ? -1 : 1;
-        const selection = d3.select(element);
-        selection
-            .call(elem => elem
-                .transition()
-                .duration(250)
-                .ease(d3.easeCubicIn)
-                .style('transform', `translateX(${width * direction}px)`)
-                .on('end', function() {
-                    d3.select(this)
-                        .text(formattedNewValue)
-                        .style('transform', `translateX(${-width * direction}px)`);
-                })
-                .transition()
-                .ease(d3.easeCubicOut)
-                .style('transform', 'translateX(0px)'));
-    }
-
-    updateText(element: HTMLElement, oldValue: string, newValue: string): void {
-        const selection = d3.select(element);
-        selection
-            .call(elem => elem
-                .transition()
-                .duration(250)
-                .ease(d3.easeLinear)
-                .style('opacity', '0')
-                .on('end', function() {
-                    d3.select(this).text(newValue)
-                })
-                .transition()
-                .ease(d3.easeLinear)
-                .style('opacity', '1'));
-    }
-
-    async hideEliminationBracket(element: HTMLElement): Promise<void> {
+export class D3EliminationBracketAnimator implements EliminationBracketAnimator {
+    async hide(element: HTMLElement): Promise<void> {
         return d3.select(element)
             .transition()
             .duration(350)
@@ -50,7 +14,7 @@ export class D3BracketAnimator implements BracketAnimator {
             .end()
     }
 
-    beforeEliminationBracketReveal(element: HTMLElement): void {
+    beforeReveal(element: HTMLElement): void {
         const selection = d3.select(element);
         selection
             .style('opacity', '1');
@@ -66,7 +30,7 @@ export class D3BracketAnimator implements BracketAnimator {
             .style('stroke-dashoffset', '-1');
     }
 
-    async revealEliminationBracket(element: HTMLElement, renderer: EliminationRenderer): Promise<void> {
+    async reveal(element: HTMLElement, renderer: EliminationRenderer): Promise<void> {
         const selection = d3.select(element);
         const depth = renderer.getBracketDepth();
 
