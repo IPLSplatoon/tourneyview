@@ -1,6 +1,8 @@
 const SCROLL_MASK_VISIBILITY_OFFSET = 35;
 type ScrollMaskSide = 'top' | 'bottom';
 
+const SCROLL_MASKED_CLASS_NAME = 'scroll-masked';
+
 export class ScrollMask {
     private readonly target: HTMLElement;
 
@@ -13,14 +15,16 @@ export class ScrollMask {
     }
 
     start() {
-        this.target.classList.add('scroll-masked');
         this.refreshMask();
-        this.target.addEventListener('scroll', this.listenerFunction);
+        if (!this.target.classList.contains(SCROLL_MASKED_CLASS_NAME)) {
+            this.target.classList.add(SCROLL_MASKED_CLASS_NAME);
+            this.target.addEventListener('scroll', this.listenerFunction);
+        }
     }
 
     stop() {
         this.target.removeEventListener('scroll', this.listenerFunction);
-        this.target.classList.remove('scroll-masked');
+        this.target.classList.remove(SCROLL_MASKED_CLASS_NAME, 'scroll-mask-top', 'scroll-mask-bottom');
     }
 
     refreshMask() {

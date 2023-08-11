@@ -19,3 +19,5 @@ interface BracketTypeAnimator<Renderer> {
 }
 
 export type EliminationBracketAnimator = BracketTypeAnimator<EliminationRenderer>
+
+export type SwissBracketAnimator = BracketTypeAnimator<SwissRenderer>
