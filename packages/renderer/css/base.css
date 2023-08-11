@@ -70,8 +70,8 @@
     grid-template-columns: 1fr 50px 50px 1fr;
     align-items: center;
     padding: 8px 0;
-    /*border-bottom: 1px solid black;*/
     color: white;
+    border-radius: 5px;
 }
 
 .swiss-renderer > .match-row:nth-child(even) {
