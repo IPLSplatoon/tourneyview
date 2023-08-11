@@ -54,3 +54,112 @@
     max-width: 100%;
     overflow: hidden;
 }
+
+.swiss-renderer {
+    display: grid;
+    grid-auto-flow: row;
+    font-family: sans-serif;
+    overflow: hidden;
+
+    transform: translateY(100px);
+}
+
+.swiss-renderer > .match-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 50px 50px 1fr;
+    align-items: center;
+    padding: 8px 0;
+    /*border-bottom: 1px solid black;*/
+    color: white;
+}
+
+.swiss-renderer > .match-row:nth-child(even) {
+    background-color: hotpink;
+}
+
+.swiss-renderer > .match-row:nth-child(odd) {
+    background-color: limegreen;
+}
+
+.swiss-renderer > .match-row:last-child {
+    border-color: transparent;
+}
+
+.swiss-renderer > .match-row > .match-row__team-name {
+    font-size: 1.25em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.swiss-renderer > .match-row > .match-row__top-team-name {
+    text-align: right;
+}
+
+.swiss-renderer > .match-row > .match-row__bottom-team-name {
+    text-align: left;
+}
+
+.swiss-renderer > .match-row .match-row__score {
+    text-align: center;
+    font-size: 1.75em;
+    transform: translateY(1px);
+}
+
+.swiss-renderer > .match-row .match-row__top-score {
+    margin-left: 5px;
+}
+
+.swiss-renderer > .match-row .match-row__bottom-score {
+    margin-right: 5px;
+}
+
+.scroll-masked {
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0,
+        black var(--top-mask-height),
+        black calc(100% - var(--bottom-mask-height)),
+        rgba(255, 255, 255, 0) 100%);
+    mask-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0,
+        black var(--top-mask-height),
+        black calc(100% - var(--bottom-mask-height)),
+        rgba(255, 255, 255, 0) 100%);
+    -webkit-mask-size: 100% calc(100% + var(--top-mask-height) + var(--bottom-mask-height));
+    mask-size: 100% calc(100% + var(--top-mask-height) + var(--bottom-mask-height));
+    -webkit-mask-position: 0 calc(var(--top-mask-height) * -1);
+    mask-position: 0 calc(var(--top-mask-height) * -1);
+
+    transition-property: mask-position, -webkit-mask-position, mask-size, -webkit-mask-size;
+    transition-duration: 350ms;
+
+    --top-mask-height: 15px;
+    --bottom-mask-height: 15px;
+    --top-mask-alpha: 1;
+    --bottom-mask-alpha: 1;
+}
+
+.scroll-masked.scroll-mask-top {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+    -webkit-mask-size: 100% calc(100% + var(--bottom-mask-height));
+    mask-size: 100% calc(100% + var(--bottom-mask-height));
+}
+
+.scroll-masked.scroll-mask-bottom {
+    -webkit-mask-position: 0 calc(var(--top-mask-height) * -1);
+    mask-position: 0 calc(var(--top-mask-height) * -1);
+    -webkit-mask-size: 100% calc(100% + var(--top-mask-height));
+    mask-size: 100% calc(100% + var(--top-mask-height));
+}
+
+.scroll-masked.scroll-mask-bottom.scroll-mask-top {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
