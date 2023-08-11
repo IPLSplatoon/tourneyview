@@ -38,7 +38,7 @@ export class SwissRenderer {
              .style('grid-auto-rows', `${(this.rowHeight)}px`)
              .style('row-gap', `${this.rowGap}px`);
 
-         this.scroller = new Autoscroller(this.element.node()!, this.height, this.rowHeight, opts.useScrollMask ?? false);
+         this.scroller = new Autoscroller(this.element.node()!, this.height, this.rowHeight, this.rowGap, opts.useScrollMask ?? false);
      }
 
      destroy() {

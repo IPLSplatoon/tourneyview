@@ -5,15 +5,17 @@ export class Autoscroller {
     private readonly target: HTMLElement;
     private readonly rowsPerScreen: number;
     private readonly rowHeight: number;
+    private readonly rowGap: number;
 
     private direction: 'up' | 'down';
     private scrollTopTo: number;
     private scrollMask: ScrollMask | null;
 
-    constructor(target: HTMLElement, height: number, rowHeight: number, useScrollMask: boolean) {
+    constructor(target: HTMLElement, height: number, rowHeight: number, rowGap: number, useScrollMask: boolean) {
         this.target = target;
-        this.rowsPerScreen = Math.floor(height / rowHeight);
+        this.rowsPerScreen = Math.floor((height + rowGap) / (rowHeight + rowGap));
         this.rowHeight = rowHeight;
+        this.rowGap = rowGap;
 
         this.direction = 'up';
         this.target.scrollTop = 0;
@@ -57,7 +59,7 @@ export class Autoscroller {
         if (this.direction === 'up') {
             return 0;
         } else {
-            return Math.min(this.scrollTopTo + this.rowHeight * (this.rowsPerScreen - 1), this.maxScrollTop());
+            return Math.min(this.scrollTopTo + (this.rowHeight + this.rowGap) * (this.rowsPerScreen - 1), this.maxScrollTop());
         }
     }
 
