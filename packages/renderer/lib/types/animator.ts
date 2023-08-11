@@ -8,10 +8,14 @@ export interface BracketAnimator {
     updateText(element: HTMLElement, oldValue: string, newValue: string): void
 }
 
-export interface EliminationBracketAnimator {
-    hide(element: HTMLElement, renderer: EliminationRenderer): Promise<void>
+interface BracketTypeAnimator<Renderer> {
+    beforeHide(element: HTMLElement, renderer: Renderer): void
 
-    beforeReveal(element: HTMLElement, renderer: EliminationRenderer): void
+    hide(element: HTMLElement, renderer: Renderer): Promise<void>
 
-    reveal(element: HTMLElement, renderer: EliminationRenderer): Promise<void>
+    beforeReveal(element: HTMLElement, renderer: Renderer): void
+
+    reveal(element: HTMLElement, renderer: Renderer): Promise<void>
 }
+
+export type EliminationBracketAnimator = BracketTypeAnimator<EliminationRenderer>

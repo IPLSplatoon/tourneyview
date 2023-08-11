@@ -5,6 +5,10 @@ import { EliminationRenderer } from '../../renderer/EliminationRenderer';
 import { Match } from '@tourneyview/common';
 
 export class D3EliminationBracketAnimator implements EliminationBracketAnimator {
+    beforeHide() {
+
+    }
+
     async hide(element: HTMLElement): Promise<void> {
         return d3.select(element)
             .transition()

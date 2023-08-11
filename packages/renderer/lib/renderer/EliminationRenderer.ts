@@ -100,6 +100,7 @@ export class EliminationRenderer implements BracketRenderer {
         const switchingBrackets = matchGroup.id !== this.activeBracketId;
         if (this.activeBracketId != null && switchingBrackets) {
             const element = this.getElement();
+            this.animator.eliminationAnimator.beforeHide(element, this);
             await this.animator.eliminationAnimator.hide(element, this);
             element.style.visibility = 'hidden';
         }

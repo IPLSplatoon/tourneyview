@@ -1,15 +1,19 @@
 import { EliminationBracketAnimator } from '../../types/animator';
 
 export class DummyEliminationBracketAnimator implements EliminationBracketAnimator {
-    hide(element: HTMLElement): Promise<void> {
+    beforeHide() {
+
+    }
+
+    hide(): Promise<void> {
         return Promise.resolve();
     }
 
-    beforeReveal(element: HTMLElement): void {
+    beforeReveal(): void {
 
     }
 
-    async reveal(element: HTMLElement): Promise<void> {
+    async reveal(): Promise<void> {
         return Promise.resolve();
     }
 }
