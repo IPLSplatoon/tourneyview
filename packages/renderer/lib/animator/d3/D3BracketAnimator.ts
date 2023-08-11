@@ -1,12 +1,15 @@
-import { BracketAnimator, EliminationBracketAnimator } from '../../types/animator';
+import { BracketAnimator, EliminationBracketAnimator, SwissBracketAnimator } from '../../types/animator';
 import * as d3 from 'd3';
 import { D3EliminationBracketAnimator } from './D3EliminationBracketAnimator';
+import { D3SwissBracketAnimator } from './D3SwissBracketAnimator';
 
 export class D3BracketAnimator implements BracketAnimator {
     public readonly eliminationAnimator: EliminationBracketAnimator;
+    public readonly swissAnimator: SwissBracketAnimator;
 
     constructor() {
         this.eliminationAnimator = new D3EliminationBracketAnimator();
+        this.swissAnimator = new D3SwissBracketAnimator();
     }
 
     updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string): void {

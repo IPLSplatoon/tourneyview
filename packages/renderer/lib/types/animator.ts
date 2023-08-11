@@ -1,7 +1,10 @@
 import { EliminationRenderer } from '../renderer/EliminationRenderer';
+import { SwissRenderer } from '../renderer/SwissRenderer';
 
 export interface BracketAnimator {
     readonly eliminationAnimator: EliminationBracketAnimator
+    
+    readonly swissAnimator: SwissBracketAnimator
 
     updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string): void
 

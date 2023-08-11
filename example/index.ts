@@ -1,14 +1,15 @@
 import '@tourneyview/renderer/css/base.css';
 import { BattlefyImporter } from '@tourneyview/importer';
+import { BaseTextFormatter, D3BracketAnimator } from '../packages/renderer/lib';
 import { SwissRenderer } from '../packages/renderer/lib/renderer/SwissRenderer';
-import { BaseTextFormatter } from '../packages/renderer/lib';
 
 // const renderer = new EliminationRenderer(1000, 1000, {
 //     animator: new D3BracketAnimator()
 // });
 const renderer = new SwissRenderer(700, 500, {
     formatter: new BaseTextFormatter(),
-    useScrollMask: true
+    useScrollMask: true,
+    animator: new D3BracketAnimator()
 });
 const importer = new BattlefyImporter();
 
@@ -26,6 +27,7 @@ const importData = async (data: string) => {
     // low ink de: 643ad67d227ec44112fbaeb6
     // sos rr: 64af308261c247675b6dbffb
     // li swiss: 648dc6d95fbfa53423cdca58
+    // li swiss(2): 648dc6f3ad149d17b8f84117
     // console.log(await importer.getMatches({ id: data }));
     renderer.setData(await importer.getMatches({ id: data, roundNumber: '1' }));
 }

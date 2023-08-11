@@ -3,9 +3,12 @@ import { TextFormatter } from '../formatter/TextFormatter';
 import { Bracket, Match } from '@tourneyview/common';
 import { Autoscroller } from './Autoscroller';
 import { BracketRenderer } from '../types/renderer';
+import { BracketAnimator } from '../types/animator';
+import { DummyBracketAnimator } from '../animator/dummy/DummyBracketAnimator';
 
 type SwissRendererOpts = {
     formatter: TextFormatter
+    animator?: BracketAnimator
     minRowHeight?: number
     rowGap?: number
     useScrollMask?: boolean
@@ -14,18 +17,23 @@ type SwissRendererOpts = {
 export class SwissRenderer implements BracketRenderer {
     private readonly element: d3.Selection<HTMLDivElement, undefined, null, undefined>;
 
-    private readonly width: number;
-    private readonly height: number;
+    public readonly width: number;
+    public readonly height: number;
     private readonly rowHeight: number;
     private readonly rowGap: number;
 
     private readonly formatter: TextFormatter;
     private readonly scroller: Autoscroller;
+    private readonly animator: BracketAnimator;
+
+    private activeBracketId: string | null;
 
      constructor(width: number, height: number, opts: SwissRendererOpts) {
          this.width = width;
          this.height = height;
          this.formatter = opts.formatter;
+         this.animator = opts.animator ?? new DummyBracketAnimator();
+         this.activeBracketId = null;
 
          const minRowHeight = opts.minRowHeight ?? 50;
          this.rowGap = opts.rowGap ?? 5;
@@ -50,13 +58,23 @@ export class SwissRenderer implements BracketRenderer {
          return this.element.node()!;
      }
 
-     setData(data: Bracket) {
+     async setData(data: Bracket) {
          if (data.matchGroups.length !== 1) {
              // todo: throw up like, a slideshow of groups? maybe something for another piece of code to handle
              throw new Error(`Rendering swiss groups requires only one bracket group to be present! (Found ${data.matchGroups.length})`);
          }
 
          const matchGroup = data.matchGroups[0];
+         const switchingBrackets = matchGroup.id !== this.activeBracketId;
+         if (this.activeBracketId != null && switchingBrackets) {
+             const element = this.getElement();
+             this.animator.swissAnimator.beforeHide(element, this);
+             await this.animator.swissAnimator.hide(element, this);
+             this.scroller.stop();
+             element.style.visibility = 'hidden';
+         }
+
+         this.activeBracketId = matchGroup.id;
 
          const drawTeamName = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) =>
              elem
@@ -87,10 +105,18 @@ export class SwissRenderer implements BracketRenderer {
              )
 
          const node = this.element.node()!;
-         if (node.scrollHeight > node.clientHeight) {
+         const useScroller = node.scrollHeight > node.clientHeight;
+
+         if (useScroller) {
+             this.scroller.initScrollMask();
+         }
+         if (switchingBrackets) {
+             this.animator.swissAnimator.beforeReveal(node, this);
+             node.style.visibility = 'visible';
+             await this.animator.swissAnimator.reveal(node, this);
+         }
+         if (useScroller) {
              this.scroller.start();
-         } else {
-             this.scroller.stop();
          }
      }
 }

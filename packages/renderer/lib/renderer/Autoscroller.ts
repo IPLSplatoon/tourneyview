@@ -22,11 +22,15 @@ export class Autoscroller {
         this.scrollTopTo = 0;
 
         this.scrollMask = useScrollMask ? new ScrollMask(target) : null;
+        this.initScrollMask();
+    }
+
+    initScrollMask() {
         this.scrollMask?.start();
     }
 
     start() {
-        this.scrollMask?.refreshMask();
+        this.initScrollMask();
 
         const scrollingFinished = this.scrollingFinished();
         if (scrollingFinished) {
@@ -52,6 +56,7 @@ export class Autoscroller {
     stop() {
         d3.select(this.target).interrupt('scroll');
         this.target.scrollTop = 0;
+        this.scrollTopTo = 0;
         this.scrollMask?.stop();
     }
 
