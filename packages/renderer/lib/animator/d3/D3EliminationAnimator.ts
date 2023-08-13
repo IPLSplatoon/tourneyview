@@ -1,10 +1,10 @@
-import { EliminationBracketAnimator } from '../../types/animator';
+import { EliminationAnimator } from '../../types/animator';
 import * as d3 from 'd3';
 import { HierarchyPointLink, HierarchyPointNode } from 'd3';
 import { EliminationRenderer } from '../../renderer/EliminationRenderer';
 import { Match } from '@tourneyview/common';
 
-export class D3EliminationBracketAnimator implements EliminationBracketAnimator {
+export class D3EliminationAnimator implements EliminationAnimator {
     beforeHide() {
 
     }

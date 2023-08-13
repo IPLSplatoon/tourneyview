@@ -1,6 +1,6 @@
-import { EliminationBracketAnimator } from '../../types/animator';
+import { EliminationAnimator } from '../../types/animator';
 
-export class DummyEliminationBracketAnimator implements EliminationBracketAnimator {
+export class DummyEliminationAnimator implements EliminationAnimator {
     beforeHide() {
 
     }

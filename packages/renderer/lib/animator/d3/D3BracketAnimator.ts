@@ -1,16 +1,16 @@
-import { BracketAnimator, EliminationBracketAnimator, SwissBracketAnimator } from '../../types/animator';
+import { BracketAnimator, EliminationAnimator, SwissAnimator } from '../../types/animator';
 import * as d3 from 'd3';
-import { D3EliminationBracketAnimator } from './D3EliminationBracketAnimator';
-import { D3SwissBracketAnimator } from './D3SwissBracketAnimator';
+import { D3EliminationAnimator } from './D3EliminationAnimator';
+import { D3SwissAnimator } from './D3SwissAnimator';
 import { BracketType } from '@tourneyview/common';
 
 export class D3BracketAnimator implements BracketAnimator {
-    public readonly eliminationAnimator: EliminationBracketAnimator;
-    public readonly swissAnimator: SwissBracketAnimator;
+    public readonly eliminationAnimator: EliminationAnimator;
+    public readonly swissAnimator: SwissAnimator;
 
     constructor() {
-        this.eliminationAnimator = new D3EliminationBracketAnimator();
-        this.swissAnimator = new D3SwissBracketAnimator();
+        this.eliminationAnimator = new D3EliminationAnimator();
+        this.swissAnimator = new D3SwissAnimator();
     }
 
     updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string, bracketType: BracketType): void {

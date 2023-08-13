@@ -1,8 +1,8 @@
 import * as d3 from 'd3';
-import { SwissBracketAnimator } from '../../types/animator';
+import { SwissAnimator } from '../../types/animator';
 import { SwissRenderer } from '../../renderer/SwissRenderer';
 
-export class D3SwissBracketAnimator implements SwissBracketAnimator {
+export class D3SwissAnimator implements SwissAnimator {
     beforeHide(): void {
 
     }

@@ -3,9 +3,9 @@ import { EliminationRenderer } from '../renderer/EliminationRenderer';
 import { SwissRenderer } from '../renderer/SwissRenderer';
 
 export interface BracketAnimator {
-    readonly eliminationAnimator: EliminationBracketAnimator
+    readonly eliminationAnimator: EliminationAnimator
     
-    readonly swissAnimator: SwissBracketAnimator
+    readonly swissAnimator: SwissAnimator
 
     updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string, bracketType: BracketType): void
 
@@ -22,6 +22,6 @@ interface BracketTypeAnimator<Renderer> {
     reveal(element: HTMLElement, renderer: Renderer): Promise<void>
 }
 
-export type EliminationBracketAnimator = BracketTypeAnimator<EliminationRenderer>
+export type EliminationAnimator = BracketTypeAnimator<EliminationRenderer>
 
-export type SwissBracketAnimator = BracketTypeAnimator<SwissRenderer>
+export type SwissAnimator = BracketTypeAnimator<SwissRenderer>

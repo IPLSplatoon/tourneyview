@@ -1,14 +1,14 @@
-import { BracketAnimator, EliminationBracketAnimator, SwissBracketAnimator } from '../../types/animator';
-import { DummyEliminationBracketAnimator } from './DummyEliminationBracketAnimator';
-import { DummySwissBracketAnimator } from './DummySwissBracketAnimator';
+import { BracketAnimator, EliminationAnimator, SwissAnimator } from '../../types/animator';
+import { DummyEliminationAnimator } from './DummyEliminationAnimator';
+import { DummySwissAnimator } from './DummySwissAnimator';
 
 export class DummyBracketAnimator implements BracketAnimator {
-    public readonly eliminationAnimator: EliminationBracketAnimator;
-    public readonly swissAnimator: SwissBracketAnimator;
+    public readonly eliminationAnimator: EliminationAnimator;
+    public readonly swissAnimator: SwissAnimator;
 
     constructor() {
-        this.eliminationAnimator = new DummyEliminationBracketAnimator();
-        this.swissAnimator = new DummySwissBracketAnimator();
+        this.eliminationAnimator = new DummyEliminationAnimator();
+        this.swissAnimator = new DummySwissAnimator();
     }
 
     updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string): void {

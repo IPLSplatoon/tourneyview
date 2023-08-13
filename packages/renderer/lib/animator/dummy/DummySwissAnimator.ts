@@ -1,6 +1,6 @@
-import { SwissBracketAnimator } from '../../types/animator';
+import { SwissAnimator } from '../../types/animator';
 
-export class DummySwissBracketAnimator implements SwissBracketAnimator {
+export class DummySwissAnimator implements SwissAnimator {
     beforeHide(): void {
     }
 
