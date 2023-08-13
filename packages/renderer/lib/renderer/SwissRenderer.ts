@@ -1,10 +1,11 @@
 import * as d3 from 'd3';
 import { TextFormatter } from '../formatter/TextFormatter';
-import { Bracket, Match } from '@tourneyview/common';
+import { Bracket, BracketType, Match } from '@tourneyview/common';
 import { Autoscroller } from './Autoscroller';
 import { BracketRenderer } from '../types/renderer';
 import { BracketAnimator } from '../types/animator';
 import { DummyBracketAnimator } from '../animator/dummy/DummyBracketAnimator';
+import { BaseType } from 'd3';
 
 type SwissRendererOpts = {
     formatter: TextFormatter
@@ -92,6 +93,38 @@ export class SwissRenderer implements BracketRenderer {
                  .classed(`match-row__${position}-score`, true)
                  .text(d => this.formatter.formatScore(score(d)));
 
+         const updateTeamName = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) => {
+             const that = this;
+             return elem
+                 .select(`.match-row__${position}-team-name`)
+                 .each(function(d) {
+                     const currentText = (this as HTMLElement).textContent ?? '';
+                     const newText = that.formatter.formatTeamName(text(d));
+                     if (currentText !== newText) {
+                         that.animator.updateText(this as HTMLElement, currentText, newText, BracketType.SWISS);
+                     }
+                 });
+         };
+
+         const updateScore = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', score: (d: Datum) => number | undefined | null) => {
+             const that = this;
+             return elem
+                 .select(`.match-row__${position}-score`)
+                 .each(function(d) {
+                     const currentScore = parseInt((this as HTMLElement).textContent ?? '');
+                     const newScore = score(d) ?? NaN;
+                     if (currentScore !== newScore && !(isNaN(currentScore) && isNaN(newScore))) {
+                         that.animator.updateScore(
+                             this as HTMLElement,
+                             currentScore,
+                             newScore,
+                             that.formatter.formatScore(newScore),
+                             BracketType.SWISS
+                         );
+                     }
+                 });
+         };
+
          this.element
              .selectAll('div.match-row')
              .data(matchGroup.matches, datum => (datum as Match).id)
@@ -101,7 +134,12 @@ export class SwissRenderer implements BracketRenderer {
                      .call(drawTeamName, 'top', d => d.topTeam.name)
                      .call(drawScore, 'top', d => d.topTeam.score)
                      .call(drawScore, 'bottom', d => d.bottomTeam.score)
-                     .call(drawTeamName, 'bottom', d => d.bottomTeam.name)
+                     .call(drawTeamName, 'bottom', d => d.bottomTeam.name),
+                 update => update
+                     .call(updateTeamName, 'top', d => d.topTeam.name)
+                     .call(updateScore, 'top', d => d.topTeam.score)
+                     .call(updateTeamName, 'bottom', d => d.bottomTeam.name)
+                     .call(updateScore, 'bottom', d => d.bottomTeam.score)
              )
 
          const node = this.element.node()!;

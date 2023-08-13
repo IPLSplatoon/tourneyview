@@ -2,6 +2,7 @@ import { BracketAnimator, EliminationBracketAnimator, SwissBracketAnimator } fro
 import * as d3 from 'd3';
 import { D3EliminationBracketAnimator } from './D3EliminationBracketAnimator';
 import { D3SwissBracketAnimator } from './D3SwissBracketAnimator';
+import { BracketType } from '@tourneyview/common';
 
 export class D3BracketAnimator implements BracketAnimator {
     public readonly eliminationAnimator: EliminationBracketAnimator;
@@ -12,8 +13,9 @@ export class D3BracketAnimator implements BracketAnimator {
         this.swissAnimator = new D3SwissBracketAnimator();
     }
 
-    updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string): void {
-        const width = element.getBoundingClientRect().width;
+    updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string, bracketType: BracketType): void {
+        const transformFunc = bracketType === BracketType.SWISS ? 'translateY' : 'translateX';
+        const transformAmount = transformFunc === 'translateY' ? element.getBoundingClientRect().height : element.getBoundingClientRect().width;
         const direction = isNaN(oldValue) || oldValue < newValue ? -1 : 1;
         const selection = d3.select(element);
         selection
@@ -21,15 +23,15 @@ export class D3BracketAnimator implements BracketAnimator {
                 .transition()
                 .duration(250)
                 .ease(d3.easeCubicIn)
-                .style('transform', `translateX(${width * direction}px)`)
+                .style('transform', `${transformFunc}(${transformAmount * direction}px)`)
                 .on('end', function() {
                     d3.select(this)
                         .text(formattedNewValue)
-                        .style('transform', `translateX(${-width * direction}px)`);
+                        .style('transform', `${transformFunc}(${-transformAmount * direction}px)`);
                 })
                 .transition()
                 .ease(d3.easeCubicOut)
-                .style('transform', 'translateX(0px)'));
+                .style('transform', `${transformFunc}(0px)`));
     }
 
     updateText(element: HTMLElement, oldValue: string, newValue: string): void {

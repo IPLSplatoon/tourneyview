@@ -126,7 +126,8 @@ export class EliminationRenderer implements BracketRenderer {
                 cellSeparation,
                 linkWidth: this.linkWidth,
                 cellHeight: this.cellHeight,
-                hasThirdPlaceMatch: matchGroup.matches.some(match => match.type === MatchType.LOSERS)
+                hasThirdPlaceMatch: matchGroup.matches.some(match => match.type === MatchType.LOSERS),
+                bracketType: data.type
             });
             bracketHeight = renderResult.height;
             bracketWidth = renderResult.width;
@@ -145,7 +146,8 @@ export class EliminationRenderer implements BracketRenderer {
                 cellHeight: this.cellHeight,
                 hasThirdPlaceMatch: false,
                 hasBracketReset: true,
-                bracketTitle: 'Winners Bracket'
+                bracketTitle: 'Winners Bracket',
+                bracketType: data.type
             });
             const losersRenderResult = this.losersRenderer!.setData(losersHierarchy, {
                 cellWidth,
@@ -155,7 +157,8 @@ export class EliminationRenderer implements BracketRenderer {
                 cellOffset: 1,
                 yOffset: winnersRenderResult.height + this.cellHeight / 2,
                 hasThirdPlaceMatch: false,
-                bracketTitle: 'Losers Bracket'
+                bracketTitle: 'Losers Bracket',
+                bracketType: data.type
             });
 
             bracketHeight = winnersRenderResult.height + this.cellHeight / 2 + losersRenderResult.height;

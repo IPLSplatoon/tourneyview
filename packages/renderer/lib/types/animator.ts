@@ -1,3 +1,4 @@
+import { BracketType } from '@tourneyview/common';
 import { EliminationRenderer } from '../renderer/EliminationRenderer';
 import { SwissRenderer } from '../renderer/SwissRenderer';
 
@@ -6,9 +7,9 @@ export interface BracketAnimator {
     
     readonly swissAnimator: SwissBracketAnimator
 
-    updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string): void
+    updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string, bracketType: BracketType): void
 
-    updateText(element: HTMLElement, oldValue: string, newValue: string): void
+    updateText(element: HTMLElement, oldValue: string, newValue: string, bracketType: BracketType): void
 }
 
 interface BracketTypeAnimator<Renderer> {

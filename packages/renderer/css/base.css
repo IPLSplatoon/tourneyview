@@ -69,9 +69,9 @@
     display: grid;
     grid-template-columns: 1fr 50px 50px 1fr;
     align-items: center;
-    padding: 8px 0;
     color: white;
     border-radius: 5px;
+    overflow: hidden;
 }
 
 .swiss-renderer > .match-row:nth-child(even) {

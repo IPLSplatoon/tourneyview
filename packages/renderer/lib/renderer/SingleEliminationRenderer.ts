@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { BaseType, HierarchyPointNode, tree } from 'd3';
-import { Match, MatchType } from '@tourneyview/common';
+import { BracketType, Match, MatchType } from '@tourneyview/common';
 import { EliminationHierarchyNode, EliminationHierarchyNodeData } from './EliminationRenderer';
 import { BracketAnimator } from '../types/animator';
 import { TextFormatter } from '../formatter/TextFormatter';
@@ -17,6 +17,7 @@ type SingleEliminationRendererSetDataOpts = {
     yOffset?: number
     bracketTitle?: string
     bracketHeaderOffset?: number
+    bracketType: BracketType
 };
 
 export class SingleEliminationRenderer {
@@ -183,7 +184,7 @@ export class SingleEliminationRenderer {
                     const currentText = (this as HTMLElement).textContent ?? '';
                     const newText = that.formatter.formatTeamName(text(d));
                     if (currentText !== newText) {
-                        that.animator.updateText(this as HTMLElement, currentText, newText);
+                        that.animator.updateText(this as HTMLElement, currentText, newText, opts.bracketType);
                     }
                 });
         };
@@ -196,7 +197,13 @@ export class SingleEliminationRenderer {
                     const currentScore = parseInt((this as HTMLElement).textContent ?? '');
                     const newScore = score(d) ?? NaN;
                     if (currentScore !== newScore && !(isNaN(currentScore) && isNaN(newScore))) {
-                        that.animator.updateScore(this as HTMLElement, currentScore, newScore, that.formatter.formatScore(newScore));
+                        that.animator.updateScore(
+                            this as HTMLElement,
+                            currentScore,
+                            newScore,
+                            that.formatter.formatScore(newScore),
+                            opts.bracketType
+                        );
                     }
                 });
         };
