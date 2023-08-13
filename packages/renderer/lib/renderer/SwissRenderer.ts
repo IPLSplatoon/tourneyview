@@ -1,11 +1,11 @@
 import * as d3 from 'd3';
+import { BaseType } from 'd3';
 import { TextFormatter } from '../formatter/TextFormatter';
 import { Bracket, BracketType, Match } from '@tourneyview/common';
 import { Autoscroller } from './Autoscroller';
 import { BracketRenderer } from '../types/renderer';
 import { BracketAnimator } from '../types/animator';
 import { DummyBracketAnimator } from '../animator/dummy/DummyBracketAnimator';
-import { BaseType } from 'd3';
 
 type SwissRendererOpts = {
     formatter: TextFormatter
@@ -143,18 +143,12 @@ export class SwissRenderer implements BracketRenderer {
              )
 
          const node = this.element.node()!;
-         const useScroller = node.scrollHeight > node.clientHeight;
-
-         if (useScroller) {
-             this.scroller.initScrollMask();
-         }
          if (switchingBrackets) {
+             this.scroller.initScrollMask();
              this.animator.swissAnimator.beforeReveal(node, this);
              node.style.visibility = 'visible';
              await this.animator.swissAnimator.reveal(node, this);
          }
-         if (useScroller) {
-             this.scroller.start();
-         }
+         this.scroller.start();
      }
 }

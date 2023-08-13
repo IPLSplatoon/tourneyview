@@ -10,6 +10,7 @@ export class Autoscroller {
     private direction: 'up' | 'down';
     private scrollTopTo: number;
     private scrollMask: ScrollMask | null;
+    private started: boolean;
 
     constructor(target: HTMLElement, height: number, rowHeight: number, rowGap: number, useScrollMask: boolean) {
         this.target = target;
@@ -20,18 +21,30 @@ export class Autoscroller {
         this.direction = 'up';
         this.target.scrollTop = 0;
         this.scrollTopTo = 0;
+        this.started = false;
 
         this.scrollMask = useScrollMask ? new ScrollMask(target) : null;
         this.initScrollMask();
     }
 
     initScrollMask() {
-        this.scrollMask?.start();
+        if (this.targetIsScrollable()) {
+            this.scrollMask?.start();
+        }
     }
 
     start() {
-        this.initScrollMask();
+        if (this.started || !this.targetIsScrollable()) {
+            return;
+        }
 
+        this.initScrollMask();
+        this.started = true;
+
+        this.scroll();
+    }
+
+    private scroll() {
         const scrollingFinished = this.scrollingFinished();
         if (scrollingFinished) {
             this.direction = this.direction === 'down' ? 'up' : 'down';
@@ -44,7 +57,7 @@ export class Autoscroller {
             .transition('scroll')
             .duration(750)
             .delay(5000)
-            .on('end', () => this.start())
+            .on('end', () => this.scroll())
             .tween('scroll', () => {
                 const i = d3.interpolateNumber(scrollTopFrom, this.scrollTopTo);
                 return function(t) {
@@ -58,6 +71,11 @@ export class Autoscroller {
         this.target.scrollTop = 0;
         this.scrollTopTo = 0;
         this.scrollMask?.stop();
+        this.started = false;
+    }
+
+    targetIsScrollable(): boolean {
+        return this.target.scrollHeight > this.target.clientHeight;
     }
 
     private getNextScrollTop(): number {
