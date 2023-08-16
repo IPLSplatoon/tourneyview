@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "serve": "vite --config vite.config.base.ts --port 8080 ./example",
-    "watch": "lerna watch -- lerna run build --since"
+    "watch": "lerna watch -- lerna run build --since",
+    "build": "lerna run build"
   },
   "workspaces": [
     "packages/*"
