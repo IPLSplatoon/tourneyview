@@ -40,13 +40,13 @@
     overflow: hidden;
 }
 
-.match-cell__score {
+.elimination-renderer .match-cell__score {
     text-align: center;
     font-size: 1.75em;
     transform: translateY(1px);
 }
 
-.match-cell__team-name {
+.elimination-renderer .match-cell__team-name {
     font-size: 1.25em;
     margin-left: 5px;
     text-overflow: ellipsis;
@@ -70,18 +70,7 @@
     color: white;
     border-radius: 5px;
     overflow: hidden;
-}
-
-.swiss-renderer > .match-row:nth-child(even) {
-    background-color: hotpink;
-}
-
-.swiss-renderer > .match-row:nth-child(odd) {
-    background-color: limegreen;
-}
-
-.swiss-renderer > .match-row:last-child {
-    border-color: transparent;
+    background-color: #444;
 }
 
 .swiss-renderer > .match-row > .match-row__team-name {
