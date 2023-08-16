@@ -60,8 +60,6 @@
     grid-auto-flow: row;
     font-family: sans-serif;
     overflow: hidden;
-
-    transform: translateY(100px);
 }
 
 .swiss-renderer > .match-row {
