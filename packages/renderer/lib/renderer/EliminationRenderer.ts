@@ -7,7 +7,7 @@ import { BracketAnimator } from '../types/animator';
 import { TextFormatter } from '../formatter/TextFormatter';
 import { BaseTextFormatter } from '../formatter/BaseTextFormatter';
 import { DummyBracketAnimator } from '../animator/dummy/DummyBracketAnimator';
-import { BracketRenderer } from '../types/renderer';
+import { BracketTypeRenderer } from '../types/renderer';
 
 export type EliminationRendererOpts = Partial<{
     animator: BracketAnimator
@@ -21,7 +21,9 @@ export type EliminationRendererOpts = Partial<{
 export type EliminationHierarchyNodeData = { isRoot: true } | Match;
 export type EliminationHierarchyNode = d3.HierarchyNode<EliminationHierarchyNodeData>;
 
-export class EliminationRenderer implements BracketRenderer {
+export class EliminationRenderer extends BracketTypeRenderer {
+    public static readonly compatibleBracketTypes = [BracketType.DOUBLE_ELIMINATION, BracketType.SINGLE_ELIMINATION];
+
     private readonly winnersRenderer: SingleEliminationRenderer;
     private losersRenderer: SingleEliminationRenderer | null;
 
@@ -45,6 +47,8 @@ export class EliminationRenderer implements BracketRenderer {
     private activeBracketId: string | null;
 
     constructor(width: number, height: number, opts: EliminationRendererOpts = {}) {
+        super();
+
         this.width = width;
         this.height = height;
         this.animator = opts.animator ?? new DummyBracketAnimator();
@@ -91,6 +95,19 @@ export class EliminationRenderer implements BracketRenderer {
         this.appendSingleElimRenderer(this.winnersRenderer);
     }
 
+    async hide() {
+        if (this.activeBracketId != null) {
+            const element = this.getElement();
+            this.animator.eliminationAnimator.beforeHide(element, this);
+            await this.animator.eliminationAnimator.hide(element, this);
+            element.style.visibility = 'hidden';
+        }
+    }
+
+    destroy() {
+        this.element.remove();
+    }
+
     async setData(data: Bracket) {
         if (data.matchGroups.length !== 1) {
             throw new Error(`Rendering elimination groups requires only one bracket group to be present! (Found ${data.matchGroups.length})`);
@@ -98,11 +115,8 @@ export class EliminationRenderer implements BracketRenderer {
 
         const matchGroup = data.matchGroups[0];
         const switchingBrackets = matchGroup.id !== this.activeBracketId;
-        if (this.activeBracketId != null && switchingBrackets) {
-            const element = this.getElement();
-            this.animator.eliminationAnimator.beforeHide(element, this);
-            await this.animator.eliminationAnimator.hide(element, this);
-            element.style.visibility = 'hidden';
+        if (switchingBrackets) {
+            await this.hide();
         }
 
         this.activeBracketId = matchGroup.id;

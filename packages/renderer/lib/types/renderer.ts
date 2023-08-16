@@ -1,5 +1,13 @@
-import { Bracket } from '@tourneyview/common';
+import { Bracket, BracketType } from '@tourneyview/common';
 
-export interface BracketRenderer {
-    setData(data: Bracket): void | Promise<void>
+export abstract class BracketTypeRenderer {
+    public static readonly compatibleBracketTypes: BracketType[]
+
+    abstract setData(data: Bracket): void | Promise<void>
+
+    abstract hide(): void | Promise<void>
+
+    abstract destroy(): void
+
+    abstract getElement(): HTMLElement
 }

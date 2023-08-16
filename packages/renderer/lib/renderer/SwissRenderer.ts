@@ -3,11 +3,11 @@ import { BaseType } from 'd3';
 import { TextFormatter } from '../formatter/TextFormatter';
 import { Bracket, BracketType, Match } from '@tourneyview/common';
 import { Autoscroller } from './Autoscroller';
-import { BracketRenderer } from '../types/renderer';
+import { BracketTypeRenderer } from '../types/renderer';
 import { BracketAnimator } from '../types/animator';
 import { DummyBracketAnimator } from '../animator/dummy/DummyBracketAnimator';
 
-type SwissRendererOpts = {
+export type SwissRendererOpts = {
     formatter: TextFormatter
     animator?: BracketAnimator
     minRowHeight?: number
@@ -15,7 +15,9 @@ type SwissRendererOpts = {
     useScrollMask?: boolean
 };
 
-export class SwissRenderer implements BracketRenderer {
+export class SwissRenderer extends BracketTypeRenderer {
+    public static readonly compatibleBracketTypes = [BracketType.SWISS];
+
     private readonly element: d3.Selection<HTMLDivElement, undefined, null, undefined>;
 
     public readonly width: number;
@@ -29,126 +31,134 @@ export class SwissRenderer implements BracketRenderer {
 
     private activeBracketId: string | null;
 
-     constructor(width: number, height: number, opts: SwissRendererOpts) {
-         this.width = width;
-         this.height = height;
-         this.formatter = opts.formatter;
-         this.animator = opts.animator ?? new DummyBracketAnimator();
-         this.activeBracketId = null;
+    constructor(width: number, height: number, opts: SwissRendererOpts) {
+        super();
 
-         const minRowHeight = opts.minRowHeight ?? 50;
-         this.rowGap = opts.rowGap ?? 5;
-         this.rowHeight = Math.round((height + this.rowGap) / Math.floor((height + this.rowGap) / (minRowHeight + this.rowGap))) - this.rowGap;
+        this.width = width;
+        this.height = height;
+        this.formatter = opts.formatter;
+        this.animator = opts.animator ?? new DummyBracketAnimator();
+        this.activeBracketId = null;
 
-         this.element = d3
-             .create('div')
-             .classed('swiss-renderer', true)
-             .style('width', `${width}px`)
-             .style('height', `${height}px`)
-             .style('grid-auto-rows', `${(this.rowHeight)}px`)
-             .style('row-gap', `${this.rowGap}px`);
+        const minRowHeight = opts.minRowHeight ?? 50;
+        this.rowGap = opts.rowGap ?? 5;
+        this.rowHeight = Math.round((height + this.rowGap) / Math.floor((height + this.rowGap) / (minRowHeight + this.rowGap))) - this.rowGap;
 
-         this.scroller = new Autoscroller(this.element.node()!, this.height, this.rowHeight, this.rowGap, opts.useScrollMask ?? false);
-     }
+        this.element = d3
+            .create('div')
+            .classed('swiss-renderer', true)
+            .style('width', `${width}px`)
+            .style('height', `${height}px`)
+            .style('grid-auto-rows', `${(this.rowHeight)}px`)
+            .style('row-gap', `${this.rowGap}px`);
 
-     destroy() {
-         this.element.remove();
-     }
+        this.scroller = new Autoscroller(this.element.node()!, this.height, this.rowHeight, this.rowGap, opts.useScrollMask ?? false);
+    }
 
-     getElement(): HTMLElement {
-         return this.element.node()!;
-     }
+    destroy() {
+        this.element.remove();
+    }
 
-     async setData(data: Bracket) {
-         if (data.matchGroups.length !== 1) {
-             // todo: throw up like, a slideshow of groups? maybe something for another piece of code to handle
-             throw new Error(`Rendering swiss groups requires only one bracket group to be present! (Found ${data.matchGroups.length})`);
-         }
+    getElement(): HTMLElement {
+        return this.element.node()!;
+    }
 
-         const matchGroup = data.matchGroups[0];
-         const switchingBrackets = matchGroup.id !== this.activeBracketId;
-         if (this.activeBracketId != null && switchingBrackets) {
-             const element = this.getElement();
-             this.animator.swissAnimator.beforeHide(element, this);
-             await this.animator.swissAnimator.hide(element, this);
-             this.scroller.stop();
-             element.style.visibility = 'hidden';
-         }
+    async hide() {
+        if (this.activeBracketId != null) {
+            const element = this.getElement();
+            this.animator.swissAnimator.beforeHide(element, this);
+            await this.animator.swissAnimator.hide(element, this);
+            this.scroller.stop();
+            element.style.visibility = 'hidden';
+        }
+    }
 
-         this.activeBracketId = matchGroup.id;
+    async setData(data: Bracket) {
+        if (data.matchGroups.length !== 1) {
+            // todo: throw up like, a slideshow of groups? maybe something for another piece of code to handle
+            throw new Error(`Rendering swiss groups requires only one bracket group to be present! (Found ${data.matchGroups.length})`);
+        }
 
-         const drawTeamName = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) =>
-             elem
-                 .append('div')
-                 .classed('match-row__team-name', true)
-                 .classed(`match-row__${position}-team-name`, true)
-                 .text(d => this.formatter.formatTeamName(text(d)));
+        const matchGroup = data.matchGroups[0];
+        const switchingBrackets = matchGroup.id !== this.activeBracketId;
+        if (switchingBrackets) {
+            await this.hide();
+        }
 
-         const drawScore = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', score: (d: Datum) => number | undefined | null) =>
-             elem
-                 .append('div')
-                 .classed('match-row__score-wrapper', true)
-                 .append('div')
-                 .classed('match-row__score', true)
-                 .classed(`match-row__${position}-score`, true)
-                 .text(d => this.formatter.formatScore(score(d)));
+        this.activeBracketId = matchGroup.id;
 
-         const updateTeamName = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) => {
-             const that = this;
-             return elem
-                 .select(`.match-row__${position}-team-name`)
-                 .each(function(d) {
-                     const currentText = (this as HTMLElement).textContent ?? '';
-                     const newText = that.formatter.formatTeamName(text(d));
-                     if (currentText !== newText) {
-                         that.animator.updateText(this as HTMLElement, currentText, newText, BracketType.SWISS);
-                     }
-                 });
-         };
+        const drawTeamName = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) =>
+            elem
+                .append('div')
+                .classed('match-row__team-name', true)
+                .classed(`match-row__${position}-team-name`, true)
+                .text(d => this.formatter.formatTeamName(text(d)));
 
-         const updateScore = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', score: (d: Datum) => number | undefined | null) => {
-             const that = this;
-             return elem
-                 .select(`.match-row__${position}-score`)
-                 .each(function(d) {
-                     const currentScore = parseInt((this as HTMLElement).textContent ?? '');
-                     const newScore = score(d) ?? NaN;
-                     if (currentScore !== newScore && !(isNaN(currentScore) && isNaN(newScore))) {
-                         that.animator.updateScore(
-                             this as HTMLElement,
-                             currentScore,
-                             newScore,
-                             that.formatter.formatScore(newScore),
-                             BracketType.SWISS
-                         );
-                     }
-                 });
-         };
+        const drawScore = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', score: (d: Datum) => number | undefined | null) =>
+            elem
+                .append('div')
+                .classed('match-row__score-wrapper', true)
+                .append('div')
+                .classed('match-row__score', true)
+                .classed(`match-row__${position}-score`, true)
+                .text(d => this.formatter.formatScore(score(d)));
 
-         this.element
-             .selectAll('div.match-row')
-             .data(matchGroup.matches, datum => (datum as Match).id)
-             .join(
-                 enter => enter.append('div')
-                     .classed('match-row', true)
-                     .call(drawTeamName, 'top', d => d.topTeam.name)
-                     .call(drawScore, 'top', d => d.topTeam.score)
-                     .call(drawScore, 'bottom', d => d.bottomTeam.score)
-                     .call(drawTeamName, 'bottom', d => d.bottomTeam.name),
-                 update => update
-                     .call(updateTeamName, 'top', d => d.topTeam.name)
-                     .call(updateScore, 'top', d => d.topTeam.score)
-                     .call(updateTeamName, 'bottom', d => d.bottomTeam.name)
-                     .call(updateScore, 'bottom', d => d.bottomTeam.score)
-             )
+        const updateTeamName = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) => {
+            const that = this;
+            return elem
+                .select(`.match-row__${position}-team-name`)
+                .each(function (d) {
+                    const currentText = (this as HTMLElement).textContent ?? '';
+                    const newText = that.formatter.formatTeamName(text(d));
+                    if (currentText !== newText) {
+                        that.animator.updateText(this as HTMLElement, currentText, newText, BracketType.SWISS);
+                    }
+                });
+        };
 
-         const node = this.element.node()!;
-         if (switchingBrackets) {
-             this.scroller.initScrollMask();
-             this.animator.swissAnimator.beforeReveal(node, this);
-             node.style.visibility = 'visible';
-             await this.animator.swissAnimator.reveal(node, this);
-         }
-         this.scroller.start();
-     }
+        const updateScore = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', score: (d: Datum) => number | undefined | null) => {
+            const that = this;
+            return elem
+                .select(`.match-row__${position}-score`)
+                .each(function (d) {
+                    const currentScore = parseInt((this as HTMLElement).textContent ?? '');
+                    const newScore = score(d) ?? NaN;
+                    if (currentScore !== newScore && !(isNaN(currentScore) && isNaN(newScore))) {
+                        that.animator.updateScore(
+                            this as HTMLElement,
+                            currentScore,
+                            newScore,
+                            that.formatter.formatScore(newScore),
+                            BracketType.SWISS
+                        );
+                    }
+                });
+        };
+
+        this.element
+            .selectAll('div.match-row')
+            .data(matchGroup.matches, datum => (datum as Match).id)
+            .join(
+                enter => enter.append('div')
+                    .classed('match-row', true)
+                    .call(drawTeamName, 'top', d => d.topTeam.name)
+                    .call(drawScore, 'top', d => d.topTeam.score)
+                    .call(drawScore, 'bottom', d => d.bottomTeam.score)
+                    .call(drawTeamName, 'bottom', d => d.bottomTeam.name),
+                update => update
+                    .call(updateTeamName, 'top', d => d.topTeam.name)
+                    .call(updateScore, 'top', d => d.topTeam.score)
+                    .call(updateTeamName, 'bottom', d => d.bottomTeam.name)
+                    .call(updateScore, 'bottom', d => d.bottomTeam.score)
+            )
+
+        const node = this.element.node()!;
+        if (switchingBrackets) {
+            this.scroller.initScrollMask();
+            this.animator.swissAnimator.beforeReveal(node, this);
+            node.style.visibility = 'visible';
+            await this.animator.swissAnimator.reveal(node, this);
+        }
+        this.scroller.start();
+    }
 }
