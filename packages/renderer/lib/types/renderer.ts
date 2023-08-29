@@ -7,6 +7,8 @@ export abstract class BracketTypeRenderer {
 
     abstract hide(): void | Promise<void>
 
+    abstract install(target: HTMLElement): void
+
     abstract destroy(): void
 
     abstract getElement(): HTMLElement

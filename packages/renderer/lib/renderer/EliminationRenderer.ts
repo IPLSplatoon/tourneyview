@@ -104,6 +104,10 @@ export class EliminationRenderer extends BracketTypeRenderer {
         }
     }
 
+    install(target: HTMLElement) {
+        target.appendChild(this.getElement());
+    }
+
     destroy() {
         this.element.remove();
     }

@@ -21,4 +21,7 @@ const importData = async (data: string) => {
     renderer.setData(await importer.getMatches({ id: data, roundNumber: '1' }));
 }
 
+renderer.element.style.height = '500px';
+renderer.element.style.width = '500px';
+renderer.element.style.resize = 'both';
 document.body.appendChild(renderer.element);

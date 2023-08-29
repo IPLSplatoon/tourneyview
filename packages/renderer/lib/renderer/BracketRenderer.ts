@@ -54,7 +54,7 @@ export class BracketRenderer {
             this.activeRenderer?.destroy();
 
             this.activeRenderer = this.getRenderer(data.type);
-            this.element.appendChild(this.activeRenderer.getElement());
+            this.activeRenderer.install(this.element);
         }
 
         return this.activeRenderer.setData(data);
@@ -62,7 +62,7 @@ export class BracketRenderer {
 
     private getRenderer(type: BracketType): BracketTypeRenderer {
         if (SwissRenderer.compatibleBracketTypes.includes(type)) {
-            return new SwissRenderer(this.width, this.height, {
+            return new SwissRenderer({
                 animator: this.opts.animator,
                 formatter: this.opts.formatter,
                 ...this.opts.swissOpts

@@ -10,7 +10,7 @@ import { DummyBracketAnimator } from '../animator/dummy/DummyBracketAnimator';
 export type SwissRendererOpts = {
     formatter: TextFormatter
     animator?: BracketAnimator
-    minRowHeight?: number
+    rowHeight?: number
     rowGap?: number
     useScrollMask?: boolean
 };
@@ -18,10 +18,9 @@ export type SwissRendererOpts = {
 export class SwissRenderer extends BracketTypeRenderer {
     public static readonly compatibleBracketTypes = [BracketType.SWISS];
 
+    private readonly wrapper: d3.Selection<HTMLDivElement, undefined, null, undefined>;
     private readonly element: d3.Selection<HTMLDivElement, undefined, null, undefined>;
 
-    public readonly width: number;
-    public readonly height: number;
     private readonly rowHeight: number;
     private readonly rowGap: number;
 
@@ -31,36 +30,60 @@ export class SwissRenderer extends BracketTypeRenderer {
 
     private activeBracketId: string | null;
 
-    constructor(width: number, height: number, opts: SwissRendererOpts) {
+    private resizeObserver: ResizeObserver;
+
+    constructor(opts: SwissRendererOpts) {
         super();
 
-        this.width = width;
-        this.height = height;
         this.formatter = opts.formatter;
         this.animator = opts.animator ?? new DummyBracketAnimator();
         this.activeBracketId = null;
 
-        const minRowHeight = opts.minRowHeight ?? 50;
+        this.rowHeight = opts.rowHeight ?? 50;
         this.rowGap = opts.rowGap ?? 5;
-        this.rowHeight = Math.round((height + this.rowGap) / Math.floor((height + this.rowGap) / (minRowHeight + this.rowGap))) - this.rowGap;
 
-        this.element = d3
+        this.wrapper = d3
             .create('div')
+            .classed('swiss-renderer__wrapper', true);
+        this.element = this.wrapper
+            .append('div')
             .classed('swiss-renderer', true)
-            .style('width', `${width}px`)
-            .style('height', `${height}px`)
             .style('grid-auto-rows', `${(this.rowHeight)}px`)
             .style('row-gap', `${this.rowGap}px`);
 
-        this.scroller = new Autoscroller(this.element.node()!, this.height, this.rowHeight, this.rowGap, opts.useScrollMask ?? false);
+        this.resizeObserver = new ResizeObserver(entries => {
+            for (const entry of entries) {
+                if (entry.contentBoxSize) {
+                    this.handleHeightChange(entry.contentBoxSize[0].blockSize);
+                }
+            }
+        });
+
+        this.resizeObserver.observe(this.wrapper.node()!);
+
+        this.scroller = new Autoscroller(this.element.node()!, this.rowHeight, this.rowGap, opts.useScrollMask ?? false);
+    }
+
+    private handleHeightChange(elementHeight: number) {
+        const rowsPerScreen = Math.floor((elementHeight + this.rowGap) / (this.rowHeight + this.rowGap));
+        const innerHeight = rowsPerScreen * (this.rowHeight + this.rowGap) - this.rowGap;
+        this.element.style('height', `${innerHeight}px`);
+        this.scroller.setHeights(innerHeight, rowsPerScreen);
+    }
+
+    install(target: HTMLElement) {
+        const element = this.getElement();
+        target.appendChild(element);
+        this.handleHeightChange(element.getBoundingClientRect().height);
     }
 
     destroy() {
-        this.element.remove();
+        this.wrapper.remove();
+        this.resizeObserver.disconnect();
     }
 
     getElement(): HTMLElement {
-        return this.element.node()!;
+        return this.wrapper.node()!;
     }
 
     async hide() {

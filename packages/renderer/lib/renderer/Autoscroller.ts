@@ -3,18 +3,20 @@ import { ScrollMask } from './ScrollMask';
 
 export class Autoscroller {
     private readonly target: HTMLElement;
-    private readonly rowsPerScreen: number;
-    private readonly rowHeight: number;
+    private readonly targetSelection: d3.Selection<HTMLElement, unknown, null, undefined>;
     private readonly rowGap: number;
+    private readonly rowHeight: number;
 
+    private rowsPerScreen?: number;
     private direction: 'up' | 'down';
     private scrollTopTo: number;
     private scrollMask: ScrollMask | null;
     private started: boolean;
+    private targetHeight: number;
 
-    constructor(target: HTMLElement, height: number, rowHeight: number, rowGap: number, useScrollMask: boolean) {
+    constructor(target: HTMLElement, rowHeight: number, rowGap: number, useScrollMask: boolean) {
         this.target = target;
-        this.rowsPerScreen = Math.floor((height + rowGap) / (rowHeight + rowGap));
+        this.targetSelection = d3.select(target);
         this.rowHeight = rowHeight;
         this.rowGap = rowGap;
 
@@ -25,6 +27,15 @@ export class Autoscroller {
 
         this.scrollMask = useScrollMask ? new ScrollMask(target) : null;
         this.initScrollMask();
+
+        this.targetHeight = 0;
+    }
+
+    setHeights(height: number, rowsPerScreen: number) {
+        this.resetPosition();
+        this.targetHeight = height;
+        this.rowsPerScreen = rowsPerScreen;
+        this.start();
     }
 
     initScrollMask() {
@@ -51,47 +62,59 @@ export class Autoscroller {
         }
 
         const scrollTopFrom = this.scrollTopTo;
-        this.scrollTopTo = this.getNextScrollTop();
+        const scrollTopTo = this.getNextScrollTop();
+        this.scrollTopTo = scrollTopTo;
 
-        d3.select(this.target)
+        this.targetSelection
             .transition('scroll')
             .duration(750)
             .delay(5000)
-            .on('end', () => this.scroll())
+            .on('end', () => {
+                this.scroll();
+            })
             .tween('scroll', () => {
-                const i = d3.interpolateNumber(scrollTopFrom, this.scrollTopTo);
+                const i = d3.interpolateNumber(scrollTopFrom, scrollTopTo);
                 return function(t) {
                     this.scrollTop = i(t);
                 }
             });
     }
 
-    stop() {
-        d3.select(this.target).interrupt('scroll');
+    private resetPosition() {
+        this.targetSelection.interrupt('scroll');
         this.target.scrollTop = 0;
         this.scrollTopTo = 0;
-        this.scrollMask?.stop();
+        this.direction = 'up';
         this.started = false;
     }
 
+    stop() {
+        this.resetPosition();
+        this.scrollMask?.stop();
+    }
+
     targetIsScrollable(): boolean {
-        return this.target.scrollHeight > this.target.clientHeight;
+        return this.rowsPerScreen != null && this.target.scrollHeight > this.targetHeight;
     }
 
     private getNextScrollTop(): number {
         if (this.direction === 'up') {
             return 0;
         } else {
+            if (this.rowsPerScreen == null) {
+                throw new Error('Tried starting an autoscroller without telling it the target element\'s height first');
+            }
+
             return Math.min(this.scrollTopTo + (this.rowHeight + this.rowGap) * (this.rowsPerScreen - 1), this.maxScrollTop());
         }
     }
 
     private scrollingFinished() {
         return (this.direction === 'up' && this.target.scrollTop <= 0)
-            || (this.direction === 'down' && Math.abs(this.target.scrollHeight - this.target.clientHeight - this.target.scrollTop) < 1);
+            || (this.direction === 'down' && Math.abs(this.target.scrollHeight - this.targetHeight - this.target.scrollTop) < 1);
     }
 
     private maxScrollTop() {
-        return this.target.scrollHeight - this.target.clientHeight;
+        return this.target.scrollHeight - this.targetHeight;
     }
 }

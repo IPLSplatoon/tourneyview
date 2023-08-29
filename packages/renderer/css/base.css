@@ -1,3 +1,7 @@
+.bracket-renderer {
+    overflow: hidden;
+}
+
 .elimination-renderer {
     font-family: sans-serif;
 }
@@ -55,10 +59,18 @@
     overflow: hidden;
 }
 
+.swiss-renderer__wrapper {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
 .swiss-renderer {
     display: grid;
     grid-auto-flow: row;
     font-family: sans-serif;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
 }
 

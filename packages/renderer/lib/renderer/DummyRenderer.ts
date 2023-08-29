@@ -41,6 +41,10 @@ export class DummyRenderer implements BracketTypeRenderer {
             .end();
     }
 
+    install(target: HTMLElement) {
+        target.appendChild(this.getElement());
+    }
+
     destroy() {
         this.element.remove();
     }
