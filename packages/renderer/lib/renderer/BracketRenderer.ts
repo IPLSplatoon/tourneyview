@@ -21,16 +21,12 @@ export class BracketRenderer {
     private activeRenderer: BracketTypeRenderer | null;
 
     private readonly opts: Required<BracketRendererOpts>;
-    private readonly height: number;
-    private readonly width: number;
 
     public readonly element: HTMLElement;
 
-    constructor(width: number, height: number, opts?: BracketRendererOpts) {
+    constructor(opts?: BracketRendererOpts) {
         this.activeRenderer = null;
 
-        this.width = width;
-        this.height = height;
         this.opts = {
             animator: opts?.animator ?? new DummyBracketAnimator(),
             formatter: opts?.formatter ?? new BaseTextFormatter(),

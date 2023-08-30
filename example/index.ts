@@ -4,7 +4,7 @@ import { BattlefyImporter } from '@tourneyview/importer';
 import { D3BracketAnimator } from '../packages/renderer/lib';
 import { BracketRenderer } from '../packages/renderer/lib';
 
-const renderer = new BracketRenderer(700, 500, {
+const renderer = new BracketRenderer({
     animator: new D3BracketAnimator(),
     swissOpts: {
         useScrollMask: true
