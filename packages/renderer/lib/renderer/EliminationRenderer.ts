@@ -21,6 +21,8 @@ export type EliminationRendererOpts = Partial<{
 export type EliminationHierarchyNodeData = { isRoot: true } | Match;
 export type EliminationHierarchyNode = d3.HierarchyNode<EliminationHierarchyNodeData>;
 
+const BRACKET_SIZE = 2048;
+
 export class EliminationRenderer extends BracketTypeRenderer {
     public static readonly compatibleBracketTypes = [BracketType.DOUBLE_ELIMINATION, BracketType.SINGLE_ELIMINATION];
 
@@ -37,20 +39,20 @@ export class EliminationRenderer extends BracketTypeRenderer {
 
     private readonly zoomBehavior: d3.ZoomBehavior<Element, unknown>;
 
-    private readonly width: number;
-    private readonly height: number;
     private readonly linkWidth: number;
     private readonly cellHeight: number;
     private readonly minCellWidth: number;
     private readonly maxCellWidth: number;
 
     private activeBracketId: string | null;
+    private renderedBracketWidth: number;
+    private renderedBracketHeight: number;
 
-    constructor(width: number, height: number, opts: EliminationRendererOpts = {}) {
+    private resizeObserver: ResizeObserver;
+
+    constructor(opts: EliminationRendererOpts = {}) {
         super();
 
-        this.width = width;
-        this.height = height;
         this.animator = opts.animator ?? new DummyBracketAnimator();
         this.formatter = opts.formatter ?? new BaseTextFormatter();
         this.linkWidth = opts.linkWidth ?? 50;
@@ -58,12 +60,12 @@ export class EliminationRenderer extends BracketTypeRenderer {
         this.minCellWidth = opts.minCellWidth ?? 175;
         this.maxCellWidth = opts.maxCellWidth ?? 250;
         this.activeBracketId = null;
+        this.renderedBracketWidth = 1;
+        this.renderedBracketHeight = 1;
 
         this.element = d3
             .create('div')
             .classed('elimination-renderer', true)
-            .style('width', `${width}px`)
-            .style('height', `${height}px`)
             .style('position', 'relative')
             .style('overflow', 'hidden');
 
@@ -73,11 +75,9 @@ export class EliminationRenderer extends BracketTypeRenderer {
 
         this.svg = this.element
             .append('svg')
-            .attr('viewBox', [0, 0, width, height])
-            .attr('width', width)
-            .attr('height', height)
-            .style('max-width', '100%')
-            .style('height', 'auto');
+            .attr('viewBox', [0, 0, BRACKET_SIZE, BRACKET_SIZE])
+            .attr('width', BRACKET_SIZE)
+            .attr('height', BRACKET_SIZE);
 
         this.linkWrapper = this.svg
             .append('g')
@@ -87,12 +87,22 @@ export class EliminationRenderer extends BracketTypeRenderer {
             .attr('stroke-width', 1.5);
 
         this.zoomBehavior = d3.zoom()
-            .extent([[0, 0], [this.width, this.height]])
+            .extent([[0, 0], [BRACKET_SIZE, BRACKET_SIZE]])
             .on('zoom', e => this.onZoom(e));
 
-        this.winnersRenderer = new SingleEliminationRenderer(this.width, this.height, { animator: this.animator, formatter: this.formatter });
+        this.winnersRenderer = new SingleEliminationRenderer(BRACKET_SIZE, BRACKET_SIZE, { animator: this.animator, formatter: this.formatter });
         this.losersRenderer = null;
         this.appendSingleElimRenderer(this.winnersRenderer);
+
+        this.resizeObserver = new ResizeObserver(entries => {
+            for (const entry of entries) {
+                if (entry.contentBoxSize) {
+                    this.setZoom(entry.contentBoxSize[0].blockSize, entry.contentBoxSize[0].inlineSize);
+                }
+            }
+        });
+
+        this.resizeObserver.observe(this.element.node()!);
     }
 
     async hide() {
@@ -109,6 +119,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
     }
 
     destroy() {
+        this.resizeObserver.disconnect();
         this.element.remove();
     }
 
@@ -129,12 +140,9 @@ export class EliminationRenderer extends BracketTypeRenderer {
             this.losersRenderer.destroy();
             this.losersRenderer = null;
         } else if (data.type === BracketType.DOUBLE_ELIMINATION && this.losersRenderer == null) {
-            this.losersRenderer = new SingleEliminationRenderer(this.width, this.height, { animator: this.animator, formatter: this.formatter });
+            this.losersRenderer = new SingleEliminationRenderer(BRACKET_SIZE, BRACKET_SIZE, { animator: this.animator, formatter: this.formatter });
             this.appendSingleElimRenderer(this.losersRenderer);
         }
-
-        let bracketHeight: number;
-        let bracketWidth: number;
 
         if (data.type === BracketType.SINGLE_ELIMINATION) {
             const hierarchy = this.buildMatchHierarchy(matchGroup.matches);
@@ -147,8 +155,9 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 hasThirdPlaceMatch: matchGroup.matches.some(match => match.type === MatchType.LOSERS),
                 bracketType: data.type
             });
-            bracketHeight = renderResult.height;
-            bracketWidth = renderResult.width;
+
+            this.renderedBracketHeight = renderResult.height;
+            this.renderedBracketWidth = renderResult.width;
         } else {
             const winnersHierarchy = this.buildMatchHierarchy(matchGroup.matches.filter(match => match.type === MatchType.WINNERS));
             const losersHierarchy = this.buildMatchHierarchy(matchGroup.matches.filter(match => match.type === MatchType.LOSERS));
@@ -179,20 +188,12 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 bracketType: data.type
             });
 
-            bracketHeight = winnersRenderResult.height + this.cellHeight / 2 + losersRenderResult.height;
-            bracketWidth = Math.max(winnersRenderResult.width, losersRenderResult.width);
+            this.renderedBracketHeight = winnersRenderResult.height + this.cellHeight / 2 + losersRenderResult.height;
+            this.renderedBracketWidth = Math.max(winnersRenderResult.width, losersRenderResult.width);
         }
 
-        const scale = Math.min(this.height / bracketHeight, this.width / bracketWidth, 1);
-
-        this.zoomBehavior.translateTo(
-            this.element as unknown as d3.Selection<Element, unknown, null, unknown>,
-            bracketWidth / 2,
-            bracketHeight / 2);
-
-        this.zoomBehavior.scaleTo(
-            this.element as unknown as d3.Selection<Element, unknown, null, unknown>,
-            scale);
+        const boundingRect = this.element.node()!.getBoundingClientRect();
+        this.setZoom(boundingRect.height, boundingRect.width);
 
         if (switchingBrackets) {
             const element = this.getElement();
@@ -200,6 +201,21 @@ export class EliminationRenderer extends BracketTypeRenderer {
             element.style.visibility = 'visible';
             await this.animator.eliminationAnimator.reveal(element, this);
         }
+    }
+
+    setZoom(height: number, width: number) {
+        const scale = Math.min(height / this.renderedBracketHeight, width / this.renderedBracketWidth);
+
+        this.zoomBehavior.extent([[0, 0], [width, height]]);
+        this.zoomBehavior.translateTo(
+            this.element as unknown as d3.Selection<Element, unknown, null, unknown>,
+            this.renderedBracketWidth / 2,
+            this.renderedBracketHeight / 2
+        );
+        this.zoomBehavior.scaleTo(
+            this.element as unknown as d3.Selection<Element, unknown, null, unknown>,
+            scale
+        );
     }
 
     getElement(): HTMLElement {
@@ -233,7 +249,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
     }
 
     private getCellWidth(hierarchy: EliminationHierarchyNode, losers = false): number {
-        const result = losers ? (this.width - this.linkWidth * hierarchy.height) / (hierarchy.height + 1) : (this.width - this.linkWidth * (hierarchy.height - 1)) / hierarchy.height;
+        const result = losers ? (BRACKET_SIZE - this.linkWidth * hierarchy.height) / (hierarchy.height + 1) : (BRACKET_SIZE - this.linkWidth * (hierarchy.height - 1)) / hierarchy.height;
         return Math.max(Math.min(result, this.maxCellWidth), this.minCellWidth);
     }
 

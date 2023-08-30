@@ -70,7 +70,7 @@ export class BracketRenderer {
         }
 
         if (EliminationRenderer.compatibleBracketTypes.includes(type)) {
-            return new EliminationRenderer(this.width, this.height, {
+            return new EliminationRenderer({
                 animator: this.opts.animator,
                 formatter: this.opts.formatter,
                 ...this.opts.eliminationOpts
