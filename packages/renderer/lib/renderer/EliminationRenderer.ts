@@ -5,18 +5,16 @@ import { Bracket, BracketType } from '@tourneyview/common';
 import { Match, MatchType } from '@tourneyview/common';
 import { BracketAnimator } from '../types/animator';
 import { TextFormatter } from '../formatter/TextFormatter';
-import { BaseTextFormatter } from '../formatter/BaseTextFormatter';
-import { DummyBracketAnimator } from '../animator/dummy/DummyBracketAnimator';
 import { BracketTypeRenderer } from '../types/renderer';
 
-export type EliminationRendererOpts = Partial<{
+export type EliminationRendererOpts = {
     animator: BracketAnimator
     formatter: TextFormatter
-    linkWidth: number
-    cellHeight: number
-    minCellWidth: number
-    maxCellWidth: number
-}>
+    linkWidth?: number
+    cellHeight?: number
+    minCellWidth?: number
+    maxCellWidth?: number
+}
 
 export type EliminationHierarchyNodeData = { isRoot: true } | Match;
 export type EliminationHierarchyNode = d3.HierarchyNode<EliminationHierarchyNodeData>;
@@ -50,11 +48,11 @@ export class EliminationRenderer extends BracketTypeRenderer {
 
     private resizeObserver: ResizeObserver;
 
-    constructor(opts: EliminationRendererOpts = {}) {
+    constructor(opts: EliminationRendererOpts) {
         super();
 
-        this.animator = opts.animator ?? new DummyBracketAnimator();
-        this.formatter = opts.formatter ?? new BaseTextFormatter();
+        this.animator = opts.animator;
+        this.formatter = opts.formatter;
         this.linkWidth = opts.linkWidth ?? 50;
         this.cellHeight = opts.cellHeight ?? 65;
         this.minCellWidth = opts.minCellWidth ?? 175;

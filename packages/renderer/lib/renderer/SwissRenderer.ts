@@ -5,11 +5,10 @@ import { Bracket, BracketType, Match } from '@tourneyview/common';
 import { Autoscroller } from './Autoscroller';
 import { BracketTypeRenderer } from '../types/renderer';
 import { BracketAnimator } from '../types/animator';
-import { DummyBracketAnimator } from '../animator/dummy/DummyBracketAnimator';
 
 export type SwissRendererOpts = {
     formatter: TextFormatter
-    animator?: BracketAnimator
+    animator: BracketAnimator
     rowHeight?: number
     rowGap?: number
     useScrollMask?: boolean
@@ -36,7 +35,7 @@ export class SwissRenderer extends BracketTypeRenderer {
         super();
 
         this.formatter = opts.formatter;
-        this.animator = opts.animator ?? new DummyBracketAnimator();
+        this.animator = opts.animator;
         this.activeBracketId = null;
 
         this.rowHeight = opts.rowHeight ?? 50;
