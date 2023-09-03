@@ -2,6 +2,7 @@ import { MatchGroup } from './match';
 
 export interface Bracket {
     id?: string
+    roundNumber?: number
     type: BracketType
     name: string
     matchGroups: MatchGroup[]

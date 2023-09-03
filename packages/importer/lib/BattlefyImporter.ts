@@ -143,6 +143,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
             return {
                 name: stageDetails.data.name,
                 type: bracketType,
+                roundNumber: opts.roundNumber,
                 matchGroups: [
                     {
                         id: opts.stageId,

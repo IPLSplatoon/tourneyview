@@ -28,6 +28,7 @@ export class SwissRenderer extends BracketTypeRenderer {
     private readonly animator: BracketAnimator;
 
     private activeBracketId: string | null;
+    private activeRoundNumber?: number;
 
     private resizeObserver: ResizeObserver;
 
@@ -102,12 +103,13 @@ export class SwissRenderer extends BracketTypeRenderer {
         }
 
         const matchGroup = data.matchGroups[0];
-        const switchingBrackets = matchGroup.id !== this.activeBracketId;
+        const switchingBrackets = matchGroup.id !== this.activeBracketId || data.roundNumber !== this.activeRoundNumber;
         if (switchingBrackets) {
             await this.hide();
         }
 
         this.activeBracketId = matchGroup.id;
+        this.activeRoundNumber = data.roundNumber;
 
         const drawTeamName = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) =>
             elem
@@ -174,7 +176,7 @@ export class SwissRenderer extends BracketTypeRenderer {
                     .call(updateScore, 'bottom', d => d.bottomTeam.score)
             )
 
-        const node = this.element.node()!;
+        const node = this.getElement();
         if (switchingBrackets) {
             this.scroller.initScrollMask();
             this.animator.swissAnimator.beforeReveal(node, this);
