@@ -2,13 +2,22 @@ import axios from 'axios';
 import { MatchImporter } from './types/MatchImporter';
 import type { Bracket, Match, MatchGroup } from '@tourneyview/common';
 import { BracketType, MatchType } from '@tourneyview/common';
+import { BracketQueryParameter, BracketQuerySelectParameter } from './types/BracketQuery';
+
+interface BattlefyTournamentDetails {
+    _id: string
+    name: string,
+    stages: BattlefyStageDetails[]
+}
 
 interface BattlefyStageDetails {
+    _id: string
     name: string
     bracket: {
         type: string
         style?: string
         hasThirdPlaceMatch: boolean
+        roundsCount: number
     }
 }
 
@@ -54,11 +63,55 @@ interface BattlefyMaxRoundRobinStage {
     maxRound: number
 }
 
+export interface BattlefyImportOpts {
+    stageId: string
+    roundNumber?: number
+}
+
 const battlefyApiRoot = 'https://api.battlefy.com';
 
-export class BattlefyImporter implements MatchImporter<{ id: string, roundNumber?: string }> {
-    async getMatches(opts: { id: string, roundNumber?: string }): Promise<Bracket> {
-        const stageDetails = await axios.get<BattlefyStageDetails>(`${battlefyApiRoot}/stages/${opts.id}`);
+export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
+    async getBracketQuery(tournamentId: string): Promise<BracketQuerySelectParameter[]> {
+        const tournamentDetails = await axios.get<BattlefyTournamentDetails[]>(`${battlefyApiRoot}/tournaments/${tournamentId}`, {
+            params: {
+                'extend[stages][$query][deletedAt][$exists]': false,
+                'extend[stages][$opts][name]': 1,
+                'extend[stages][$opts][bracket]': 1
+            }
+        });
+
+        if (tournamentDetails.data.length !== 1) {
+            throw new Error(`Expected to get details for 1 tournament; Battlefy returned ${tournamentDetails.data.length} tournaments?`);
+        }
+
+        return [{
+            key: 'stageId',
+            type: 'select',
+            name: 'Bracket ID',
+            options: tournamentDetails.data[0].stages.map(stage => {
+                const params: BracketQueryParameter[] = [];
+
+                if (stage.bracket.type === 'swiss') {
+                    params.push({
+                        key: 'roundNumber',
+                        type: 'numberRange',
+                        name: 'Round number',
+                        min: 1,
+                        max: stage.bracket.roundsCount
+                    });
+                }
+
+                return ({
+                    value: stage._id,
+                    name: stage.name,
+                    params
+                });
+            })
+        }];
+    }
+
+    async getMatches(opts: BattlefyImportOpts): Promise<Bracket> {
+        const stageDetails = await axios.get<BattlefyStageDetails>(`${battlefyApiRoot}/stages/${opts.stageId}`);
 
         const bracketType = this.mapBracketType(stageDetails.data.bracket.type, stageDetails.data.bracket.style);
         if (bracketType == null) {
@@ -70,9 +123,9 @@ export class BattlefyImporter implements MatchImporter<{ id: string, roundNumber
         }
 
         if ([BracketType.SWISS, BracketType.SINGLE_ELIMINATION, BracketType.DOUBLE_ELIMINATION].includes(bracketType)) {
-            const matchListUrl = new URL(`${battlefyApiRoot}/stages/${opts.id}/matches`)
+            const matchListUrl = new URL(`${battlefyApiRoot}/stages/${opts.stageId}/matches`)
             if (bracketType === BracketType.SWISS) {
-                matchListUrl.searchParams.append('roundNumber', opts.roundNumber!);
+                matchListUrl.searchParams.append('roundNumber', String(opts.roundNumber));
             }
 
             const matchList = await axios.get<BattlefyMatchListItem[]>(matchListUrl.toString());
@@ -92,7 +145,7 @@ export class BattlefyImporter implements MatchImporter<{ id: string, roundNumber
                 type: bracketType,
                 matchGroups: [
                     {
-                        id: opts.id,
+                        id: opts.stageId,
                         name: stageDetails.data.name,
                         matches: matchList.data
                             .map(match => ({
@@ -113,11 +166,11 @@ export class BattlefyImporter implements MatchImporter<{ id: string, roundNumber
                 ]
             }
         } else if (bracketType === BracketType.ROUND_ROBIN) {
-            const maxRound = await axios.get<BattlefyMaxRoundRobinStage>(`${battlefyApiRoot}/stages/${opts.id}/round-robin-max-round`);
+            const maxRound = await axios.get<BattlefyMaxRoundRobinStage>(`${battlefyApiRoot}/stages/${opts.stageId}/round-robin-max-round`);
 
             const allRounds = await Promise.all(Array.from(
                 { length: maxRound.data.maxRound },
-                (_, i) => axios.get<BattlefyStageGroupItem[]>(`${battlefyApiRoot}/stages/${opts.id}/groups/round/${i + 1}`)));
+                (_, i) => axios.get<BattlefyStageGroupItem[]>(`${battlefyApiRoot}/stages/${opts.stageId}/groups/round/${i + 1}`)));
 
             const matchGroups = Object.values(allRounds.reduce<Record<string, MatchGroup>>((result, round) => {
                 round.data.forEach(group => {

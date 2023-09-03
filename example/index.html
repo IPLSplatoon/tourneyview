@@ -6,12 +6,15 @@
 </head>
 <body>
 <div>test</div>
-<label for="stage-input">bfy stage id</label>
-<input id="stage-input" type="text">
-<label for="stage-input-alt">bfy stage id (again)</label>
-<input id="stage-input-alt" type="text">
-<button id="set-stage-button">set stage!</button>
-<button id="set-stage-button-alt">set stage again!</button>
+
+<div id="bracket-query-container">
+    <div class="bracket-query-input">
+        <label for="tournament-id-input">bfy tournament id</label>
+        <input id="tournament-id-input" type="text">
+        <button id="tournament-id-submit">get tournament</button>
+    </div>
+</div>
+<button id="bracket-query-submit">submit</button>
 
 <script type="module" src="index.ts"></script>
 </body>
