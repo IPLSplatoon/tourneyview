@@ -3,7 +3,6 @@
 }
 
 .elimination-renderer {
-    font-family: sans-serif;
     width: 100%;
     height: 100%;
 }
@@ -50,6 +49,7 @@
     text-align: center;
     font-size: 1.75em;
     transform: translateY(1px);
+    font-feature-settings: 'tnum';
 }
 
 .elimination-renderer .match-cell__team-name {
@@ -73,7 +73,6 @@
 .swiss-renderer {
     display: grid;
     grid-auto-flow: row;
-    font-family: sans-serif;
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -124,14 +123,7 @@
     text-align: center;
     font-size: 1.75em;
     transform: translateY(1px);
-}
-
-.swiss-renderer > .match-row .match-row__top-score {
-    margin-left: 5px;
-}
-
-.swiss-renderer > .match-row .match-row__bottom-score {
-    margin-right: 5px;
+    font-feature-settings: 'tnum';
 }
 
 .scroll-masked {

@@ -1,4 +1,5 @@
 import '@tourneyview/renderer/css/base.css';
+import './example.css';
 
 import { BattlefyImporter } from '../packages/importer/lib';
 import { D3BracketAnimator } from '../packages/renderer/lib';

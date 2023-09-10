@@ -1,0 +1,10 @@
+.bracket-renderer {
+    font-family: sans-serif;
+}
+
+.swiss-renderer .match-row > .match-row__scores {
+    background-color: #333;
+    font-weight: 800;
+    font-size: 1.2em;
+    width: 70px;
+}
