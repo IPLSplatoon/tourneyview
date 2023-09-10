@@ -160,14 +160,22 @@ export class SwissRenderer extends BracketTypeRenderer {
         };
 
         this.element
-            .selectAll('div.match-row')
+            .selectAll('div.match-row-wrapper')
             .data(matchGroup.matches, datum => (datum as Match).id)
             .join(
-                enter => enter.append('div')
+                enter => enter
+                    .append('div')
+                    .classed('match-row-wrapper', true)
+                    .append('div')
                     .classed('match-row', true)
                     .call(drawTeamName, 'top', d => d.topTeam.name)
-                    .call(drawScore, 'top', d => d.topTeam.score)
-                    .call(drawScore, 'bottom', d => d.bottomTeam.score)
+                    .call(elem => {
+                        elem
+                            .append('div')
+                            .classed('match-row__scores', true)
+                            .call(drawScore, 'top', d => d.topTeam.score)
+                            .call(drawScore, 'bottom', d => d.bottomTeam.score)
+                    })
                     .call(drawTeamName, 'bottom', d => d.bottomTeam.name),
                 update => update
                     .call(updateTeamName, 'top', d => d.topTeam.name)
