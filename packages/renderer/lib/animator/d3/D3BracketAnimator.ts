@@ -5,13 +5,8 @@ import { D3SwissAnimator } from './D3SwissAnimator';
 import { BracketType } from '@tourneyview/common';
 
 export class D3BracketAnimator implements BracketAnimator {
-    public readonly eliminationAnimator: EliminationAnimator;
-    public readonly swissAnimator: SwissAnimator;
-
-    constructor() {
-        this.eliminationAnimator = new D3EliminationAnimator();
-        this.swissAnimator = new D3SwissAnimator();
-    }
+    public readonly eliminationAnimator: EliminationAnimator = new D3EliminationAnimator();
+    public readonly swissAnimator: SwissAnimator = new D3SwissAnimator();
 
     updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string, bracketType: BracketType): void {
         const transformFunc = bracketType === BracketType.SWISS ? 'translateY' : 'translateX';
