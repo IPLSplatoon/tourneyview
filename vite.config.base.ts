@@ -17,7 +17,7 @@ export default defineConfig(env => {
                 entry: resolve(process.env.PWD, 'lib/index.ts'),
                 name: libName,
                 fileName: 'index',
-                formats: ['es', 'iife']
+                formats: ['es', 'iife', 'cjs']
             }
         },
         plugins: [

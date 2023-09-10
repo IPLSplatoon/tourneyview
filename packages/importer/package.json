@@ -2,8 +2,18 @@
   "name": "@tourneyview/importer",
   "version": "0.1.0",
   "description": "Import tournament data from various sources",
-  "main": "dist/index.iife.js",
-  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "browser": {
+        "import": "./dist/index.mjs",
+        "default": "./dist/index.iife.js"
+      },
+      "default": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js"
+      }
+    }
+  },
   "types": "dist/index.d.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
