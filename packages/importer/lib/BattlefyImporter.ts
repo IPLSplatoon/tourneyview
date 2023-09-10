@@ -87,7 +87,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
         return [{
             key: 'stageId',
             type: 'select',
-            name: 'Bracket ID',
+            name: 'Bracket',
             options: tournamentDetails.data[0].stages.map(stage => {
                 const params: BracketQueryParameter[] = [];
 
