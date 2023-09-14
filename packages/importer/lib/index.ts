@@ -1,3 +1,4 @@
 export type { MatchImporter } from './types/MatchImporter';
-export type { BracketQueryParameter, BracketQueryOption } from './types/BracketQuery';
+export type { MatchQueryParameter, MatchQueryOption } from './types/MatchQuery';
 export { BattlefyImporter } from './BattlefyImporter';
+export { StartggImporter } from './StartggImporter';

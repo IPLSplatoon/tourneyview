@@ -1,8 +1,8 @@
 import { Bracket } from '@tourneyview/common';
-import { BracketQueryParameter } from './BracketQuery';
+import { MatchQueryParameter, MatchQueryResult } from './MatchQuery';
 
 export interface MatchImporter<ImportOpts> {
-    getBracketQuery(tournamentId: string): Promise<BracketQueryParameter[]> | BracketQueryParameter[]
+    getMatchQueryOptions(tournamentId: string): Promise<MatchQueryParameter[]> | MatchQueryParameter[]
 
-    getMatches(opts: ImportOpts): Promise<Bracket> | Bracket
+    getMatches(opts: ImportOpts & MatchQueryResult): Promise<Bracket> | Bracket
 }
