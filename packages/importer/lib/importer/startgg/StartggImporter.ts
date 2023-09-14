@@ -215,18 +215,17 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
             })
         }
 
+        const phaseGroup = getSetsResponse.data.data.phase.phaseGroups.nodes[0];
         return {
             type: bracketType,
             name: StartggImporter.formatBracketName(getSetsResponse.data),
             roundNumber: opts.roundNumber,
             matchGroups: [
                 {
-                    // todo: this id varies between brackets that are not started (containing "preview" matches)
-                    // and ongoing brackets - should we generate our own?
-                    id: String(getSetsResponse.data.data.phase.phaseGroups.nodes[0].id),
-                    name: '',
+                    id: String(phaseGroup.id),
+                    name: `Pool ${phaseGroup.displayIdentifier}`,
                     matches: sets.map(set => {
-                        const nextMatch = sets.find(set2 =>
+                        const nextSet = sets.find(set2 =>
                             (set.round < 0 && set2.round < 0 || set.round >= 0 && set2.round >= 0)
                             && set2.slots.some(slot => slot.prereqType === 'set' && slot.prereqId === String(set.id)));
 
@@ -235,8 +234,8 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                         }
 
                         return {
-                            id: String(set.id),
-                            nextMatchId: nextMatch?.id.toString(),
+                            id: StartggImporter.generateMatchId(phaseGroup.id, set.identifier),
+                            nextMatchId: nextSet ? StartggImporter.generateMatchId(phaseGroup.id, nextSet.identifier) : null,
                             roundNumber: set.round < 0 ? Math.abs(set.round + 2) : set.round,
                             type: set.round < 0 ? MatchType.LOSERS : MatchType.WINNERS,
                             topTeam: {
@@ -252,6 +251,10 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                 }
             ]
         };
+    }
+
+    private static generateMatchId(phaseGroupId: number, setIdentifier: string): string {
+        return `${phaseGroupId}_${setIdentifier}`;
     }
 
     private static formatBracketName(response: GetSetsWithPhaseGroupResponse): string {
