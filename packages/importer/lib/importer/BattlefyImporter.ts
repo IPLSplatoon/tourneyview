@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { MatchImporter } from './types/MatchImporter';
+import { MatchImporter } from '../types/MatchImporter';
 import type { Bracket, Match, MatchGroup } from '@tourneyview/common';
 import { BracketType, MatchType } from '@tourneyview/common';
-import { MatchQueryOption, MatchQueryParameter, MatchQueryResult, MatchQuerySelectParameter } from './types/MatchQuery';
+import { MatchQueryOption, MatchQueryParameter, MatchQueryResult, MatchQuerySelectParameter } from '../types/MatchQuery';
 
 interface BattlefyTournamentDetails {
     _id: string

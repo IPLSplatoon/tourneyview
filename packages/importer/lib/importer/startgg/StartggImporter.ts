@@ -1,166 +1,13 @@
 import { Bracket, BracketType, MatchType } from '@tourneyview/common';
-import { MatchImporter } from './types/MatchImporter';
-import { MatchQueryOption, MatchQueryParameter, MatchQueryResult } from './types/MatchQuery';
+import { MatchImporter } from '../../types/MatchImporter';
+import { MatchQueryOption, MatchQueryParameter, MatchQueryResult } from '../../types/MatchQuery';
 import type { AxiosInstance } from 'axios';
 import axios from 'axios';
-
-const getSetsQuery = `
-query Sets($phaseId: ID!, $phaseGroupIds: [ID], $page: Int!, $perPage: Int!, $roundNumber: Int) {
-  phase(id: $phaseId) {
-    bracketType
-    groupCount
-    name
-    phaseGroups(query: {filter: {id: $phaseGroupIds}}) {
-      nodes {
-        id
-        displayIdentifier
-      }
-    }
-    sets(page: $page, perPage: $perPage, filters: {phaseGroupIds: $phaseGroupIds, roundNumber: $roundNumber}) {
-      pageInfo {
-        totalPages
-      }
-      nodes {
-        id
-        round
-        fullRoundText
-        slots(includeByes: true) {
-          entrant {
-            name
-          }
-          standing {
-            stats {
-              score {
-                value
-              }
-            }
-          }
-          prereqType
-          prereqId
-        }
-      }
-    }
-  }
-}`;
-interface StartggGetSetsResponse {
-    data: {
-        phase: {
-            bracketType: string
-            groupCount: number
-            name: string
-            phaseGroups: {
-              nodes: {
-                  id: number
-                  displayIdentifier: string
-              }[]
-            }
-            sets: {
-                pageData: {
-                    totalPages: number
-                }
-                nodes: {
-                    id: number | string
-                    round: number
-                    fullRoundText: string
-                    slots: {
-                        entrant?: {
-                            name: string
-                        }
-                        standing?: {
-                            stats: {
-                                score: {
-                                    value: number
-                                }
-                            }
-                        }
-                        prereqType: string
-                        prereqId: string
-                    }[]
-                }[]
-            }
-        }
-    }
-}
-
-const getPhaseGroupsQuery = `
-query PhaseGroups($phaseId: ID, $page: Int, $perPage: Int) {
-  phase(id: $phaseId) {
-    phaseGroups(query: { page: $page, perPage: $perPage }) {
-      pageInfo {
-        totalPages
-      }
-      nodes {
-        id
-        displayIdentifier
-        numRounds
-      }
-    }
-  }
-}`;
-interface StartggGetPhaseGroupsResponse {
-    data: {
-        phase: {
-            phaseGroups: {
-                pageInfo: {
-                    totalPages: number
-                }
-                nodes: {
-                    id: number
-                    displayIdentifier: string
-                    numRounds: number | null
-                }[]
-            }
-        }
-    }
-}
-
-const getPhasesQuery = `
-query EventPhases($eventId: ID) {
-  event(id: $eventId) {
-    phases {
-      id
-      name
-      groupCount
-      bracketType
-    }
-  }
-}`;
-interface StartggGetPhasesResponse {
-    data: {
-        event: {
-            phases: {
-                id: number
-                name: string
-                groupCount: number
-                bracketType: string
-            }[]
-        }
-    }
-}
-
-const getEventsQuery = `
-query TournamentEvents($slug: String) {
-  tournament(slug: $slug) {
-    id
-    name
-    events {
-      id
-      name
-    }
-  }
-}`;
-interface StartggGetEventsResponse {
-    data: {
-        tournament: {
-            id: number
-            name: string
-            events: {
-                id: number
-                name: string
-            }[]
-        }
-    }
-}
+import { getPhasesQuery, GetPhasesResponse } from './queries/GetPhases';
+import { getPhaseGroupsQuery, GetPhaseGroupsResponse } from './queries/GetPhaseGroups';
+import { getEventsQuery, GetEventsResponse } from './queries/GetEvents';
+import { getSetsWithPhaseGroupQuery, GetSetsWithPhaseGroupResponse } from './queries/GetSetsWithPhaseGroup';
+import { getSetsQuery, GetSetsResponse } from './queries/GetSets';
 
 const startggApiPath = 'https://api.start.gg/gql/alpha';
 
@@ -177,7 +24,7 @@ class StartggEventOption implements MatchQueryOption {
     }
 
     async getParams(): Promise<MatchQueryParameter[]> {
-        const phaseListResponse = await this.axios.post<StartggGetPhasesResponse>(
+        const phaseListResponse = await this.axios.post<GetPhasesResponse>(
             startggApiPath,
             JSON.stringify({
                 query: getPhasesQuery,
@@ -216,7 +63,7 @@ class StartggPhaseOption implements MatchQueryOption {
             return [];
         }
 
-        const phaseGroupsResponse = await this.axios.post<StartggGetPhaseGroupsResponse>(
+        const phaseGroupsResponse = await this.axios.post<GetPhaseGroupsResponse>(
             startggApiPath,
             JSON.stringify({
                 query: getPhaseGroupsQuery,
@@ -287,7 +134,7 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
     }
 
     async getMatchQueryOptions(tournamentId: string): Promise<MatchQueryParameter[]> {
-        const eventListResponse = await this.axios.post<StartggGetEventsResponse>(
+        const eventListResponse = await this.axios.post<GetEventsResponse>(
             startggApiPath,
             JSON.stringify({
                 query: getEventsQuery,
@@ -306,15 +153,18 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
     }
 
     async getMatches(opts: StartggImportOpts & MatchQueryResult): Promise<Bracket> {
-        const getSetsResponse = await this.axios.post<StartggGetSetsResponse>(
+        const setsPerPage = 50;
+        const phaseGroupIds = opts.phaseGroupId == null ? null : [opts.phaseGroupId];
+
+        const getSetsResponse = await this.axios.post<GetSetsWithPhaseGroupResponse>(
             startggApiPath,
             JSON.stringify({
-              query: getSetsQuery,
+              query: getSetsWithPhaseGroupQuery,
               variables: {
                   phaseId: opts.phaseId,
                   page: 1,
-                  perPage: 100,
-                  phaseGroupIds: opts.phaseGroupId == null ? null : [opts.phaseGroupId],
+                  perPage: setsPerPage,
+                  phaseGroupIds: phaseGroupIds,
                   roundNumber: opts.roundNumber
               }
             }));
@@ -328,8 +178,29 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
             throw new Error(`Unknown or unsupported bracket type "${getSetsResponse.data.data.phase.bracketType}"`);
         }
 
-        // todo: pagination
         const sets = getSetsResponse.data.data.phase.sets.nodes;
+        const totalPages = getSetsResponse.data.data.phase.sets.pageInfo.totalPages;
+        if (totalPages > 1) {
+            const pageLoads = [];
+
+            for (let i = 2; i <= totalPages; i++) {
+                pageLoads.push(this.axios.post<GetSetsResponse>(
+                    startggApiPath,
+                    JSON.stringify({
+                        query: getSetsQuery,
+                        variables: {
+                            phaseId: opts.phaseId,
+                            page: i,
+                            perPage: setsPerPage,
+                            phaseGroupIds: phaseGroupIds,
+                            roundNumber: opts.roundNumber
+                        }
+                    })));
+            }
+
+            sets.push(...(await Promise.all(pageLoads)).flatMap(response => response.data.data.phase.sets.nodes));
+        }
+
         if (bracketType === BracketType.DOUBLE_ELIMINATION) {
             sets.forEach(set => {
                 if (set.fullRoundText.toLowerCase().includes('reset')) {
@@ -383,7 +254,7 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
         };
     }
 
-    private static formatBracketName(response: StartggGetSetsResponse): string {
+    private static formatBracketName(response: GetSetsWithPhaseGroupResponse): string {
         if (response.data.phase.groupCount > 1) {
             return `${response.data.phase.name} - Pool ${response.data.phase.phaseGroups.nodes[0].displayIdentifier}`;
         } else {
