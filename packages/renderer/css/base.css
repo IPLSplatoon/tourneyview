@@ -29,6 +29,8 @@
 }
 
 .elimination-renderer .match-cell {
+    height: 100%;
+    width: 100%;
     background-color: #444;
     color: white;
     display: grid;

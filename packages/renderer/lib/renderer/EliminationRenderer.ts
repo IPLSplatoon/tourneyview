@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { D3ZoomEvent } from 'd3';
+import { D3ZoomEvent, HierarchyNode } from 'd3';
 import { SingleEliminationRenderer } from './SingleEliminationRenderer';
 import { Bracket, BracketType } from '@tourneyview/common';
 import { Match, MatchType } from '@tourneyview/common';
@@ -14,8 +14,10 @@ export type EliminationRendererOpts = {
     cellHeight?: number
     minCellWidth?: number
     maxCellWidth?: number
+    onCellCreated?: EliminationRendererCellCreatedCallback
 }
 
+export type EliminationRendererCellCreatedCallback = (element: d3.Selection<HTMLDivElement, HierarchyNode<Match>, HTMLDivElement, unknown>) => void;
 export type EliminationHierarchyNodeData = { isRoot: true } | Match;
 export type EliminationHierarchyNode = d3.HierarchyNode<EliminationHierarchyNodeData>;
 
@@ -41,6 +43,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
     private readonly cellHeight: number;
     private readonly minCellWidth: number;
     private readonly maxCellWidth: number;
+    private readonly onCellCreated?: EliminationRendererCellCreatedCallback;
 
     private activeBracketId: string | null;
     private renderedBracketWidth: number;
@@ -57,6 +60,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
         this.cellHeight = opts.cellHeight ?? 65;
         this.minCellWidth = opts.minCellWidth ?? 175;
         this.maxCellWidth = opts.maxCellWidth ?? 250;
+        this.onCellCreated = opts.onCellCreated;
         this.activeBracketId = null;
         this.renderedBracketWidth = 1;
         this.renderedBracketHeight = 1;
@@ -88,7 +92,10 @@ export class EliminationRenderer extends BracketTypeRenderer {
             .extent([[0, 0], [BRACKET_SIZE, BRACKET_SIZE]])
             .on('zoom', e => this.onZoom(e));
 
-        this.winnersRenderer = new SingleEliminationRenderer(BRACKET_SIZE, BRACKET_SIZE, { animator: this.animator, formatter: this.formatter });
+        this.winnersRenderer = new SingleEliminationRenderer(
+            BRACKET_SIZE,
+            BRACKET_SIZE,
+            { animator: this.animator, formatter: this.formatter, onCellCreated: opts.onCellCreated });
         this.losersRenderer = null;
         this.appendSingleElimRenderer(this.winnersRenderer);
 
@@ -138,7 +145,10 @@ export class EliminationRenderer extends BracketTypeRenderer {
             this.losersRenderer.destroy();
             this.losersRenderer = null;
         } else if (data.type === BracketType.DOUBLE_ELIMINATION && this.losersRenderer == null) {
-            this.losersRenderer = new SingleEliminationRenderer(BRACKET_SIZE, BRACKET_SIZE, { animator: this.animator, formatter: this.formatter });
+            this.losersRenderer = new SingleEliminationRenderer(
+                BRACKET_SIZE,
+                BRACKET_SIZE,
+                { animator: this.animator, formatter: this.formatter, onCellCreated: this.onCellCreated });
             this.appendSingleElimRenderer(this.losersRenderer);
         }
 

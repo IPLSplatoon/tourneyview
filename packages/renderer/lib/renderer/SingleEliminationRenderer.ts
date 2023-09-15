@@ -1,11 +1,20 @@
 import * as d3 from 'd3';
 import { BaseType, HierarchyPointNode, tree } from 'd3';
 import { BracketType, Match, MatchType } from '@tourneyview/common';
-import { EliminationHierarchyNode, EliminationHierarchyNodeData } from './EliminationRenderer';
+import {
+    EliminationHierarchyNode,
+    EliminationHierarchyNodeData,
+    EliminationRendererCellCreatedCallback
+} from './EliminationRenderer';
 import { BracketAnimator } from '../types/animator';
 import { TextFormatter } from '../formatter/TextFormatter';
 
-export type SingleEliminationRendererOpts = { animator: BracketAnimator, formatter: TextFormatter };
+export type SingleEliminationRendererOpts = {
+    animator: BracketAnimator
+    formatter: TextFormatter
+    onCellCreated?: EliminationRendererCellCreatedCallback
+};
+
 type SingleEliminationRendererSetDataOpts = {
     hasThirdPlaceMatch: boolean
     hasBracketReset?: boolean
@@ -37,11 +46,14 @@ export class SingleEliminationRenderer {
     private readonly formatter: TextFormatter;
     hierarchy: EliminationHierarchyNode | null;
 
+    private readonly onCellCreated?: EliminationRendererCellCreatedCallback;
+
     constructor(width: number, height: number, opts: SingleEliminationRendererOpts) {
         this.height = height;
         this.width = width;
         this.animator = opts.animator;
         this.formatter = opts.formatter;
+        this.onCellCreated = opts.onCellCreated;
 
         this.svg = d3
             .create('svg')
@@ -209,23 +221,32 @@ export class SingleEliminationRenderer {
         };
 
         this.domElementContainer
-            .selectAll('div.match-cell')
+            .selectAll('div.match-cell-wrapper')
             .data(
                 hierarchy.descendants().filter(node => !('isRoot' in node.data)) as d3.HierarchyNode<Match>[],
                 datum => (datum as d3.HierarchyNode<Match>).data.id)
             .join(
-                enter => enter.append('div')
-                    .style('height', `${(opts.cellHeight)}px`)
-                    .style('width', `${(opts.cellWidth)}px`)
-                    .style('left', d => `${this.width - (d as HierarchyPointNode<Match>).y + opts.linkWidth - widthOffset}px`)
-                    .style('top', d => `${((d as HierarchyPointNode<Match>).x - opts.cellHeight / 2) - x0 + opts.cellHeight / 2 + yOffset}px`)
-                    .style('position', 'absolute')
-                    .classed('match-cell', true)
-                    .attr('data-depth', d => d.depth)
-                    .call(drawTeamName, 'top', d => d.data?.topTeam.name)
-                    .call(drawScore, 'top', d => d.data?.topTeam.score)
-                    .call(drawTeamName, 'bottom', d => d.data?.bottomTeam.name)
-                    .call(drawScore, 'bottom', d => d.data?.bottomTeam.score),
+                enter => {
+                    const wrapperSelection = enter
+                        .append('div')
+                        .style('height', `${(opts.cellHeight)}px`)
+                        .style('width', `${(opts.cellWidth)}px`)
+                        .style('left', d => `${this.width - (d as HierarchyPointNode<Match>).y + opts.linkWidth - widthOffset}px`)
+                        .style('top', d => `${((d as HierarchyPointNode<Match>).x - opts.cellHeight / 2) - x0 + opts.cellHeight / 2 + yOffset}px`)
+                        .style('position', 'absolute')
+                        .classed('match-cell-wrapper', true)
+                        .attr('data-depth', d => d.depth);
+
+                    wrapperSelection
+                        .append('div')
+                        .classed('match-cell', true)
+                        .call(drawTeamName, 'top', d => d.data?.topTeam.name)
+                        .call(drawScore, 'top', d => d.data?.topTeam.score)
+                        .call(drawTeamName, 'bottom', d => d.data?.bottomTeam.name)
+                        .call(drawScore, 'bottom', d => d.data?.bottomTeam.score);
+
+                    return this.onCellCreated ? wrapperSelection.call(this.onCellCreated) : wrapperSelection;
+                },
                 update => update
                     .call(updateTeamName, 'top', d => d.data?.topTeam.name)
                     .call(updateScore, 'top', d => d.data?.topTeam.score)
