@@ -53,10 +53,14 @@ document.getElementById('tournament-id-submit').addEventListener('click', async 
     });
 });
 
+const loadedBracketDisplay = <HTMLDivElement>document.getElementById('loaded-bracket-display');
+
 document.getElementById('match-query-submit').addEventListener('click', async () => {
     const query = buildBracketQuery();
     const importer = getImporter();
-    await renderer.setData(await importer.getMatches(query));
+    const bracket = await importer.getMatches(query);
+    loadedBracketDisplay.innerText = `Loaded: ${bracket.name} ${bracket.roundNumber ? `(Round ${bracket.roundNumber})` : ''} (${bracket.eventName})`;
+    await renderer.setData(bracket);
 });
 
 function buildBracketQuery(): Record<string, string | number> {
@@ -66,7 +70,12 @@ function buildBracketQuery(): Record<string, string | number> {
         if (paramElement.tagName === 'SELECT') {
             result[paramElement.dataset.key] = ((paramElement as HTMLSelectElement).selectedOptions[0]['__TOURNEYVIEW_OPTION_DATA'] as MatchQueryOption).value;
         } else {
-            result[paramElement.dataset.key] = paramElement.value;
+            if (paramElement.dataset.tourneyviewType === 'static') {
+                result[paramElement.dataset.key] = paramElement['__TOURNEYVIEW_STATIC_VALUE'];
+            } else {
+                result[paramElement.dataset.key] = paramElement.value;
+            }
+
         }
     });
 
@@ -107,10 +116,12 @@ function addBracketQueryParameter(param: MatchQueryParameter, parentParamKey?: s
     }
     const id = `tournament-query_${param.key}`;
 
-    const label = document.createElement('label');
-    label.htmlFor = id;
-    label.innerText = param.name;
-    wrapper.appendChild(label);
+    if (param.type !== 'static') {
+        const label = document.createElement('label');
+        label.htmlFor = id;
+        label.innerText = param.name;
+        wrapper.appendChild(label);
+    }
 
     if (param.type === 'numberRange') {
         const input = document.createElement('input');
@@ -120,6 +131,7 @@ function addBracketQueryParameter(param: MatchQueryParameter, parentParamKey?: s
         input.value = String(param.min);
         input.id = id;
         input.dataset.key = param.key;
+        input.dataset.tourneyviewType = param.type;
         wrapper.appendChild(input);
         matchQueryContainer.appendChild(wrapper);
     } else if (param.type === 'select') {
@@ -139,6 +151,15 @@ function addBracketQueryParameter(param: MatchQueryParameter, parentParamKey?: s
         wrapper.appendChild(select);
         matchQueryContainer.appendChild(wrapper);
         onSelectChange(select, param);
+    } else if (param.type === 'static') {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.id = id;
+        input.dataset.key = param.key;
+        input.dataset.tourneyviewType = param.type;
+        input['__TOURNEYVIEW_STATIC_VALUE'] = param.value;
+        wrapper.appendChild(input);
+        matchQueryContainer.appendChild(wrapper);
     }
 }
 

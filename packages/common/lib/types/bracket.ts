@@ -5,6 +5,7 @@ export interface Bracket {
     roundNumber?: number
     type: BracketType
     name: string
+    eventName: string
     matchGroups: MatchGroup[]
 }
 

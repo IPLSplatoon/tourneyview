@@ -2,7 +2,7 @@ import axios from 'axios';
 import { MatchImporter } from '../types/MatchImporter';
 import type { Bracket, Match, MatchGroup } from '@tourneyview/common';
 import { BracketType, MatchType } from '@tourneyview/common';
-import { MatchQueryOption, MatchQueryParameter, MatchQueryResult, MatchQuerySelectParameter } from '../types/MatchQuery';
+import { MatchQueryOption, MatchQueryParameter, MatchQueryResult } from '../types/MatchQuery';
 
 interface BattlefyTournamentDetails {
     _id: string
@@ -64,6 +64,7 @@ interface BattlefyMaxRoundRobinStage {
 }
 
 export interface BattlefyImportOpts {
+    tournamentId: string
     stageId: string
     roundNumber?: number
 }
@@ -99,7 +100,7 @@ class BattlefyStageQueryOption implements MatchQueryOption {
 }
 
 export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
-    async getMatchQueryOptions(tournamentId: string): Promise<MatchQuerySelectParameter[]> {
+    private async getTournamentDetails(tournamentId: string): Promise<BattlefyTournamentDetails> {
         const tournamentDetails = await axios.get<BattlefyTournamentDetails[]>(`${battlefyApiRoot}/tournaments/${tournamentId}`, {
             params: {
                 'extend[stages][$query][deletedAt][$exists]': false,
@@ -112,13 +113,27 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
             throw new Error(`Expected to get details for 1 tournament; Battlefy returned ${tournamentDetails.data.length} tournaments?`);
         }
 
-        return [{
-            key: 'stageId',
-            type: 'select',
-            name: 'Bracket',
-            options: tournamentDetails.data[0].stages.map(stage =>
-                new BattlefyStageQueryOption(stage._id, stage.name, stage.bracket.type, stage.bracket.roundsCount))
-        }];
+        return tournamentDetails.data[0];
+    }
+
+    async getMatchQueryOptions(tournamentId: string): Promise<MatchQueryParameter[]> {
+        const tournamentDetails = await this.getTournamentDetails(tournamentId);
+
+        return [
+            {
+                key: 'tournamentId',
+                type: 'static',
+                name: 'Tournament ID',
+                value: tournamentId
+            },
+            {
+                key: 'stageId',
+                type: 'select',
+                name: 'Bracket',
+                options: tournamentDetails.stages.map(stage =>
+                    new BattlefyStageQueryOption(stage._id, stage.name, stage.bracket.type, stage.bracket.roundsCount))
+            }
+        ];
     }
 
     async getMatches(opts: BattlefyImportOpts & MatchQueryResult): Promise<Bracket> {
@@ -132,6 +147,8 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
         if (bracketType === BracketType.SWISS && opts.roundNumber == null) {
             throw new Error(`A round number is required when importing brackets of type ${bracketType} from Battlefy.`);
         }
+
+        const tournamentDetails = await this.getTournamentDetails(opts.tournamentId);
 
         if ([BracketType.SWISS, BracketType.SINGLE_ELIMINATION, BracketType.DOUBLE_ELIMINATION].includes(bracketType)) {
             const matchListUrl = new URL(`${battlefyApiRoot}/stages/${opts.stageId}/matches`)
@@ -155,6 +172,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                 name: stageDetails.data.name,
                 type: bracketType,
                 roundNumber: opts.roundNumber,
+                eventName: tournamentDetails.name,
                 matchGroups: [
                     {
                         id: opts.stageId,
@@ -217,6 +235,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
             return {
                 type: bracketType,
                 name: stageDetails.data.name,
+                eventName: tournamentDetails.name,
                 matchGroups
             };
         } else {
@@ -224,6 +243,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
             return {
                 type: bracketType,
                 name: stageDetails.data.name,
+                eventName: tournamentDetails.name,
                 matchGroups: []
             };
         }

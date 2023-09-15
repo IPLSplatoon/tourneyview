@@ -2,7 +2,7 @@ export type MatchQueryParameterValue = string | number;
 
 export type MatchQueryResult = Record<string, MatchQueryParameterValue>;
 
-export type MatchQueryParameter = MatchQuerySelectParameter | MatchQueryNumberRangeParameter;
+export type MatchQueryParameter = MatchQuerySelectParameter | MatchQueryNumberRangeParameter | MatchQueryStaticParameter;
 
 interface BaseMatchQueryParameter {
     key: string
@@ -13,6 +13,11 @@ interface BaseMatchQueryParameter {
 export interface MatchQuerySelectParameter extends BaseMatchQueryParameter {
     type: 'select'
     options: MatchQueryOption[]
+}
+
+export interface MatchQueryStaticParameter extends BaseMatchQueryParameter {
+    type: 'static'
+    value: MatchQueryParameterValue
 }
 
 export interface MatchQueryNumberRangeParameter extends BaseMatchQueryParameter {

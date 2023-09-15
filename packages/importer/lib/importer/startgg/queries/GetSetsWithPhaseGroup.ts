@@ -4,6 +4,12 @@ query Sets($phaseId: ID!, $phaseGroupIds: [ID], $page: Int!, $perPage: Int!, $ro
     bracketType
     groupCount
     name
+    event {
+      name
+      tournament {
+        name
+      }
+    }
     phaseGroups(query: {filter: {id: $phaseGroupIds}}) {
       nodes {
         id
@@ -44,6 +50,12 @@ export interface GetSetsWithPhaseGroupResponse {
             bracketType: string
             groupCount: number
             name: string
+            event: {
+                name: string
+                tournament: {
+                    name: string
+                }
+            }
             phaseGroups: {
                 nodes: {
                     id: number
