@@ -1,4 +1,6 @@
 export { BracketRenderer } from './renderer/BracketRenderer';
+export type { EliminationRenderer } from './renderer/EliminationRenderer';
+export type { SwissRenderer } from './renderer/SwissRenderer';
 
 export { D3BracketAnimator } from './animator/d3/D3BracketAnimator';
 export { DummyBracketAnimator } from './animator/dummy/DummyBracketAnimator';
