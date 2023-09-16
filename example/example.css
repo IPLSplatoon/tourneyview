@@ -8,3 +8,7 @@
     font-size: 1.2em;
     width: 70px;
 }
+
+.elimination-renderer .match-cell__score {
+    transform: translateY(1px);
+}

@@ -50,7 +50,6 @@
 .elimination-renderer .match-cell__score {
     text-align: center;
     font-size: 1.75em;
-    transform: translateY(1px);
     font-feature-settings: 'tnum';
 }
 
