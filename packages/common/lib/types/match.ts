@@ -13,6 +13,7 @@ export interface Match {
 export interface MatchGroup {
     id: string
     name: string
+    hasBracketReset?: boolean
     matches: Match[]
 }
 

@@ -180,7 +180,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 linkWidth: this.linkWidth,
                 cellHeight: this.cellHeight,
                 hasThirdPlaceMatch: false,
-                hasBracketReset: true,
+                hasBracketReset: matchGroup.hasBracketReset ?? true,
                 bracketTitle: 'Winners Bracket',
                 bracketType: data.type
             });

@@ -201,9 +201,11 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
             sets.push(...(await Promise.all(pageLoads)).flatMap(response => response.data.data.phase.sets.nodes));
         }
 
+        let hasBracketReset = false;
         if (bracketType === BracketType.DOUBLE_ELIMINATION) {
             sets.forEach(set => {
                 if (set.fullRoundText.toLowerCase().includes('reset')) {
+                    hasBracketReset = true;
                     set.round++;
                 }
             })
@@ -225,6 +227,7 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                 {
                     id: String(phaseGroup.id),
                     name: `Pool ${phaseGroup.displayIdentifier}`,
+                    hasBracketReset,
                     matches: sets.map(set => {
                         const nextSet = sets.find(set2 =>
                             (set.round < 0 && set2.round < 0 || set.round >= 0 && set2.round >= 0)
