@@ -99,6 +99,13 @@ export class SingleEliminationRenderer {
     setData(hierarchy: EliminationHierarchyNode, opts: SingleEliminationRendererSetDataOpts): { width: number, height: number } {
         this.hierarchy = hierarchy;
 
+        if (hierarchy.length === 0) {
+            this.getElements().forEach(el => el.style.display = 'none');
+            return { width: 0, height: 0 };
+        } else {
+            this.getElements().forEach(el => el.style.removeProperty('display'));
+        }
+
         const cellOffset = opts.cellOffset ?? 0;
         const hasBracketReset = opts.hasBracketReset ?? false;
 

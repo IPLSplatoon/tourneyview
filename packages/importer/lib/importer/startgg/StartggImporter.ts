@@ -1,6 +1,11 @@
 import { Bracket, BracketType, MatchType } from '@tourneyview/common';
 import { MatchImporter } from '../../types/MatchImporter';
-import { MatchQueryOption, MatchQueryParameter, MatchQueryResult } from '../../types/MatchQuery';
+import {
+    MatchQueryOption,
+    MatchQueryParameter,
+    MatchQueryResult,
+    MatchQuerySelectParameter
+} from '../../types/MatchQuery';
 import type { AxiosInstance } from 'axios';
 import axios from 'axios';
 import { getPhasesQuery, GetPhasesResponse } from './queries/GetPhases';
@@ -8,6 +13,8 @@ import { getPhaseGroupsQuery, GetPhaseGroupsResponse } from './queries/GetPhaseG
 import { getEventsQuery, GetEventsResponse } from './queries/GetEvents';
 import { getSetsWithPhaseGroupQuery, GetSetsWithPhaseGroupResponse } from './queries/GetSetsWithPhaseGroup';
 import { getSetsQuery, GetSetsResponse } from './queries/GetSets';
+import { DoubleEliminationMatchTypeQueryParameter } from '../../query/DoubleEliminationMatchTypeQueryParameter';
+import { ContainedMatchType } from '@tourneyview/common';
 
 const startggApiPath = 'https://api.start.gg/gql/alpha';
 
@@ -38,8 +45,9 @@ class StartggEventOption implements MatchQueryOption {
             name: 'Bracket',
             type: 'select',
             options: phaseListResponse.data.data.event.phases
-                .filter(phase => StartggImporter.parseBracketType(phase.bracketType) != null)
-                .map(phase => new StartggPhaseOption(phase.id, phase.name, phase.groupCount, this.axios))
+                .map(phase => ({ ...phase, parsedBracketType: StartggImporter.parseBracketType(phase.bracketType) }))
+                .filter(phase => phase.parsedBracketType != null)
+                .map(phase => new StartggPhaseOption(phase.id, phase.name, phase.groupCount, phase.parsedBracketType!, this.axios))
         }]
     }
 }
@@ -50,41 +58,49 @@ class StartggPhaseOption implements MatchQueryOption {
     name: string;
     value: number;
     private readonly groupCount: number;
+    private readonly bracketType: BracketType;
 
-    constructor(phaseId: number, eventName: string, groupCount: number, axios: AxiosInstance) {
+    constructor(phaseId: number, eventName: string, groupCount: number, bracketType: BracketType, axios: AxiosInstance) {
         this.value = phaseId;
         this.name = eventName;
         this.axios = axios;
         this.groupCount = groupCount;
+        this.bracketType = bracketType;
     }
 
     async getParams(): Promise<MatchQueryParameter[]> {
-        if (this.groupCount <= 1) {
-            return [];
+        const result = [];
+
+        if (this.bracketType === BracketType.DOUBLE_ELIMINATION) {
+            result.push(new DoubleEliminationMatchTypeQueryParameter());
         }
 
-        const phaseGroupsResponse = await this.axios.post<GetPhaseGroupsResponse>(
-            startggApiPath,
-            JSON.stringify({
-                query: getPhaseGroupsQuery,
-                variables: {
-                    phaseId: this.value,
-                    page: 1,
-                    perPage: 100
-                }
-            }));
+        if (this.groupCount > 1) {
+            const phaseGroupsResponse = await this.axios.post<GetPhaseGroupsResponse>(
+                startggApiPath,
+                JSON.stringify({
+                    query: getPhaseGroupsQuery,
+                    variables: {
+                        phaseId: this.value,
+                        page: 1,
+                        perPage: 100
+                    }
+                }));
 
-        if (phaseGroupsResponse.data.data.phase.phaseGroups.pageInfo.totalPages > 1) {
-            console.warn('Found a start.gg phase with more than 100 phase groups?!');
+            if (phaseGroupsResponse.data.data.phase.phaseGroups.pageInfo.totalPages > 1) {
+                console.warn('Found a start.gg phase with more than 100 phase groups?!');
+            }
+
+            result.push(<MatchQuerySelectParameter>{
+                type: 'select',
+                key: 'phaseGroupId',
+                name: 'Pool',
+                options: phaseGroupsResponse.data.data.phase.phaseGroups.nodes
+                    .map(group => new StartggPhaseGroupOption(group.displayIdentifier, group.id, group.numRounds))
+            });
         }
 
-        return [{
-            type: 'select',
-            key: 'phaseGroupId',
-            name: 'Pool',
-            options: phaseGroupsResponse.data.data.phase.phaseGroups.nodes
-                .map(group => new StartggPhaseGroupOption(group.displayIdentifier, group.id, group.numRounds))
-        }]
+        return result;
     }
 }
 
@@ -118,6 +134,7 @@ export interface StartggImportOpts {
     phaseId: number
     phaseGroupId?: number
     roundNumber?: number
+    matchType?: ContainedMatchType
 }
 
 export class StartggImporter implements MatchImporter<StartggImportOpts> {
@@ -228,30 +245,45 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                     id: String(phaseGroup.id),
                     name: `Pool ${phaseGroup.displayIdentifier}`,
                     hasBracketReset,
-                    matches: sets.map(set => {
-                        const nextSet = sets.find(set2 =>
-                            (set.round < 0 && set2.round < 0 || set.round >= 0 && set2.round >= 0)
-                            && set2.slots.some(slot => slot.prereqType === 'set' && slot.prereqId === String(set.id)));
-
-                        if (set.slots.length !== 2) {
-                            throw new Error(`Start.gg set contains ${set.slots.length} slots; expected 2`);
-                        }
-
-                        return {
-                            id: StartggImporter.generateMatchId(phaseGroup.id, set.identifier),
-                            nextMatchId: nextSet ? StartggImporter.generateMatchId(phaseGroup.id, nextSet.identifier) : null,
-                            roundNumber: set.round < 0 ? Math.abs(set.round + 2) : set.round,
-                            type: set.round < 0 ? MatchType.LOSERS : MatchType.WINNERS,
-                            topTeam: {
-                                name: set.slots[0].entrant?.name,
-                                score: set.slots[0].standing?.stats.score.value
-                            },
-                            bottomTeam: {
-                                name: set.slots[1].entrant?.name,
-                                score: set.slots[1].standing?.stats.score.value
+                    containedMatchType: opts.matchType,
+                    matches: sets
+                        .filter(set => {
+                            if (bracketType !== BracketType.DOUBLE_ELIMINATION) {
+                                return true;
                             }
-                        }
-                    })
+
+                            if (opts.matchType === ContainedMatchType.WINNERS) {
+                                return set.round > 0;
+                            } else if (opts.matchType === ContainedMatchType.LOSERS) {
+                                return set.round < 0;
+                            }
+
+                            return true;
+                        })
+                        .map(set => {
+                            const nextSet = sets.find(set2 =>
+                                (set.round < 0 && set2.round < 0 || set.round >= 0 && set2.round >= 0)
+                                && set2.slots.some(slot => slot.prereqType === 'set' && slot.prereqId === String(set.id)));
+
+                            if (set.slots.length !== 2) {
+                                throw new Error(`Start.gg set contains ${set.slots.length} slots; expected 2`);
+                            }
+
+                            return {
+                                id: StartggImporter.generateMatchId(phaseGroup.id, set.identifier),
+                                nextMatchId: nextSet ? StartggImporter.generateMatchId(phaseGroup.id, nextSet.identifier) : null,
+                                roundNumber: set.round < 0 ? Math.abs(set.round + 2) : set.round,
+                                type: set.round < 0 ? MatchType.LOSERS : MatchType.WINNERS,
+                                topTeam: {
+                                    name: set.slots[0].entrant?.name,
+                                    score: set.slots[0].standing?.stats.score.value
+                                },
+                                bottomTeam: {
+                                    name: set.slots[1].entrant?.name,
+                                    score: set.slots[1].standing?.stats.score.value
+                                }
+                            }
+                        })
                 }
             ]
         };

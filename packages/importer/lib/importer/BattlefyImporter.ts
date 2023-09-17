@@ -3,6 +3,8 @@ import { MatchImporter } from '../types/MatchImporter';
 import type { Bracket, Match, MatchGroup } from '@tourneyview/common';
 import { BracketType, MatchType } from '@tourneyview/common';
 import { MatchQueryOption, MatchQueryParameter, MatchQueryResult } from '../types/MatchQuery';
+import { DoubleEliminationMatchTypeQueryParameter } from '../query/DoubleEliminationMatchTypeQueryParameter';
+import { ContainedMatchType } from '@tourneyview/common';
 
 interface BattlefyTournamentDetails {
     _id: string
@@ -67,6 +69,7 @@ export interface BattlefyImportOpts {
     tournamentId: string
     stageId: string
     roundNumber?: number
+    matchType?: ContainedMatchType
 }
 
 const battlefyApiRoot = 'https://api.battlefy.com';
@@ -76,25 +79,32 @@ class BattlefyStageQueryOption implements MatchQueryOption {
     value: string;
     private readonly type: string;
     private readonly roundCount: number;
+    private readonly style?: string;
 
-    constructor(id: string, name: string, type: string, roundCount: number) {
+    constructor(id: string, name: string, type: string, style: string | undefined, roundCount: number) {
         this.value = id;
         this.name = name;
         this.type = type;
+        this.style = style;
         this.roundCount = roundCount;
     }
 
     getParams(): MatchQueryParameter[] {
-        if (this.type === 'swiss') {
-            return [{
-                key: 'roundNumber',
-                type: 'numberRange',
-                name: 'Round number',
-                min: 1,
-                max: this.roundCount
-            }];
-        } else {
-            return [];
+        const bracketType = BattlefyImporter.parseBracketType(this.type, this.style);
+
+        switch (bracketType) {
+            case BracketType.SWISS:
+                return [{
+                    key: 'roundNumber',
+                    type: 'numberRange',
+                    name: 'Round number',
+                    min: 1,
+                    max: this.roundCount
+                }];
+            case BracketType.DOUBLE_ELIMINATION:
+                return [new DoubleEliminationMatchTypeQueryParameter()];
+            default:
+                return [];
         }
     }
 }
@@ -131,7 +141,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                 type: 'select',
                 name: 'Bracket',
                 options: tournamentDetails.stages.map(stage =>
-                    new BattlefyStageQueryOption(stage._id, stage.name, stage.bracket.type, stage.bracket.roundsCount))
+                    new BattlefyStageQueryOption(stage._id, stage.name, stage.bracket.type, stage.bracket.style, stage.bracket.roundsCount))
             }
         ];
     }
@@ -139,7 +149,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
     async getMatches(opts: BattlefyImportOpts & MatchQueryResult): Promise<Bracket> {
         const stageDetails = await axios.get<BattlefyStageDetails>(`${battlefyApiRoot}/stages/${opts.stageId}`);
 
-        const bracketType = this.mapBracketType(stageDetails.data.bracket.type, stageDetails.data.bracket.style);
+        const bracketType = BattlefyImporter.parseBracketType(stageDetails.data.bracket.type, stageDetails.data.bracket.style);
         if (bracketType == null) {
             throw new Error(`Failed to parse bracket type for input parameters (type=${stageDetails.data.bracket.type}, style=${stageDetails.data.bracket.style})`);
         }
@@ -177,7 +187,21 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                     {
                         id: opts.stageId,
                         name: stageDetails.data.name,
+                        containedMatchType: opts.matchType,
                         matches: matchList.data
+                            .filter(match => {
+                                if (bracketType !== BracketType.DOUBLE_ELIMINATION) {
+                                    return true;
+                                }
+
+                                if (opts.matchType === ContainedMatchType.WINNERS) {
+                                    return match.matchType === 'winner';
+                                } else if (opts.matchType === ContainedMatchType.LOSERS) {
+                                    return match.matchType === 'loser';
+                                }
+
+                                return true;
+                            })
                             .map(match => ({
                                 id: match._id,
                                 nextMatchId: isEliminationBracket ? match.next?.winner?.matchID : undefined,
@@ -249,7 +273,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
         }
     }
 
-    private mapBracketType(type: string, style?: string): BracketType | undefined {
+    static parseBracketType(type: string, style?: string): BracketType | undefined {
         if (type === 'elimination') {
             if (style == null) {
                 throw new Error('Got bracket type "elimination" from Battlefy without "style" parameter (single or double?)');

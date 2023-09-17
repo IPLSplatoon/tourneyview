@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { D3ZoomEvent, HierarchyNode } from 'd3';
 import { SingleEliminationRenderer } from './SingleEliminationRenderer';
-import { Bracket, BracketType } from '@tourneyview/common';
+import { Bracket, BracketType, ContainedMatchType } from '@tourneyview/common';
 import { Match, MatchType } from '@tourneyview/common';
 import { BracketAnimator } from '../types/animator';
 import { TextFormatter } from '../formatter/TextFormatter';
@@ -26,8 +26,8 @@ const BRACKET_SIZE = 2048;
 export class EliminationRenderer extends BracketTypeRenderer {
     public static readonly compatibleBracketTypes = [BracketType.DOUBLE_ELIMINATION, BracketType.SINGLE_ELIMINATION];
 
-    private readonly winnersRenderer: SingleEliminationRenderer;
-    private losersRenderer: SingleEliminationRenderer | null;
+    private readonly topRenderer: SingleEliminationRenderer;
+    private bottomRenderer: SingleEliminationRenderer | null;
 
     private readonly animator: BracketAnimator;
     private readonly formatter: TextFormatter;
@@ -46,6 +46,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
     private readonly onCellCreated?: EliminationRendererCellCreatedCallback;
 
     private activeBracketId: string | null;
+    private activeMatchType?: ContainedMatchType;
     private renderedBracketWidth: number;
     private renderedBracketHeight: number;
 
@@ -92,12 +93,8 @@ export class EliminationRenderer extends BracketTypeRenderer {
             .extent([[0, 0], [BRACKET_SIZE, BRACKET_SIZE]])
             .on('zoom', e => this.onZoom(e));
 
-        this.winnersRenderer = new SingleEliminationRenderer(
-            BRACKET_SIZE,
-            BRACKET_SIZE,
-            { animator: this.animator, formatter: this.formatter, onCellCreated: opts.onCellCreated });
-        this.losersRenderer = null;
-        this.appendSingleElimRenderer(this.winnersRenderer);
+        this.topRenderer = this.createSingleElimRenderer();
+        this.bottomRenderer = null;
 
         this.resizeObserver = new ResizeObserver(entries => {
             for (const entry of entries) {
@@ -134,34 +131,51 @@ export class EliminationRenderer extends BracketTypeRenderer {
         }
 
         const matchGroup = data.matchGroups[0];
-        const switchingBrackets = matchGroup.id !== this.activeBracketId;
+        const switchingBrackets = matchGroup.id !== this.activeBracketId || this.activeMatchType !== matchGroup.containedMatchType;
         if (switchingBrackets) {
             await this.hide();
         }
 
         this.activeBracketId = matchGroup.id;
+        this.activeMatchType = matchGroup.containedMatchType;
 
-        if (data.type === BracketType.SINGLE_ELIMINATION && this.losersRenderer != null) {
-            this.losersRenderer.destroy();
-            this.losersRenderer = null;
-        } else if (data.type === BracketType.DOUBLE_ELIMINATION && this.losersRenderer == null) {
-            this.losersRenderer = new SingleEliminationRenderer(
-                BRACKET_SIZE,
-                BRACKET_SIZE,
-                { animator: this.animator, formatter: this.formatter, onCellCreated: this.onCellCreated });
-            this.appendSingleElimRenderer(this.losersRenderer);
+        // if (de_winners_only || se) draw winners
+        // elif (de_losers_only) draw losers
+        // elif (de_all) draw winners+losers
+
+        if ((data.type === BracketType.SINGLE_ELIMINATION
+                || data.type === BracketType.DOUBLE_ELIMINATION && matchGroup.containedMatchType !== ContainedMatchType.ALL_MATCHES)
+            && this.bottomRenderer != null
+        ) {
+            this.bottomRenderer.destroy();
+            this.bottomRenderer = null;
+        } else if (data.type === BracketType.DOUBLE_ELIMINATION
+            && matchGroup.containedMatchType !== ContainedMatchType.WINNERS
+            && this.bottomRenderer == null
+        ) {
+            this.bottomRenderer = this.createSingleElimRenderer();
         }
 
-        if (data.type === BracketType.SINGLE_ELIMINATION) {
+        if (data.type === BracketType.SINGLE_ELIMINATION || matchGroup.containedMatchType !== ContainedMatchType.ALL_MATCHES) {
             const hierarchy = this.buildMatchHierarchy(matchGroup.matches);
             const cellSeparation = this.getCellSeparation(hierarchy.height);
-            const renderResult = this.winnersRenderer.setData(hierarchy, {
+
+            const renderResult = this.topRenderer.setData(hierarchy, {
                 cellWidth: this.getCellWidth(hierarchy),
                 cellSeparation,
                 linkWidth: this.linkWidth,
                 cellHeight: this.cellHeight,
-                hasThirdPlaceMatch: matchGroup.matches.some(match => match.type === MatchType.LOSERS),
-                bracketType: data.type
+                hasThirdPlaceMatch: data.type === BracketType.SINGLE_ELIMINATION
+                    && matchGroup.matches.some(match => match.type === MatchType.LOSERS),
+                bracketType: data.type,
+                hasBracketReset: data.type === BracketType.DOUBLE_ELIMINATION
+                    && matchGroup.containedMatchType === ContainedMatchType.WINNERS
+                    && (matchGroup.hasBracketReset ?? true),
+                bracketTitle: data.type === BracketType.DOUBLE_ELIMINATION
+                    ? matchGroup.containedMatchType === ContainedMatchType.WINNERS
+                        ? 'Winners Bracket'
+                        : 'Losers Bracket'
+                    : undefined,
             });
 
             this.renderedBracketHeight = renderResult.height;
@@ -174,7 +188,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
             const winnersCellSeparation = this.getCellSeparation(winnersHierarchy.height);
             const losersCellSeparation = this.getCellSeparation(losersHierarchy.height);
 
-            const winnersRenderResult = this.winnersRenderer.setData(winnersHierarchy, {
+            const winnersRenderResult = this.topRenderer.setData(winnersHierarchy, {
                 cellWidth,
                 cellSeparation: winnersCellSeparation,
                 linkWidth: this.linkWidth,
@@ -184,7 +198,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 bracketTitle: 'Winners Bracket',
                 bracketType: data.type
             });
-            const losersRenderResult = this.losersRenderer!.setData(losersHierarchy, {
+            const losersRenderResult = this.bottomRenderer!.setData(losersHierarchy, {
                 cellWidth,
                 cellSeparation: losersCellSeparation,
                 linkWidth: this.linkWidth,
@@ -232,14 +246,20 @@ export class EliminationRenderer extends BracketTypeRenderer {
 
     getBracketDepth(): number {
         return Math.max(
-            this.winnersRenderer.hierarchy?.height ?? 0,
-            this.losersRenderer?.hierarchy?.height ?? 0)
+            this.topRenderer.hierarchy?.height ?? 0,
+            this.bottomRenderer?.hierarchy?.height ?? 0)
     }
 
-    private appendSingleElimRenderer(renderer: SingleEliminationRenderer) {
+    private createSingleElimRenderer(): SingleEliminationRenderer {
+        const renderer = new SingleEliminationRenderer(
+            BRACKET_SIZE,
+            BRACKET_SIZE,
+            { animator: this.animator, formatter: this.formatter, onCellCreated: this.onCellCreated });
         const elems = renderer.getElements();
+
         this.matchCellWrapper.append(() => elems[0]);
         this.linkWrapper.append(() => elems[1]);
+        return renderer;
     }
 
     private buildMatchHierarchy(matches: Match[]): EliminationHierarchyNode {

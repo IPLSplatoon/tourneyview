@@ -14,7 +14,14 @@ export interface MatchGroup {
     id: string
     name: string
     hasBracketReset?: boolean
+    containedMatchType?: ContainedMatchType
     matches: Match[]
+}
+
+export enum ContainedMatchType {
+    ALL_MATCHES = 'ALL_MATCHES',
+    WINNERS = 'WINNERS',
+    LOSERS = 'LOSERS'
 }
 
 export enum MatchType {
