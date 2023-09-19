@@ -15,6 +15,7 @@ export type EliminationRendererOpts = {
     minCellWidth?: number
     maxCellWidth?: number
     onCellCreated?: EliminationRendererCellCreatedCallback
+    thirdPlaceMatchLabelHeight?: number
 }
 
 export type EliminationRendererCellCreatedCallback = (element: d3.Selection<HTMLDivElement, HierarchyNode<Match>, HTMLDivElement, unknown>) => void;
@@ -44,6 +45,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
     private readonly minCellWidth: number;
     private readonly maxCellWidth: number;
     private readonly onCellCreated?: EliminationRendererCellCreatedCallback;
+    private readonly thirdPlaceMatchLabelHeight: number;
 
     private activeBracketId: string | null;
     private activeMatchType?: ContainedMatchType;
@@ -65,6 +67,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
         this.activeBracketId = null;
         this.renderedBracketWidth = 1;
         this.renderedBracketHeight = 1;
+        this.thirdPlaceMatchLabelHeight = opts.thirdPlaceMatchLabelHeight ?? 20;
 
         this.element = d3
             .create('div')
@@ -176,6 +179,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
                         ? 'Winners Bracket'
                         : 'Losers Bracket'
                     : undefined,
+                thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight
             });
 
             this.renderedBracketHeight = renderResult.height;
@@ -196,7 +200,8 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 hasThirdPlaceMatch: false,
                 hasBracketReset: matchGroup.hasBracketReset ?? true,
                 bracketTitle: 'Winners Bracket',
-                bracketType: data.type
+                bracketType: data.type,
+                thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight
             });
             const losersRenderResult = this.bottomRenderer!.setData(losersHierarchy, {
                 cellWidth,
@@ -207,7 +212,8 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 yOffset: winnersRenderResult.height + this.cellHeight / 2,
                 hasThirdPlaceMatch: false,
                 bracketTitle: 'Losers Bracket',
-                bracketType: data.type
+                bracketType: data.type,
+                thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight
             });
 
             this.renderedBracketHeight = winnersRenderResult.height + this.cellHeight / 2 + losersRenderResult.height;

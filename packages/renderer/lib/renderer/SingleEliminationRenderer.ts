@@ -27,6 +27,7 @@ type SingleEliminationRendererSetDataOpts = {
     bracketTitle?: string
     bracketHeaderOffset?: number
     bracketType: BracketType
+    thirdPlaceMatchLabelHeight: number
 };
 
 export class SingleEliminationRenderer {
@@ -195,6 +196,20 @@ export class SingleEliminationRenderer {
                 .classed(`match-cell__${position}-score`, true)
                 .text(d => this.formatter.formatScore(text(d)));
 
+        const drawThirdPlaceMatchLabel = (selection: d3.Selection<HTMLDivElement, d3.HierarchyNode<Match>, HTMLDivElement, undefined>) => {
+            const labelHeight = opts.thirdPlaceMatchLabelHeight;
+            selection.each(function(d) {
+                if (isThirdPlaceMatch(d)) {
+                    d3.select(this)
+                        .classed('has-third-place-match-label', true)
+                        .append('div')
+                        .classed('match-cell__third-place-match-label', true)
+                        .style('height', `${labelHeight}px`)
+                        .text('Third place match');
+                }
+            });
+        }
+
         const updateTeamName = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) => {
             const that = this;
             return elem
@@ -227,6 +242,8 @@ export class SingleEliminationRenderer {
                 });
         };
 
+        const isThirdPlaceMatch = (d: d3.HierarchyNode<Match>) => d.data.type === MatchType.LOSERS && opts.hasThirdPlaceMatch;
+
         this.domElementContainer
             .selectAll('div.match-cell-wrapper')
             .data(
@@ -236,7 +253,9 @@ export class SingleEliminationRenderer {
                 enter => {
                     const wrapperSelection = enter
                         .append('div')
-                        .style('height', `${(opts.cellHeight)}px`)
+                        .style('height', d => isThirdPlaceMatch(d)
+                            ? `${(opts.cellHeight + opts.thirdPlaceMatchLabelHeight)}px`
+                            : `${(opts.cellHeight)}px`)
                         .style('width', `${(opts.cellWidth)}px`)
                         .style('left', d => `${this.width - (d as HierarchyPointNode<Match>).y + opts.linkWidth - widthOffset}px`)
                         .style('top', d => `${((d as HierarchyPointNode<Match>).x - opts.cellHeight / 2) - x0 + opts.cellHeight / 2 + yOffset}px`)
@@ -247,6 +266,7 @@ export class SingleEliminationRenderer {
                     wrapperSelection
                         .append('div')
                         .classed('match-cell', true)
+                        .call(drawThirdPlaceMatchLabel)
                         .call(drawTeamName, 'top', d => d.data?.topTeam.name)
                         .call(drawScore, 'top', d => d.data?.topTeam.score)
                         .call(drawTeamName, 'bottom', d => d.data?.bottomTeam.name)
