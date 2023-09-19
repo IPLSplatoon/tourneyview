@@ -4,15 +4,17 @@ import { BracketType, Match, MatchType } from '@tourneyview/common';
 import {
     EliminationHierarchyNode,
     EliminationHierarchyNodeData,
-    EliminationRendererCellCreatedCallback
+    EliminationRendererCellCreationCallback, EliminationRendererCellUpdateCallback
 } from './EliminationRenderer';
 import { BracketAnimator } from '../types/animator';
 import { TextFormatter } from '../formatter/TextFormatter';
+import { BaseTextFormatter } from '../formatter/BaseTextFormatter';
 
 export type SingleEliminationRendererOpts = {
     animator: BracketAnimator
     formatter: TextFormatter
-    onCellCreated?: EliminationRendererCellCreatedCallback
+    onCellCreation?: EliminationRendererCellCreationCallback
+    onCellUpdate?: EliminationRendererCellUpdateCallback
 };
 
 type SingleEliminationRendererSetDataOpts = {
@@ -28,6 +30,7 @@ type SingleEliminationRendererSetDataOpts = {
     bracketHeaderOffset?: number
     bracketType: BracketType
     thirdPlaceMatchLabelHeight: number
+    isLosersBracket: boolean
 };
 
 export class SingleEliminationRenderer {
@@ -47,14 +50,16 @@ export class SingleEliminationRenderer {
     private readonly formatter: TextFormatter;
     hierarchy: EliminationHierarchyNode | null;
 
-    private readonly onCellCreated?: EliminationRendererCellCreatedCallback;
+    private readonly onCellCreation?: EliminationRendererCellCreationCallback;
+    private readonly onCellUpdate?: EliminationRendererCellUpdateCallback;
 
     constructor(width: number, height: number, opts: SingleEliminationRendererOpts) {
         this.height = height;
         this.width = width;
         this.animator = opts.animator;
         this.formatter = opts.formatter;
-        this.onCellCreated = opts.onCellCreated;
+        this.onCellCreation = opts.onCellCreation;
+        this.onCellUpdate = opts.onCellUpdate;
 
         this.svg = d3
             .create('svg')
@@ -119,7 +124,7 @@ export class SingleEliminationRenderer {
             .join('div')
             .classed('round-label', true)
             .style('width', `${opts.cellWidth}px`)
-            .text(d => this.formatter.formatRoundNumber(d + 1, hierarchy.height, hasBracketReset));
+            .text(d => (this.formatter as BaseTextFormatter).formatDoubleEliminationRoundNumber(d + 1, hierarchy.height, hasBracketReset, opts.isLosersBracket));
 
         const headerSpacing = opts.bracketHeaderOffset ?? 8;
         const headerHeight = this.bracketHeader.node()?.offsetHeight ?? 0;
@@ -272,13 +277,23 @@ export class SingleEliminationRenderer {
                         .call(drawTeamName, 'bottom', d => d.data?.bottomTeam.name)
                         .call(drawScore, 'bottom', d => d.data?.bottomTeam.score);
 
-                    return this.onCellCreated ? wrapperSelection.call(this.onCellCreated) : wrapperSelection;
+                    return this.onCellCreation ? wrapperSelection.call(this.onCellCreation) : wrapperSelection;
                 },
-                update => update
-                    .call(updateTeamName, 'top', d => d.data?.topTeam.name)
-                    .call(updateScore, 'top', d => d.data?.topTeam.score)
-                    .call(updateTeamName, 'bottom', d => d.data?.bottomTeam.name)
-                    .call(updateScore, 'bottom', d => d.data?.bottomTeam.score));
+                update => {
+                    const selection = update
+                        .style('left', d => `${this.width - (d as HierarchyPointNode<Match>).y + opts.linkWidth - widthOffset}px`)
+                        .style('top', d => `${((d as HierarchyPointNode<Match>).x - opts.cellHeight / 2) - x0 + opts.cellHeight / 2 + yOffset}px`)
+                        .style('height', d => isThirdPlaceMatch(d)
+                            ? `${(opts.cellHeight + opts.thirdPlaceMatchLabelHeight)}px`
+                            : `${(opts.cellHeight)}px`)
+                        .style('width', `${(opts.cellWidth)}px`)
+                        .call(updateTeamName, 'top', d => d.data?.topTeam.name)
+                        .call(updateScore, 'top', d => d.data?.topTeam.score)
+                        .call(updateTeamName, 'bottom', d => d.data?.bottomTeam.name)
+                        .call(updateScore, 'bottom', d => d.data?.bottomTeam.score);
+
+                    return this.onCellUpdate ? selection.call(this.onCellUpdate) : selection;
+                });
 
         return {
             width: bracketWidth,

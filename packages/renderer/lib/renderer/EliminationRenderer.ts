@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { D3ZoomEvent, HierarchyNode } from 'd3';
+import { BaseType, D3ZoomEvent, HierarchyNode } from 'd3';
 import { SingleEliminationRenderer } from './SingleEliminationRenderer';
 import { Bracket, BracketType, ContainedMatchType } from '@tourneyview/common';
 import { Match, MatchType } from '@tourneyview/common';
@@ -14,11 +14,13 @@ export type EliminationRendererOpts = {
     cellHeight?: number
     minCellWidth?: number
     maxCellWidth?: number
-    onCellCreated?: EliminationRendererCellCreatedCallback
+    onCellCreation?: EliminationRendererCellCreationCallback
+    onCellUpdate?: EliminationRendererCellUpdateCallback
     thirdPlaceMatchLabelHeight?: number
 }
 
-export type EliminationRendererCellCreatedCallback = (element: d3.Selection<HTMLDivElement, HierarchyNode<Match>, HTMLDivElement, unknown>) => void;
+export type EliminationRendererCellCreationCallback = (element: d3.Selection<HTMLDivElement, HierarchyNode<Match>, HTMLDivElement, unknown>) => void;
+export type EliminationRendererCellUpdateCallback = (element: d3.Selection<BaseType, HierarchyNode<Match>, HTMLDivElement, unknown>) => void;
 export type EliminationHierarchyNodeData = { isRoot: true } | Match;
 export type EliminationHierarchyNode = d3.HierarchyNode<EliminationHierarchyNodeData>;
 
@@ -44,7 +46,8 @@ export class EliminationRenderer extends BracketTypeRenderer {
     private readonly cellHeight: number;
     private readonly minCellWidth: number;
     private readonly maxCellWidth: number;
-    private readonly onCellCreated?: EliminationRendererCellCreatedCallback;
+    private readonly onCellCreation?: EliminationRendererCellCreationCallback;
+    private readonly onCellUpdate?: EliminationRendererCellUpdateCallback;
     private readonly thirdPlaceMatchLabelHeight: number;
 
     private activeBracketId: string | null;
@@ -63,7 +66,8 @@ export class EliminationRenderer extends BracketTypeRenderer {
         this.cellHeight = opts.cellHeight ?? 65;
         this.minCellWidth = opts.minCellWidth ?? 175;
         this.maxCellWidth = opts.maxCellWidth ?? 250;
-        this.onCellCreated = opts.onCellCreated;
+        this.onCellCreation = opts.onCellCreation;
+        this.onCellUpdate = opts.onCellUpdate;
         this.activeBracketId = null;
         this.renderedBracketWidth = 1;
         this.renderedBracketHeight = 1;
@@ -179,7 +183,9 @@ export class EliminationRenderer extends BracketTypeRenderer {
                         ? 'Winners Bracket'
                         : 'Losers Bracket'
                     : undefined,
-                thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight
+                thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight,
+                isLosersBracket: data.type === BracketType.DOUBLE_ELIMINATION
+                    && matchGroup.containedMatchType === ContainedMatchType.LOSERS
             });
 
             this.renderedBracketHeight = renderResult.height;
@@ -201,7 +207,8 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 hasBracketReset: matchGroup.hasBracketReset ?? true,
                 bracketTitle: 'Winners Bracket',
                 bracketType: data.type,
-                thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight
+                thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight,
+                isLosersBracket: false
             });
             const losersRenderResult = this.bottomRenderer!.setData(losersHierarchy, {
                 cellWidth,
@@ -213,7 +220,8 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 hasThirdPlaceMatch: false,
                 bracketTitle: 'Losers Bracket',
                 bracketType: data.type,
-                thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight
+                thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight,
+                isLosersBracket: true
             });
 
             this.renderedBracketHeight = winnersRenderResult.height + this.cellHeight / 2 + losersRenderResult.height;
@@ -260,7 +268,12 @@ export class EliminationRenderer extends BracketTypeRenderer {
         const renderer = new SingleEliminationRenderer(
             BRACKET_SIZE,
             BRACKET_SIZE,
-            { animator: this.animator, formatter: this.formatter, onCellCreated: this.onCellCreated });
+            {
+                animator: this.animator,
+                formatter: this.formatter,
+                onCellCreation: this.onCellCreation,
+                onCellUpdate: this.onCellUpdate
+            });
         const elems = renderer.getElements();
 
         this.matchCellWrapper.append(() => elems[0]);
