@@ -29,7 +29,8 @@ export enum MatchType {
     LOSERS
 }
 
-interface MatchTeam {
+export interface MatchTeam {
     name?: string | null
     score?: number | null
+    isDisqualified: boolean
 }

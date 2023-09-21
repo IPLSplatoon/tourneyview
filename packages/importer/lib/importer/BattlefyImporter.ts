@@ -202,6 +202,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
 
                                 return true;
                             })
+                            // todo: isDisqualified
                             .map(match => ({
                                 id: match._id,
                                 nextMatchId: isEliminationBracket ? match.next?.winner?.matchID : undefined,
@@ -209,11 +210,13 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                                 type: isEliminationBracket ? match.matchType === 'winner' ? MatchType.WINNERS : MatchType.LOSERS : undefined,
                                 topTeam: {
                                     name: match.top.team?.name,
-                                    score: match.top.score
+                                    score: match.top.score,
+                                    isDisqualified: false
                                 },
                                 bottomTeam: {
                                     name: match.bottom.team?.name,
-                                    score: match.bottom.score
+                                    score: match.bottom.score,
+                                    isDisqualified: false
                                 }
                             }))
                     }
@@ -233,11 +236,13 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                         roundNumber: match.roundNumber,
                         topTeam: {
                             name: match.top.team?.name,
-                            score: match.top.score
+                            score: match.top.score,
+                            isDisqualified: false
                         },
                         bottomTeam: {
                             name: match.bottom.team?.name,
-                            score: match.bottom.score
+                            score: match.bottom.score,
+                            isDisqualified: false
                         }
                     }));
 
