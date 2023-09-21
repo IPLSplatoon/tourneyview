@@ -263,7 +263,7 @@ export class SingleEliminationRenderer {
                     const currentScore = parseInt((this as HTMLElement).textContent ?? '');
                     const newTeam = team(d);
                     const newScore = newTeam.score ?? NaN;
-                    if (currentScore !== newScore && !(isNaN(currentScore) && isNaN(newScore))) {
+                    if (currentScore !== newScore && !(isNaN(currentScore) && (isNaN(newScore) || newTeam.isDisqualified))) {
                         that.animator.animateScoreUpdate(
                             this as HTMLElement,
                             currentScore,

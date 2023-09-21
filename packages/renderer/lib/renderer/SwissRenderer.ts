@@ -176,7 +176,7 @@ export class SwissRenderer extends BracketTypeRenderer {
                     const currentScore = parseInt((this as HTMLElement).textContent ?? '');
                     const teamData = team(d);
                     const newScore = teamData.score ?? NaN;
-                    if (currentScore !== newScore && !(isNaN(currentScore) && isNaN(newScore))) {
+                    if (currentScore !== newScore && !(isNaN(currentScore) && (isNaN(newScore) || teamData.isDisqualified))) {
                         that.animator.animateScoreUpdate(
                             this as HTMLElement,
                             currentScore,
