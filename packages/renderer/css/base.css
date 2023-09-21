@@ -59,6 +59,10 @@
     overflow: hidden;
 }
 
+.elimination-renderer .match-cell__score.is-disqualified {
+    text-decoration: line-through;
+}
+
 .elimination-renderer .match-cell__score {
     text-align: center;
     font-size: 1.75em;
@@ -72,6 +76,10 @@
     white-space: nowrap;
     max-width: 100%;
     overflow: hidden;
+}
+
+.elimination-renderer .match-cell__team-name.is-disqualified {
+    text-decoration: line-through;
 }
 
 .swiss-renderer__wrapper {
@@ -124,6 +132,10 @@
     overflow: hidden;
 }
 
+.swiss-renderer .match-row > .match-row__team-name.is-disqualified {
+    text-decoration: line-through;
+}
+
 .swiss-renderer .match-row > .match-row__top-team-name {
     text-align: right;
 }
@@ -137,6 +149,10 @@
     font-size: 1.75em;
     transform: translateY(1px);
     font-feature-settings: 'tnum';
+}
+
+.swiss-renderer .match-row .match-row__score.is-disqualified {
+    text-decoration: line-through;
 }
 
 .scroll-masked {

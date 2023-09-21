@@ -1,5 +1,4 @@
 import { BracketTypeRenderer } from '../types/renderer';
-import { BracketAnimator } from '../types/animator';
 import { TextFormatter } from '../formatter/TextFormatter';
 import { EliminationRenderer, EliminationRendererOpts } from './EliminationRenderer';
 import { SwissRenderer, SwissRendererOpts } from './SwissRenderer';
@@ -8,10 +7,11 @@ import { DummyBracketAnimator } from '../animator/dummy/DummyBracketAnimator';
 import { BaseTextFormatter } from '../formatter/BaseTextFormatter';
 import * as d3 from 'd3';
 import { DummyRenderer } from './DummyRenderer';
+import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
 
 type WithoutCommonOpts<T> = Omit<T, 'animator' | 'formatter'>;
 export type BracketRendererOpts = {
-    animator?: BracketAnimator
+    animator?: BaseBracketAnimator
     formatter?: TextFormatter
     eliminationOpts?: WithoutCommonOpts<EliminationRendererOpts>
     swissOpts?: WithoutCommonOpts<SwissRendererOpts>

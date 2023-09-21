@@ -2,7 +2,11 @@ import { BracketType } from '@tourneyview/common';
 import { TextFormatter } from './TextFormatter';
 
 export class BaseTextFormatter implements TextFormatter {
-    formatScore(score: number | undefined | null): string {
+    formatScore(score: number | undefined | null, isDisqualified: Boolean): string {
+        if (isDisqualified) {
+            return 'DQ';
+        }
+
         return score == null || isNaN(score) ? '-' : String(score);
     }
 

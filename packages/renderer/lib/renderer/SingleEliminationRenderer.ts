@@ -1,17 +1,17 @@
 import * as d3 from 'd3';
 import { BaseType, HierarchyPointNode, tree } from 'd3';
-import { BracketType, Match, MatchType } from '@tourneyview/common';
+import { BracketType, Match, MatchTeam, MatchType } from '@tourneyview/common';
 import {
     EliminationHierarchyNode,
     EliminationHierarchyNodeData,
-    EliminationRendererCellCreationCallback, EliminationRendererCellUpdateCallback
+    EliminationRendererCellCreationCallback,
+    EliminationRendererCellUpdateCallback
 } from './EliminationRenderer';
-import { BracketAnimator } from '../types/animator';
 import { TextFormatter } from '../formatter/TextFormatter';
-import { BaseTextFormatter } from '../formatter/BaseTextFormatter';
+import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
 
 export type SingleEliminationRendererOpts = {
-    animator: BracketAnimator
+    animator: BaseBracketAnimator
     formatter: TextFormatter
     onCellCreation?: EliminationRendererCellCreationCallback
     onCellUpdate?: EliminationRendererCellUpdateCallback
@@ -46,7 +46,7 @@ export class SingleEliminationRenderer {
     private readonly width: number;
     private readonly height: number;
 
-    private readonly animator: BracketAnimator;
+    private readonly animator: BaseBracketAnimator;
     private readonly formatter: TextFormatter;
     hierarchy: EliminationHierarchyNode | null;
 
@@ -185,21 +185,42 @@ export class SingleEliminationRenderer {
             .attr('data-depth', d => d.source.depth)
             .classed('bracket-link', true);
 
-        const drawTeamName = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) =>
-            elem
+        const drawTeamName = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
+            const that = this;
+            return elem
                 .append('div')
                 .classed('match-cell__team-name', true)
                 .classed(`match-cell__${position}-team-name`, true)
-                .text(d => this.formatter.formatTeamName(text(d)));
+                .each(function (d) {
+                    const teamData = team(d);
+                    that.animator.setTeamName(
+                        this,
+                        '',
+                        that.formatter.formatTeamName(teamData.name),
+                        teamData.isDisqualified,
+                        opts.bracketType);
+                });
+        }
 
-        const drawScore = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => number | undefined | null) =>
-            elem
+        const drawScore = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
+            const that = this;
+            return elem
                 .append('div')
                 .classed('match-cell__score-wrapper', true)
                 .append('div')
                 .classed('match-cell__score', true)
                 .classed(`match-cell__${position}-score`, true)
-                .text(d => this.formatter.formatScore(text(d)));
+                .each(function (d) {
+                    const teamData = team(d);
+                    that.animator.setScore(
+                        this,
+                        0,
+                        teamData.score ?? NaN,
+                        that.formatter.formatScore(teamData.score, teamData.isDisqualified),
+                        teamData.isDisqualified,
+                        opts.bracketType);
+                });
+        }
 
         const drawThirdPlaceMatchLabel = (selection: d3.Selection<HTMLDivElement, d3.HierarchyNode<Match>, HTMLDivElement, undefined>) => {
             const labelHeight = opts.thirdPlaceMatchLabelHeight;
@@ -215,32 +236,40 @@ export class SingleEliminationRenderer {
             });
         }
 
-        const updateTeamName = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) => {
+        const updateTeamName = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
             const that = this;
             return elem
                 .select(`.match-cell__${position}-team-name`)
                 .each(function(d) {
                     const currentText = (this as HTMLElement).textContent ?? '';
-                    const newText = that.formatter.formatTeamName(text(d));
+                    const teamData = team(d);
+                    const newText = that.formatter.formatTeamName(teamData.name);
                     if (currentText !== newText) {
-                        that.animator.updateText(this as HTMLElement, currentText, newText, opts.bracketType);
+                        that.animator.animateTeamNameUpdate(
+                            this as HTMLElement,
+                            currentText,
+                            newText,
+                            teamData.isDisqualified,
+                            opts.bracketType);
                     }
                 });
         };
 
-        const updateScore = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', score: (d: Datum) => number | undefined | null) => {
+        const updateScore = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
             const that = this;
             return elem
                 .select(`.match-cell__${position}-score`)
                 .each(function(d) {
                     const currentScore = parseInt((this as HTMLElement).textContent ?? '');
-                    const newScore = score(d) ?? NaN;
+                    const newTeam = team(d);
+                    const newScore = newTeam.score ?? NaN;
                     if (currentScore !== newScore && !(isNaN(currentScore) && isNaN(newScore))) {
-                        that.animator.updateScore(
+                        that.animator.animateScoreUpdate(
                             this as HTMLElement,
                             currentScore,
                             newScore,
-                            that.formatter.formatScore(newScore),
+                            that.formatter.formatScore(newScore, newTeam.isDisqualified),
+                            newTeam.isDisqualified,
                             opts.bracketType
                         );
                     }
@@ -272,10 +301,10 @@ export class SingleEliminationRenderer {
                         .append('div')
                         .classed('match-cell', true)
                         .call(drawThirdPlaceMatchLabel)
-                        .call(drawTeamName, 'top', d => d.data?.topTeam.name)
-                        .call(drawScore, 'top', d => d.data?.topTeam.score)
-                        .call(drawTeamName, 'bottom', d => d.data?.bottomTeam.name)
-                        .call(drawScore, 'bottom', d => d.data?.bottomTeam.score);
+                        .call(drawTeamName, 'top', d => d.data?.topTeam)
+                        .call(drawScore, 'top', d => d.data?.topTeam)
+                        .call(drawTeamName, 'bottom', d => d.data?.bottomTeam)
+                        .call(drawScore, 'bottom', d => d.data?.bottomTeam);
 
                     return this.onCellCreation ? wrapperSelection.call(this.onCellCreation) : wrapperSelection;
                 },
@@ -287,10 +316,10 @@ export class SingleEliminationRenderer {
                             ? `${(opts.cellHeight + opts.thirdPlaceMatchLabelHeight)}px`
                             : `${(opts.cellHeight)}px`)
                         .style('width', `${(opts.cellWidth)}px`)
-                        .call(updateTeamName, 'top', d => d.data?.topTeam.name)
-                        .call(updateScore, 'top', d => d.data?.topTeam.score)
-                        .call(updateTeamName, 'bottom', d => d.data?.bottomTeam.name)
-                        .call(updateScore, 'bottom', d => d.data?.bottomTeam.score);
+                        .call(updateTeamName, 'top', d => d.data?.topTeam)
+                        .call(updateScore, 'top', d => d.data?.topTeam)
+                        .call(updateTeamName, 'bottom', d => d.data?.bottomTeam)
+                        .call(updateScore, 'bottom', d => d.data?.bottomTeam);
 
                     return this.onCellUpdate ? selection.call(this.onCellUpdate) : selection;
                 });

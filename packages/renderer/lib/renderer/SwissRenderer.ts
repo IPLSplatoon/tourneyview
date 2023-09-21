@@ -4,11 +4,12 @@ import { TextFormatter } from '../formatter/TextFormatter';
 import { Bracket, BracketType, Match } from '@tourneyview/common';
 import { Autoscroller } from './Autoscroller';
 import { BracketTypeRenderer } from '../types/renderer';
-import { BracketAnimator } from '../types/animator';
+import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
+import { MatchTeam } from '@tourneyview/common';
 
 export type SwissRendererOpts = {
     formatter: TextFormatter
-    animator: BracketAnimator
+    animator: BaseBracketAnimator
     rowHeight?: number
     rowGap?: number
     useScrollMask?: boolean
@@ -25,7 +26,7 @@ export class SwissRenderer extends BracketTypeRenderer {
 
     private readonly formatter: TextFormatter;
     private readonly scroller: Autoscroller;
-    private readonly animator: BracketAnimator;
+    private readonly animator: BaseBracketAnimator;
 
     private activeBracketId: string | null;
     private activeRoundNumber?: number;
@@ -111,48 +112,77 @@ export class SwissRenderer extends BracketTypeRenderer {
         this.activeBracketId = matchGroup.id;
         this.activeRoundNumber = data.roundNumber;
 
-        const drawTeamName = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) =>
-            elem
+        const drawTeamName = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
+            const that = this;
+            return elem
                 .append('div')
                 .classed('match-row__team-name', true)
                 .classed(`match-row__${position}-team-name`, true)
-                .text(d => this.formatter.formatTeamName(text(d)));
+                .each(function (d) {
+                    const teamData = team(d);
+                    that.animator.setTeamName(
+                        this,
+                        '',
+                        that.formatter.formatTeamName(teamData.name),
+                        teamData.isDisqualified,
+                        BracketType.SWISS);
+                });
+        };
 
-        const drawScore = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', score: (d: Datum) => number | undefined | null) =>
-            elem
+        const drawScore = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
+            const that = this;
+            return elem
                 .append('div')
                 .classed('match-row__score-wrapper', true)
                 .append('div')
                 .classed('match-row__score', true)
                 .classed(`match-row__${position}-score`, true)
-                .text(d => this.formatter.formatScore(score(d)));
+                .each(function (d) {
+                    const teamData = team(d);
+                    that.animator.setScore(
+                        this,
+                        0,
+                        teamData.score ?? NaN,
+                        that.formatter.formatScore(teamData.score, teamData.isDisqualified),
+                        teamData.isDisqualified,
+                        BracketType.SWISS);
+                });
+        };
 
-        const updateTeamName = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', text: (d: Datum) => string | undefined | null) => {
+        const updateTeamName = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
             const that = this;
             return elem
                 .select(`.match-row__${position}-team-name`)
                 .each(function (d) {
                     const currentText = (this as HTMLElement).textContent ?? '';
-                    const newText = that.formatter.formatTeamName(text(d));
+                    const teamData = team(d);
+                    const newText = that.formatter.formatTeamName(teamData.name);
                     if (currentText !== newText) {
-                        that.animator.updateText(this as HTMLElement, currentText, newText, BracketType.SWISS);
+                        that.animator.animateTeamNameUpdate(
+                            this as HTMLElement,
+                            currentText,
+                            newText,
+                            teamData.isDisqualified,
+                            BracketType.SWISS);
                     }
                 });
         };
 
-        const updateScore = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', score: (d: Datum) => number | undefined | null) => {
+        const updateScore = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
             const that = this;
             return elem
                 .select(`.match-row__${position}-score`)
                 .each(function (d) {
                     const currentScore = parseInt((this as HTMLElement).textContent ?? '');
-                    const newScore = score(d) ?? NaN;
+                    const teamData = team(d);
+                    const newScore = teamData.score ?? NaN;
                     if (currentScore !== newScore && !(isNaN(currentScore) && isNaN(newScore))) {
-                        that.animator.updateScore(
+                        that.animator.animateScoreUpdate(
                             this as HTMLElement,
                             currentScore,
                             newScore,
-                            that.formatter.formatScore(newScore),
+                            that.formatter.formatScore(newScore, teamData.isDisqualified),
+                            teamData.isDisqualified,
                             BracketType.SWISS
                         );
                     }
@@ -168,20 +198,20 @@ export class SwissRenderer extends BracketTypeRenderer {
                     .classed('match-row-wrapper', true)
                     .append('div')
                     .classed('match-row', true)
-                    .call(drawTeamName, 'top', d => d.topTeam.name)
+                    .call(drawTeamName, 'top', d => d.topTeam)
                     .call(elem => {
                         elem
                             .append('div')
                             .classed('match-row__scores', true)
-                            .call(drawScore, 'top', d => d.topTeam.score)
-                            .call(drawScore, 'bottom', d => d.bottomTeam.score)
+                            .call(drawScore, 'top', d => d.topTeam)
+                            .call(drawScore, 'bottom', d => d.bottomTeam)
                     })
-                    .call(drawTeamName, 'bottom', d => d.bottomTeam.name),
+                    .call(drawTeamName, 'bottom', d => d.bottomTeam),
                 update => update
-                    .call(updateTeamName, 'top', d => d.topTeam.name)
-                    .call(updateScore, 'top', d => d.topTeam.score)
-                    .call(updateTeamName, 'bottom', d => d.bottomTeam.name)
-                    .call(updateScore, 'bottom', d => d.bottomTeam.score)
+                    .call(updateTeamName, 'top', d => d.topTeam)
+                    .call(updateScore, 'top', d => d.topTeam)
+                    .call(updateTeamName, 'bottom', d => d.bottomTeam)
+                    .call(updateScore, 'bottom', d => d.bottomTeam)
             )
 
         const node = this.getElement();

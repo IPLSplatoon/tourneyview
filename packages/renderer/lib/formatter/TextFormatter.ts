@@ -1,7 +1,7 @@
 import { BracketType } from "@tourneyview/common"
 
 export interface TextFormatter {
-    formatScore(score: number | undefined | null): string
+    formatScore(score: number | undefined | null, isDisqualified: boolean): string
 
     formatTeamName(name: string | undefined | null): string
 

@@ -1,21 +1,29 @@
-import { BracketAnimator, EliminationAnimator, SwissAnimator } from '../../types/animator';
 import { DummyEliminationAnimator } from './DummyEliminationAnimator';
 import { DummySwissAnimator } from './DummySwissAnimator';
+import { BaseBracketAnimator } from '../BaseBracketAnimator';
 
-export class DummyBracketAnimator implements BracketAnimator {
-    public readonly eliminationAnimator: EliminationAnimator;
-    public readonly swissAnimator: SwissAnimator;
-
+export class DummyBracketAnimator extends BaseBracketAnimator {
     constructor() {
-        this.eliminationAnimator = new DummyEliminationAnimator();
-        this.swissAnimator = new DummySwissAnimator();
+        super(new DummyEliminationAnimator(), new DummySwissAnimator());
     }
 
-    updateScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string): void {
+    setScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string, isDisqualified: boolean): void {
         element.innerText = formattedNewValue;
+        this.setDisqualifiedClass(element, isDisqualified);
     }
 
-    updateText(element: HTMLElement, oldValue: string, newValue: string): void {
+    animateScoreUpdate(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string, isDisqualified: boolean): void {
+        element.innerText = formattedNewValue;
+        this.setDisqualifiedClass(element, isDisqualified);
+    }
+
+    setTeamName(element: HTMLElement, oldValue: string, newValue: string, isDisqualified: boolean): void {
         element.innerText = newValue;
+        this.setDisqualifiedClass(element, isDisqualified);
+    }
+
+    animateTeamNameUpdate(element: HTMLElement, oldValue: string, newValue: string, isDisqualified: boolean): void {
+        element.innerText = newValue;
+        this.setDisqualifiedClass(element, isDisqualified);
     }
 }

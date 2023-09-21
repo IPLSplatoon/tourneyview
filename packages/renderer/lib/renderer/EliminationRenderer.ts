@@ -3,12 +3,12 @@ import { BaseType, D3ZoomEvent, HierarchyNode } from 'd3';
 import { SingleEliminationRenderer } from './SingleEliminationRenderer';
 import { Bracket, BracketType, ContainedMatchType } from '@tourneyview/common';
 import { Match, MatchType } from '@tourneyview/common';
-import { BracketAnimator } from '../types/animator';
 import { TextFormatter } from '../formatter/TextFormatter';
 import { BracketTypeRenderer } from '../types/renderer';
+import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
 
 export type EliminationRendererOpts = {
-    animator: BracketAnimator
+    animator: BaseBracketAnimator
     formatter: TextFormatter
     linkWidth?: number
     cellHeight?: number
@@ -32,7 +32,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
     private readonly topRenderer: SingleEliminationRenderer;
     private bottomRenderer: SingleEliminationRenderer | null;
 
-    private readonly animator: BracketAnimator;
+    private readonly animator: BaseBracketAnimator;
     private readonly formatter: TextFormatter;
 
     private readonly element: d3.Selection<HTMLDivElement, undefined, null, undefined>;
@@ -145,10 +145,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
 
         this.activeBracketId = matchGroup.id;
         this.activeMatchType = matchGroup.containedMatchType;
-
-        // if (de_winners_only || se) draw winners
-        // elif (de_losers_only) draw losers
-        // elif (de_all) draw winners+losers
+        const bracketType = data.type as BracketType.DOUBLE_ELIMINATION | BracketType.SINGLE_ELIMINATION;
 
         if ((data.type === BracketType.SINGLE_ELIMINATION
                 || data.type === BracketType.DOUBLE_ELIMINATION && matchGroup.containedMatchType !== ContainedMatchType.ALL_MATCHES)
@@ -174,7 +171,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 cellHeight: this.cellHeight,
                 hasThirdPlaceMatch: data.type === BracketType.SINGLE_ELIMINATION
                     && matchGroup.matches.some(match => match.type === MatchType.LOSERS),
-                bracketType: data.type,
+                bracketType,
                 hasBracketReset: data.type === BracketType.DOUBLE_ELIMINATION
                     && matchGroup.containedMatchType === ContainedMatchType.WINNERS
                     && (matchGroup.hasBracketReset ?? true),
@@ -206,7 +203,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 hasThirdPlaceMatch: false,
                 hasBracketReset: matchGroup.hasBracketReset ?? true,
                 bracketTitle: 'Winners Bracket',
-                bracketType: data.type,
+                bracketType,
                 thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight,
                 isLosersBracket: false
             });
@@ -219,7 +216,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 yOffset: winnersRenderResult.height + this.cellHeight / 2,
                 hasThirdPlaceMatch: false,
                 bracketTitle: 'Losers Bracket',
-                bracketType: data.type,
+                bracketType,
                 thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight,
                 isLosersBracket: true
             });
