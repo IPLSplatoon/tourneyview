@@ -121,7 +121,7 @@
     justify-content: space-between;
     align-items: center;
     width: 90px;
-    padding: 0 15px;
+    padding: 0 8px;
 }
 
 .swiss-renderer .match-row > .match-row__team-name {
@@ -144,6 +144,10 @@
     text-align: left;
 }
 
+.swiss-renderer .match-row .match-row__score-wrapper {
+    width: 100%;
+}
+
 .swiss-renderer .match-row .match-row__score {
     text-align: center;
     font-size: 1.75em;
@@ -153,6 +157,7 @@
 
 .swiss-renderer .match-row .match-row__score.is-disqualified {
     text-decoration: line-through;
+    font-size: 1.2em;
 }
 
 .scroll-masked {
