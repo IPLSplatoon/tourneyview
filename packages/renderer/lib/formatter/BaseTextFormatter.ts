@@ -1,3 +1,4 @@
+import { BracketType } from '@tourneyview/common';
 import { TextFormatter } from './TextFormatter';
 
 export class BaseTextFormatter implements TextFormatter {
@@ -9,17 +10,25 @@ export class BaseTextFormatter implements TextFormatter {
         return name == null ? '-' : name;
     }
 
-    formatRoundNumber(roundNumber: number, maxRoundNumber: number, hasBracketReset: boolean): string {
-        if (hasBracketReset) {
-            if (roundNumber === maxRoundNumber - 1) {
+    formatEliminationRoundNumber(roundNumber: number, maxRoundNumber: number, isLosersSide: boolean, hasBracketReset: boolean, bracketType: BracketType.DOUBLE_ELIMINATION | BracketType.SINGLE_ELIMINATION): string {
+        if (bracketType === BracketType.SINGLE_ELIMINATION || isLosersSide) {
+            if (roundNumber === maxRoundNumber) {
                 return 'Finals';
-            } else if (roundNumber === maxRoundNumber) {
-                return 'Bracket Reset';
+            } else if (roundNumber === maxRoundNumber - 1) {
+                return 'Semi-Finals'
             }
-        }
+        } else if (bracketType === BracketType.DOUBLE_ELIMINATION) {
+            const normalizedRoundNumber = hasBracketReset ? roundNumber : roundNumber - 1;
 
-        if (roundNumber === maxRoundNumber) {
-            return 'Finals';
+            if (normalizedRoundNumber === maxRoundNumber) {
+                return 'Bracket Reset';
+            } else if (normalizedRoundNumber === maxRoundNumber - 1) {
+                return 'Grand Finals'
+            } else if (normalizedRoundNumber === maxRoundNumber - 2) {
+                return 'Finals'
+            } else if (normalizedRoundNumber === maxRoundNumber - 3) {
+                return 'Semi-Finals'
+            }
         }
 
         return `Round ${roundNumber}`;

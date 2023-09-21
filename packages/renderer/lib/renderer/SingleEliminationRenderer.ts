@@ -28,7 +28,7 @@ type SingleEliminationRendererSetDataOpts = {
     yOffset?: number
     bracketTitle?: string
     bracketHeaderOffset?: number
-    bracketType: BracketType
+    bracketType: BracketType.DOUBLE_ELIMINATION | BracketType.SINGLE_ELIMINATION
     thirdPlaceMatchLabelHeight: number
     isLosersBracket: boolean
 };
@@ -124,7 +124,7 @@ export class SingleEliminationRenderer {
             .join('div')
             .classed('round-label', true)
             .style('width', `${opts.cellWidth}px`)
-            .text(d => (this.formatter as BaseTextFormatter).formatDoubleEliminationRoundNumber(d + 1, hierarchy.height, hasBracketReset, opts.isLosersBracket));
+            .text(d => this.formatter.formatEliminationRoundNumber(d + 1, hierarchy.height, opts.isLosersBracket, hasBracketReset, opts.bracketType));
 
         const headerSpacing = opts.bracketHeaderOffset ?? 8;
         const headerHeight = this.bracketHeader.node()?.offsetHeight ?? 0;
