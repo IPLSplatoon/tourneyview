@@ -1,6 +1,7 @@
 import { Bracket, BracketType, MatchType } from '@tourneyview/common';
 import { MatchImporter } from '../../types/MatchImporter';
 import {
+    MatchQueryNumberRangeParameter,
     MatchQueryOption,
     MatchQueryParameter,
     MatchQueryResult,
@@ -47,7 +48,19 @@ class StartggEventOption implements MatchQueryOption {
             options: phaseListResponse.data.data.event.phases
                 .map(phase => ({ ...phase, parsedBracketType: StartggImporter.parseBracketType(phase.bracketType) }))
                 .filter(phase => phase.parsedBracketType != null)
-                .map(phase => new StartggPhaseOption(phase.id, phase.name, phase.groupCount, phase.parsedBracketType!, this.axios))
+                .map(phase => {
+                    if (phase.groupCount === 1 && phase.phaseGroups.nodes.length !== 1) {
+                        throw new Error('Received phase from start.gg where groupCount === 1 but number of phase groups is not 1?');
+                    }
+
+                    return new StartggPhaseOption(
+                        phase.id,
+                        phase.name,
+                        phase.groupCount,
+                        phase.parsedBracketType!,
+                        phase.groupCount === 1 ? phase.phaseGroups.nodes[0].numRounds : null,
+                        this.axios);
+                })
         }]
     }
 }
@@ -59,13 +72,15 @@ class StartggPhaseOption implements MatchQueryOption {
     value: number;
     private readonly groupCount: number;
     private readonly bracketType: BracketType;
+    private readonly numRounds: number | null;
 
-    constructor(phaseId: number, eventName: string, groupCount: number, bracketType: BracketType, axios: AxiosInstance) {
+    constructor(phaseId: number, eventName: string, groupCount: number, bracketType: BracketType, numRounds: number | null, axios: AxiosInstance) {
         this.value = phaseId;
         this.name = eventName;
         this.axios = axios;
         this.groupCount = groupCount;
         this.bracketType = bracketType;
+        this.numRounds = numRounds;
     }
 
     async getParams(): Promise<MatchQueryParameter[]> {
@@ -98,6 +113,14 @@ class StartggPhaseOption implements MatchQueryOption {
                 options: phaseGroupsResponse.data.data.phase.phaseGroups.nodes
                     .map(group => new StartggPhaseGroupOption(group.displayIdentifier, group.id, group.numRounds))
             });
+        } else if (this.groupCount === 1 && this.numRounds != null) {
+            result.push(<MatchQueryNumberRangeParameter>{
+                type: 'numberRange',
+                key: 'roundNumber',
+                min: 1,
+                max: this.numRounds,
+                name: 'Round number'
+            })
         }
 
         return result;

@@ -6,6 +6,12 @@ query EventPhases($eventId: ID) {
       name
       groupCount
       bracketType
+      phaseGroups(query: {page: 1, perPage: 1}) {
+        nodes {
+          id
+          numRounds
+        }
+      }
     }
   }
 }`;
@@ -18,6 +24,12 @@ export interface GetPhasesResponse {
                 name: string
                 groupCount: number
                 bracketType: string
+                phaseGroups: {
+                    nodes: [{
+                        id: number
+                        numRounds: number | null
+                    }]
+                }
             }[]
         }
     }
