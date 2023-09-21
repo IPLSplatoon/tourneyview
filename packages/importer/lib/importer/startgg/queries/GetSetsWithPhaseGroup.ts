@@ -16,7 +16,7 @@ query Sets($phaseId: ID!, $phaseGroupIds: [ID], $page: Int!, $perPage: Int!, $ro
         displayIdentifier
       }
     }
-    sets(page: $page, perPage: $perPage, filters: {phaseGroupIds: $phaseGroupIds, roundNumber: $roundNumber}) {
+    sets(page: $page, perPage: $perPage, filters: {phaseGroupIds: $phaseGroupIds, roundNumber: $roundNumber, showByes: true}) {
       pageInfo {
         totalPages
       }
