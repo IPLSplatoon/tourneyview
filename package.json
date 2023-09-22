@@ -4,7 +4,8 @@
   "scripts": {
     "serve": "vite --config vite.config.base.ts --port 8080 ./example",
     "watch": "lerna watch -- lerna run build --since",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "prepublishOnly": "npm run build"
   },
   "workspaces": [
     "packages/*"
