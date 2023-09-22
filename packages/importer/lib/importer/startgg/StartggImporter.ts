@@ -10,9 +10,9 @@ import {
 import type { AxiosInstance } from 'axios';
 import axios from 'axios';
 import { getPhasesQuery, GetPhasesResponse } from './queries/GetPhases';
-import { getPhaseGroupsQuery, GetPhaseGroupsResponse } from './queries/GetPhaseGroups';
+import { getPhaseGroupsForPhaseQuery, GetPhaseGroupsForPhaseResponse } from './queries/GetPhaseGroupsForPhase';
 import { getEventsQuery, GetEventsResponse } from './queries/GetEvents';
-import { getSetsWithPhaseGroupQuery, GetSetsWithPhaseGroupResponse } from './queries/GetSetsWithPhaseGroup';
+import { getPhaseGroupsQuery, GetPhaseGroupsResponse } from './queries/GetPhaseGroups';
 import { getSetsQuery, GetSetsResponse } from './queries/GetSets';
 import { DoubleEliminationMatchTypeQueryParameter } from '../../query/DoubleEliminationMatchTypeQueryParameter';
 import { ContainedMatchType } from '@tourneyview/common';
@@ -91,10 +91,10 @@ class StartggPhaseOption implements MatchQueryOption {
         }
 
         if (this.groupCount > 1) {
-            const phaseGroupsResponse = await this.axios.post<GetPhaseGroupsResponse>(
+            const phaseGroupsResponse = await this.axios.post<GetPhaseGroupsForPhaseResponse>(
                 startggApiPath,
                 JSON.stringify({
-                    query: getPhaseGroupsQuery,
+                    query: getPhaseGroupsForPhaseQuery,
                     variables: {
                         phaseId: this.value,
                         page: 1,
@@ -194,29 +194,42 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
 
     async getMatches(opts: StartggImportOpts & MatchQueryResult): Promise<Bracket> {
         const setsPerPage = 50;
+        // todo: support importing multiple phase groups in swiss (and other bracket types?)
         const phaseGroupIds = opts.phaseGroupId == null ? null : [opts.phaseGroupId];
 
-        const getSetsResponse = await this.axios.post<GetSetsWithPhaseGroupResponse>(
+        const getPhaseGroupsResponse = await this.axios.post<GetPhaseGroupsResponse>(
             startggApiPath,
             JSON.stringify({
-              query: getSetsWithPhaseGroupQuery,
+              query: getPhaseGroupsQuery,
               variables: {
                   phaseId: opts.phaseId,
-                  page: 1,
-                  perPage: setsPerPage,
-                  phaseGroupIds: phaseGroupIds,
-                  roundNumber: opts.roundNumber
+                  phaseGroupIds,
               }
             }));
 
-        if (getSetsResponse.data.data.phase.groupCount > 1 && opts.phaseGroupId == null) {
+        if (getPhaseGroupsResponse.data.data.phase.groupCount > 1 && opts.phaseGroupId == null) {
             throw new Error('Tried to import a phase with multiple groups without specifying which group to import!');
         }
 
-        const bracketType = StartggImporter.parseBracketType(getSetsResponse.data.data.phase.bracketType);
+        const bracketType = StartggImporter.parseBracketType(getPhaseGroupsResponse.data.data.phase.bracketType);
         if (bracketType == null) {
-            throw new Error(`Unknown or unsupported bracket type "${getSetsResponse.data.data.phase.bracketType}"`);
+            throw new Error(`Unknown or unsupported bracket type "${getPhaseGroupsResponse.data.data.phase.bracketType}"`);
         }
+
+        const showByes = bracketType === BracketType.SWISS;
+        const getSetsResponse = await this.axios.post<GetSetsResponse>(
+            startggApiPath,
+            JSON.stringify({
+                query: getSetsQuery,
+                variables: {
+                    phaseId: opts.phaseId,
+                    page: 1,
+                    perPage: setsPerPage,
+                    phaseGroupIds,
+                    roundNumber: opts.roundNumber,
+                    showByes
+                }
+            }));
 
         const sets = getSetsResponse.data.data.phase.sets.nodes;
         const totalPages = getSetsResponse.data.data.phase.sets.pageInfo.totalPages;
@@ -257,12 +270,12 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
             })
         }
 
-        const phaseGroup = getSetsResponse.data.data.phase.phaseGroups.nodes[0];
+        const phaseGroup = getPhaseGroupsResponse.data.data.phase.phaseGroups.nodes[0];
         return {
             type: bracketType,
-            name: StartggImporter.formatBracketName(getSetsResponse.data),
+            name: StartggImporter.formatBracketName(getPhaseGroupsResponse.data),
             roundNumber: opts.roundNumber,
-            eventName: `${getSetsResponse.data.data.phase.event.tournament.name} - ${getSetsResponse.data.data.phase.event.name}`,
+            eventName: `${getPhaseGroupsResponse.data.data.phase.event.tournament.name} - ${getPhaseGroupsResponse.data.data.phase.event.name}`,
             matchGroups: [
                 {
                     id: String(phaseGroup.id),
@@ -318,7 +331,7 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
         return `${phaseGroupId}_${setIdentifier}`;
     }
 
-    private static formatBracketName(response: GetSetsWithPhaseGroupResponse): string {
+    private static formatBracketName(response: GetPhaseGroupsResponse): string {
         if (response.data.phase.groupCount > 1) {
             return `${response.data.phase.name} - Pool ${response.data.phase.phaseGroups.nodes[0].displayIdentifier}`;
         } else {

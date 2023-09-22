@@ -1,14 +1,20 @@
 export const getPhaseGroupsQuery = `
-query PhaseGroups($phaseId: ID, $page: Int, $perPage: Int) {
+query PhaseGroups($phaseId: ID!, $phaseGroupIds: [ID]) {
   phase(id: $phaseId) {
-    phaseGroups(query: { page: $page, perPage: $perPage }) {
-      pageInfo {
-        totalPages
+    bracketType
+    groupCount
+    name
+    event {
+      name
+      tournament {
+        name
       }
+    }
+    phaseGroups(query: {filter: {id: $phaseGroupIds}}) {
       nodes {
         id
         displayIdentifier
-        numRounds
+        bracketType
       }
     }
   }
@@ -17,14 +23,20 @@ query PhaseGroups($phaseId: ID, $page: Int, $perPage: Int) {
 export interface GetPhaseGroupsResponse {
     data: {
         phase: {
-            phaseGroups: {
-                pageInfo: {
-                    totalPages: number
+            bracketType: string
+            groupCount: number
+            name: string
+            event: {
+                name: string
+                tournament: {
+                    name: string
                 }
+            }
+            phaseGroups: {
                 nodes: {
                     id: number
                     displayIdentifier: string
-                    numRounds: number | null
+                    bracketType: string
                 }[]
             }
         }

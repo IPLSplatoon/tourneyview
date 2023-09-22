@@ -1,10 +1,7 @@
 export const getSetsQuery = `
-query Sets($phaseId: ID!, $phaseGroupIds: [ID], $page: Int!, $perPage: Int!, $roundNumber: Int) {
+query Sets($phaseId: ID!, $phaseGroupIds: [ID], $page: Int!, $perPage: Int!, $roundNumber: Int, $showByes: Boolean) {
   phase(id: $phaseId) {
-    bracketType
-    groupCount
-    name
-    sets(page: $page, perPage: $perPage, filters: {phaseGroupIds: $phaseGroupIds, roundNumber: $roundNumber, showByes: true}) {
+    sets(page: $page, perPage: $perPage, filters: {phaseGroupIds: $phaseGroupIds, roundNumber: $roundNumber, showByes: $showByes}) {
       pageInfo {
         totalPages
       }
@@ -35,11 +32,8 @@ query Sets($phaseId: ID!, $phaseGroupIds: [ID], $page: Int!, $perPage: Int!, $ro
 export interface GetSetsResponse {
     data: {
         phase: {
-            bracketType: string
-            groupCount: number
-            name: string
             sets: {
-                pageData: {
+                pageInfo: {
                     totalPages: number
                 }
                 nodes: {
