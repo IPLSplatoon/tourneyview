@@ -16,5 +16,8 @@
   ],
   "build": {
     "libName": "TourneyviewCommon"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
