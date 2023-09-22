@@ -45,7 +45,11 @@ export class Autoscroller {
     }
 
     start() {
-        if (this.started || !this.targetIsScrollable()) {
+        if (this.started) {
+            return;
+        }
+        if (!this.targetIsScrollable()) {
+            this.scrollMask?.stop();
             return;
         }
 

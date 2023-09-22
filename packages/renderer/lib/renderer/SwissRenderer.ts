@@ -68,7 +68,7 @@ export class SwissRenderer extends BracketTypeRenderer {
     private handleHeightChange(elementHeight: number) {
         const rowsPerScreen = Math.floor((elementHeight + this.rowGap) / (this.rowHeight + this.rowGap));
         const innerHeight = rowsPerScreen * (this.rowHeight + this.rowGap) - this.rowGap;
-        this.element.style('height', `${innerHeight}px`);
+        this.element.style('max-height', `${innerHeight}px`);
         this.scroller.setHeights(innerHeight, rowsPerScreen);
     }
 

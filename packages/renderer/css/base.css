@@ -94,7 +94,6 @@
 .swiss-renderer {
     display: grid;
     grid-auto-flow: row;
-    height: 100%;
     width: 100%;
     overflow: hidden;
 }
