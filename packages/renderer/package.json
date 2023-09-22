@@ -22,7 +22,7 @@
     "d3": "7.x"
   },
   "dependencies": {
-    "@tourneyview/common": "0.1.0"
+    "@tourneyview/common": "^0.1.0"
   },
   "devDependencies": {
     "@types/d3": "^7.4.0"

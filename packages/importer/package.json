@@ -31,6 +31,6 @@
     "axios": "^1.4.0"
   },
   "dependencies": {
-    "@tourneyview/common": "0.1.0"
+    "@tourneyview/common": "^0.1.0"
   }
 }
