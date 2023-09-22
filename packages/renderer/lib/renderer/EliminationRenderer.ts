@@ -17,6 +17,7 @@ export type EliminationRendererOpts = {
     onCellCreation?: EliminationRendererCellCreationCallback
     onCellUpdate?: EliminationRendererCellUpdateCallback
     thirdPlaceMatchLabelHeight?: number
+    maxScale?: number
 }
 
 export type EliminationRendererCellCreationCallback = (element: d3.Selection<HTMLDivElement, HierarchyNode<Match>, HTMLDivElement, unknown>) => void;
@@ -41,6 +42,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
     private readonly linkWrapper: d3.Selection<SVGGElement, undefined, null, undefined>;
 
     private readonly zoomBehavior: d3.ZoomBehavior<Element, unknown>;
+    private readonly maxScale: number;
 
     private readonly linkWidth: number;
     private readonly cellHeight: number;
@@ -96,6 +98,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
             .attr('stroke', '#555')
             .attr('stroke-width', 1.5);
 
+        this.maxScale = opts.maxScale ?? 2;
         this.zoomBehavior = d3.zoom()
             .extent([[0, 0], [BRACKET_SIZE, BRACKET_SIZE]])
             .on('zoom', e => this.onZoom(e));
@@ -237,7 +240,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
     }
 
     setZoom(height: number, width: number) {
-        const scale = Math.min(height / this.renderedBracketHeight, width / this.renderedBracketWidth);
+        const scale = Math.min(height / this.renderedBracketHeight, width / this.renderedBracketWidth, this.maxScale);
 
         this.zoomBehavior.extent([[0, 0], [width, height]]);
         this.zoomBehavior.translateTo(
