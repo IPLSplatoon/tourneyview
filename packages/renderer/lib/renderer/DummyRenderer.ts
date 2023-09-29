@@ -3,7 +3,7 @@ import { BracketTypeRenderer } from '../types/renderer';
 import * as d3 from 'd3';
 
 export class DummyRenderer implements BracketTypeRenderer {
-    public compatibleBracketTypes = [];
+    public static readonly compatibleBracketTypes = [];
 
     private readonly element: d3.Selection<HTMLDivElement, undefined, null, undefined>;
     private readonly textElement: HTMLElement;
