@@ -30,6 +30,7 @@ export enum MatchType {
 }
 
 export interface MatchTeam {
+    id?: string | null
     name?: string | null
     score?: number | null
     isDisqualified: boolean

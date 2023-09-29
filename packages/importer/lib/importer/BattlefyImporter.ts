@@ -238,11 +238,13 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                                 roundNumber: match.roundNumber,
                                 type: isEliminationBracket ? match.matchType === 'winner' ? MatchType.WINNERS : MatchType.LOSERS : undefined,
                                 topTeam: {
+                                    id: match.top.team?._id,
                                     name: match.top.team?.name,
                                     score: match.top.score,
                                     isDisqualified: false
                                 },
                                 bottomTeam: {
+                                    id: match.bottom.team?._id,
                                     name: match.bottom.team?.name,
                                     score: match.bottom.score,
                                     isDisqualified: false
@@ -266,11 +268,13 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                         id: match._id,
                         roundNumber: match.roundNumber,
                         topTeam: {
+                            id: match.top.team?._id,
                             name: match.top.team?.name,
                             score: match.top.score,
                             isDisqualified: false
                         },
                         bottomTeam: {
+                            id: match.bottom.team?._id,
                             name: match.bottom.team?.name,
                             score: match.bottom.score,
                             isDisqualified: false
