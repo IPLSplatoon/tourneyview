@@ -273,7 +273,7 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
         const phaseGroup = getPhaseGroupsResponse.data.data.phase.phaseGroups.nodes[0];
         return {
             type: bracketType,
-            name: StartggImporter.formatBracketName(getPhaseGroupsResponse.data),
+            name: getPhaseGroupsResponse.data.data.phase.name,
             roundNumber: opts.roundNumber,
             eventName: `${getPhaseGroupsResponse.data.data.phase.event.tournament.name} - ${getPhaseGroupsResponse.data.data.phase.event.name}`,
             matchGroups: [
@@ -329,14 +329,6 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
 
     private static generateMatchId(phaseGroupId: number, setIdentifier: string): string {
         return `${phaseGroupId}_${setIdentifier}`;
-    }
-
-    private static formatBracketName(response: GetPhaseGroupsResponse): string {
-        if (response.data.phase.groupCount > 1) {
-            return `${response.data.phase.name} - Pool ${response.data.phase.phaseGroups.nodes[0].displayIdentifier}`;
-        } else {
-            return response.data.phase.name;
-        }
     }
 
     static parseBracketType(bracketType: string): BracketType | null {
