@@ -8,8 +8,13 @@ import { ContainedMatchType } from '@tourneyview/common';
 
 interface BattlefyTournamentDetails {
     _id: string
-    name: string,
+    name: string
     stages: BattlefyStageDetails[]
+}
+
+interface BattlefyStageGroup {
+    _id: string
+    name: string
 }
 
 interface BattlefyStageDetails {
@@ -21,6 +26,7 @@ interface BattlefyStageDetails {
         hasThirdPlaceMatch: boolean
         roundsCount: number
     }
+    groups?: BattlefyStageGroup[]
 }
 
 interface BattlefyMatchListTeam {
@@ -70,6 +76,7 @@ export interface BattlefyImportOpts {
     stageId: string
     roundNumber?: number
     matchType?: ContainedMatchType
+    groupId?: string
 }
 
 const battlefyApiRoot = 'https://api.battlefy.com';
@@ -89,7 +96,7 @@ class BattlefyStageQueryOption implements MatchQueryOption {
         this.roundCount = roundCount;
     }
 
-    getParams(): MatchQueryParameter[] {
+    async getParams(): Promise<MatchQueryParameter[]> {
         const bracketType = BattlefyImporter.parseBracketType(this.type, this.style);
 
         switch (bracketType) {
@@ -103,6 +110,24 @@ class BattlefyStageQueryOption implements MatchQueryOption {
                 }];
             case BracketType.DOUBLE_ELIMINATION:
                 return [new DoubleEliminationMatchTypeQueryParameter()];
+            case BracketType.ROUND_ROBIN: {
+                const stageDetails = await axios.get<BattlefyStageDetails[]>(
+                    `${battlefyApiRoot}/stages/${this.value}`,
+                    { params: { 'extend[groups]': true } });
+
+                if (stageDetails.data.length === 0) {
+                    throw new Error('Battlefy returned 0 stages without an error?');
+                } else if (stageDetails.data.length > 1) {
+                    console.warn(`Battlefy returned ${stageDetails.data.length} stages? (Expected 1)`);
+                }
+
+                return [{
+                    key: 'groupId',
+                    type: 'select',
+                    name: 'Group',
+                    options: stageDetails.data[0].groups!.map(group => ({ value: group._id, name: `Group ${group.name}` }))
+                }];
+            }
             default:
                 return [];
         }
@@ -156,6 +181,10 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
 
         if (bracketType === BracketType.SWISS && opts.roundNumber == null) {
             throw new Error(`A round number is required when importing brackets of type ${bracketType} from Battlefy.`);
+        }
+
+        if (bracketType === BracketType.ROUND_ROBIN && opts.groupId == null) {
+            throw new Error('Round Robin brackets must be imported from Battlefy with a group ID.');
         }
 
         const tournamentDetails = await this.getTournamentDetails(opts.tournamentId);
@@ -223,15 +252,17 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                 ]
             }
         } else if (bracketType === BracketType.ROUND_ROBIN) {
-            const maxRound = await axios.get<BattlefyMaxRoundRobinStage>(`${battlefyApiRoot}/stages/${opts.stageId}/round-robin-max-round`);
+            const groupInfo = await axios.get<BattlefyStageGroup>(`${battlefyApiRoot}/groups/${opts.groupId}`);
+            const matches = await axios.get<BattlefyMatchListItem[]>(`${battlefyApiRoot}/groups/${opts.groupId}/matches`);
 
-            const allRounds = await Promise.all(Array.from(
-                { length: maxRound.data.maxRound },
-                (_, i) => axios.get<BattlefyStageGroupItem[]>(`${battlefyApiRoot}/stages/${opts.stageId}/groups/round/${i + 1}`)));
-
-            const matchGroups = Object.values(allRounds.reduce<Record<string, MatchGroup>>((result, round) => {
-                round.data.forEach(group => {
-                    const matches: Match[] = group.matches.map(match => ({
+            return {
+                type: bracketType,
+                name: stageDetails.data.name,
+                eventName: tournamentDetails.name,
+                matchGroups: [{
+                    id: opts.groupId!,
+                    name: `Group ${groupInfo.data.name}`,
+                    matches: matches.data.map(match => ({
                         id: match._id,
                         roundNumber: match.roundNumber,
                         topTeam: {
@@ -244,28 +275,8 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                             score: match.bottom.score,
                             isDisqualified: false
                         }
-                    }));
-
-                    const existingGroup = result[group._id];
-                    if (existingGroup == null) {
-                        result[group._id] = {
-                            id: group._id,
-                            name: group.name,
-                            matches
-                        };
-                    } else {
-                        existingGroup.matches.push(...matches);
-                    }
-                });
-
-                return result;
-            }, {}));
-
-            return {
-                type: bracketType,
-                name: stageDetails.data.name,
-                eventName: tournamentDetails.name,
-                matchGroups
+                    }))
+                }]
             };
         } else {
             // todo: support battlefy ladders (standings + list of matches played?)
