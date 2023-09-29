@@ -38,9 +38,9 @@ function getImporter(): MatchImporter<unknown> {
     }
 }
 
-const matchQueryContainer = document.getElementById('match-query-container');
+const matchQueryContainer = document.getElementById('match-query-container')!;
 const tournamentIdInput = document.getElementById('tournament-id-input') as HTMLInputElement;
-document.getElementById('tournament-id-submit').addEventListener('click', async () => {
+document.getElementById('tournament-id-submit')!.addEventListener('click', async () => {
     const importer = getImporter();
     const data = await importer.getMatchQueryOptions(tournamentIdInput.value);
     Array.from(matchQueryContainer.children).forEach(child => {
@@ -55,25 +55,26 @@ document.getElementById('tournament-id-submit').addEventListener('click', async 
 
 const loadedBracketDisplay = <HTMLDivElement>document.getElementById('loaded-bracket-display');
 
-document.getElementById('match-query-submit').addEventListener('click', async () => {
+document.getElementById('match-query-submit')!.addEventListener('click', async () => {
     const query = buildBracketQuery();
     const importer = getImporter();
     const bracket = await importer.getMatches(query);
     loadedBracketDisplay.innerText = `Loaded: ${bracket.name} ${bracket.roundNumber ? `(Round ${bracket.roundNumber})` : ''} (${bracket.eventName})`;
+    console.log('Loaded bracket', bracket);
     await renderer.setData(bracket);
 });
 
 function buildBracketQuery(): Record<string, string | number> {
     const result: Record<string, string | number> = { };
-    const paramElements = matchQueryContainer.querySelectorAll('*:not(.match-query-input-wrapper)[data-key]');
-    paramElements.forEach((paramElement: HTMLInputElement | HTMLSelectElement) => {
+    const paramElements = matchQueryContainer.querySelectorAll<HTMLInputElement | HTMLSelectElement>('*:not(.match-query-input-wrapper)[data-key]');
+    paramElements.forEach((paramElement) => {
         if (paramElement.tagName === 'SELECT') {
-            result[paramElement.dataset.key] = ((paramElement as HTMLSelectElement).selectedOptions[0]['__TOURNEYVIEW_OPTION_DATA'] as MatchQueryOption).value;
+            result[paramElement.dataset.key!] = ((paramElement as HTMLSelectElement).selectedOptions[0]['__TOURNEYVIEW_OPTION_DATA'] as MatchQueryOption).value;
         } else {
             if (paramElement.dataset.tourneyviewType === 'static') {
-                result[paramElement.dataset.key] = paramElement['__TOURNEYVIEW_STATIC_VALUE'];
+                result[paramElement.dataset.key!] = paramElement['__TOURNEYVIEW_STATIC_VALUE'];
             } else {
-                result[paramElement.dataset.key] = paramElement.value;
+                result[paramElement.dataset.key!] = paramElement.value;
             }
 
         }
@@ -89,8 +90,8 @@ function deleteChildParameters(paramKey: string) {
 
     const params = document.querySelectorAll(`.match-query-input-wrapper[data-parent-param-key="${paramKey}"]`);
     params.forEach(param => {
-         deleteChildParameters((param as HTMLElement).dataset.key);
-         param.parentNode.removeChild(param);
+         deleteChildParameters((param as HTMLElement).dataset.key!);
+         param.parentNode?.removeChild(param);
     });
 }
 
