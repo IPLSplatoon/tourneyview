@@ -1,7 +1,7 @@
 export const getSetsQuery = `
 query Sets($phaseId: ID!, $phaseGroupIds: [ID], $page: Int!, $perPage: Int!, $roundNumber: Int, $showByes: Boolean) {
   phase(id: $phaseId) {
-    sets(page: $page, perPage: $perPage, filters: {phaseGroupIds: $phaseGroupIds, roundNumber: $roundNumber, showByes: $showByes}) {
+    sets(page: $page, perPage: $perPage, sortType: ROUND, filters: {phaseGroupIds: $phaseGroupIds, roundNumber: $roundNumber, showByes: $showByes}) {
       pageInfo {
         totalPages
       }
