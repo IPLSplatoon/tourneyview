@@ -10,6 +10,7 @@ query Sets($phaseId: ID!, $phaseGroupIds: [ID], $page: Int!, $perPage: Int!, $ro
         round
         identifier
         fullRoundText
+        state
         slots(includeByes: true) {
           entrant {
             id
@@ -42,6 +43,7 @@ export interface GetSetsResponse {
                     round: number
                     identifier: string
                     fullRoundText: string
+                    state: number
                     slots: {
                         entrant?: {
                             id: number | string

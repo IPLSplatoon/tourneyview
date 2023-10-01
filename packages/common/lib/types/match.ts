@@ -1,3 +1,10 @@
+export enum MatchState {
+    UNKNOWN = 'UNKNOWN',
+    NOT_STARTED = 'NOT_STARTED',
+    IN_PROGRESS = 'IN_PROGRESS',
+    COMPLETED = 'COMPLETED'
+}
+
 export interface Match {
     id: string
     nextMatchId?: string | null
@@ -5,6 +12,7 @@ export interface Match {
     type?: MatchType
     topTeam: MatchTeam
     bottomTeam: MatchTeam
+    state: MatchState
 }
 
 // A "Match Group" can represent:
@@ -30,7 +38,7 @@ export enum MatchType {
 }
 
 export interface MatchTeam {
-    id?: string | null
+    id?: string | number | null
     name?: string | null
     score?: number | null
     isDisqualified: boolean

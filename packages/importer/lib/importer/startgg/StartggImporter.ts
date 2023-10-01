@@ -1,4 +1,4 @@
-import { Bracket, BracketType, MatchType } from '@tourneyview/common';
+import { Bracket, BracketType, MatchState, MatchType } from '@tourneyview/common';
 import { MatchImporter } from '../../types/MatchImporter';
 import {
     MatchQueryNumberRangeParameter,
@@ -310,6 +310,7 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                                 nextMatchId: nextSet ? StartggImporter.generateMatchId(phaseGroup.id, nextSet.identifier) : null,
                                 roundNumber: set.round < 0 ? Math.abs(set.round + 2) : set.round,
                                 type: set.round < 0 ? MatchType.LOSERS : MatchType.WINNERS,
+                                state: StartggImporter.mapState(set.state),
                                 topTeam: {
                                     id: set.slots[0].entrant?.id,
                                     name: set.slots[0].entrant?.name,
@@ -327,6 +328,19 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                 }
             ]
         };
+    }
+
+    private static mapState(state: number): MatchState {
+        switch (state) {
+            case 1:
+                return MatchState.NOT_STARTED;
+            case 2:
+                return MatchState.IN_PROGRESS;
+            case 3:
+                return MatchState.COMPLETED;
+            default:
+                return MatchState.UNKNOWN;
+        }
     }
 
     private static generateMatchId(phaseGroupId: number, setIdentifier: string): string {

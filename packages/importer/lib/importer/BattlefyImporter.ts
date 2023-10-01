@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { MatchImporter } from '../types/MatchImporter';
 import type { Bracket, Match, MatchGroup } from '@tourneyview/common';
-import { BracketType, MatchType } from '@tourneyview/common';
+import { BracketType, MatchState, MatchType } from '@tourneyview/common';
 import { MatchQueryOption, MatchQueryParameter, MatchQueryResult } from '../types/MatchQuery';
 import { DoubleEliminationMatchTypeQueryParameter } from '../query/DoubleEliminationMatchTypeQueryParameter';
 import { ContainedMatchType } from '@tourneyview/common';
@@ -54,6 +54,7 @@ interface BattlefyMatchListItem {
     matchNumber: number
     roundNumber: number
     isBye: boolean
+    isComplete?: boolean
     next?: {
         winner: BattlefyMatchListNextNode
         loser?: BattlefyMatchListNextNode
@@ -171,6 +172,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
         ];
     }
 
+    // todo: isDisqualified
     async getMatches(opts: BattlefyImportOpts & MatchQueryResult): Promise<Bracket> {
         const stageDetails = await axios.get<BattlefyStageDetails>(`${battlefyApiRoot}/stages/${opts.stageId}`);
 
@@ -231,12 +233,12 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
 
                                 return true;
                             })
-                            // todo: isDisqualified
                             .map(match => ({
                                 id: match._id,
                                 nextMatchId: isEliminationBracket ? match.next?.winner?.matchID : undefined,
                                 roundNumber: match.roundNumber,
                                 type: isEliminationBracket ? match.matchType === 'winner' ? MatchType.WINNERS : MatchType.LOSERS : undefined,
+                                state: BattlefyImporter.getMatchState(match),
                                 topTeam: {
                                     id: match.top.team?._id,
                                     name: match.top.team?.name,
@@ -267,6 +269,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                     matches: matches.data.map(match => ({
                         id: match._id,
                         roundNumber: match.roundNumber,
+                        state: BattlefyImporter.getMatchState(match),
                         topTeam: {
                             id: match.top.team?._id,
                             name: match.top.team?.name,
@@ -290,6 +293,15 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                 eventName: tournamentDetails.name,
                 matchGroups: []
             };
+        }
+    }
+
+    private static getMatchState(match: BattlefyMatchListItem): MatchState {
+        if (match.isComplete) {
+            return MatchState.COMPLETED;
+        } else {
+            // todo: this is a lazy solution, and battlefy wasn't cooperating with me tonight; can we check something other whether score has been reported or not?
+            return (match.top?.score ?? 0) + (match.bottom?.score ?? 0) > 0 ? MatchState.IN_PROGRESS : MatchState.NOT_STARTED;
         }
     }
 
