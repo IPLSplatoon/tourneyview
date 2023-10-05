@@ -22,10 +22,12 @@
     "d3": "7.x"
   },
   "dependencies": {
-    "@tourneyview/common": "^0.1.0"
+    "@tourneyview/common": "^0.1.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@types/d3": "^7.4.0"
+    "@types/d3": "^7.4.0",
+    "@types/lodash": "^4.14.199"
   },
   "publishConfig": {
     "access": "public"

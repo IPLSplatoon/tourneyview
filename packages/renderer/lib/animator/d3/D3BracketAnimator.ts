@@ -3,10 +3,11 @@ import { D3EliminationAnimator } from './D3EliminationAnimator';
 import { D3SwissAnimator } from './D3SwissAnimator';
 import { BracketType } from '@tourneyview/common';
 import { BaseBracketAnimator } from '../BaseBracketAnimator';
+import { D3RoundRobinAnimator } from './D3RoundRobinAnimator';
 
 export class D3BracketAnimator extends BaseBracketAnimator {
     constructor() {
-        super(new D3EliminationAnimator(), new D3SwissAnimator());
+        super(new D3EliminationAnimator(), new D3SwissAnimator(), new D3RoundRobinAnimator());
     }
 
     setScore(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string, isDisqualified: boolean): void {
@@ -15,7 +16,7 @@ export class D3BracketAnimator extends BaseBracketAnimator {
     }
 
     animateScoreUpdate(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string, isDisqualified: boolean, bracketType: BracketType): void {
-        const transformFunc = bracketType === BracketType.SWISS ? 'translateY' : 'translateX';
+        const transformFunc = bracketType === BracketType.SWISS || bracketType === BracketType.ROUND_ROBIN ? 'translateY' : 'translateX';
         const transformAmount = transformFunc === 'translateY' ? element.getBoundingClientRect().height : element.getBoundingClientRect().width;
         const direction = isNaN(oldValue) || oldValue < newValue ? -1 : 1;
         const selection = d3.select(element);

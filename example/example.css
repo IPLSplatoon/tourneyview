@@ -12,3 +12,23 @@
 .elimination-renderer .match-cell__score {
     transform: translateY(1px);
 }
+
+.round-robin-grid-item.type-match {
+    transition-duration: 1s;
+    transition-property: border-width, border-color, background-color;
+}
+
+.round-robin-grid-item.type-match.left-team-winner {
+    background-color: #31472D;
+    border: 4px solid #37C92B;
+}
+
+.round-robin-grid-item.type-match.top-team-winner {
+    background-color: #472D2D;
+    border: 4px solid #EA1616;
+}
+
+.round-robin-grid-item.type-match.in-progress {
+    background-color: #393608;
+    border: 4px solid #FFE324;
+}

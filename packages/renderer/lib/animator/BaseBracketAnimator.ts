@@ -1,5 +1,5 @@
 import { BracketType } from '@tourneyview/common';
-import { EliminationAnimator, SwissAnimator } from '../types/animator';
+import { EliminationAnimator, RoundRobinAnimator, SwissAnimator } from '../types/animator';
 
 const disqualifiedTextClassName = 'is-disqualified';
 
@@ -8,9 +8,12 @@ export abstract class BaseBracketAnimator {
 
     public readonly swissAnimator: SwissAnimator
 
-    protected constructor(eliminationAnimator: EliminationAnimator, swissAnimator: SwissAnimator) {
+    public readonly roundRobinAnimator: RoundRobinAnimator
+
+    protected constructor(eliminationAnimator: EliminationAnimator, swissAnimator: SwissAnimator, roundRobinAnimator: RoundRobinAnimator) {
         this.eliminationAnimator = eliminationAnimator;
         this.swissAnimator = swissAnimator;
+        this.roundRobinAnimator = roundRobinAnimator;
     }
 
     protected setDisqualifiedClass(element: HTMLElement, isDisqualified: boolean) {

@@ -8,6 +8,7 @@ import { BaseTextFormatter } from '../formatter/BaseTextFormatter';
 import * as d3 from 'd3';
 import { DummyRenderer } from './DummyRenderer';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
+import { RoundRobinRenderer } from './RoundRobinRenderer';
 
 type WithoutCommonOpts<T> = Omit<T, 'animator' | 'formatter'>;
 export type BracketRendererOpts = {
@@ -70,6 +71,13 @@ export class BracketRenderer {
                 animator: this.opts.animator,
                 formatter: this.opts.formatter,
                 ...this.opts.eliminationOpts
+            });
+        }
+
+        if (RoundRobinRenderer.compatibleBracketTypes.includes(type)) {
+            return new RoundRobinRenderer({
+                animator: this.opts.animator,
+                formatter: this.opts.formatter
             });
         }
 
