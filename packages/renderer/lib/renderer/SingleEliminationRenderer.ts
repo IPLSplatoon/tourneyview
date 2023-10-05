@@ -202,7 +202,7 @@ export class SingleEliminationRenderer {
                 });
         }
 
-        const drawScore = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
+        const drawScore = (elem: d3.Selection<HTMLDivElement, d3.HierarchyNode<Match>, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: d3.HierarchyNode<Match>) => MatchTeam) => {
             const that = this;
             return elem
                 .append('div')
@@ -216,7 +216,7 @@ export class SingleEliminationRenderer {
                         this,
                         0,
                         teamData.score ?? NaN,
-                        that.formatter.formatScore(teamData.score, teamData.isDisqualified),
+                        that.formatter.formatScore(teamData.score, teamData.isDisqualified, opts.bracketType, d.data.state),
                         teamData.isDisqualified,
                         opts.bracketType);
                 });
@@ -255,7 +255,7 @@ export class SingleEliminationRenderer {
                 });
         };
 
-        const updateScore = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
+        const updateScore = (elem: d3.Selection<BaseType, d3.HierarchyNode<Match>, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: d3.HierarchyNode<Match>) => MatchTeam) => {
             const that = this;
             return elem
                 .select(`.match-cell__${position}-score`)
@@ -268,7 +268,7 @@ export class SingleEliminationRenderer {
                             this as HTMLElement,
                             currentScore,
                             newScore,
-                            that.formatter.formatScore(newScore, newTeam.isDisqualified),
+                            that.formatter.formatScore(newScore, newTeam.isDisqualified, opts.bracketType, d.data.state),
                             newTeam.isDisqualified,
                             opts.bracketType
                         );

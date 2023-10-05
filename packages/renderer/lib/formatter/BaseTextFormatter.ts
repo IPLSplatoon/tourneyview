@@ -1,13 +1,23 @@
-import { BracketType } from '@tourneyview/common';
+import { BracketType, MatchState } from '@tourneyview/common';
 import { TextFormatter } from './TextFormatter';
 
 export class BaseTextFormatter implements TextFormatter {
-    formatScore(score: number | undefined | null, isDisqualified: Boolean): string {
+    formatScore(score: number | undefined | null, isDisqualified: Boolean, bracketType: BracketType, matchState: MatchState): string {
         if (isDisqualified) {
             return 'DQ';
         }
 
-        return score == null || isNaN(score) ? '-' : String(score);
+        if (score == null || isNaN(score)) {
+            if (matchState === MatchState.COMPLETED || matchState === MatchState.IN_PROGRESS) {
+                return '0';
+            } else if (bracketType === BracketType.ROUND_ROBIN) {
+                return '?';
+            } else {
+                return '-';
+            }
+        }
+
+        return String(score);
     }
 
     formatTeamName(name: string | undefined | null): string {
