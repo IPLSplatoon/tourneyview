@@ -7,14 +7,20 @@
 <body>
 <div>test</div>
 
+<div class="match-query-input">
+    <label for="tournament-source-input">source</label>
+    <select id="tournament-source-input">
+        <option value="battlefy" selected>Battlefy</option>
+        <option value="startgg">start.gg</option>
+    </select>
+</div>
+
+<div class="match-query-input" id="tournament-data-input-wrapper" style="display: none">
+    <label for="tournament-data-input">Tournament data</label>
+    <input id="tournament-data-input" type="text">
+</div>
+
 <div id="match-query-container">
-    <div class="match-query-input">
-        <label for="tournament-source-input">source</label>
-        <select id="tournament-source-input">
-            <option value="battlefy" selected>Battlefy</option>
-            <option value="startgg">start.gg</option>
-        </select>
-    </div>
     <div class="match-query-input" id="api-key-input-wrapper" style="display: none">
         <label for="api-key-input">API key</label>
         <input id="api-key-input" type="text">
@@ -26,7 +32,10 @@
     </div>
 </div>
 <button id="match-query-submit">submit</button>
-<div id="loaded-bracket-display">Loaded: ?</div>
+<div id="loaded-bracket-display">
+    Loaded: ?
+</div>
+<button id="copy-loaded-data">Copy as JSON</button>
 
 <script type="module" src="index.ts"></script>
 </body>

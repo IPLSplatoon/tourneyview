@@ -8,6 +8,11 @@ import {
 } from '../packages/importer/lib/types/MatchQuery';
 import { StartggImporter, BattlefyImporter } from '../packages/importer/lib';
 import type { MatchImporter } from '../packages/importer/lib';
+import { Bracket } from '@tourneyview/common';
+import { ClipboardImporter } from './scripts/ClipboardImporter';
+import { TextInputImporter } from './scripts/TextInputImporter';
+
+import './scripts/SourceHandler';
 
 const renderer = new BracketRenderer({
     animator: new D3BracketAnimator(),
@@ -16,29 +21,25 @@ const renderer = new BracketRenderer({
     }
 });
 
+const sourceSelect = <HTMLSelectElement>document.getElementById('tournament-source-input');
+const matchQueryContainer = document.getElementById('match-query-container')!;
 const apiKeyInput = <HTMLInputElement>document.getElementById('api-key-input');
-const apiKeyInputWrapper = <HTMLDivElement>document.getElementById('api-key-input-wrapper');
-const sourceInput = <HTMLSelectElement>document.getElementById('tournament-source-input');
-
-function checkSource() {
-    apiKeyInputWrapper.style.display = sourceInput.value === 'startgg' ? 'block' : 'none';
-}
-
-sourceInput.addEventListener('change', checkSource);
-checkSource();
 
 function getImporter(): MatchImporter<unknown> {
-    switch (sourceInput.value) {
+    switch (sourceSelect.value) {
         case 'startgg':
             return new StartggImporter(apiKeyInput.value);
         case 'battlefy':
             return new BattlefyImporter();
+        case 'clipboard':
+            return new ClipboardImporter();
+        case 'input':
+            return new TextInputImporter();
         default:
-            throw new Error(`Unknown source ${sourceInput.value}`);
+            throw new Error(`Unknown source ${sourceSelect.value}`);
     }
 }
 
-const matchQueryContainer = document.getElementById('match-query-container')!;
 const tournamentIdInput = document.getElementById('tournament-id-input') as HTMLInputElement;
 document.getElementById('tournament-id-submit')!.addEventListener('click', async () => {
     const importer = getImporter();
@@ -53,7 +54,33 @@ document.getElementById('tournament-id-submit')!.addEventListener('click', async
     });
 });
 
+const copyLoadedDataBtn = <HTMLButtonElement>document.getElementById('copy-loaded-data');
+let copyLoadedDataSuccessTimeout: number | undefined;
 const loadedBracketDisplay = <HTMLDivElement>document.getElementById('loaded-bracket-display');
+let lastImportedData: Bracket | null = null;
+
+function checkLoadedData() {
+    copyLoadedDataBtn.style.display = lastImportedData == null ? 'none' : 'initial';
+}
+checkLoadedData();
+
+copyLoadedDataBtn.addEventListener('click', async () => {
+    if (lastImportedData == null) {
+        throw new Error('No data has been loaded.');
+    }
+
+    try {
+        await navigator.clipboard.writeText(JSON.stringify(lastImportedData));
+        clearTimeout(copyLoadedDataSuccessTimeout);
+        copyLoadedDataBtn.innerText = 'Copied!';
+        copyLoadedDataSuccessTimeout = window.setTimeout(() => {
+            copyLoadedDataBtn.innerText = 'Copy as JSON';
+        }, 2500);
+    } catch (e) {
+        console.error('Could not write last imported data to clipboard', e);
+        copyLoadedDataBtn.innerText = 'Copy as JSON';
+    }
+});
 
 document.getElementById('match-query-submit')!.addEventListener('click', async () => {
     const query = buildBracketQuery();
@@ -61,11 +88,20 @@ document.getElementById('match-query-submit')!.addEventListener('click', async (
     const bracket = await importer.getMatches(query);
     loadedBracketDisplay.innerText = `Loaded: ${bracket.name} ${bracket.roundNumber ? `(Round ${bracket.roundNumber})` : ''} (${bracket.eventName})`;
     console.log('Loaded bracket', bracket);
+    lastImportedData = bracket;
+    checkLoadedData();
     await renderer.setData(bracket);
 });
 
+const tournamentDataInput = <HTMLInputElement>document.getElementById('tournament-data-input');
+
 function buildBracketQuery(): Record<string, string | number> {
     const result: Record<string, string | number> = { };
+
+    if (sourceSelect.value === 'input') {
+        result.data = tournamentDataInput.value;
+    }
+
     const paramElements = matchQueryContainer.querySelectorAll<HTMLInputElement | HTMLSelectElement>('*:not(.match-query-input-wrapper)[data-key]');
     paramElements.forEach((paramElement) => {
         if (paramElement.tagName === 'SELECT') {
