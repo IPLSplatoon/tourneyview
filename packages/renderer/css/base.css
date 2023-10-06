@@ -222,7 +222,6 @@
 
 .round-robin-renderer {
     display: grid;
-    gap: 4px;
     transform-origin: top left;
 }
 
