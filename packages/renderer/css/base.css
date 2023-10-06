@@ -218,14 +218,12 @@
 .round-robin-renderer__wrapper {
     height: 100%;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .round-robin-renderer {
     display: grid;
     gap: 4px;
+    transform-origin: top left;
 }
 
 .round-robin-grid-item.type-blank-no-match {

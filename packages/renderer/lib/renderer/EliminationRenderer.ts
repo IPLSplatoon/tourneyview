@@ -6,6 +6,7 @@ import { Match, MatchType } from '@tourneyview/common';
 import { TextFormatter } from '../formatter/TextFormatter';
 import { BracketTypeRenderer } from '../types/renderer';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
+import { Zoomer } from './Zoomer';
 
 export type EliminationRendererOpts = {
     animator: BaseBracketAnimator
@@ -41,9 +42,6 @@ export class EliminationRenderer extends BracketTypeRenderer {
     private readonly matchCellWrapper: d3.Selection<HTMLDivElement, undefined, null, undefined>;
     private readonly linkWrapper: d3.Selection<SVGGElement, undefined, null, undefined>;
 
-    private readonly zoomBehavior: d3.ZoomBehavior<Element, unknown>;
-    private readonly maxScale: number;
-
     private readonly linkWidth: number;
     private readonly cellHeight: number;
     private readonly minCellWidth: number;
@@ -57,7 +55,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
     private renderedBracketWidth: number;
     private renderedBracketHeight: number;
 
-    private resizeObserver: ResizeObserver;
+    private readonly zoomer: Zoomer;
 
     constructor(opts: EliminationRendererOpts) {
         super();
@@ -98,23 +96,13 @@ export class EliminationRenderer extends BracketTypeRenderer {
             .attr('stroke', '#555')
             .attr('stroke-width', 1.5);
 
-        this.maxScale = opts.maxScale ?? 2;
-        this.zoomBehavior = d3.zoom()
-            .extent([[0, 0], [BRACKET_SIZE, BRACKET_SIZE]])
-            .on('zoom', e => this.onZoom(e));
-
         this.topRenderer = this.createSingleElimRenderer();
         this.bottomRenderer = null;
 
-        this.resizeObserver = new ResizeObserver(entries => {
-            for (const entry of entries) {
-                if (entry.contentBoxSize) {
-                    this.setZoom(entry.contentBoxSize[0].blockSize, entry.contentBoxSize[0].inlineSize);
-                }
-            }
-        });
-
-        this.resizeObserver.observe(this.element.node()!);
+        this.zoomer = new Zoomer(
+            this.element as unknown as d3.Selection<Element, undefined, null, undefined>,
+            this.onZoom.bind(this),
+            opts.maxScale ?? 1.5);
     }
 
     async hide() {
@@ -128,10 +116,11 @@ export class EliminationRenderer extends BracketTypeRenderer {
 
     install(target: HTMLElement) {
         target.appendChild(this.getElement());
+        this.zoomer.recalculateContainerSize();
     }
 
     destroy() {
-        this.resizeObserver.disconnect();
+        this.zoomer.disconnect();
         this.element.remove();
     }
 
@@ -228,8 +217,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
             this.renderedBracketWidth = Math.max(winnersRenderResult.width, losersRenderResult.width);
         }
 
-        const boundingRect = this.element.node()!.getBoundingClientRect();
-        this.setZoom(boundingRect.height, boundingRect.width);
+        this.zoomer.setContentSize(this.renderedBracketWidth, this.renderedBracketHeight);
 
         if (switchingBrackets) {
             const element = this.getElement();
@@ -237,21 +225,6 @@ export class EliminationRenderer extends BracketTypeRenderer {
             element.style.visibility = 'visible';
             await this.animator.eliminationAnimator.reveal(element, this);
         }
-    }
-
-    setZoom(height: number, width: number) {
-        const scale = Math.min(height / this.renderedBracketHeight, width / this.renderedBracketWidth, this.maxScale);
-
-        this.zoomBehavior.extent([[0, 0], [width, height]]);
-        this.zoomBehavior.translateTo(
-            this.element as unknown as d3.Selection<Element, unknown, null, unknown>,
-            this.renderedBracketWidth / 2,
-            this.renderedBracketHeight / 2
-        );
-        this.zoomBehavior.scaleTo(
-            this.element as unknown as d3.Selection<Element, unknown, null, unknown>,
-            scale
-        );
     }
 
     getElement(): HTMLElement {
@@ -304,7 +277,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
         this.linkWrapper
             .selectAll('.elimination-renderer__link-group')
             .attr('transform', event.transform.toString());
-        this.matchCellWrapper.style('transform', `translate(${event.transform.x}px, ${event.transform.y}px) scale(${event.transform.k})`);
+        this.matchCellWrapper.style('transform', Zoomer.toCSSTransform(event));
     }
 
     private getCellSeparation(bracketHeight: number): number {

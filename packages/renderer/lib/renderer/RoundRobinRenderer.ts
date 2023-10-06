@@ -4,12 +4,14 @@ import * as d3 from 'd3';
 import { TextFormatter } from '../formatter/TextFormatter';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
 import uniqBy from 'lodash/uniqBy';
+import { Zoomer } from './Zoomer';
 
 export type RoundRobinRendererOpts = {
     formatter: TextFormatter
     animator: BaseBracketAnimator
     rowHeight?: number
     rowWidth?: number
+    maxScale?: number
 };
 
 export interface MatchGridItem {
@@ -54,6 +56,8 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
     private activeBracketId: string | null;
     private activeGridSize?: number;
 
+    private readonly zoomer: Zoomer;
+
     constructor(opts: RoundRobinRendererOpts) {
         super();
 
@@ -70,9 +74,16 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
         this.gridElement = this.wrapper
             .append('div')
             .classed('round-robin-renderer', true);
+
+        this.zoomer = new Zoomer(this.wrapper as unknown as d3.Selection<Element, undefined, null, undefined>, this.onZoom.bind(this), opts.maxScale ?? 1.5);
+    }
+
+    private onZoom(event: d3.D3ZoomEvent<HTMLElement, never>): void {
+        this.gridElement.style('transform', Zoomer.toCSSTransform(event));
     }
 
     destroy(): void {
+        this.zoomer.disconnect();
         this.wrapper.remove();
     }
 
@@ -91,6 +102,7 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
 
     install(target: HTMLElement): void {
         target.appendChild(this.getElement());
+        this.zoomer.recalculateContainerSize();
     }
 
     async setData(data: Bracket): Promise<void> {
@@ -121,6 +133,7 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
         this.gridElement
             .style('grid-template-rows', `repeat(${gridSize}, ${this.rowHeight}px)`)
             .style('grid-template-columns', `repeat(${gridSize}, ${this.rowWidth}px)`);
+        this.zoomer.setContentSize(this.rowWidth * gridSize + (4 * gridSize - 4), this.rowHeight * gridSize + (4 * gridSize - 4));
 
         const gridItems: RoundRobinGridItem[] = [];
         for (let y = 0; y < gridSize; y++) {
