@@ -70,7 +70,7 @@ copyLoadedDataBtn.addEventListener('click', async () => {
     }
 
     try {
-        await navigator.clipboard.writeText(JSON.stringify(lastImportedData));
+        await navigator.clipboard.writeText(JSON.stringify(lastImportedData, null, 2));
         clearTimeout(copyLoadedDataSuccessTimeout);
         copyLoadedDataBtn.innerText = 'Copied!';
         copyLoadedDataSuccessTimeout = window.setTimeout(() => {
