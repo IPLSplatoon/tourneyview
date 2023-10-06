@@ -73,3 +73,6 @@ When working without a builder, use the IIFE bundles of tourneyview (`dist/index
 </body>
 ```
 
+## Versioning
+
+`npx lerna publish --no-private` will guide you through the rigmaroll of assigning a new version number to each package and sending it off to git and npm.
