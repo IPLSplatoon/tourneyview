@@ -234,15 +234,19 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
     }
 
     private setWinnerClasses(element: HTMLElement, item: RoundRobinGridItem) {
-        if (item.type !== 'match') {
+        if (item.type !== 'match' || item.match?.state !== MatchState.IN_PROGRESS && item.match?.state !== MatchState.COMPLETED) {
             element.classList.remove('left-team-winner', 'top-team-winner', 'in-progress');
         } else {
             if (item.match?.state === MatchState.IN_PROGRESS) {
                 element.classList.add('in-progress');
             } else if (item.match?.state === MatchState.COMPLETED && item.leftTeam?.score != null && item.topTeam?.score != null) {
+                element.classList.remove('in-progress');
+
                 if (item.leftTeam.score > item.topTeam.score) {
+                    element.classList.remove('top-team-winner');
                     element.classList.add('left-team-winner');
                 } else {
+                    element.classList.remove('left-team-winner');
                     element.classList.add('top-team-winner');
                 }
             }
