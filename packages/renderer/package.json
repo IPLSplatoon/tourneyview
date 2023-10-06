@@ -1,6 +1,6 @@
 {
   "name": "@tourneyview/renderer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Render tournament brackets in a browser",
   "main": "dist/index.iife.js",
   "module": "dist/index.mjs",
