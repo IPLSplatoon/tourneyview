@@ -8,7 +8,7 @@ import { BaseTextFormatter } from '../formatter/BaseTextFormatter';
 import * as d3 from 'd3';
 import { DummyRenderer } from './DummyRenderer';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
-import { RoundRobinRenderer } from './RoundRobinRenderer';
+import { RoundRobinRenderer, RoundRobinRendererOpts } from './RoundRobinRenderer';
 
 type WithoutCommonOpts<T> = Omit<T, 'animator' | 'formatter'>;
 export type BracketRendererOpts = {
@@ -16,6 +16,7 @@ export type BracketRendererOpts = {
     formatter?: TextFormatter
     eliminationOpts?: WithoutCommonOpts<EliminationRendererOpts>
     swissOpts?: WithoutCommonOpts<SwissRendererOpts>
+    roundRobinOpts?: WithoutCommonOpts<RoundRobinRendererOpts>
 };
 
 export class BracketRenderer {
@@ -32,7 +33,8 @@ export class BracketRenderer {
             animator: opts?.animator ?? new DummyBracketAnimator(),
             formatter: opts?.formatter ?? new BaseTextFormatter(),
             eliminationOpts: opts?.eliminationOpts ?? {},
-            swissOpts: opts?.swissOpts ?? {}
+            swissOpts: opts?.swissOpts ?? {},
+            roundRobinOpts: opts?.roundRobinOpts ?? {}
         }
 
         this.element = d3
@@ -77,7 +79,8 @@ export class BracketRenderer {
         if (RoundRobinRenderer.compatibleBracketTypes.includes(type)) {
             return new RoundRobinRenderer({
                 animator: this.opts.animator,
-                formatter: this.opts.formatter
+                formatter: this.opts.formatter,
+                ...this.opts.roundRobinOpts
             });
         }
 
