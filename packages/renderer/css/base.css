@@ -12,9 +12,13 @@
     display: grid;
     grid-auto-flow: column;
     text-align: center;
+    grid-template-rows: 1fr;
+    width: 100%;
+    justify-items: center;
 }
 
 .elimination-renderer__bracket-title:not(:empty) ~ .elimination-renderer__round-labels > *:first-child {
+    justify-self: start;
     text-align: left;
 }
 

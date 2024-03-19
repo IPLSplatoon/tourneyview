@@ -119,11 +119,11 @@ export class SingleEliminationRenderer {
             .text(opts.bracketTitle ?? '');
         this.roundLabelContainer
             .style('column-gap', `${opts.linkWidth}px`)
+            .style('grid-auto-columns', `${opts.cellWidth}px`)
             .selectAll('div.round-label')
             .data(d3.range(hierarchy.height))
             .join('div')
             .classed('round-label', true)
-            .style('width', `${opts.cellWidth}px`)
             .text(d => this.formatter.formatEliminationRoundNumber(d + 1, hierarchy.height, opts.isLosersBracket, hasBracketReset, opts.bracketType));
 
         const headerSpacing = opts.bracketHeaderOffset ?? 8;
