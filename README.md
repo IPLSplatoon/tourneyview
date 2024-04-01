@@ -25,10 +25,10 @@ An ESM bundle (`dist/index.mjs`) is supplied by each package for use with bundle
 ```ts
 // Import base styles
 import '@tourneyview/renderer/css/base.css';
-import { EliminationRenderer, D3BracketAnimator } from '@tourneyview/renderer';
+import { BracketRenderer, D3BracketAnimator } from '@tourneyview/renderer';
 import { BattlefyImporter } from '@tourneyview/importer';
 
-const renderer = new EliminationRenderer(1000, 1000, {
+const renderer = new BracketRenderer({
     animator: new D3BracketAnimator()
 });
 const importer = new BattlefyImporter();
@@ -59,7 +59,7 @@ When working without a builder, use the IIFE bundles of tourneyview (`dist/index
     <script src="@tourneyview/renderer/dist/index.iife.js"></script>
     <script src="@tourneyview/importer/dist/index.iife.js"></script>
     <script>
-        const renderer = new TourneyviewRenderer.EliminationRenderer(1000, 1000, {
+        const renderer = new TourneyviewRenderer.BracketRenderer({
             animator: new TourneyviewRenderer.D3BracketAnimator()
         });
         document.body.appendChild(renderer.getElement());
