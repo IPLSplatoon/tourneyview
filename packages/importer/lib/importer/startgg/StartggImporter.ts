@@ -19,6 +19,12 @@ import { ContainedMatchType } from '@tourneyview/common';
 
 const startggApiPath = 'https://api.start.gg/gql/alpha';
 
+// When getting info about DE brackets, the start.gg API seems to sometimes return null as the "numRounds" property and a number some other times.
+// We only want to set a round number when it is actually necessary, meaning we only ask for it when we're dealing with swiss stages.
+function shouldShowRoundNumberOption(bracketType: BracketType): boolean {
+    return bracketType === BracketType.SWISS;
+}
+
 class StartggEventOption implements MatchQueryOption {
     private readonly axios: AxiosInstance;
 
@@ -110,10 +116,10 @@ class StartggPhaseOption implements MatchQueryOption {
                 type: 'select',
                 key: 'phaseGroupId',
                 name: 'Pool',
-                options: phaseGroupsResponse.data.data.phase.phaseGroups.nodes
-                    .map(group => new StartggPhaseGroupOption(group.displayIdentifier, group.id, group.numRounds))
+                options: phaseGroupsResponse.data.data.phase.phaseGroups.nodes.map(group =>
+                    new StartggPhaseGroupOption(group.displayIdentifier, group.id, group.numRounds, this.bracketType))
             });
-        } else if (this.groupCount === 1 && this.numRounds != null) {
+        } else if (this.groupCount === 1 && this.numRounds != null && shouldShowRoundNumberOption(this.bracketType)) {
             result.push(<MatchQueryNumberRangeParameter>{
                 type: 'numberRange',
                 key: 'roundNumber',
@@ -131,15 +137,17 @@ class StartggPhaseGroupOption implements MatchQueryOption {
     readonly name: string;
     readonly value: number;
     private readonly numRounds: number | null;
+    private readonly bracketType: BracketType;
 
-    constructor(displayIdentifier: string, id: number, numRounds: number | null) {
+    constructor(displayIdentifier: string, id: number, numRounds: number | null, bracketType: BracketType) {
         this.name = `Pool ${displayIdentifier}`;
         this.value = id;
         this.numRounds = numRounds;
+        this.bracketType = bracketType;
     }
 
     getParams(): MatchQueryParameter[] {
-        if (this.numRounds == null) {
+        if (this.numRounds == null || !shouldShowRoundNumberOption(this.bracketType)) {
             return [];
         }
 
