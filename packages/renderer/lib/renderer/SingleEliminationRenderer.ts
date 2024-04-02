@@ -260,15 +260,15 @@ export class SingleEliminationRenderer {
             return elem
                 .select(`.match-cell__${position}-score`)
                 .each(function(d) {
-                    const currentScore = parseInt((this as HTMLElement).textContent ?? '');
+                    const oldFormattedScore = (this as HTMLElement).textContent ?? '';
                     const newTeam = team(d);
-                    const newScore = newTeam.score ?? NaN;
-                    if (currentScore !== newScore && !(isNaN(currentScore) && (isNaN(newScore) || newTeam.isDisqualified))) {
+                    const newFormattedScore = that.formatter.formatScore(newTeam, opts.bracketType, d.data.state);
+                    if (oldFormattedScore !== newFormattedScore) {
                         that.animator.animateScoreUpdate(
                             this as HTMLElement,
-                            currentScore,
-                            newScore,
-                            that.formatter.formatScore(newTeam, opts.bracketType, d.data.state),
+                            parseInt(oldFormattedScore),
+                            newTeam.score ?? NaN,
+                            newFormattedScore,
                             newTeam.isDisqualified,
                             opts.bracketType
                         );

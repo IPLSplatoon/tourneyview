@@ -1,11 +1,10 @@
 import * as d3 from 'd3';
 import { BaseType } from 'd3';
 import { TextFormatter } from '../formatter/TextFormatter';
-import { Bracket, BracketType, Match } from '@tourneyview/common';
+import { Bracket, BracketType, Match, MatchTeam } from '@tourneyview/common';
 import { Autoscroller } from './Autoscroller';
 import { BracketTypeRenderer } from '../types/renderer';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
-import { MatchTeam } from '@tourneyview/common';
 
 export type SwissRendererOpts = {
     formatter: TextFormatter
@@ -173,15 +172,15 @@ export class SwissRenderer extends BracketTypeRenderer {
             return elem
                 .select(`.match-row__${position}-score`)
                 .each(function (d) {
-                    const currentScore = parseInt((this as HTMLElement).textContent ?? '');
+                    const oldFormattedScore = (this as HTMLElement).textContent ?? '';
                     const teamData = team(d);
-                    const newScore = teamData.score ?? NaN;
-                    if (currentScore !== newScore && !(isNaN(currentScore) && (isNaN(newScore) || teamData.isDisqualified))) {
+                    const newFormattedScore = that.formatter.formatScore(teamData, BracketType.SWISS, d.state);
+                    if (oldFormattedScore !== newFormattedScore) {
                         that.animator.animateScoreUpdate(
                             this as HTMLElement,
-                            currentScore,
-                            newScore,
-                            that.formatter.formatScore(teamData, BracketType.SWISS, d.state),
+                            parseInt(oldFormattedScore),
+                            teamData.score ?? NaN,
+                            newFormattedScore,
                             teamData.isDisqualified,
                             BracketType.SWISS
                         );

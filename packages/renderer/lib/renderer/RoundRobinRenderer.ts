@@ -285,15 +285,15 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
     private updateScore(element: Element, datum: MatchGridItem): void {
         ['left', 'top'].forEach(team => {
             const scoreElem = element.querySelector<HTMLElement>(`.${team}-score-wrapper > .team-score`)!;
-            const currentScore = parseInt(scoreElem.textContent ?? '');
+            const oldFormattedScore = scoreElem.textContent ?? '';
             const teamData = team === 'left' ? datum.leftTeam : datum.topTeam;
-            const newScore = teamData?.score ?? NaN;
-            if (currentScore !== newScore && !(isNaN(currentScore) && (isNaN(newScore) || teamData?.isDisqualified))) {
+            const newFormattedScore = team === 'left' ? datum.leftTeamScore : datum.topTeamScore;
+            if (oldFormattedScore !== newFormattedScore) {
                 this.animator.animateScoreUpdate(
                     scoreElem,
-                    currentScore,
-                    newScore,
-                    team === 'left' ? datum.leftTeamScore : datum.topTeamScore,
+                    parseInt(oldFormattedScore),
+                    teamData?.score ?? NaN,
+                    newFormattedScore,
                     teamData?.isDisqualified ?? false,
                     BracketType.ROUND_ROBIN);
             }
