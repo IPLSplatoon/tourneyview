@@ -191,8 +191,14 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
                         match,
                         leftTeam: leftMatchTeam,
                         topTeam: topMatchTeam,
-                        leftTeamScore: this.formatter.formatScore(leftMatchTeam?.score, leftMatchTeam?.isDisqualified ?? false, BracketType.ROUND_ROBIN, match?.state ?? MatchState.UNKNOWN),
-                        topTeamScore: this.formatter.formatScore(topMatchTeam?.score, topMatchTeam?.isDisqualified ?? false, BracketType.ROUND_ROBIN, match?.state ?? MatchState.UNKNOWN)
+                        leftTeamScore: this.formatter.formatScore(
+                            leftMatchTeam,
+                            BracketType.ROUND_ROBIN,
+                            match?.state ?? MatchState.UNKNOWN),
+                        topTeamScore: this.formatter.formatScore(
+                            topMatchTeam,
+                            BracketType.ROUND_ROBIN,
+                            match?.state ?? MatchState.UNKNOWN)
                     })
                 }
             } 
@@ -262,10 +268,10 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
         } else {
             if (item.match?.state === MatchState.IN_PROGRESS) {
                 element.classList.add('in-progress');
-            } else if (item.match?.state === MatchState.COMPLETED && item.leftTeam?.score != null && item.topTeam?.score != null) {
+            } else if (item.match?.state === MatchState.COMPLETED && (item.leftTeam?.isWinner || item.topTeam?.isWinner)) {
                 element.classList.remove('in-progress');
 
-                if (item.leftTeam.score > item.topTeam.score) {
+                if (item.leftTeam?.isWinner) {
                     element.classList.remove('top-team-winner');
                     element.classList.add('left-team-winner');
                 } else {
@@ -302,7 +308,7 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
             .classed(`${team}-score-wrapper`, true)
             .append('div')
             .classed('team-score', true)
-            .each(function (d) {
+            .each(function () {
                 animator.setScore(
                     this,
                     0,

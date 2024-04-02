@@ -143,7 +143,7 @@ export class SwissRenderer extends BracketTypeRenderer {
                         this,
                         0,
                         teamData.score ?? NaN,
-                        that.formatter.formatScore(teamData.score, teamData.isDisqualified, BracketType.SWISS, d.state),
+                        that.formatter.formatScore(teamData, BracketType.SWISS, d.state),
                         teamData.isDisqualified,
                         BracketType.SWISS);
                 });
@@ -181,7 +181,7 @@ export class SwissRenderer extends BracketTypeRenderer {
                             this as HTMLElement,
                             currentScore,
                             newScore,
-                            that.formatter.formatScore(newScore, teamData.isDisqualified, BracketType.SWISS, d.state),
+                            that.formatter.formatScore(teamData, BracketType.SWISS, d.state),
                             teamData.isDisqualified,
                             BracketType.SWISS
                         );

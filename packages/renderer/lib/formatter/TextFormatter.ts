@@ -1,7 +1,7 @@
-import { BracketType, MatchState } from "@tourneyview/common"
+import { BracketType, MatchState, MatchTeam } from "@tourneyview/common"
 
 export interface TextFormatter {
-    formatScore(score: number | undefined | null, isDisqualified: boolean, bracketType: BracketType, matchState: MatchState): string
+    formatScore(team: MatchTeam | undefined, bracketType: BracketType, matchState: MatchState): string
 
     formatTeamName(name: string | undefined | null): string
 

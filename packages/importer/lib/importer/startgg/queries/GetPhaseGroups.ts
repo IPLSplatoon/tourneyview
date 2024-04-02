@@ -4,6 +4,7 @@ query PhaseGroups($phaseId: ID!, $phaseGroupIds: [ID]) {
     bracketType
     groupCount
     name
+    isExhibition
     event {
       name
       tournament {

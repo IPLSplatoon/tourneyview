@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { MatchImporter } from '../types/MatchImporter';
-import type { Bracket, Match, MatchGroup } from '@tourneyview/common';
+import type { Bracket } from '@tourneyview/common';
 import { BracketType, MatchState, MatchType } from '@tourneyview/common';
 import { MatchQueryOption, MatchQueryParameter, MatchQueryResult } from '../types/MatchQuery';
 import { DoubleEliminationMatchTypeQueryParameter } from '../query/DoubleEliminationMatchTypeQueryParameter';
@@ -59,17 +59,6 @@ interface BattlefyMatchListItem {
         winner: BattlefyMatchListNextNode
         loser?: BattlefyMatchListNextNode
     }
-}
-
-interface BattlefyStageGroupItem {
-    _id: string
-    name: string
-    matches: BattlefyMatchListItem[]
-}
-
-interface BattlefyMaxRoundRobinStage {
-    _id: string
-    maxRound: number
 }
 
 export interface BattlefyImportOpts {
@@ -243,13 +232,15 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                                     id: match.top.team?._id,
                                     name: match.top.team?.name,
                                     score: match.top.score,
-                                    isDisqualified: false
+                                    isDisqualified: false,
+                                    isWinner: match.top.winner
                                 },
                                 bottomTeam: {
                                     id: match.bottom.team?._id,
                                     name: match.bottom.team?.name,
                                     score: match.bottom.score,
-                                    isDisqualified: false
+                                    isDisqualified: false,
+                                    isWinner: match.bottom.winner
                                 }
                             }))
                     }
@@ -274,13 +265,15 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                             id: match.top.team?._id,
                             name: match.top.team?.name,
                             score: match.top.score,
-                            isDisqualified: false
+                            isDisqualified: false,
+                            isWinner: match.top.winner
                         },
                         bottomTeam: {
                             id: match.bottom.team?._id,
                             name: match.bottom.team?.name,
                             score: match.bottom.score,
-                            isDisqualified: false
+                            isDisqualified: false,
+                            isWinner: match.bottom.winner
                         }
                     }))
                 }]

@@ -1,23 +1,28 @@
-import { BracketType, MatchState } from '@tourneyview/common';
+import { BracketType, MatchState, MatchTeam } from '@tourneyview/common';
 import { TextFormatter } from './TextFormatter';
 
 export class BaseTextFormatter implements TextFormatter {
-    formatScore(score: number | undefined | null, isDisqualified: Boolean, bracketType: BracketType, matchState: MatchState): string {
-        if (isDisqualified) {
+    formatScore(team: MatchTeam | undefined, bracketType: BracketType, matchState: MatchState): string {
+        if (team?.isDisqualified) {
             return 'DQ';
         }
 
-        if (score == null || isNaN(score)) {
-            if (matchState === MatchState.COMPLETED || matchState === MatchState.IN_PROGRESS) {
+        if (team == null || team.id == null) {
+            return bracketType === BracketType.ROUND_ROBIN ? '?' : '-';
+        }
+
+        if (team.score == null) {
+            if (matchState === MatchState.COMPLETED) {
+                // Some brackets in start.gg don't contain score, only reporting a win or a loss.
+                return team.isWinner ? 'W' : 'L';
+            } else if (matchState === MatchState.IN_PROGRESS || matchState === MatchState.NOT_STARTED) {
                 return '0';
-            } else if (bracketType === BracketType.ROUND_ROBIN) {
-                return '?';
             } else {
-                return '-';
+                return bracketType === BracketType.ROUND_ROBIN ? '?' : '-';
             }
         }
 
-        return String(score);
+        return String(team.score);
     }
 
     formatTeamName(name: string | undefined | null): string {

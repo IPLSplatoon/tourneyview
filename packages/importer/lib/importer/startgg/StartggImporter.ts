@@ -323,13 +323,15 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                                     id: set.slots[0].entrant?.id,
                                     name: set.slots[0].entrant?.name,
                                     score: set.slots[0].standing?.stats.score.value,
-                                    isDisqualified: set.slots[0].standing?.stats.score.value === -1
+                                    isDisqualified: set.slots[0].standing?.stats.score.value === -1,
+                                    isWinner: set.slots[0].entrant?.id === set.winnerId
                                 },
                                 bottomTeam: {
                                     id: set.slots[1].entrant?.id,
                                     name: set.slots[1].entrant?.name,
                                     score: set.slots[1].standing?.stats.score.value,
-                                    isDisqualified: set.slots[1].standing?.stats.score.value === -1
+                                    isDisqualified: set.slots[1].standing?.stats.score.value === -1,
+                                    isWinner: set.slots[1].entrant?.id === set.winnerId
                                 }
                             }
                         })

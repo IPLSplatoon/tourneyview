@@ -42,4 +42,5 @@ export interface MatchTeam {
     name?: string | null
     score?: number | null
     isDisqualified: boolean
+    isWinner: boolean
 }

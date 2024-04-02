@@ -216,7 +216,7 @@ export class SingleEliminationRenderer {
                         this,
                         0,
                         teamData.score ?? NaN,
-                        that.formatter.formatScore(teamData.score, teamData.isDisqualified, opts.bracketType, d.data.state),
+                        that.formatter.formatScore(teamData, opts.bracketType, d.data.state),
                         teamData.isDisqualified,
                         opts.bracketType);
                 });
@@ -268,7 +268,7 @@ export class SingleEliminationRenderer {
                             this as HTMLElement,
                             currentScore,
                             newScore,
-                            that.formatter.formatScore(newScore, newTeam.isDisqualified, opts.bracketType, d.data.state),
+                            that.formatter.formatScore(newTeam, opts.bracketType, d.data.state),
                             newTeam.isDisqualified,
                             opts.bracketType
                         );
