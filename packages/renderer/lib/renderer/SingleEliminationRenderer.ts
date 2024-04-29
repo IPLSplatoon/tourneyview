@@ -116,7 +116,8 @@ export class SingleEliminationRenderer {
         const hasBracketReset = opts.hasBracketReset ?? false;
 
         this.bracketTitle
-            .text(opts.bracketTitle ?? '');
+            .text(opts.bracketTitle ?? '')
+            .style('visibility', opts.bracketTitle == null ? 'hidden' : 'visible');
         this.roundLabelContainer
             .style('column-gap', `${opts.linkWidth}px`)
             .style('grid-auto-columns', `${opts.cellWidth}px`)
