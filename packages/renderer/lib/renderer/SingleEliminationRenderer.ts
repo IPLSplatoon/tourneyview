@@ -111,6 +111,17 @@ export class SingleEliminationRenderer {
             this.getElements().forEach(el => el.style.removeProperty('display'));
         }
 
+        if (opts.bracketType === BracketType.SINGLE_ELIMINATION && opts.hasThirdPlaceMatch) {
+            hierarchy.sort((a, b) => {
+                if ('isRoot' in a.data && a.data.isRoot || 'isRoot' in b.data && b.data.isRoot) return 0;
+    
+                if ((a.data as Match).type === MatchType.LOSERS) return 1;
+                if ((b.data as Match).type === MatchType.LOSERS) return -1;
+
+                return 0;
+            });
+        }
+
         const roundNames = this.getRoundNames(hierarchy, opts.isLosersBracket, opts.bracketType, opts.hasThirdPlaceMatch);
         const cellOffset = opts.cellOffset ?? 0;
 
