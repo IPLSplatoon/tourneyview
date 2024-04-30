@@ -270,12 +270,6 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                     set.round++;
                 }
             })
-        } else if (bracketType === BracketType.SINGLE_ELIMINATION) {
-            sets.forEach(set => {
-                if (set.fullRoundText.toLowerCase().includes('tiebreak')) {
-                    set.round--;
-                }
-            })
         }
 
         const phaseGroup = getPhaseGroupsResponse.data.data.phase.phaseGroups.nodes[0];
@@ -313,11 +307,23 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                                 throw new Error(`Start.gg set contains ${set.slots.length} slots; expected 2`);
                             }
 
+                            let type: MatchType | undefined = undefined;
+                            if (bracketType === BracketType.DOUBLE_ELIMINATION) {
+                                type = set.round < 0 ? MatchType.LOSERS : MatchType.WINNERS;
+                            } else if (bracketType === BracketType.SINGLE_ELIMINATION) {
+                                if (set.fullRoundText.toLowerCase().includes('tiebreak')) {
+                                    type = MatchType.LOSERS;
+                                    set.round--;
+                                } else {
+                                    type = MatchType.WINNERS;
+                                }
+                            }
+
                             return {
                                 id: StartggImporter.generateMatchId(phaseGroup.id, set.identifier),
                                 nextMatchId: nextSet ? StartggImporter.generateMatchId(phaseGroup.id, nextSet.identifier) : null,
                                 roundNumber: set.round < 0 ? Math.abs(set.round + 2) : set.round,
-                                type: set.round < 0 ? MatchType.LOSERS : MatchType.WINNERS,
+                                type,
                                 state: StartggImporter.mapState(set.state),
                                 topTeam: {
                                     id: set.slots[0].entrant?.id,
