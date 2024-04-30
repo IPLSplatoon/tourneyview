@@ -54,7 +54,7 @@ export class D3EliminationAnimator implements EliminationAnimator {
                 .duration(350)
                 .ease(d3.easeCubicOut)
                 .style('opacity', '1')
-                .delay(d => (d as number ?? 0) * 200)
+                .delay(function() { return Number((this as HTMLElement).dataset.roundIndex ?? 0) * 200 })
                 .end(),
             selection
                 .selectAll('.bracket-link')

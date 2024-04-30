@@ -262,16 +262,6 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
             sets.push(...(await Promise.all(pageLoads)).flatMap(response => response.data.data.phase.sets.nodes));
         }
 
-        let hasBracketReset = false;
-        if (bracketType === BracketType.DOUBLE_ELIMINATION) {
-            sets.forEach(set => {
-                if (set.fullRoundText.toLowerCase().includes('reset')) {
-                    hasBracketReset = true;
-                    set.round++;
-                }
-            })
-        }
-
         const phaseGroup = getPhaseGroupsResponse.data.data.phase.phaseGroups.nodes[0];
         return {
             type: bracketType,
@@ -282,7 +272,6 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                 {
                     id: String(phaseGroup.id),
                     name: `Pool ${phaseGroup.displayIdentifier}`,
-                    hasBracketReset,
                     containedMatchType: opts.matchType,
                     matches: sets
                         .filter(set => {
@@ -308,10 +297,14 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                             }
 
                             let type: MatchType | undefined = undefined;
+                            const fullRoundText = set.fullRoundText.toLowerCase();
                             if (bracketType === BracketType.DOUBLE_ELIMINATION) {
                                 type = set.round < 0 ? MatchType.LOSERS : MatchType.WINNERS;
+                                if (fullRoundText.includes('reset')) {
+                                    set.round++;
+                                }
                             } else if (bracketType === BracketType.SINGLE_ELIMINATION) {
-                                if (set.fullRoundText.toLowerCase().includes('tiebreak')) {
+                                if (fullRoundText.includes('tiebreak')) {
                                     type = MatchType.LOSERS;
                                     set.round--;
                                 } else {

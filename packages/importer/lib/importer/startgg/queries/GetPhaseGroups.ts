@@ -16,6 +16,12 @@ query PhaseGroups($phaseId: ID!, $phaseGroupIds: [ID]) {
         id
         displayIdentifier
         bracketType
+        numRounds
+        rounds {
+          id
+          bestOf
+          number
+        }
       }
     }
   }

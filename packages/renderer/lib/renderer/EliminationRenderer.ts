@@ -164,9 +164,6 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 hasThirdPlaceMatch: data.type === BracketType.SINGLE_ELIMINATION
                     && matchGroup.matches.some(match => match.type === MatchType.LOSERS),
                 bracketType,
-                hasBracketReset: data.type === BracketType.DOUBLE_ELIMINATION
-                    && matchGroup.containedMatchType === ContainedMatchType.WINNERS
-                    && (matchGroup.hasBracketReset ?? true),
                 bracketTitle: data.type === BracketType.DOUBLE_ELIMINATION
                     ? matchGroup.containedMatchType === ContainedMatchType.WINNERS
                         ? 'Winners Bracket'
@@ -193,7 +190,6 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 linkWidth: this.linkWidth,
                 cellHeight: this.cellHeight,
                 hasThirdPlaceMatch: false,
-                hasBracketReset: matchGroup.hasBracketReset ?? true,
                 bracketTitle: 'Winners Bracket',
                 bracketType,
                 thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight,

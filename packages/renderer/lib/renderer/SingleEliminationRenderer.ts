@@ -19,7 +19,6 @@ export type SingleEliminationRendererOpts = {
 
 type SingleEliminationRendererSetDataOpts = {
     hasThirdPlaceMatch: boolean
-    hasBracketReset?: boolean
     cellHeight: number
     cellWidth: number
     linkWidth: number
@@ -112,8 +111,8 @@ export class SingleEliminationRenderer {
             this.getElements().forEach(el => el.style.removeProperty('display'));
         }
 
+        const roundNames = this.getRoundNames(hierarchy, opts.isLosersBracket, opts.bracketType, opts.hasThirdPlaceMatch);
         const cellOffset = opts.cellOffset ?? 0;
-        const hasBracketReset = opts.hasBracketReset ?? false;
 
         this.bracketTitle
             .text(opts.bracketTitle ?? '')
@@ -122,10 +121,11 @@ export class SingleEliminationRenderer {
             .style('column-gap', `${opts.linkWidth}px`)
             .style('grid-auto-columns', `${opts.cellWidth}px`)
             .selectAll('div.round-label')
-            .data(d3.range(hierarchy.height))
+            .data(roundNames)
             .join('div')
             .classed('round-label', true)
-            .text(d => this.formatter.formatEliminationRoundNumber(d + 1, hierarchy.height, opts.isLosersBracket, hasBracketReset, opts.bracketType));
+            .text(d => d)
+            .attr('data-round-index', (_, i) => i);
 
         const headerSpacing = opts.bracketHeaderOffset ?? 8;
         const headerHeight = this.bracketHeader.node()?.offsetHeight ?? 0;
@@ -329,6 +329,80 @@ export class SingleEliminationRenderer {
             width: bracketWidth,
             height: this.measureHierarchy(hierarchy, opts.cellHeight, opts.cellSeparation) + headerHeight + headerSpacing
         };
+    }
+
+    // I *hate* this entire function but it works suprisingly well
+    private getRoundNames(
+        hierarchy: EliminationHierarchyNode,
+        isLosersBracket: boolean,
+        bracketType: BracketType.SINGLE_ELIMINATION | BracketType.DOUBLE_ELIMINATION,
+        hasThirdPlaceMatch: boolean
+    ): string[] {
+        const matchCountsPerRoundNumber: Map<number, number> = new Map();
+        hierarchy.each(node => {
+            if ('isRoot' in node.data && node.data.isRoot) return;
+
+            const roundNumber = (node.data as Match).roundNumber ?? node.height;
+            matchCountsPerRoundNumber.set(roundNumber, (matchCountsPerRoundNumber.get(roundNumber) ?? 0) + 1);
+        });
+
+        const roundNames: string[] = [];
+        const roundNumbers = Array.from(matchCountsPerRoundNumber.keys());
+        const maxRoundNumber = Math.max(...roundNumbers);
+
+        if (isLosersBracket) {
+            if (
+                roundNumbers.length >= 2
+                && matchCountsPerRoundNumber.get(maxRoundNumber) === 1
+            ) {
+                roundNames.push('Semi-Finals');
+
+                if (matchCountsPerRoundNumber.get(maxRoundNumber - 1) === 1) {
+                    roundNames.push('Finals');
+                }
+            }
+
+            if (
+                (matchCountsPerRoundNumber.get(maxRoundNumber - roundNames.length) ?? NaN) <= 2
+                && (matchCountsPerRoundNumber.get(maxRoundNumber - roundNames.length - 1) ?? 0) <= 2
+            ) {
+                roundNames.unshift('Quarter-Finals');
+            }
+        } else {
+            if (
+                roundNumbers.length >= 3
+                && matchCountsPerRoundNumber.get(maxRoundNumber) === 1
+                && matchCountsPerRoundNumber.get(maxRoundNumber - 1) === 1
+                && matchCountsPerRoundNumber.get(maxRoundNumber - 2) === 1
+            ) {
+                roundNames.push('Finals', 'Grand Finals', 'Bracket Reset');
+            } else if (
+                roundNumbers.length >= 2
+                && matchCountsPerRoundNumber.get(maxRoundNumber) === 1
+                && matchCountsPerRoundNumber.get(maxRoundNumber - 1) === 1
+            ) {
+                roundNames.push('Finals', 'Grand Finals');
+            } else if (
+                roundNumbers.length >= 1
+                && matchCountsPerRoundNumber.get(maxRoundNumber) === (bracketType === BracketType.SINGLE_ELIMINATION && hasThirdPlaceMatch ? 2 : 1)
+            ) {
+                roundNames.push('Finals');
+            }
+
+            if ((matchCountsPerRoundNumber.get(maxRoundNumber - roundNames.length) ?? NaN) <= 2) {
+                roundNames.unshift('Semi-Finals');
+            }
+
+            if ((matchCountsPerRoundNumber.get(maxRoundNumber - roundNames.length) ?? NaN) <= 4) {
+                roundNames.unshift('Quarter-Finals');
+            }
+        }
+
+        if (roundNames.length !== roundNumbers.length) {
+            roundNames.unshift(...d3.range(roundNumbers.length - roundNames.length).map(roundNumber => `Round ${roundNumber + 1}`));
+        }
+
+        return roundNames;
     }
 
     private measureHierarchy(hierarchy: EliminationHierarchyNode, cellHeight: number, separation: number): number {
