@@ -128,7 +128,12 @@ export class SwissRenderer extends BracketTypeRenderer {
                 });
         };
 
-        const drawScore = (elem: d3.Selection<HTMLDivElement, Match, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Match) => MatchTeam) => {
+        const drawScore = (
+            elem: d3.Selection<HTMLDivElement, Match, HTMLElement, unknown>,
+            position: 'top' | 'bottom',
+            team: (d: Match) => MatchTeam,
+            opponentTeam: (d: Match) => MatchTeam
+        ) => {
             const that = this;
             return elem
                 .append('div')
@@ -142,7 +147,12 @@ export class SwissRenderer extends BracketTypeRenderer {
                         this,
                         0,
                         teamData.score ?? NaN,
-                        that.formatter.formatScore(teamData, BracketType.SWISS, d.state),
+                        that.formatter.formatScore({ 
+                            team: teamData,
+                            opponentTeam: opponentTeam(d),
+                            bracketType: BracketType.SWISS,
+                            matchState: d.state
+                        }),
                         teamData.isDisqualified,
                         BracketType.SWISS);
                 });
@@ -167,14 +177,24 @@ export class SwissRenderer extends BracketTypeRenderer {
                 });
         };
 
-        const updateScore = (elem: d3.Selection<BaseType, Match, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Match) => MatchTeam) => {
+        const updateScore = (
+            elem: d3.Selection<BaseType, Match, HTMLElement, unknown>, 
+            position: 'top' | 'bottom',
+            team: (d: Match) => MatchTeam,
+            opponentTeam: (d: Match) => MatchTeam
+        ) => {
             const that = this;
             return elem
                 .select(`.match-row__${position}-score`)
                 .each(function (d) {
                     const oldFormattedScore = (this as HTMLElement).textContent ?? '';
                     const teamData = team(d);
-                    const newFormattedScore = that.formatter.formatScore(teamData, BracketType.SWISS, d.state);
+                    const newFormattedScore = that.formatter.formatScore({ 
+                        team: teamData,
+                        opponentTeam: opponentTeam(d),
+                        bracketType: BracketType.SWISS,
+                        matchState: d.state
+                    });
                     if (oldFormattedScore !== newFormattedScore) {
                         that.animator.animateScoreUpdate(
                             this as HTMLElement,
@@ -202,15 +222,15 @@ export class SwissRenderer extends BracketTypeRenderer {
                         elem
                             .append('div')
                             .classed('match-row__scores', true)
-                            .call(drawScore, 'top', d => d.topTeam)
-                            .call(drawScore, 'bottom', d => d.bottomTeam)
+                            .call(drawScore, 'top', d => d.topTeam, d => d.bottomTeam)
+                            .call(drawScore, 'bottom', d => d.bottomTeam, d => d.topTeam)
                     })
                     .call(drawTeamName, 'bottom', d => d.bottomTeam),
                 update => update
                     .call(updateTeamName, 'top', d => d.topTeam)
-                    .call(updateScore, 'top', d => d.topTeam)
+                    .call(updateScore, 'top', d => d.topTeam, d => d.bottomTeam)
                     .call(updateTeamName, 'bottom', d => d.bottomTeam)
-                    .call(updateScore, 'bottom', d => d.bottomTeam)
+                    .call(updateScore, 'bottom', d => d.bottomTeam, d => d.topTeam)
             )
 
         const node = this.getElement();

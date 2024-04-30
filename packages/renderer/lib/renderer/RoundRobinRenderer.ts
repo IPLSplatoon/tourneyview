@@ -191,14 +191,18 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
                         match,
                         leftTeam: leftMatchTeam,
                         topTeam: topMatchTeam,
-                        leftTeamScore: this.formatter.formatScore(
-                            leftMatchTeam,
-                            BracketType.ROUND_ROBIN,
-                            match?.state ?? MatchState.UNKNOWN),
-                        topTeamScore: this.formatter.formatScore(
-                            topMatchTeam,
-                            BracketType.ROUND_ROBIN,
-                            match?.state ?? MatchState.UNKNOWN)
+                        leftTeamScore: this.formatter.formatScore({
+                            team: leftMatchTeam,
+                            opponentTeam: topMatchTeam,
+                            bracketType: BracketType.ROUND_ROBIN,
+                            matchState: match?.state ?? MatchState.UNKNOWN
+                        }),
+                        topTeamScore: this.formatter.formatScore({
+                            team: topMatchTeam,
+                            opponentTeam: leftMatchTeam,
+                            bracketType: BracketType.ROUND_ROBIN,
+                            matchState: match?.state ?? MatchState.UNKNOWN
+                        })
                     })
                 }
             } 

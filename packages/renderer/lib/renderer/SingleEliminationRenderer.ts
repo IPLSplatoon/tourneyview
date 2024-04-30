@@ -214,7 +214,12 @@ export class SingleEliminationRenderer {
                 });
         }
 
-        const drawScore = (elem: d3.Selection<HTMLDivElement, d3.HierarchyNode<Match>, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: d3.HierarchyNode<Match>) => MatchTeam) => {
+        const drawScore = (
+            elem: d3.Selection<HTMLDivElement, d3.HierarchyNode<Match>, HTMLElement, unknown>,
+            position: 'top' | 'bottom',
+            team: (d: d3.HierarchyNode<Match>) => MatchTeam,
+            opponentTeam: (d: d3.HierarchyNode<Match>) => MatchTeam
+        ) => {
             const that = this;
             return elem
                 .append('div')
@@ -228,7 +233,12 @@ export class SingleEliminationRenderer {
                         this,
                         0,
                         teamData.score ?? NaN,
-                        that.formatter.formatScore(teamData, opts.bracketType, d.data.state),
+                        that.formatter.formatScore({ 
+                            team: teamData,
+                            opponentTeam: opponentTeam(d),
+                            bracketType: opts.bracketType,
+                            matchState: d.data.state 
+                        }),
                         teamData.isDisqualified,
                         opts.bracketType);
                 });
@@ -267,14 +277,24 @@ export class SingleEliminationRenderer {
                 });
         };
 
-        const updateScore = (elem: d3.Selection<BaseType, d3.HierarchyNode<Match>, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: d3.HierarchyNode<Match>) => MatchTeam) => {
+        const updateScore = (
+            elem: d3.Selection<BaseType, d3.HierarchyNode<Match>, HTMLElement, unknown>, 
+            position: 'top' | 'bottom',
+            team: (d: d3.HierarchyNode<Match>) => MatchTeam,
+            opponentTeam: (d: d3.HierarchyNode<Match>) => MatchTeam
+        ) => {
             const that = this;
             return elem
                 .select(`.match-cell__${position}-score`)
                 .each(function(d) {
                     const oldFormattedScore = (this as HTMLElement).textContent ?? '';
                     const newTeam = team(d);
-                    const newFormattedScore = that.formatter.formatScore(newTeam, opts.bracketType, d.data.state);
+                    const newFormattedScore = that.formatter.formatScore({ 
+                        team: newTeam,
+                        opponentTeam: opponentTeam(d),
+                        bracketType: opts.bracketType,
+                        matchState: d.data.state
+                    });
                     if (oldFormattedScore !== newFormattedScore) {
                         that.animator.animateScoreUpdate(
                             this as HTMLElement,
@@ -314,9 +334,9 @@ export class SingleEliminationRenderer {
                         .classed('match-cell', true)
                         .call(drawThirdPlaceMatchLabel)
                         .call(drawTeamName, 'top', d => d.data?.topTeam)
-                        .call(drawScore, 'top', d => d.data?.topTeam)
+                        .call(drawScore, 'top', d => d.data?.topTeam, d => d.data?.bottomTeam)
                         .call(drawTeamName, 'bottom', d => d.data?.bottomTeam)
-                        .call(drawScore, 'bottom', d => d.data?.bottomTeam);
+                        .call(drawScore, 'bottom', d => d.data?.bottomTeam, d => d.data?.topTeam);
 
                     return this.onCellCreation ? wrapperSelection.call(this.onCellCreation) : wrapperSelection;
                 },
@@ -329,9 +349,9 @@ export class SingleEliminationRenderer {
                             : `${(opts.cellHeight)}px`)
                         .style('width', `${(opts.cellWidth)}px`)
                         .call(updateTeamName, 'top', d => d.data?.topTeam)
-                        .call(updateScore, 'top', d => d.data?.topTeam)
+                        .call(updateScore, 'top', d => d.data?.topTeam, d => d.data?.bottomTeam)
                         .call(updateTeamName, 'bottom', d => d.data?.bottomTeam)
-                        .call(updateScore, 'bottom', d => d.data?.bottomTeam);
+                        .call(updateScore, 'bottom', d => d.data?.bottomTeam, d => d.data.topTeam);
 
                     return this.onCellUpdate ? selection.call(this.onCellUpdate) : selection;
                 });

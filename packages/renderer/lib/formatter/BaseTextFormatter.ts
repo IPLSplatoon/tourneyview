@@ -1,28 +1,28 @@
 import { BracketType, MatchState, MatchTeam } from '@tourneyview/common';
-import { TextFormatter } from './TextFormatter';
+import { FormatScoreOpts, TextFormatter } from './TextFormatter';
 
 export class BaseTextFormatter implements TextFormatter {
-    formatScore(team: MatchTeam | undefined, bracketType: BracketType, matchState: MatchState): string {
-        if (team?.isDisqualified) {
+    formatScore(opts: FormatScoreOpts): string {
+        if (opts.team?.isDisqualified) {
             return 'DQ';
         }
 
-        if (team == null || team.id == null) {
-            return bracketType === BracketType.ROUND_ROBIN ? '?' : '-';
+        if (opts.team == null || opts.team.id == null || opts.opponentTeam == null || opts.opponentTeam.id == null) {
+            return opts.bracketType === BracketType.ROUND_ROBIN ? '?' : '-';
         }
 
-        if (team.score == null) {
-            if (matchState === MatchState.COMPLETED) {
+        if (opts.team.score == null) {
+            if (opts.matchState === MatchState.COMPLETED) {
                 // Some brackets in start.gg don't contain score, only reporting a win or a loss.
-                return team.isWinner ? 'W' : 'L';
-            } else if (matchState === MatchState.IN_PROGRESS || matchState === MatchState.NOT_STARTED) {
+                return opts.team.isWinner ? 'W' : 'L';
+            } else if (opts.matchState === MatchState.IN_PROGRESS || opts.matchState === MatchState.NOT_STARTED) {
                 return '0';
             } else {
-                return bracketType === BracketType.ROUND_ROBIN ? '?' : '-';
+                return opts.bracketType === BracketType.ROUND_ROBIN ? '?' : '-';
             }
         }
 
-        return String(team.score);
+        return String(opts.team.score);
     }
 
     formatTeamName(name: string | undefined | null): string {

@@ -8,4 +8,4 @@ export type { EliminationAnimator, SwissAnimator } from './types/animator';
 export { BaseBracketAnimator } from './animator/BaseBracketAnimator';
 
 export { BaseTextFormatter } from './formatter/BaseTextFormatter';
-export type { TextFormatter } from './formatter/TextFormatter';
+export type { TextFormatter, FormatScoreOpts } from './formatter/TextFormatter';
