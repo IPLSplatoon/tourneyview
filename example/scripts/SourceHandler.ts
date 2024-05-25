@@ -4,7 +4,7 @@ const tournamentDataInputWrapper = <HTMLDivElement>document.getElementById('tour
 const matchQueryContainer = document.getElementById('match-query-container')!;
 
 function checkSource() {
-    apiKeyInputWrapper.style.display = sourceSelect.value === 'startgg' ? 'block' : 'none';
+    apiKeyInputWrapper.style.display = (sourceSelect.value === 'startgg' || sourceSelect.value === 'sendouink') ? 'block' : 'none';
     matchQueryContainer.style.display = sourceSelect.value === 'clipboard' || sourceSelect.value === 'input' ? 'none' : 'block';
     tournamentDataInputWrapper.style.display = sourceSelect.value === 'input' ? 'block' : 'none';
 }

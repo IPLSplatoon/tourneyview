@@ -6,7 +6,7 @@ import {
     MatchQueryParameter,
     MatchQuerySelectParameter
 } from '../packages/importer/lib/types/MatchQuery';
-import { StartggImporter, BattlefyImporter } from '../packages/importer/lib';
+import { StartggImporter, BattlefyImporter, SendouInkImporter } from '../packages/importer/lib';
 import type { MatchImporter } from '../packages/importer/lib';
 import { Bracket } from '@tourneyview/common';
 import { ClipboardImporter } from './scripts/ClipboardImporter';
@@ -35,6 +35,8 @@ function getImporter(): MatchImporter<unknown> {
             return new ClipboardImporter();
         case 'input':
             return new TextInputImporter();
+        case 'sendouink':
+            return new SendouInkImporter(apiKeyInput.value);
         default:
             throw new Error(`Unknown source ${sourceSelect.value}`);
     }
