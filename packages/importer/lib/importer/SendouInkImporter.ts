@@ -310,7 +310,7 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
             eventName: opts.tournamentName,
             matchGroups: [
                 {
-                    id: String(stage.id),
+                    id: opts.groupId == null ? String(stage.id) : String(opts.groupId),
                     name: opts.groupId == null || !groupMap.has(opts.groupId) ? stage.name : `Group ${SendouInkImporter.groupNumberToLetter(groupMap.get(opts.groupId)!.number)}`,
                     containedMatchType: opts.matchType,
                     matches: bracketDetails.data.data.match
