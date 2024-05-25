@@ -461,7 +461,8 @@ export class SingleEliminationRenderer {
         }
 
         if (roundNames.length !== roundNumbers.length) {
-            roundNames.unshift(...d3.range(roundNumbers.length - roundNames.length).map(roundNumber => `Round ${roundNumber + 1}`));
+            roundNumbers.sort((a, b) => a - b);
+            roundNames.unshift(...roundNumbers.slice(0, roundNumbers.length - roundNames.length).map(roundNumber => `Round ${roundNumber}`));
         }
 
         return roundNames;
