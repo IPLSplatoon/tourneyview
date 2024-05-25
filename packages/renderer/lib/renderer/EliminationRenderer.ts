@@ -19,6 +19,7 @@ export type EliminationRendererOpts = {
     onCellUpdate?: EliminationRendererCellUpdateCallback
     thirdPlaceMatchLabelHeight?: number
     maxScale?: number
+    curveFunction?: d3.CurveFactory
 }
 
 export type EliminationRendererCellCreationCallback = (element: d3.Selection<HTMLDivElement, HierarchyNode<Match>, HTMLDivElement, unknown>) => void;
@@ -49,6 +50,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
     private readonly onCellCreation?: EliminationRendererCellCreationCallback;
     private readonly onCellUpdate?: EliminationRendererCellUpdateCallback;
     private readonly thirdPlaceMatchLabelHeight: number;
+    private readonly curveFunction?: d3.CurveFactory;
 
     private activeBracketId: string | null;
     private activeMatchType?: ContainedMatchType;
@@ -72,6 +74,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
         this.renderedBracketWidth = 1;
         this.renderedBracketHeight = 1;
         this.thirdPlaceMatchLabelHeight = opts.thirdPlaceMatchLabelHeight ?? 20;
+        this.curveFunction = opts.curveFunction;
 
         this.element = d3
             .create('div')
@@ -171,7 +174,8 @@ export class EliminationRenderer extends BracketTypeRenderer {
                     : undefined,
                 thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight,
                 isLosersBracket: data.type === BracketType.DOUBLE_ELIMINATION
-                    && matchGroup.containedMatchType === ContainedMatchType.LOSERS
+                    && matchGroup.containedMatchType === ContainedMatchType.LOSERS,
+                curveFunction: this.curveFunction
             });
 
             this.renderedBracketHeight = renderResult.height;
@@ -193,7 +197,8 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 bracketTitle: 'Winners Bracket',
                 bracketType,
                 thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight,
-                isLosersBracket: false
+                isLosersBracket: false,
+                curveFunction: this.curveFunction
             });
             const losersRenderResult = this.bottomRenderer!.setData(losersHierarchy, {
                 cellWidth,
@@ -206,7 +211,8 @@ export class EliminationRenderer extends BracketTypeRenderer {
                 bracketTitle: 'Losers Bracket',
                 bracketType,
                 thirdPlaceMatchLabelHeight: this.thirdPlaceMatchLabelHeight,
-                isLosersBracket: true
+                isLosersBracket: true,
+                curveFunction: this.curveFunction
             });
 
             this.renderedBracketHeight = winnersRenderResult.height + this.cellHeight / 2 + losersRenderResult.height;

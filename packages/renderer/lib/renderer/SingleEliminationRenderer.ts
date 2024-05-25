@@ -30,6 +30,7 @@ type SingleEliminationRendererSetDataOpts = {
     bracketType: BracketType.DOUBLE_ELIMINATION | BracketType.SINGLE_ELIMINATION
     thirdPlaceMatchLabelHeight: number
     isLosersBracket: boolean
+    curveFunction?: d3.CurveFactory
 };
 
 export class SingleEliminationRenderer {
@@ -192,7 +193,7 @@ export class SingleEliminationRenderer {
             .data(links)
             .join('path')
             // @ts-ignore
-            .attr('d', d3.link(d3.curveBumpX).y(d => d.x).x(d => this.width - d.y))
+            .attr('d', d3.link(opts.curveFunction ?? d3.curveBumpX).y(d => d.x).x(d => this.width - d.y))
             .attr('pathLength', 1)
             .attr('data-depth', d => d.source.depth)
             .classed('bracket-link', true);
