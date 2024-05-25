@@ -262,6 +262,8 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
             sets.push(...(await Promise.all(pageLoads)).flatMap(response => response.data.data.phase.sets.nodes));
         }
 
+        const maxLosersRoundNum = Math.max(...sets.filter(set => set.round < 0).map(set => set.round));
+
         const phaseGroup = getPhaseGroupsResponse.data.data.phase.phaseGroups.nodes[0];
         return {
             type: bracketType,
@@ -312,10 +314,14 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                                 }
                             }
 
+                            if (type === MatchType.LOSERS) {
+                                console.log(maxLosersRoundNum, set.round);
+                            }
+
                             return {
                                 id: StartggImporter.generateMatchId(phaseGroup.id, set.identifier),
                                 nextMatchId: nextSet ? StartggImporter.generateMatchId(phaseGroup.id, nextSet.identifier) : null,
-                                roundNumber: set.round < 0 ? Math.abs(set.round + 2) : set.round,
+                                roundNumber: set.round < 0 ? Math.abs(set.round - (maxLosersRoundNum + 1)) : set.round,
                                 type,
                                 state: StartggImporter.mapState(set.state),
                                 topTeam: {
