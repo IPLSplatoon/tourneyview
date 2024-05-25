@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { BaseType } from 'd3';
 import { TextFormatter } from '../formatter/TextFormatter';
-import { Bracket, BracketType, Match, MatchTeam } from '@tourneyview/common';
+import { Bracket, BracketType, Match, MatchState, MatchTeam } from '@tourneyview/common';
 import { Autoscroller } from './Autoscroller';
 import { BracketTypeRenderer } from '../types/renderer';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
@@ -111,6 +111,33 @@ export class SwissRenderer extends BracketTypeRenderer {
         this.activeBracketId = matchGroup.id;
         this.activeRoundNumber = data.roundNumber;
 
+        const setWinnerClasses = (selection: d3.Selection<HTMLDivElement, Match, HTMLDivElement, undefined>) => {
+            selection.each(function(d) {
+                if (d.state !== MatchState.IN_PROGRESS && d.state !== MatchState.COMPLETED) {
+                    this.classList.remove('top-team-winner', 'bottom-team-winner', 'in-progress');
+                } else {
+                    if (d.state === MatchState.IN_PROGRESS) {
+                        this.classList.add('in-progress');
+                        this.classList.remove('bottom-team-winner', 'top-team-winner');
+                    } else {
+                        this.classList.remove('in-progress');
+
+                        if (d.topTeam.isWinner) {
+                            this.classList.add('top-team-winner');
+                        } else {
+                            this.classList.remove('top-team-winner');
+                        }
+
+                        if (d.bottomTeam.isWinner) {
+                            this.classList.add('bottom-team-winner');
+                        } else {
+                            this.classList.remove('bottom-team-winner');
+                        }
+                    }
+                }
+            });
+        }
+
         const drawTeamName = <Datum>(elem: d3.Selection<HTMLDivElement, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
             const that = this;
             return elem
@@ -215,6 +242,7 @@ export class SwissRenderer extends BracketTypeRenderer {
                 enter => enter
                     .append('div')
                     .classed('match-row-wrapper', true)
+                    .call(setWinnerClasses)
                     .append('div')
                     .classed('match-row', true)
                     .call(drawTeamName, 'top', d => d.topTeam)
@@ -227,6 +255,8 @@ export class SwissRenderer extends BracketTypeRenderer {
                     })
                     .call(drawTeamName, 'bottom', d => d.bottomTeam),
                 update => update
+                    // @ts-ignore
+                    .call(setWinnerClasses)
                     .call(updateTeamName, 'top', d => d.topTeam)
                     .call(updateScore, 'top', d => d.topTeam, d => d.bottomTeam)
                     .call(updateTeamName, 'bottom', d => d.bottomTeam)

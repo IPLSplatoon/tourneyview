@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { BaseType, HierarchyPointNode, tree } from 'd3';
-import { BracketType, Match, MatchTeam, MatchType } from '@tourneyview/common';
+import { BracketType, Match, MatchState, MatchTeam, MatchType } from '@tourneyview/common';
 import {
     EliminationHierarchyNode,
     EliminationHierarchyNodeData,
@@ -245,6 +245,33 @@ export class SingleEliminationRenderer {
                 });
         }
 
+        const setWinnerClasses = (selection: d3.Selection<HTMLDivElement, d3.HierarchyNode<Match>, HTMLDivElement, undefined>) => {
+            selection.each(function(d) {
+                if (d.data.state !== MatchState.IN_PROGRESS && d.data.state !== MatchState.COMPLETED) {
+                    this.classList.remove('top-team-winner', 'bottom-team-winner', 'in-progress');
+                } else {
+                    if (d.data.state === MatchState.IN_PROGRESS) {
+                        this.classList.add('in-progress');
+                        this.classList.remove('bottom-team-winner', 'top-team-winner');
+                    } else {
+                        this.classList.remove('in-progress');
+
+                        if (d.data.topTeam.isWinner) {
+                            this.classList.add('top-team-winner');
+                        } else {
+                            this.classList.remove('top-team-winner');
+                        }
+
+                        if (d.data.bottomTeam.isWinner) {
+                            this.classList.add('bottom-team-winner');
+                        } else {
+                            this.classList.remove('bottom-team-winner');
+                        }
+                    }
+                }
+            });
+        }
+
         const drawThirdPlaceMatchLabel = (selection: d3.Selection<HTMLDivElement, d3.HierarchyNode<Match>, HTMLDivElement, undefined>) => {
             const labelHeight = opts.thirdPlaceMatchLabelHeight;
             selection.each(function(d) {
@@ -328,7 +355,8 @@ export class SingleEliminationRenderer {
                         .style('top', d => `${((d as HierarchyPointNode<Match>).x - opts.cellHeight / 2) - x0 + opts.cellHeight / 2 + yOffset}px`)
                         .style('position', 'absolute')
                         .classed('match-cell-wrapper', true)
-                        .attr('data-depth', d => d.depth);
+                        .attr('data-depth', d => d.depth)
+                        .call(setWinnerClasses);
 
                     wrapperSelection
                         .append('div')
@@ -349,6 +377,8 @@ export class SingleEliminationRenderer {
                             ? `${(opts.cellHeight + opts.thirdPlaceMatchLabelHeight)}px`
                             : `${(opts.cellHeight)}px`)
                         .style('width', `${(opts.cellWidth)}px`)
+                        // @ts-ignore
+                        .call(setWinnerClasses)
                         .call(updateTeamName, 'top', d => d.data?.topTeam)
                         .call(updateScore, 'top', d => d.data?.topTeam, d => d.data?.bottomTeam)
                         .call(updateTeamName, 'bottom', d => d.data?.bottomTeam)
