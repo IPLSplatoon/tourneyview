@@ -210,6 +210,10 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                         containedMatchType: opts.matchType,
                         matches: matchList.data
                             .filter(match => {
+                                if (isEliminationBracket && match.isBye) {
+                                    return false;
+                                }
+
                                 if (bracketType !== BracketType.DOUBLE_ELIMINATION) {
                                     return true;
                                 }

@@ -315,6 +315,10 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
                     containedMatchType: opts.matchType,
                     matches: bracketDetails.data.data.match
                         .filter(match => {
+                            if (isEliminationBracket && (match.opponent1 == null || match.opponent2 == null)) {
+                                return false;
+                            }
+
                             if (bracketType === BracketType.DOUBLE_ELIMINATION && opts.matchType !== ContainedMatchType.ALL_MATCHES) {
                                 const group = groupMap.get(match.group_id);
 
