@@ -9,3 +9,5 @@ export { BaseBracketAnimator } from './animator/BaseBracketAnimator';
 
 export { BaseTextFormatter } from './formatter/BaseTextFormatter';
 export type { TextFormatter, FormatScoreOpts } from './formatter/TextFormatter';
+
+export * from './utils';
