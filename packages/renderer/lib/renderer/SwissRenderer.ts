@@ -5,6 +5,7 @@ import { Bracket, BracketType, Match, MatchState, MatchTeam } from '@tourneyview
 import { Autoscroller } from './Autoscroller';
 import { BracketTypeRenderer } from '../types/renderer';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
+import { PublicBracketAnimationOpts } from '../types/animator';
 
 export type SwissRendererOpts = {
     formatter: TextFormatter
@@ -86,14 +87,25 @@ export class SwissRenderer extends BracketTypeRenderer {
         return this.wrapper.node()!;
     }
 
-    async hide() {
+    async hide(opts: PublicBracketAnimationOpts = {}) {
         if (this.activeBracketId != null) {
             const element = this.getElement();
             this.animator.swissAnimator.beforeHide(element, this);
-            await this.animator.swissAnimator.hide(element, this);
+            await this.animator.swissAnimator.hide(element, { renderer: this, ...opts });
             this.scroller.stop();
             element.style.visibility = 'hidden';
         }
+    }
+
+    beforeReveal(): void {
+        const node = this.getElement();
+        this.scroller.initScrollMask();
+        this.animator.swissAnimator.beforeReveal(node, this);
+        node.style.visibility = 'visible';
+    }
+
+    async reveal(opts: PublicBracketAnimationOpts = {}): Promise<void> {
+        await this.animator.swissAnimator.reveal(this.getElement(), { renderer: this, ...opts });
     }
 
     async setData(data: Bracket) {
@@ -263,12 +275,9 @@ export class SwissRenderer extends BracketTypeRenderer {
                     .call(updateScore, 'bottom', d => d.bottomTeam, d => d.topTeam)
             )
 
-        const node = this.getElement();
         if (switchingBrackets) {
-            this.scroller.initScrollMask();
-            this.animator.swissAnimator.beforeReveal(node, this);
-            node.style.visibility = 'visible';
-            await this.animator.swissAnimator.reveal(node, this);
+            this.beforeReveal();
+            await this.reveal();
         }
         this.scroller.start();
     }

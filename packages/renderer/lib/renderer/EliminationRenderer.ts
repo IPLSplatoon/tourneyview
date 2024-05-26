@@ -7,6 +7,7 @@ import { TextFormatter } from '../formatter/TextFormatter';
 import { BracketTypeRenderer } from '../types/renderer';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
 import { Zoomer } from './Zoomer';
+import { PublicBracketAnimationOpts } from '../types/animator';
 
 export type EliminationRendererOpts = {
     animator: BaseBracketAnimator
@@ -108,13 +109,23 @@ export class EliminationRenderer extends BracketTypeRenderer {
             opts.maxScale ?? 1.5);
     }
 
-    async hide() {
+    async hide(opts: PublicBracketAnimationOpts = {}) {
         if (this.activeBracketId != null) {
             const element = this.getElement();
             this.animator.eliminationAnimator.beforeHide(element, this);
-            await this.animator.eliminationAnimator.hide(element, this);
+            await this.animator.eliminationAnimator.hide(element, { renderer: this, ...opts });
             element.style.visibility = 'hidden';
         }
+    }
+
+    beforeReveal(): void {
+        const element = this.getElement();
+        this.animator.eliminationAnimator.beforeReveal(element, this);
+        element.style.visibility = 'visible';
+    }
+
+    async reveal(opts: PublicBracketAnimationOpts = {}): Promise<void> {
+        await this.animator.eliminationAnimator.reveal(this.getElement(), { renderer: this, ...opts });
     }
 
     install(target: HTMLElement) {
@@ -222,10 +233,8 @@ export class EliminationRenderer extends BracketTypeRenderer {
         this.zoomer.setContentSize(this.renderedBracketWidth, this.renderedBracketHeight);
 
         if (switchingBrackets) {
-            const element = this.getElement();
-            this.animator.eliminationAnimator.beforeReveal(element, this);
-            element.style.visibility = 'visible';
-            await this.animator.eliminationAnimator.reveal(element, this);
+            this.beforeReveal();
+            await this.reveal();
         }
     }
 

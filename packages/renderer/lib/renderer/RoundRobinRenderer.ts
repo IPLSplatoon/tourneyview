@@ -5,6 +5,7 @@ import { TextFormatter } from '../formatter/TextFormatter';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
 import uniqBy from 'lodash/uniqBy';
 import { Zoomer } from './Zoomer';
+import { PublicBracketAnimationOpts } from '../types/animator';
 
 export type RoundRobinRendererOpts = {
     formatter: TextFormatter
@@ -99,13 +100,23 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
         return this.wrapper.node()!;
     }
 
-    async hide(): Promise<void> {
+    async hide(opts: PublicBracketAnimationOpts = {}): Promise<void> {
         if (this.activeBracketId != null) {
             const element = this.getElement();
             this.animator.roundRobinAnimator.beforeHide(element, this);
-            await this.animator.roundRobinAnimator.hide(element, this);
+            await this.animator.roundRobinAnimator.hide(element, { renderer: this, ...opts });
             element.style.visibility = 'hidden';
         }
+    }
+
+    beforeReveal(): void {
+        const element = this.getElement();
+        this.animator.roundRobinAnimator.beforeReveal(element, this);
+        element.style.visibility = 'visible';
+    }
+
+    async reveal(opts: PublicBracketAnimationOpts = {}): Promise<void> {
+        await this.animator.roundRobinAnimator.reveal(this.getElement(), { renderer: this, ...opts });
     }
 
     install(target: HTMLElement): void {
@@ -259,10 +270,8 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
             );
 
         if (doFullUpdate) {
-            const element = this.getElement();
-            this.animator.roundRobinAnimator.beforeReveal(element, this);
-            element.style.visibility = 'visible';
-            await this.animator.roundRobinAnimator.reveal(element, this);
+            this.beforeReveal();
+            await this.reveal();
         }
     }
 

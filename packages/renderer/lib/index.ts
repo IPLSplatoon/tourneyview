@@ -4,7 +4,7 @@ export type { SwissRenderer } from './renderer/SwissRenderer';
 
 export { D3BracketAnimator } from './animator/d3/D3BracketAnimator';
 export { DummyBracketAnimator } from './animator/dummy/DummyBracketAnimator';
-export type { EliminationAnimator, SwissAnimator } from './types/animator';
+export type { EliminationAnimator, SwissAnimator, RoundRobinAnimator, BracketAnimationOpts, PublicBracketAnimationOpts } from './types/animator';
 export { BaseBracketAnimator } from './animator/BaseBracketAnimator';
 
 export { BaseTextFormatter } from './formatter/BaseTextFormatter';

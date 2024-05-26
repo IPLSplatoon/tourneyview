@@ -9,6 +9,7 @@ import * as d3 from 'd3';
 import { DummyRenderer } from './DummyRenderer';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
 import { RoundRobinRenderer, RoundRobinRendererOpts } from './RoundRobinRenderer';
+import { PublicBracketAnimationOpts } from '../types/animator';
 
 type WithoutCommonOpts<T> = Omit<T, 'animator' | 'formatter'>;
 export type BracketRendererOpts = {
@@ -57,6 +58,14 @@ export class BracketRenderer {
         }
 
         return this.activeRenderer.setData(data);
+    }
+
+    beforeReveal(): void {
+        this.activeRenderer?.beforeReveal();
+    }
+
+    async reveal(opts: PublicBracketAnimationOpts = {}): Promise<void> {
+        await this.activeRenderer?.reveal(opts);
     }
 
     private getRenderer(type: BracketType): BracketTypeRenderer {
