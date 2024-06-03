@@ -41,6 +41,19 @@ export class DummyRenderer implements BracketTypeRenderer {
             .end();
     }
 
+    beforeReveal(): void {
+        this.element.style('opacity', '0');
+    }
+
+    reveal(): Promise<void> {
+        return this.element
+            .transition('fade-in')   
+            .duration(350)
+            .ease(d3.easeLinear)
+            .style('opacity', '1')
+            .end();
+    }
+
     install(target: HTMLElement) {
         target.appendChild(this.getElement());
     }

@@ -1,6 +1,6 @@
 import '@tourneyview/renderer/css/base.css';
 import './example.css';
-import { BracketRenderer, D3BracketAnimator } from '../packages/renderer/lib';
+import { BracketRenderer, D3BracketAnimator, revealOnObsSourceVisible } from '../packages/renderer/lib';
 import {
     MatchQueryOption,
     MatchQueryParameter,
@@ -207,3 +207,5 @@ renderer.element.style.width = '500px';
 renderer.element.style.resize = 'both';
 renderer.element.style.border = '1px solid red';
 document.body.appendChild(renderer.element);
+
+revealOnObsSourceVisible(renderer, 500);
