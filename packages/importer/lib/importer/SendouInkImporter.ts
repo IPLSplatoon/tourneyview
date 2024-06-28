@@ -84,11 +84,6 @@ interface SendouInkTournamentBracketDetailsResponse {
             lastGameFinishedAt?: number
             createdAt?: number | null
         }[]
-        participant: {
-            id: number
-            name: string
-            tournament_id: number
-        }[]
     }
     meta: {
         // RR
@@ -98,6 +93,33 @@ interface SendouInkTournamentBracketDetailsResponse {
         roundCount?: number
     }
 }
+
+type SendouInkgetTournamentTeamsResponse = {
+    id: number
+    name: string
+    registeredAt: string
+    checkedIn: boolean
+    url: string
+    teamPageUrl: string
+    logoUrl: string
+    seed: number
+    mapPool: {
+        mode: string
+        stage: {
+            id: number
+            name: string
+        }
+    }[]
+    members: {
+        userId: number
+        name: string
+        discordId: string
+        battlefy: string | null
+        avatarUrl: string | null
+        captain: boolean
+        joinedAt: string
+    }[]
+}[]
 
 export class SendouInkBracketOption implements MatchQueryOption {
     value: MatchQueryParameterValue
@@ -252,9 +274,11 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
             });
         }
 
-        const participantMap: Map<number, SendouInkTournamentBracketDetailsResponse['data']['participant'][number]> = new Map();
-        for (const participant of bracketDetails.data.data.participant) {
-            participantMap.set(participant.id, participant);
+        const teams = await this.axios.get<SendouInkgetTournamentTeamsResponse>(`/tournament/${opts.tournamentId}/teams`);
+
+        const teamMap: Map<number, SendouInkgetTournamentTeamsResponse[number]> = new Map();
+        for (const team of teams.data) {
+            teamMap.set(team.id, team);
         }
         const groupMap: Map<number, SendouInkTournamentBracketDetailsResponse['data']['group'][number]> = new Map();
         for (const group of bracketDetails.data.data.group) {
@@ -293,7 +317,7 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
                 }
             }
 
-            const participant = participantMap.get(opponent.id);
+            const participant = teamMap.get(opponent.id);
             return {
                 id: opponent.id,
                 name: participant?.name,
