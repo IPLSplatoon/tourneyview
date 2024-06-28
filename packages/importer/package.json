@@ -1,6 +1,6 @@
 {
   "name": "@tourneyview/importer",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Import tournament data from various sources",
   "exports": {
     ".": {
