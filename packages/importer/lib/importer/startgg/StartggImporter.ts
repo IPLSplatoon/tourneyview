@@ -314,10 +314,6 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                                 }
                             }
 
-                            if (type === MatchType.LOSERS) {
-                                console.log(maxLosersRoundNum, set.round);
-                            }
-
                             return {
                                 id: StartggImporter.generateMatchId(phaseGroup.id, set.identifier),
                                 nextMatchId: nextSet ? StartggImporter.generateMatchId(phaseGroup.id, nextSet.identifier) : null,
