@@ -215,7 +215,8 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
               }
             }));
 
-        if (getPhaseGroupsResponse.data.data.phase.groupCount > 1 && opts.phaseGroupId == null) {
+        const phaseGroupCount = getPhaseGroupsResponse.data.data.phase.groupCount;
+        if (phaseGroupCount > 1 && opts.phaseGroupId == null) {
             throw new Error('Tried to import a phase with multiple groups without specifying which group to import!');
         }
 
@@ -276,7 +277,7 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
             matchGroups: [
                 {
                     id: String(phaseGroup.id),
-                    name: `Pool ${phaseGroup.displayIdentifier}`,
+                    name: phaseGroupCount > 1 ? `Pool ${phaseGroup.displayIdentifier}` : getPhaseGroupsResponse.data.data.phase.name,
                     containedMatchType: opts.matchType,
                     matches: sets
                         .filter(set => {
