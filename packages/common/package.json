@@ -1,6 +1,6 @@
 {
   "name": "@tourneyview/common",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Common tourneyview types & functionality",
   "main": "dist/index.iife.js",
   "module": "dist/index.mjs",
