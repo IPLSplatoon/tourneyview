@@ -269,7 +269,10 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
             type: bracketType,
             name: getPhaseGroupsResponse.data.data.phase.name,
             roundNumber: opts.roundNumber,
-            eventName: `${getPhaseGroupsResponse.data.data.phase.event.tournament.name} - ${getPhaseGroupsResponse.data.data.phase.event.name}`,
+            eventName: getPhaseGroupsResponse.data.data.phase.event.name,
+            eventId: String(getPhaseGroupsResponse.data.data.phase.event.id),
+            tournamentName: getPhaseGroupsResponse.data.data.phase.event.tournament.name,
+            tournamentId: String(getPhaseGroupsResponse.data.data.phase.event.tournament.id),
             matchGroups: [
                 {
                     id: String(phaseGroup.id),

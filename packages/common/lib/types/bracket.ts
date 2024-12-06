@@ -6,6 +6,11 @@ export interface Bracket {
     type: BracketType
     name: string
     eventName: string
+    eventId?: string
+    // The tournament name and ID are filled if the tournament hosts more than one event.
+    // This currently only happens for start.gg events.
+    tournamentName?: string
+    tournamentId?: string
     matchGroups: MatchGroup[]
 }
 

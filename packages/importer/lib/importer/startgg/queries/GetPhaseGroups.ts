@@ -6,8 +6,10 @@ query PhaseGroups($phaseId: ID!, $phaseGroupIds: [ID]) {
     name
     isExhibition
     event {
+      id
       name
       tournament {
+        id
         name
       }
     }
@@ -34,8 +36,10 @@ export interface GetPhaseGroupsResponse {
             groupCount: number
             name: string
             event: {
+                id: number
                 name: string
                 tournament: {
+                    id: number
                     name: string
                 }
             }

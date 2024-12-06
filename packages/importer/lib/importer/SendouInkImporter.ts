@@ -332,6 +332,7 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
             type: bracketType,
             roundNumber: opts.roundNumber,
             eventName: opts.tournamentName,
+            eventId: String(opts.tournamentId),
             matchGroups: [
                 {
                     id: opts.groupId == null ? String(stage.id) : String(opts.groupId),
