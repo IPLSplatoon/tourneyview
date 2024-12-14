@@ -7,12 +7,17 @@ import { BracketTypeRenderer } from '../types/renderer';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
 import { PublicBracketAnimationOpts } from '../types/animator';
 
+export type SwissRendererCellCreationCallback = (element: d3.Selection<HTMLDivElement, Match, HTMLDivElement, unknown>) => void;
+export type SwissRendererCellUpdateCallback = (element: d3.Selection<BaseType, Match, HTMLDivElement, unknown>) => void;
+
 export type SwissRendererOpts = {
     formatter: TextFormatter
     animator: BaseBracketAnimator
     rowHeight?: number
     rowGap?: number
     useScrollMask?: boolean
+    onCellCreation?: SwissRendererCellCreationCallback
+    onCellUpdate?: SwissRendererCellUpdateCallback
 };
 
 export class SwissRenderer extends BracketTypeRenderer {
@@ -23,6 +28,8 @@ export class SwissRenderer extends BracketTypeRenderer {
 
     private readonly rowHeight: number;
     private readonly rowGap: number;
+    private readonly onCellCreation?: SwissRendererCellCreationCallback;
+    private readonly onCellUpdate?: SwissRendererCellUpdateCallback;
 
     private readonly formatter: TextFormatter;
     private readonly scroller: Autoscroller;
@@ -42,6 +49,8 @@ export class SwissRenderer extends BracketTypeRenderer {
 
         this.rowHeight = opts.rowHeight ?? 50;
         this.rowGap = opts.rowGap ?? 5;
+        this.onCellCreation = opts.onCellCreation;
+        this.onCellUpdate = opts.onCellUpdate;
 
         this.wrapper = d3
             .create('div')
@@ -251,28 +260,38 @@ export class SwissRenderer extends BracketTypeRenderer {
             .selectAll('div.match-row-wrapper')
             .data(matchGroup.matches, datum => (datum as Match).id)
             .join(
-                enter => enter
-                    .append('div')
-                    .classed('match-row-wrapper', true)
-                    .call(setWinnerClasses)
-                    .append('div')
-                    .classed('match-row', true)
-                    .call(drawTeamName, 'top', d => d.topTeam)
-                    .call(elem => {
-                        elem
-                            .append('div')
-                            .classed('match-row__scores', true)
-                            .call(drawScore, 'top', d => d.topTeam, d => d.bottomTeam)
-                            .call(drawScore, 'bottom', d => d.bottomTeam, d => d.topTeam)
-                    })
-                    .call(drawTeamName, 'bottom', d => d.bottomTeam),
-                update => update
-                    // @ts-ignore
-                    .call(setWinnerClasses)
-                    .call(updateTeamName, 'top', d => d.topTeam)
-                    .call(updateScore, 'top', d => d.topTeam, d => d.bottomTeam)
-                    .call(updateTeamName, 'bottom', d => d.bottomTeam)
-                    .call(updateScore, 'bottom', d => d.bottomTeam, d => d.topTeam)
+                enter => {
+                    const wrapperSelection = enter
+                        .append('div')
+                        .classed('match-row-wrapper', true)
+                        .call(setWinnerClasses);
+
+                    wrapperSelection
+                        .append('div')
+                        .classed('match-row', true)
+                        .call(drawTeamName, 'top', d => d.topTeam)
+                        .call(elem => {
+                            elem
+                                .append('div')
+                                .classed('match-row__scores', true)
+                                .call(drawScore, 'top', d => d.topTeam, d => d.bottomTeam)
+                                .call(drawScore, 'bottom', d => d.bottomTeam, d => d.topTeam)
+                        })
+                        .call(drawTeamName, 'bottom', d => d.bottomTeam);
+
+                    return this.onCellCreation ? wrapperSelection.call(this.onCellCreation) : wrapperSelection;
+                },
+                update => {
+                    const selection = update
+                        // @ts-ignore
+                        .call(setWinnerClasses)
+                        .call(updateTeamName, 'top', d => d.topTeam)
+                        .call(updateScore, 'top', d => d.topTeam, d => d.bottomTeam)
+                        .call(updateTeamName, 'bottom', d => d.bottomTeam)
+                        .call(updateScore, 'bottom', d => d.bottomTeam, d => d.topTeam);
+
+                    return this.onCellUpdate ? selection.call(this.onCellUpdate) : selection;
+                }
             )
 
         if (switchingBrackets) {

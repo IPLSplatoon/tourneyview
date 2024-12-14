@@ -1,6 +1,19 @@
 export { BracketRenderer } from './renderer/BracketRenderer';
-export type { EliminationRenderer } from './renderer/EliminationRenderer';
-export type { SwissRenderer } from './renderer/SwissRenderer';
+export type {
+    EliminationRenderer,
+    EliminationRendererCellCreationCallback,
+    EliminationRendererCellUpdateCallback
+} from './renderer/EliminationRenderer';
+export type {
+    SwissRenderer,
+    SwissRendererCellCreationCallback,
+    SwissRendererCellUpdateCallback
+} from './renderer/SwissRenderer';
+export type {
+    RoundRobinRenderer,
+    RoundRobinRendererGridItemCreationCallback,
+    RoundRobinRendererGridItemUpdateCallback
+} from './renderer/RoundRobinRenderer';
 
 export { D3BracketAnimator } from './animator/d3/D3BracketAnimator';
 export { DummyBracketAnimator } from './animator/dummy/DummyBracketAnimator';

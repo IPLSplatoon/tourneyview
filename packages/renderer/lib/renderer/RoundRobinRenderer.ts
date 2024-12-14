@@ -6,6 +6,10 @@ import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
 import uniqBy from 'lodash/uniqBy';
 import { Zoomer } from './Zoomer';
 import { PublicBracketAnimationOpts } from '../types/animator';
+import { BaseType } from 'd3';
+
+export type RoundRobinRendererGridItemCreationCallback = (element: d3.Selection<HTMLDivElement, RoundRobinGridItem, HTMLDivElement, unknown>) => void;
+export type RoundRobinRendererGridItemUpdateCallback = (element: d3.Selection<BaseType, RoundRobinGridItem, HTMLDivElement, unknown>) => void;
 
 export type RoundRobinRendererOpts = {
     formatter: TextFormatter
@@ -15,6 +19,8 @@ export type RoundRobinRendererOpts = {
     maxScale?: number
     rowGap?: number
     columnGap?: number
+    onGridItemCreation?: RoundRobinRendererGridItemCreationCallback
+    onGridItemUpdate?: RoundRobinRendererGridItemUpdateCallback
 };
 
 export interface MatchGridItem {
@@ -57,6 +63,8 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
     private readonly rowWidth: number;
     private readonly rowGap: number;
     private readonly columnGap: number;
+    private readonly onGridItemCreation?: RoundRobinRendererGridItemCreationCallback;
+    private readonly onGridItemUpdate?: RoundRobinRendererGridItemUpdateCallback;
 
     private activeBracketId: string | null;
     private activeGridSize?: number;
@@ -73,6 +81,8 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
         this.rowWidth = opts.rowWidth ?? 125;
         this.rowGap = opts.rowGap ?? 4;
         this.columnGap = opts.columnGap ?? 4;
+        this.onGridItemCreation = opts.onGridItemCreation;
+        this.onGridItemUpdate = opts.onGridItemUpdate;
 
         this.wrapper = d3
             .create('div')
@@ -224,49 +234,57 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
             .selectAll('div.round-robin-grid-item')
             .data(gridItems)
             .join(
-                enter => enter
-                    .append('div')
-                    .classed('round-robin-grid-item', true)
-                    .each(function(d) {
-                        if (d.type === 'blank') {
-                            this.classList.add('type-blank', `type-blank-${d.style}`);
-                        } else if (d.type === 'teamName') {
-                            this.classList.add('type-team-name', `type-team-name-${d.side}`)
-                            that.animator.setTeamName(
-                                this,
-                                '',
-                                d.name,
-                                d.isDisqualified,
-                                BracketType.ROUND_ROBIN);
-                        } else {
-                            this.classList.add(`type-${d.type}`);
-                        }
-
-                        if (d.type === 'match') {
-                            this.dataset.xPosition = d.x.toString();
-                            this.dataset.yPosition = d.y.toString();
-                            that.insertScoreLayout(this, d);
-                            that.setWinnerClasses(this, d);
-                        }
-                    }),
-                update => update
-                    .each(function(d) {
-                        that.setWinnerClasses(<HTMLElement>this, d);
-
-                        if (d.type === 'match') {
-                            that.updateScore(<HTMLElement>this, d);
-                        } else if (d.type === 'teamName') {
-                            const currentValue = (<HTMLElement>this).innerText;
-                            if (currentValue !== d.name) {
-                                that.animator.animateTeamNameUpdate(
-                                    <HTMLElement>this,
-                                    currentValue,
+                enter => {
+                    const selection = enter
+                        .append('div')
+                        .classed('round-robin-grid-item', true)
+                        .each(function (d) {
+                            if (d.type === 'blank') {
+                                this.classList.add('type-blank', `type-blank-${d.style}`);
+                            } else if (d.type === 'teamName') {
+                                this.classList.add('type-team-name', `type-team-name-${d.side}`)
+                                that.animator.setTeamName(
+                                    this,
+                                    '',
                                     d.name,
                                     d.isDisqualified,
                                     BracketType.ROUND_ROBIN);
+                            } else {
+                                this.classList.add(`type-${d.type}`);
                             }
-                        }
-                    })
+
+                            if (d.type === 'match') {
+                                this.dataset.xPosition = d.x.toString();
+                                this.dataset.yPosition = d.y.toString();
+                                that.insertScoreLayout(this, d);
+                                that.setWinnerClasses(this, d);
+                            }
+                        });
+
+                    return this.onGridItemCreation ? selection.call(this.onGridItemCreation) : selection;
+                },
+                update => {
+                    const selection = update
+                        .each(function (d) {
+                            that.setWinnerClasses(<HTMLElement>this, d);
+
+                            if (d.type === 'match') {
+                                that.updateScore(<HTMLElement>this, d);
+                            } else if (d.type === 'teamName') {
+                                const currentValue = (<HTMLElement>this).innerText;
+                                if (currentValue !== d.name) {
+                                    that.animator.animateTeamNameUpdate(
+                                        <HTMLElement>this,
+                                        currentValue,
+                                        d.name,
+                                        d.isDisqualified,
+                                        BracketType.ROUND_ROBIN);
+                                }
+                            }
+                        });
+
+                    return this.onGridItemUpdate ? selection.call(this.onGridItemUpdate) : selection;
+                }
             );
 
         if (doFullUpdate) {
