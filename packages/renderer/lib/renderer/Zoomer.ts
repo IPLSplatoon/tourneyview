@@ -14,7 +14,11 @@ export class Zoomer {
 
     private readonly maxScale: number;
 
-    constructor(container: d3.Selection<Element, undefined, null, undefined>, onZoom: (event: d3.D3ZoomEvent<HTMLElement, never>) => void, maxScale = 2) {
+    constructor(
+        container: d3.Selection<Element, undefined, null, undefined>,
+        onZoom: (event: d3.D3ZoomEvent<HTMLElement, never>) => void,
+        maxScale = 2
+    ) {
         this.zoomBehavior = d3.zoom()
             .extent([[0, 0], [2048, 2048]])
             .on('zoom', e => onZoom(e));

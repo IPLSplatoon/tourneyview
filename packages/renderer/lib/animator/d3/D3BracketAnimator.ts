@@ -16,7 +16,7 @@ export class D3BracketAnimator extends BaseBracketAnimator {
     }
 
     animateScoreUpdate(element: HTMLElement, oldValue: number, newValue: number, formattedNewValue: string, isDisqualified: boolean, bracketType: BracketType): void {
-        const transformFunc = bracketType === BracketType.SWISS || bracketType === BracketType.ROUND_ROBIN ? 'translateY' : 'translateX';
+        const transformFunc = bracketType === BracketType.ROUND_ROBIN ? 'translateY' : 'translateX';
         const transformAmount = transformFunc === 'translateY' ? element.getBoundingClientRect().height : element.getBoundingClientRect().width;
         const direction = isNaN(oldValue) || oldValue < newValue ? -1 : 1;
         const selection = d3.select(element);

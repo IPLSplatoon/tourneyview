@@ -2,7 +2,6 @@ import * as d3 from 'd3';
 import { BaseType } from 'd3';
 import { TextFormatter } from '../formatter/TextFormatter';
 import { Bracket, BracketType, Match, MatchState, MatchTeam } from '@tourneyview/common';
-import { Autoscroller } from './Autoscroller';
 import { BracketTypeRenderer } from '../types/renderer';
 import { BaseBracketAnimator } from '../animator/BaseBracketAnimator';
 import { PublicBracketAnimationOpts } from '../types/animator';
@@ -13,11 +12,14 @@ export type SwissRendererCellUpdateCallback = (element: d3.Selection<BaseType, M
 export type SwissRendererOpts = {
     formatter: TextFormatter
     animator: BaseBracketAnimator
-    rowHeight?: number
+    cellWidth?: number
+    cellHeight?: number
+    columnGap?: number
     rowGap?: number
     useScrollMask?: boolean
     onCellCreation?: SwissRendererCellCreationCallback
     onCellUpdate?: SwissRendererCellUpdateCallback
+    maxScale?: number
 };
 
 export class SwissRenderer extends BracketTypeRenderer {
@@ -26,19 +28,18 @@ export class SwissRenderer extends BracketTypeRenderer {
     private readonly wrapper: d3.Selection<HTMLDivElement, undefined, null, undefined>;
     private readonly element: d3.Selection<HTMLDivElement, undefined, null, undefined>;
 
-    private readonly rowHeight: number;
+    private readonly cellWidth: number;
+    private readonly cellHeight: number;
+    private readonly columnGap: number;
     private readonly rowGap: number;
     private readonly onCellCreation?: SwissRendererCellCreationCallback;
     private readonly onCellUpdate?: SwissRendererCellUpdateCallback;
 
     private readonly formatter: TextFormatter;
-    private readonly scroller: Autoscroller;
     private readonly animator: BaseBracketAnimator;
 
     private activeBracketId: string | null;
     private activeRoundNumber?: number;
-
-    private resizeObserver: ResizeObserver;
 
     constructor(opts: SwissRendererOpts) {
         super();
@@ -47,8 +48,10 @@ export class SwissRenderer extends BracketTypeRenderer {
         this.animator = opts.animator;
         this.activeBracketId = null;
 
-        this.rowHeight = opts.rowHeight ?? 50;
+        this.cellWidth = opts.cellWidth ?? 250;
+        this.cellHeight = opts.cellHeight ?? 65;
         this.rowGap = opts.rowGap ?? 5;
+        this.columnGap = opts.columnGap ?? 5;
         this.onCellCreation = opts.onCellCreation;
         this.onCellUpdate = opts.onCellUpdate;
 
@@ -58,38 +61,19 @@ export class SwissRenderer extends BracketTypeRenderer {
         this.element = this.wrapper
             .append('div')
             .classed('swiss-renderer', true)
-            .style('grid-auto-rows', `${(this.rowHeight)}px`)
+            .style('grid-auto-rows', `${(this.cellHeight)}px`)
+            .style('grid-template-columns', `repeat(auto-fill, ${this.cellWidth}px)`)
+            .style('column-gap', `${this.columnGap}px`)
             .style('row-gap', `${this.rowGap}px`);
-
-        this.resizeObserver = new ResizeObserver(entries => {
-            for (const entry of entries) {
-                if (entry.contentBoxSize) {
-                    this.handleHeightChange(entry.contentBoxSize[0].blockSize);
-                }
-            }
-        });
-
-        this.resizeObserver.observe(this.wrapper.node()!);
-
-        this.scroller = new Autoscroller(this.element.node()!, this.rowHeight, this.rowGap, opts.useScrollMask ?? false);
-    }
-
-    private handleHeightChange(elementHeight: number) {
-        const rowsPerScreen = Math.floor((elementHeight + this.rowGap) / (this.rowHeight + this.rowGap));
-        const innerHeight = rowsPerScreen * (this.rowHeight + this.rowGap) - this.rowGap;
-        this.element.style('max-height', `${innerHeight}px`);
-        this.scroller.setHeights(innerHeight, rowsPerScreen);
     }
 
     install(target: HTMLElement) {
         const element = this.getElement();
         target.appendChild(element);
-        this.handleHeightChange(element.getBoundingClientRect().height);
     }
 
     destroy() {
         this.wrapper.remove();
-        this.resizeObserver.disconnect();
     }
 
     getElement(): HTMLElement {
@@ -101,14 +85,12 @@ export class SwissRenderer extends BracketTypeRenderer {
             const element = this.getElement();
             this.animator.swissAnimator.beforeHide(element, this);
             await this.animator.swissAnimator.hide(element, { renderer: this, ...opts });
-            this.scroller.stop();
             element.style.visibility = 'hidden';
         }
     }
 
     beforeReveal(): void {
         const node = this.getElement();
-        this.scroller.initScrollMask();
         this.animator.swissAnimator.beforeReveal(node, this);
         node.style.visibility = 'visible';
     }
@@ -163,8 +145,8 @@ export class SwissRenderer extends BracketTypeRenderer {
             const that = this;
             return elem
                 .append('div')
-                .classed('match-row__team-name', true)
-                .classed(`match-row__${position}-team-name`, true)
+                .classed('match-cell__team-name', true)
+                .classed(`match-cell__${position}-team-name`, true)
                 .each(function (d) {
                     const teamData = team(d);
                     that.animator.setTeamName(
@@ -185,10 +167,10 @@ export class SwissRenderer extends BracketTypeRenderer {
             const that = this;
             return elem
                 .append('div')
-                .classed('match-row__score-wrapper', true)
+                .classed('match-cell__score-wrapper', true)
                 .append('div')
-                .classed('match-row__score', true)
-                .classed(`match-row__${position}-score`, true)
+                .classed('match-cell__score', true)
+                .classed(`match-cell__${position}-score`, true)
                 .each(function (d) {
                     const teamData = team(d);
                     that.animator.setScore(
@@ -209,7 +191,7 @@ export class SwissRenderer extends BracketTypeRenderer {
         const updateTeamName = <Datum>(elem: d3.Selection<BaseType, Datum, HTMLElement, unknown>, position: 'top' | 'bottom', team: (d: Datum) => MatchTeam) => {
             const that = this;
             return elem
-                .select(`.match-row__${position}-team-name`)
+                .select(`.match-cell__${position}-team-name`)
                 .each(function (d) {
                     const currentText = (this as HTMLElement).textContent ?? '';
                     const teamData = team(d);
@@ -233,7 +215,7 @@ export class SwissRenderer extends BracketTypeRenderer {
         ) => {
             const that = this;
             return elem
-                .select(`.match-row__${position}-score`)
+                .select(`.match-cell__${position}-score`)
                 .each(function (d) {
                     const oldFormattedScore = (this as HTMLElement).textContent ?? '';
                     const teamData = team(d);
@@ -257,27 +239,22 @@ export class SwissRenderer extends BracketTypeRenderer {
         };
 
         this.element
-            .selectAll('div.match-row-wrapper')
+            .selectAll('div.match-cell-wrapper')
             .data(matchGroup.matches, datum => (datum as Match).id)
             .join(
                 enter => {
                     const wrapperSelection = enter
                         .append('div')
-                        .classed('match-row-wrapper', true)
+                        .classed('match-cell-wrapper', true)
                         .call(setWinnerClasses);
 
                     wrapperSelection
                         .append('div')
-                        .classed('match-row', true)
+                        .classed('match-cell', true)
                         .call(drawTeamName, 'top', d => d.topTeam)
-                        .call(elem => {
-                            elem
-                                .append('div')
-                                .classed('match-row__scores', true)
-                                .call(drawScore, 'top', d => d.topTeam, d => d.bottomTeam)
-                                .call(drawScore, 'bottom', d => d.bottomTeam, d => d.topTeam)
-                        })
-                        .call(drawTeamName, 'bottom', d => d.bottomTeam);
+                        .call(drawScore, 'top', d => d.topTeam, d => d.bottomTeam)
+                        .call(drawTeamName, 'bottom', d => d.bottomTeam)
+                        .call(drawScore, 'bottom', d => d.bottomTeam, d => d.topTeam);
 
                     return this.onCellCreation ? wrapperSelection.call(this.onCellCreation) : wrapperSelection;
                 },
@@ -298,6 +275,5 @@ export class SwissRenderer extends BracketTypeRenderer {
             this.beforeReveal();
             await this.reveal();
         }
-        this.scroller.start();
     }
 }
