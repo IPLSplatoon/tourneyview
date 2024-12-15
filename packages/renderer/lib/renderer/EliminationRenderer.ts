@@ -80,8 +80,7 @@ export class EliminationRenderer extends BracketTypeRenderer {
         this.element = d3
             .create('div')
             .classed('elimination-renderer', true)
-            .style('position', 'relative')
-            .style('overflow', 'hidden');
+            .style('position', 'relative');
 
         this.matchCellWrapper = this.element
             .append('div')
