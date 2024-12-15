@@ -247,14 +247,26 @@ export class SingleEliminationRenderer {
 
         const setWinnerClasses = (selection: d3.Selection<HTMLDivElement, d3.HierarchyNode<Match>, HTMLDivElement, undefined>) => {
             selection.each(function(d) {
+                if (d.data.topTeam.id == null || d.data.bottomTeam.id == null) {
+                    this.classList.add('missing-team');
+                } else {
+                    this.classList.remove('missing-team');
+                }
+
                 if (d.data.state !== MatchState.IN_PROGRESS && d.data.state !== MatchState.COMPLETED) {
-                    this.classList.remove('top-team-winner', 'bottom-team-winner', 'in-progress');
+                    this.classList.remove('top-team-winner', 'bottom-team-winner', 'in-progress', 'completed');
                 } else {
                     if (d.data.state === MatchState.IN_PROGRESS) {
                         this.classList.add('in-progress');
-                        this.classList.remove('bottom-team-winner', 'top-team-winner');
+                        this.classList.remove('bottom-team-winner', 'top-team-winner', 'completed');
                     } else {
                         this.classList.remove('in-progress');
+
+                        if (d.data.state === MatchState.COMPLETED) {
+                            this.classList.add('completed');
+                        } else {
+                            this.classList.remove('completed');
+                        }
 
                         if (d.data.topTeam.isWinner) {
                             this.classList.add('top-team-winner');

@@ -130,7 +130,12 @@ export class SwissRenderer extends BracketTypeRenderer {
                         this.classList.remove('bottom-team-winner', 'top-team-winner', 'completed');
                     } else {
                         this.classList.remove('in-progress');
-                        this.classList.add('completed');
+
+                        if (d.state === MatchState.COMPLETED) {
+                            this.classList.add('completed');
+                        } else {
+                            this.classList.remove('completed');
+                        }
 
                         if (d.topTeam.isWinner) {
                             this.classList.add('top-team-winner');
