@@ -116,14 +116,21 @@ export class SwissRenderer extends BracketTypeRenderer {
 
         const setWinnerClasses = (selection: d3.Selection<HTMLDivElement, Match, HTMLDivElement, undefined>) => {
             selection.each(function(d) {
+                if (d.topTeam.id == null || d.bottomTeam.id == null) {
+                    this.classList.add('missing-team');
+                } else {
+                    this.classList.remove('missing-team');
+                }
+
                 if (d.state !== MatchState.IN_PROGRESS && d.state !== MatchState.COMPLETED) {
-                    this.classList.remove('top-team-winner', 'bottom-team-winner', 'in-progress');
+                    this.classList.remove('top-team-winner', 'bottom-team-winner', 'in-progress', 'completed');
                 } else {
                     if (d.state === MatchState.IN_PROGRESS) {
                         this.classList.add('in-progress');
-                        this.classList.remove('bottom-team-winner', 'top-team-winner');
+                        this.classList.remove('bottom-team-winner', 'top-team-winner', 'completed');
                     } else {
                         this.classList.remove('in-progress');
+                        this.classList.add('completed');
 
                         if (d.topTeam.isWinner) {
                             this.classList.add('top-team-winner');
