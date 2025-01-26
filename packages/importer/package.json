@@ -1,6 +1,6 @@
 {
   "name": "@tourneyview/importer",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Import tournament data from various sources",
   "exports": {
     ".": {
@@ -31,7 +31,7 @@
     "axios": "^1.4.0"
   },
   "dependencies": {
-    "@tourneyview/common": "^0.7.0"
+    "@tourneyview/common": "^0.8.0"
   },
   "publishConfig": {
     "access": "public"
