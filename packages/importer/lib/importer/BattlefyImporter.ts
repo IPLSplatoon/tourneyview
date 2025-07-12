@@ -237,6 +237,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                                     id: match.top.team?._id,
                                     name: match.top.team?.name,
                                     score: match.top.score,
+                                    seed: match.top.seedNumber,
                                     isDisqualified: false,
                                     isWinner: match.top.winner
                                 },
@@ -244,6 +245,7 @@ export class BattlefyImporter implements MatchImporter<BattlefyImportOpts> {
                                     id: match.bottom.team?._id,
                                     name: match.bottom.team?.name,
                                     score: match.bottom.score,
+                                    seed: match.bottom.seedNumber,
                                     isDisqualified: false,
                                     isWinner: match.bottom.winner
                                 }

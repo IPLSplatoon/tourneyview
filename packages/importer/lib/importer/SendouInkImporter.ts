@@ -94,7 +94,7 @@ interface SendouInkTournamentBracketDetailsResponse {
     }
 }
 
-type SendouInkgetTournamentTeamsResponse = {
+type SendouInkGetTournamentTeamsResponse = {
     id: number
     name: string
     registeredAt: string
@@ -274,9 +274,9 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
             });
         }
 
-        const teams = await this.axios.get<SendouInkgetTournamentTeamsResponse>(`/tournament/${opts.tournamentId}/teams`);
+        const teams = await this.axios.get<SendouInkGetTournamentTeamsResponse>(`/tournament/${opts.tournamentId}/teams`);
 
-        const teamMap: Map<number, SendouInkgetTournamentTeamsResponse[number]> = new Map();
+        const teamMap: Map<number, SendouInkGetTournamentTeamsResponse[number]> = new Map();
         for (const team of teams.data) {
             teamMap.set(team.id, team);
         }
@@ -312,6 +312,7 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
                     id: null,
                     name: null,
                     score: null,
+                    seed: null,
                     isDisqualified: false,
                     isWinner: false
                 }
@@ -322,6 +323,7 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
                 id: opponent.id,
                 name: participant?.name,
                 score: opponent.score,
+                seed: participant?.seed,
                 isDisqualified: false,
                 isWinner: opponent.result === 'win'
             }

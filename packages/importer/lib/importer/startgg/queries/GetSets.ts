@@ -24,6 +24,9 @@ query Sets($phaseId: ID!, $phaseGroupIds: [ID], $page: Int!, $perPage: Int!, $ro
               }
             }
           }
+          seed {
+            seedNum
+          }
           prereqType
           prereqId
         }
@@ -57,6 +60,9 @@ export interface GetSetsResponse {
                                     value: number
                                 }
                             }
+                        }
+                        seed?: {
+                            seedNum: number
                         }
                         prereqType: string
                         prereqId: string
