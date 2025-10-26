@@ -266,6 +266,7 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
         const maxLosersRoundNum = Math.max(...sets.filter(set => set.round < 0).map(set => set.round));
 
         const phaseGroup = getPhaseGroupsResponse.data.data.phase.phaseGroups.nodes[0];
+
         return {
             type: bracketType,
             name: getPhaseGroupsResponse.data.data.phase.name,
@@ -283,6 +284,10 @@ export class StartggImporter implements MatchImporter<StartggImportOpts> {
                         .filter(set => {
                             if (bracketType !== BracketType.DOUBLE_ELIMINATION) {
                                 return true;
+                            }
+
+                            if (set.fullRoundText.toLowerCase().includes("5th place tiebreak")) {
+                                return false;
                             }
 
                             if (opts.matchType === ContainedMatchType.WINNERS) {
