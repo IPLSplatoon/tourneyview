@@ -176,7 +176,7 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
                     gridItems.push({
                         type: 'teamName',
                         side: 'top',
-                        name: this.formatter.formatTeamName(team.name),
+                        name: this.formatter.formatTeamName(team),
                         isDisqualified: team.isDisqualified
                     });
                 } else if (x === 0) {
@@ -184,7 +184,7 @@ export class RoundRobinRenderer extends BracketTypeRenderer {
                     gridItems.push({
                         type: 'teamName',
                         side: 'left',
-                        name: this.formatter.formatTeamName(team.name),
+                        name: this.formatter.formatTeamName(team),
                         isDisqualified: team.isDisqualified
                     });
                 } else if (y === x) {

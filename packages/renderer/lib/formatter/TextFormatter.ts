@@ -10,5 +10,5 @@ export interface FormatScoreOpts {
 export interface TextFormatter {
     formatScore(opts: FormatScoreOpts): string
 
-    formatTeamName(name: string | undefined | null): string
+    formatTeamName(team: MatchTeam): string
 }

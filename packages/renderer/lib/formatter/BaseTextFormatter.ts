@@ -25,7 +25,7 @@ export class BaseTextFormatter implements TextFormatter {
         return String(opts.team.score);
     }
 
-    formatTeamName(name: string | undefined | null): string {
-        return name == null ? '-' : name;
+    formatTeamName(team: MatchTeam | null | undefined): string {
+        return team?.name == null ? '-' : team.name;
     }
 }

@@ -164,7 +164,7 @@ export class SwissRenderer extends BracketTypeRenderer {
                     that.animator.setTeamName(
                         this,
                         '',
-                        that.formatter.formatTeamName(teamData.name),
+                        that.formatter.formatTeamName(teamData),
                         teamData.isDisqualified,
                         BracketType.SWISS);
                 });
@@ -207,7 +207,7 @@ export class SwissRenderer extends BracketTypeRenderer {
                 .each(function (d) {
                     const currentText = (this as HTMLElement).textContent ?? '';
                     const teamData = team(d);
-                    const newText = that.formatter.formatTeamName(teamData.name);
+                    const newText = that.formatter.formatTeamName(teamData);
                     if (currentText !== newText) {
                         that.animator.animateTeamNameUpdate(
                             this as HTMLElement,
