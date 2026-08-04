@@ -1,6 +1,6 @@
 {
   "name": "@tourneyview/importer",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Import tournament data from various sources",
   "repository": "https://github.com/IPLSplatoon/tourneyview",
   "exports": {
@@ -32,7 +32,7 @@
     "axios": "^1.4.0"
   },
   "dependencies": {
-    "@tourneyview/common": "^0.10.1"
+    "@tourneyview/common": "^0.10.2"
   },
   "publishConfig": {
     "access": "public"

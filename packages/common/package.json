@@ -1,6 +1,6 @@
 {
   "name": "@tourneyview/common",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Common tourneyview types & functionality",
   "repository": "https://github.com/IPLSplatoon/tourneyview",
   "main": "dist/index.iife.js",
