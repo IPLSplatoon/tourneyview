@@ -2,6 +2,7 @@
   "name": "@tourneyview/renderer",
   "version": "0.10.1",
   "description": "Render tournament brackets in a browser",
+  "repository": "https://github.com/IPLSplatoon/tourneyview",
   "main": "dist/index.iife.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",

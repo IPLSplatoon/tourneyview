@@ -2,6 +2,7 @@
   "name": "@tourneyview/importer",
   "version": "0.10.1",
   "description": "Import tournament data from various sources",
+  "repository": "https://github.com/IPLSplatoon/tourneyview",
   "exports": {
     ".": {
       "browser": {

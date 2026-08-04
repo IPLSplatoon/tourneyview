@@ -1,5 +1,6 @@
 {
   "name": "tourneyview",
+  "repository": "https://github.com/IPLSplatoon/tourneyview",
   "private": true,
   "scripts": {
     "serve": "vite --config vite.config.base.ts --port 8080 ./example",
