@@ -76,7 +76,7 @@ When working without a builder, use the IIFE bundles of tourneyview (`dist/index
 ## Versioning
 
 Run `npx lerna version` to assign a new version number and push it to git. New versions may be manually published to npm 
-through GitHub actions. 
+through GitHub actions by running the release workflow on the desired version tag. 
 
 `npx lerna publish --no-private` will guide you through the rigmaroll of assigning a new version number to each package 
 and sending it off to git and npm. As of the last time this document was updated, this will not work if you use a 
