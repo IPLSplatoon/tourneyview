@@ -75,4 +75,9 @@ When working without a builder, use the IIFE bundles of tourneyview (`dist/index
 
 ## Versioning
 
-`npx lerna publish --no-private` will guide you through the rigmaroll of assigning a new version number to each package and sending it off to git and npm.
+Run `npx lerna version` to assign a new version number and push it to git. New versions may be manually published to npm 
+through GitHub actions. 
+
+`npx lerna publish --no-private` will guide you through the rigmaroll of assigning a new version number to each package 
+and sending it off to git and npm. As of the last time this document was updated, this will not work if you use a 
+security key to sign in to npm ([see here](https://github.com/lerna/lerna/issues/3273)).
