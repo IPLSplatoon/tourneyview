@@ -33,40 +33,26 @@ interface SendouInkTournamentDetailsResponse {
 type SendouInkMatchOpponent = {
     id: number
     score?: number
-    result?: 'win' | 'loss'
 } | null
-
-enum SendouInkMatchStatus {
-    // Match is waiting for results from both sides
-    Locked = 0,
-    // Match is waiting for result from one side
-    Waiting = 1,
-    // Both sides are ready to start
-    Ready = 2,
-    // Match is in progress
-    Running = 3,
-    Completed = 4
-}
 
 interface SendouInkTournamentBracketDetailsResponse {
     data: {
         stage: {
             id: number
-            name: string
+            name?: string
             number: number
-            tournament_id: number
             type: string
         }[]
         group: {
             id: number
             number: number
-            stage_id: number
+            stageId: number
         }[]
         round: {
             id: number
-            group_id: number
+            groupId: number
             number: number
-            stage_id: number
+            stageId: number
             maps: {
                 count: number
                 type: 'PLAY_ALL' | 'BEST_OF'
@@ -74,13 +60,13 @@ interface SendouInkTournamentBracketDetailsResponse {
         }[]
         match: {
             id: number
-            group_id: number
-            round_id: number
-            stage_id: number
+            groupId: number
+            roundId: number
+            stageId: number
             number: number
-            status: SendouInkMatchStatus
             opponent1: SendouInkMatchOpponent
             opponent2: SendouInkMatchOpponent
+            winnerSide: 'opponent1' | 'opponent2' | null
             lastGameFinishedAt?: number
             createdAt?: number | null
         }[]
@@ -241,7 +227,7 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
         let round: SendouInkTournamentBracketDetailsResponse['data']['round'][number] | null = null;
         if (bracketType === BracketType.SWISS) {
             const foundRound = bracketDetails.data.data.round.find(round => 
-                (opts.roundNumber == null || String(round.number) === String(opts.roundNumber)) && (opts.groupId == null || round.group_id === opts.groupId));
+                (opts.roundNumber == null || String(round.number) === String(opts.roundNumber)) && (opts.groupId == null || round.groupId === opts.groupId));
             if (foundRound == null) {
                 throw new Error(`Could not find round with round number ${opts.roundNumber} and group ID ${opts.groupId}`);
             }
@@ -253,10 +239,10 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
         let maxWinnersRoundNumber: number | undefined;
         if (bracketType === BracketType.DOUBLE_ELIMINATION && bracketDetails.data.data.group[2] != null) {
             const winnersBracketGroup = bracketDetails.data.data.group[0];
-            maxWinnersRoundNumber = Math.max(...bracketDetails.data.data.round.filter(round => round.group_id === winnersBracketGroup.id).map(round => round.number), 0);
+            maxWinnersRoundNumber = Math.max(...bracketDetails.data.data.round.filter(round => round.groupId === winnersBracketGroup.id).map(round => round.number), 0);
             const grandFinalsGroup = bracketDetails.data.data.group[2];
             bracketDetails.data.data.round.forEach(round => {
-                if (round.group_id === grandFinalsGroup.id) {
+                if (round.groupId === grandFinalsGroup.id) {
                     round.number = maxWinnersRoundNumber! + round.number;
                 }
             });
@@ -268,7 +254,7 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
             const maxRoundNumber = Math.max(...bracketDetails.data.data.round.map(round => round.number));
             const thirdPlaceMatchGroup = bracketDetails.data.data.group[1];
             bracketDetails.data.data.round.forEach(round => {
-                if (round.group_id === thirdPlaceMatchGroup.id) {
+                if (round.groupId === thirdPlaceMatchGroup.id) {
                     round.number = maxRoundNumber;
                 }
             });
@@ -291,29 +277,29 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
 
             if (isEliminationBracket) {
                 const matchInfoForRound = {
-                    matchCount: bracketDetails.data.data.match.filter(match => match.round_id === round.id).length,
+                    matchCount: bracketDetails.data.data.match.filter(match => match.roundId === round.id).length,
                     roundId: round.id
                 };
-                if (matchInfoPerRoundNumberInGroup.has(round.group_id)) {
-                    matchInfoPerRoundNumberInGroup.get(round.group_id)!.set(round.number, matchInfoForRound);
+                if (matchInfoPerRoundNumberInGroup.has(round.groupId)) {
+                    matchInfoPerRoundNumberInGroup.get(round.groupId)!.set(round.number, matchInfoForRound);
                 } else {
                     const matchInfoPerRoundNumber = new Map();
                     matchInfoPerRoundNumber.set(round.number, matchInfoForRound);
-                    matchInfoPerRoundNumberInGroup.set(round.group_id, matchInfoPerRoundNumber);
+                    matchInfoPerRoundNumberInGroup.set(round.groupId, matchInfoPerRoundNumber);
                 }
             }
         }
 
         const stage = bracketDetails.data.data.stage[0];
 
-        function getTeam(opponent: SendouInkMatchOpponent): MatchTeam {
+        function getTeam(opponent: SendouInkMatchOpponent, isWinner: boolean): MatchTeam {
             if (opponent == null || opponent.id == null) {
                 return {
                     id: null,
                     name: null,
                     score: null,
                     isDisqualified: false,
-                    isWinner: false
+                    isWinner
                 }
             }
 
@@ -323,12 +309,12 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
                 name: participant?.name,
                 score: opponent.score,
                 isDisqualified: false,
-                isWinner: opponent.result === 'win'
+                isWinner
             }
         }
 
         return {
-            name: stage.name,
+            name: stage.name ?? opts.tournamentName,
             type: bracketType,
             roundNumber: opts.roundNumber,
             eventName: opts.tournamentName,
@@ -336,7 +322,7 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
             matchGroups: [
                 {
                     id: opts.groupId == null ? String(stage.id) : String(opts.groupId),
-                    name: opts.groupId == null || !groupMap.has(opts.groupId) ? stage.name : `Group ${SendouInkImporter.groupNumberToLetter(groupMap.get(opts.groupId)!.number)}`,
+                    name: opts.groupId == null || !groupMap.has(opts.groupId) ? (stage.name ?? opts.tournamentName) : `Group ${SendouInkImporter.groupNumberToLetter(groupMap.get(opts.groupId)!.number)}`,
                     containedMatchType: opts.matchType,
                     matches: bracketDetails.data.data.match
                         .filter(match => {
@@ -345,7 +331,7 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
                             }
 
                             if (bracketType === BracketType.DOUBLE_ELIMINATION && opts.matchType !== ContainedMatchType.ALL_MATCHES) {
-                                const group = groupMap.get(match.group_id);
+                                const group = groupMap.get(match.groupId);
 
                                 if (
                                     group == null
@@ -356,22 +342,22 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
                                 }
                             }
 
-                            if (round != null && match.round_id !== round.id) {
+                            if (round != null && match.roundId !== round.id) {
                                 return false;
-                            } else if (opts.groupId != null && match.group_id !== opts.groupId) {
+                            } else if (opts.groupId != null && match.groupId !== opts.groupId) {
                                 return false;
                             }
 
                             return true;
                         })
                         .map(match => {
-                            const group = groupMap.get(match.group_id);
-                            const round = roundMap.get(match.round_id);
+                            const group = groupMap.get(match.groupId);
+                            const round = roundMap.get(match.roundId);
 
                             let nextMatchId: string | undefined = undefined;
                             const roundNumber = round?.number;
-                            if (isEliminationBracket && roundNumber != null && matchInfoPerRoundNumberInGroup.has(match.group_id)) {
-                                const matchInfoPerRoundNumber = matchInfoPerRoundNumberInGroup.get(match.group_id)!;
+                            if (isEliminationBracket && roundNumber != null && matchInfoPerRoundNumberInGroup.has(match.groupId)) {
+                                const matchInfoPerRoundNumber = matchInfoPerRoundNumberInGroup.get(match.groupId)!;
                                 const currentRoundInfo = matchInfoPerRoundNumber.get(roundNumber);
                                 const nextRoundInfo = bracketType === BracketType.DOUBLE_ELIMINATION && group?.number === 1 && roundNumber === maxWinnersRoundNumber
                                     ? matchInfoPerRoundNumberInGroup.get(bracketDetails.data.data.group[2]?.id)?.get(roundNumber + 1)
@@ -382,7 +368,7 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
                                     && nextRoundInfo != null && nextRoundInfo.matchCount > 0
                                 ) {
                                     const nextMatchNumber = Math.ceil(match.number / (currentRoundInfo.matchCount / nextRoundInfo.matchCount));
-                                    const nextMatch = bracketDetails.data.data.match.find(match => match.number === nextMatchNumber && match.round_id === nextRoundInfo.roundId);
+                                    const nextMatch = bracketDetails.data.data.match.find(match => match.number === nextMatchNumber && match.roundId === nextRoundInfo.roundId);
                                     nextMatchId = String(nextMatch?.id);
                                 }
                             }
@@ -394,9 +380,9 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
                                 type: isEliminationBracket && group != null
                                     ? group.number === 2 ? MatchType.LOSERS : MatchType.WINNERS
                                     : undefined,
-                                state: SendouInkImporter.parseMatchState(match.status),
-                                topTeam: getTeam(match.opponent1),
-                                bottomTeam: getTeam(match.opponent2)
+                                state: SendouInkImporter.parseMatchState(match),
+                                topTeam: getTeam(match.opponent1, match.winnerSide === 'opponent1'),
+                                bottomTeam: getTeam(match.opponent2, match.winnerSide === 'opponent2')
                             };
                         })
                 }
@@ -419,19 +405,28 @@ export class SendouInkImporter implements MatchImporter<SendouInkImportOpts> {
         }
     }
 
-    static parseMatchState(state: SendouInkMatchStatus): MatchState {
-        switch (state) {
-            case SendouInkMatchStatus.Waiting:
-            case SendouInkMatchStatus.Ready:
-            case SendouInkMatchStatus.Locked:
-                return MatchState.NOT_STARTED;
-            case SendouInkMatchStatus.Completed:
-                return MatchState.COMPLETED;
-            case SendouInkMatchStatus.Running:
-                return MatchState.IN_PROGRESS;
-            default:
-                return MatchState.UNKNOWN;
+    static parseMatchState(match: SendouInkTournamentBracketDetailsResponse['data']['match'][number]): MatchState {
+        if (match.winnerSide != null) {
+            return MatchState.COMPLETED;
         }
+
+        if (
+            match.opponent1 == null ||
+            match.opponent2 == null ||
+            match.opponent1?.score == null ||
+            match.opponent2?.score == null
+        ) {
+            return MatchState.NOT_STARTED;
+        }
+
+        if (
+            (match.opponent1?.score ?? 0) > 0 ||
+            (match.opponent2?.score ?? 0) > 0
+        ) {
+            return MatchState.IN_PROGRESS;
+        }
+
+        return MatchState.UNKNOWN;
     }
 
     static groupNumberToLetter(groupNumber: number) {
