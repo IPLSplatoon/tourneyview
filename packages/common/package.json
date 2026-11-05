@@ -3,8 +3,19 @@
   "version": "0.10.2",
   "description": "Common tourneyview types & functionality",
   "repository": "https://github.com/IPLSplatoon/tourneyview",
-  "main": "dist/index.iife.js",
-  "module": "dist/index.mjs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "browser": {
+        "import": "./dist/index.js",
+        "default": "./dist/index.iife.js"
+      },
+      "default": {
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      }
+    }
+  },
   "types": "dist/index.d.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",

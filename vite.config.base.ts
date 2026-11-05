@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import dtsPlugin from 'vite-plugin-dts';
 
 export default defineConfig(env => {
-    const pkgPath = resolve(process.env.PWD, 'package.json');
+    const pkgPath = resolve(process.env.PWD!, 'package.json');
     const pkg = require(pkgPath);
     const libName = pkg.build?.libName;
 
@@ -14,7 +14,7 @@ export default defineConfig(env => {
     return {
         build: {
             lib: {
-                entry: resolve(process.env.PWD, 'lib/index.ts'),
+                entry: resolve(process.env.PWD!, 'lib/index.ts'),
                 name: libName,
                 fileName: 'index',
                 formats: ['es', 'iife', 'cjs']
@@ -22,7 +22,7 @@ export default defineConfig(env => {
         },
         plugins: [
             dtsPlugin({
-                rollupTypes: true
+                bundleTypes: true
             })
         ]
     }

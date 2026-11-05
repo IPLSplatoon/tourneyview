@@ -3,9 +3,17 @@
   "version": "0.10.2",
   "description": "Render tournament brackets in a browser",
   "repository": "https://github.com/IPLSplatoon/tourneyview",
-  "main": "dist/index.iife.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "browser": {
+        "import": "./dist/index.js",
+        "default": "./dist/index.iife.js"
+      }
+    },
+    "./css/*": "./css/*"
+  },
+  "types": "./dist/index.d.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && vite build"

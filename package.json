@@ -1,6 +1,7 @@
 {
   "name": "tourneyview",
   "repository": "https://github.com/IPLSplatoon/tourneyview",
+  "type": "module",
   "private": true,
   "scripts": {
     "serve": "vite --config vite.config.base.ts --port 8080 ./example",
@@ -12,10 +13,11 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@microsoft/api-extractor": "^7.60.1",
     "@types/node": "^20.4.1",
     "lerna": "^10.0.0",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.2",
-    "vite-plugin-dts": "^3.1.1"
+    "typescript": "~6.0.3",
+    "vite": "^8.3.5",
+    "vite-plugin-dts": "^5.1.2"
   }
 }
