@@ -1,0 +1,1 @@
+export { installTestHarness } from './installTestHarness';

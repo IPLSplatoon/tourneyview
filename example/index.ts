@@ -1,4 +1,5 @@
 import '@tourneyview/renderer/css/base.css';
+import '@tourneyview/renderer-tests/css/base.css';
 import './example.css';
 import { BracketRenderer, D3BracketAnimator, revealOnObsSourceVisible } from '../packages/renderer/lib';
 import {
@@ -11,6 +12,7 @@ import type { MatchImporter } from '../packages/importer/lib';
 import { Bracket } from '@tourneyview/common';
 import { ClipboardImporter } from './scripts/ClipboardImporter';
 import { TextInputImporter } from './scripts/TextInputImporter';
+import { installTestHarness } from '../packages/renderer-tests/lib';
 
 import './scripts/SourceHandler';
 
@@ -207,5 +209,7 @@ renderer.element.style.width = '500px';
 renderer.element.style.resize = 'both';
 renderer.element.style.border = '1px solid red';
 document.body.appendChild(renderer.element);
+// @ts-ignore: ...
+installTestHarness(renderer);
 
 revealOnObsSourceVisible(renderer, 500);

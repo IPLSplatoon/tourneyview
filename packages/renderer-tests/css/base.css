@@ -1,0 +1,31 @@
+.tourneyview-renderer-test-harness {
+    position: absolute;
+    border: 2px solid #222;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    font-family: sans-serif;
+    width: 300px;
+    padding-bottom: 4px;
+}
+
+.tourneyview-renderer-test-harness > .title {
+    background-color: rgba(34, 34, 34, 0.9);
+    font-size: 1.2em;
+    font-weight: 700;
+    user-select: none;
+    cursor: move;
+}
+
+.tourneyview-renderer-test-harness > * {
+    padding: 4px 8px;
+}
+
+.tourneyview-renderer-test-harness > form {
+    padding-top: 8px;
+}
+
+.tourneyview-renderer-test-harness > form > button {
+    display: block;
+    margin-top: 4px;
+    min-width: 6em;
+}

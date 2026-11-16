@@ -1,0 +1,40 @@
+{
+  "name": "@tourneyview/renderer-tests",
+  "version": "0.10.2",
+  "description": "Test cases for graphics using tourneyview",
+  "repository": "https://github.com/IPLSplatoon/tourneyview",
+  "type": "module",
+  "exports": {
+    ".": {
+      "browser": {
+        "import": "./dist/index.js",
+        "default": "./dist/index.iife.js"
+      }
+    },
+    "./css/*": "./css/*"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && vite build"
+  },
+  "author": "inkfarer <inkfarer@inkfarer.com>",
+  "license": "MIT",
+  "files": [
+    "dist/**/*",
+    "css/**/*"
+  ],
+  "build": {
+    "libName": "TourneyviewRendererTests"
+  },
+  "dependencies": {
+    "@tourneyview/common": "^0.10.2"
+  },
+  "peerDependencies": {
+    "@tourneyview/renderer": "^0.10.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "bab4fda67c55a133893f24bfa063711463126357"
+}
