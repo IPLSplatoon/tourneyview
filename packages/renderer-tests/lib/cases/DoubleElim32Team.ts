@@ -13,7 +13,7 @@ export const DoubleElim32Team: Bracket = {
             containedMatchType: ContainedMatchType.ALL_MATCHES,
             matches: [
                 {
-                    id: '0_0',
+                    id: 'DoubleElim32Team_0_0',
                     roundNumber: 8,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -33,8 +33,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_1',
-                    nextMatchId: '0_0',
+                    id: 'DoubleElim32Team_0_1',
+                    nextMatchId: 'DoubleElim32Team_0_0',
                     roundNumber: 7,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -54,8 +54,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_2',
-                    nextMatchId: '0_1',
+                    id: 'DoubleElim32Team_0_2',
+                    nextMatchId: 'DoubleElim32Team_0_1',
                     roundNumber: 6,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -75,8 +75,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_3',
-                    nextMatchId: '0_1',
+                    id: 'DoubleElim32Team_0_3',
+                    nextMatchId: 'DoubleElim32Team_0_1',
                     roundNumber: 6,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -96,8 +96,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_4',
-                    nextMatchId: '0_2',
+                    id: 'DoubleElim32Team_0_4',
+                    nextMatchId: 'DoubleElim32Team_0_2',
                     roundNumber: 5,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -117,8 +117,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_5',
-                    nextMatchId: '0_3',
+                    id: 'DoubleElim32Team_0_5',
+                    nextMatchId: 'DoubleElim32Team_0_3',
                     roundNumber: 5,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -138,8 +138,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_6',
-                    nextMatchId: '0_4',
+                    id: 'DoubleElim32Team_0_6',
+                    nextMatchId: 'DoubleElim32Team_0_4',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -159,8 +159,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_7',
-                    nextMatchId: '0_4',
+                    id: 'DoubleElim32Team_0_7',
+                    nextMatchId: 'DoubleElim32Team_0_4',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -180,8 +180,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_8',
-                    nextMatchId: '0_5',
+                    id: 'DoubleElim32Team_0_8',
+                    nextMatchId: 'DoubleElim32Team_0_5',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -201,8 +201,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_9',
-                    nextMatchId: '0_5',
+                    id: 'DoubleElim32Team_0_9',
+                    nextMatchId: 'DoubleElim32Team_0_5',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -222,8 +222,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_10',
-                    nextMatchId: '0_6',
+                    id: 'DoubleElim32Team_0_10',
+                    nextMatchId: 'DoubleElim32Team_0_6',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -243,8 +243,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_11',
-                    nextMatchId: '0_7',
+                    id: 'DoubleElim32Team_0_11',
+                    nextMatchId: 'DoubleElim32Team_0_7',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -264,8 +264,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_12',
-                    nextMatchId: '0_8',
+                    id: 'DoubleElim32Team_0_12',
+                    nextMatchId: 'DoubleElim32Team_0_8',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -285,8 +285,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_13',
-                    nextMatchId: '0_9',
+                    id: 'DoubleElim32Team_0_13',
+                    nextMatchId: 'DoubleElim32Team_0_9',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -306,8 +306,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_14',
-                    nextMatchId: '0_10',
+                    id: 'DoubleElim32Team_0_14',
+                    nextMatchId: 'DoubleElim32Team_0_10',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -327,8 +327,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_15',
-                    nextMatchId: '0_10',
+                    id: 'DoubleElim32Team_0_15',
+                    nextMatchId: 'DoubleElim32Team_0_10',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -348,8 +348,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_16',
-                    nextMatchId: '0_11',
+                    id: 'DoubleElim32Team_0_16',
+                    nextMatchId: 'DoubleElim32Team_0_11',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -369,8 +369,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_17',
-                    nextMatchId: '0_11',
+                    id: 'DoubleElim32Team_0_17',
+                    nextMatchId: 'DoubleElim32Team_0_11',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -390,8 +390,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_18',
-                    nextMatchId: '0_12',
+                    id: 'DoubleElim32Team_0_18',
+                    nextMatchId: 'DoubleElim32Team_0_12',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -411,8 +411,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_19',
-                    nextMatchId: '0_12',
+                    id: 'DoubleElim32Team_0_19',
+                    nextMatchId: 'DoubleElim32Team_0_12',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -432,8 +432,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_20',
-                    nextMatchId: '0_13',
+                    id: 'DoubleElim32Team_0_20',
+                    nextMatchId: 'DoubleElim32Team_0_13',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -453,8 +453,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_21',
-                    nextMatchId: '0_13',
+                    id: 'DoubleElim32Team_0_21',
+                    nextMatchId: 'DoubleElim32Team_0_13',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -474,8 +474,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_22',
-                    nextMatchId: '0_14',
+                    id: 'DoubleElim32Team_0_22',
+                    nextMatchId: 'DoubleElim32Team_0_14',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -495,8 +495,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_23',
-                    nextMatchId: '0_15',
+                    id: 'DoubleElim32Team_0_23',
+                    nextMatchId: 'DoubleElim32Team_0_15',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -516,8 +516,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_24',
-                    nextMatchId: '0_16',
+                    id: 'DoubleElim32Team_0_24',
+                    nextMatchId: 'DoubleElim32Team_0_16',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -537,8 +537,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_25',
-                    nextMatchId: '0_17',
+                    id: 'DoubleElim32Team_0_25',
+                    nextMatchId: 'DoubleElim32Team_0_17',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -558,8 +558,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_26',
-                    nextMatchId: '0_18',
+                    id: 'DoubleElim32Team_0_26',
+                    nextMatchId: 'DoubleElim32Team_0_18',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -579,8 +579,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_27',
-                    nextMatchId: '0_19',
+                    id: 'DoubleElim32Team_0_27',
+                    nextMatchId: 'DoubleElim32Team_0_19',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -600,8 +600,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_28',
-                    nextMatchId: '0_20',
+                    id: 'DoubleElim32Team_0_28',
+                    nextMatchId: 'DoubleElim32Team_0_20',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -621,8 +621,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_29',
-                    nextMatchId: '0_21',
+                    id: 'DoubleElim32Team_0_29',
+                    nextMatchId: 'DoubleElim32Team_0_21',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -642,8 +642,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_30',
-                    nextMatchId: '0_46',
+                    id: 'DoubleElim32Team_0_30',
+                    nextMatchId: 'DoubleElim32Team_0_46',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -663,8 +663,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_31',
-                    nextMatchId: '0_46',
+                    id: 'DoubleElim32Team_0_31',
+                    nextMatchId: 'DoubleElim32Team_0_46',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -684,8 +684,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_32',
-                    nextMatchId: '0_47',
+                    id: 'DoubleElim32Team_0_32',
+                    nextMatchId: 'DoubleElim32Team_0_47',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -705,8 +705,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_33',
-                    nextMatchId: '0_47',
+                    id: 'DoubleElim32Team_0_33',
+                    nextMatchId: 'DoubleElim32Team_0_47',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -726,8 +726,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_34',
-                    nextMatchId: '0_48',
+                    id: 'DoubleElim32Team_0_34',
+                    nextMatchId: 'DoubleElim32Team_0_48',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -747,8 +747,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_35',
-                    nextMatchId: '0_48',
+                    id: 'DoubleElim32Team_0_35',
+                    nextMatchId: 'DoubleElim32Team_0_48',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -768,8 +768,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_36',
-                    nextMatchId: '0_49',
+                    id: 'DoubleElim32Team_0_36',
+                    nextMatchId: 'DoubleElim32Team_0_49',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -789,8 +789,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_37',
-                    nextMatchId: '0_49',
+                    id: 'DoubleElim32Team_0_37',
+                    nextMatchId: 'DoubleElim32Team_0_49',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -810,8 +810,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_38',
-                    nextMatchId: '0_50',
+                    id: 'DoubleElim32Team_0_38',
+                    nextMatchId: 'DoubleElim32Team_0_50',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -831,8 +831,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_39',
-                    nextMatchId: '0_50',
+                    id: 'DoubleElim32Team_0_39',
+                    nextMatchId: 'DoubleElim32Team_0_50',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -852,8 +852,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_40',
-                    nextMatchId: '0_51',
+                    id: 'DoubleElim32Team_0_40',
+                    nextMatchId: 'DoubleElim32Team_0_51',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -873,8 +873,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_41',
-                    nextMatchId: '0_51',
+                    id: 'DoubleElim32Team_0_41',
+                    nextMatchId: 'DoubleElim32Team_0_51',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -894,8 +894,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_42',
-                    nextMatchId: '0_52',
+                    id: 'DoubleElim32Team_0_42',
+                    nextMatchId: 'DoubleElim32Team_0_52',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -915,8 +915,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_43',
-                    nextMatchId: '0_52',
+                    id: 'DoubleElim32Team_0_43',
+                    nextMatchId: 'DoubleElim32Team_0_52',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -936,8 +936,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_44',
-                    nextMatchId: '0_53',
+                    id: 'DoubleElim32Team_0_44',
+                    nextMatchId: 'DoubleElim32Team_0_53',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -957,8 +957,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_45',
-                    nextMatchId: '0_53',
+                    id: 'DoubleElim32Team_0_45',
+                    nextMatchId: 'DoubleElim32Team_0_53',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -978,8 +978,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_46',
-                    nextMatchId: '0_56',
+                    id: 'DoubleElim32Team_0_46',
+                    nextMatchId: 'DoubleElim32Team_0_56',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -999,8 +999,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_47',
-                    nextMatchId: '0_56',
+                    id: 'DoubleElim32Team_0_47',
+                    nextMatchId: 'DoubleElim32Team_0_56',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1020,8 +1020,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_48',
-                    nextMatchId: '0_57',
+                    id: 'DoubleElim32Team_0_48',
+                    nextMatchId: 'DoubleElim32Team_0_57',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1041,8 +1041,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_49',
-                    nextMatchId: '0_57',
+                    id: 'DoubleElim32Team_0_49',
+                    nextMatchId: 'DoubleElim32Team_0_57',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1062,8 +1062,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_50',
-                    nextMatchId: '0_54',
+                    id: 'DoubleElim32Team_0_50',
+                    nextMatchId: 'DoubleElim32Team_0_54',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1083,8 +1083,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_51',
-                    nextMatchId: '0_54',
+                    id: 'DoubleElim32Team_0_51',
+                    nextMatchId: 'DoubleElim32Team_0_54',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1104,8 +1104,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_52',
-                    nextMatchId: '0_55',
+                    id: 'DoubleElim32Team_0_52',
+                    nextMatchId: 'DoubleElim32Team_0_55',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1125,8 +1125,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_53',
-                    nextMatchId: '0_55',
+                    id: 'DoubleElim32Team_0_53',
+                    nextMatchId: 'DoubleElim32Team_0_55',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1146,8 +1146,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_54',
-                    nextMatchId: '0_59',
+                    id: 'DoubleElim32Team_0_54',
+                    nextMatchId: 'DoubleElim32Team_0_59',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1167,8 +1167,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_55',
-                    nextMatchId: '0_59',
+                    id: 'DoubleElim32Team_0_55',
+                    nextMatchId: 'DoubleElim32Team_0_59',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1188,8 +1188,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_56',
-                    nextMatchId: '0_58',
+                    id: 'DoubleElim32Team_0_56',
+                    nextMatchId: 'DoubleElim32Team_0_58',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1209,8 +1209,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_57',
-                    nextMatchId: '0_58',
+                    id: 'DoubleElim32Team_0_57',
+                    nextMatchId: 'DoubleElim32Team_0_58',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1230,8 +1230,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_58',
-                    nextMatchId: '0_60',
+                    id: 'DoubleElim32Team_0_58',
+                    nextMatchId: 'DoubleElim32Team_0_60',
                     roundNumber: 4,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1251,8 +1251,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_59',
-                    nextMatchId: '0_60',
+                    id: 'DoubleElim32Team_0_59',
+                    nextMatchId: 'DoubleElim32Team_0_60',
                     roundNumber: 4,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1272,8 +1272,8 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_60',
-                    nextMatchId: '0_61',
+                    id: 'DoubleElim32Team_0_60',
+                    nextMatchId: 'DoubleElim32Team_0_61',
                     roundNumber: 5,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1293,7 +1293,7 @@ export const DoubleElim32Team: Bracket = {
                     }
                 },
                 {
-                    id: '0_61',
+                    id: 'DoubleElim32Team_0_61',
                     roundNumber: 6,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,

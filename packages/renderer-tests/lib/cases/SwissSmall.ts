@@ -12,7 +12,7 @@ export const SwissSmall: Bracket = {
             name: 'Match Group #1',
             matches: [
                 {
-                    id: '0_0',
+                    id: 'SwissSmall_0_0',
                     roundNumber: 4,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -31,7 +31,7 @@ export const SwissSmall: Bracket = {
                     }
                 },
                 {
-                    id: '0_1',
+                    id: 'SwissSmall_0_1',
                     roundNumber: 4,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -50,7 +50,7 @@ export const SwissSmall: Bracket = {
                     }
                 },
                 {
-                    id: '0_2',
+                    id: 'SwissSmall_0_2',
                     roundNumber: 4,
                     state: MatchState.COMPLETED,
                     topTeam: {

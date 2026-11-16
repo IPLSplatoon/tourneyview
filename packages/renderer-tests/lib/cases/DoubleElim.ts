@@ -13,7 +13,7 @@ export const DoubleElim: Bracket = {
             containedMatchType: ContainedMatchType.ALL_MATCHES,
             matches: [
                 {
-                    id: '0_0',
+                    id: 'DoubleElim_0_0',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -33,8 +33,8 @@ export const DoubleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_1',
-                    nextMatchId: '0_0',
+                    id: 'DoubleElim_0_1',
+                    nextMatchId: 'DoubleElim_0_0',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -54,8 +54,8 @@ export const DoubleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_2',
-                    nextMatchId: '0_1',
+                    id: 'DoubleElim_0_2',
+                    nextMatchId: 'DoubleElim_0_1',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -75,8 +75,8 @@ export const DoubleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_3',
-                    nextMatchId: '0_1',
+                    id: 'DoubleElim_0_3',
+                    nextMatchId: 'DoubleElim_0_1',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -96,8 +96,8 @@ export const DoubleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_4',
-                    nextMatchId: '0_2',
+                    id: 'DoubleElim_0_4',
+                    nextMatchId: 'DoubleElim_0_2',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -117,8 +117,8 @@ export const DoubleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_5',
-                    nextMatchId: '0_3',
+                    id: 'DoubleElim_0_5',
+                    nextMatchId: 'DoubleElim_0_3',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -138,8 +138,8 @@ export const DoubleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_6',
-                    nextMatchId: '0_8',
+                    id: 'DoubleElim_0_6',
+                    nextMatchId: 'DoubleElim_0_8',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -159,8 +159,8 @@ export const DoubleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_7',
-                    nextMatchId: '0_8',
+                    id: 'DoubleElim_0_7',
+                    nextMatchId: 'DoubleElim_0_8',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -180,8 +180,8 @@ export const DoubleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_8',
-                    nextMatchId: '0_9',
+                    id: 'DoubleElim_0_8',
+                    nextMatchId: 'DoubleElim_0_9',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -201,7 +201,7 @@ export const DoubleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_9',
+                    id: 'DoubleElim_0_9',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,

@@ -201,7 +201,8 @@ export function applyProgressRemovalStep(bracket: Bracket, step: ProgressRemoval
                     }
                 }
 
-                const override = matchOverrides[match.id];
+                const matchIdWithoutBase = match.id.substring(String(bracket.id).length + 1);
+                const override = matchOverrides[matchIdWithoutBase];
                 if (override != null) {
                     const result = { ...match };
 
@@ -227,7 +228,7 @@ export function applyProgressRemovalStep(bracket: Bracket, step: ProgressRemoval
                         result.state = override.state;
                     }
 
-                    delete matchOverrides[match.id];
+                    delete matchOverrides[matchIdWithoutBase];
                     return result;
                 }
 

@@ -12,8 +12,8 @@ export const SingleElim: Bracket = {
             name: 'Match Group #1',
             matches: [
                 {
-                    id: '0_0',
-                    nextMatchId: '0_4',
+                    id: 'SingleElim_0_0',
+                    nextMatchId: 'SingleElim_0_4',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -33,8 +33,8 @@ export const SingleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_1',
-                    nextMatchId: '0_4',
+                    id: 'SingleElim_0_1',
+                    nextMatchId: 'SingleElim_0_4',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -54,8 +54,8 @@ export const SingleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_2',
-                    nextMatchId: '0_5',
+                    id: 'SingleElim_0_2',
+                    nextMatchId: 'SingleElim_0_5',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -75,8 +75,8 @@ export const SingleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_3',
-                    nextMatchId: '0_5',
+                    id: 'SingleElim_0_3',
+                    nextMatchId: 'SingleElim_0_5',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -96,8 +96,8 @@ export const SingleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_4',
-                    nextMatchId: '0_6',
+                    id: 'SingleElim_0_4',
+                    nextMatchId: 'SingleElim_0_6',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -117,8 +117,8 @@ export const SingleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_5',
-                    nextMatchId: '0_6',
+                    id: 'SingleElim_0_5',
+                    nextMatchId: 'SingleElim_0_6',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -138,7 +138,7 @@ export const SingleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_6',
+                    id: 'SingleElim_0_6',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -158,7 +158,7 @@ export const SingleElim: Bracket = {
                     }
                 },
                 {
-                    id: '0_7',
+                    id: 'SingleElim_0_7',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,

@@ -13,7 +13,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
             containedMatchType: ContainedMatchType.ALL_MATCHES,
             matches: [
                 {
-                    id: '0_0',
+                    id: 'DoubleElimLargeGroupStage_0_0',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -33,7 +33,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_1',
+                    id: 'DoubleElimLargeGroupStage_0_1',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -53,7 +53,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_2',
+                    id: 'DoubleElimLargeGroupStage_0_2',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -73,7 +73,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_3',
+                    id: 'DoubleElimLargeGroupStage_0_3',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -93,7 +93,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_4',
+                    id: 'DoubleElimLargeGroupStage_0_4',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -113,7 +113,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_5',
+                    id: 'DoubleElimLargeGroupStage_0_5',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -133,7 +133,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_6',
+                    id: 'DoubleElimLargeGroupStage_0_6',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -153,7 +153,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_7',
+                    id: 'DoubleElimLargeGroupStage_0_7',
                     roundNumber: 4,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -173,8 +173,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_8',
-                    nextMatchId: '0_0',
+                    id: 'DoubleElimLargeGroupStage_0_8',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_0',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -194,8 +194,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_9',
-                    nextMatchId: '0_1',
+                    id: 'DoubleElimLargeGroupStage_0_9',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_1',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -215,8 +215,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_10',
-                    nextMatchId: '0_2',
+                    id: 'DoubleElimLargeGroupStage_0_10',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_2',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -236,8 +236,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_11',
-                    nextMatchId: '0_3',
+                    id: 'DoubleElimLargeGroupStage_0_11',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_3',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -257,8 +257,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_12',
-                    nextMatchId: '0_4',
+                    id: 'DoubleElimLargeGroupStage_0_12',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_4',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -278,8 +278,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_13',
-                    nextMatchId: '0_5',
+                    id: 'DoubleElimLargeGroupStage_0_13',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_5',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -299,8 +299,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_14',
-                    nextMatchId: '0_6',
+                    id: 'DoubleElimLargeGroupStage_0_14',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_6',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -320,8 +320,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_15',
-                    nextMatchId: '0_7',
+                    id: 'DoubleElimLargeGroupStage_0_15',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_7',
                     roundNumber: 3,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -341,8 +341,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_16',
-                    nextMatchId: '0_8',
+                    id: 'DoubleElimLargeGroupStage_0_16',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_8',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -362,8 +362,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_17',
-                    nextMatchId: '0_8',
+                    id: 'DoubleElimLargeGroupStage_0_17',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_8',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -383,8 +383,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_18',
-                    nextMatchId: '0_9',
+                    id: 'DoubleElimLargeGroupStage_0_18',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_9',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -404,8 +404,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_19',
-                    nextMatchId: '0_9',
+                    id: 'DoubleElimLargeGroupStage_0_19',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_9',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -425,8 +425,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_20',
-                    nextMatchId: '0_10',
+                    id: 'DoubleElimLargeGroupStage_0_20',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_10',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -446,8 +446,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_21',
-                    nextMatchId: '0_10',
+                    id: 'DoubleElimLargeGroupStage_0_21',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_10',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -467,8 +467,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_22',
-                    nextMatchId: '0_11',
+                    id: 'DoubleElimLargeGroupStage_0_22',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_11',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -488,8 +488,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_23',
-                    nextMatchId: '0_11',
+                    id: 'DoubleElimLargeGroupStage_0_23',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_11',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -509,8 +509,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_24',
-                    nextMatchId: '0_12',
+                    id: 'DoubleElimLargeGroupStage_0_24',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_12',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -530,8 +530,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_25',
-                    nextMatchId: '0_12',
+                    id: 'DoubleElimLargeGroupStage_0_25',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_12',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -551,8 +551,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_26',
-                    nextMatchId: '0_13',
+                    id: 'DoubleElimLargeGroupStage_0_26',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_13',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -572,8 +572,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_27',
-                    nextMatchId: '0_13',
+                    id: 'DoubleElimLargeGroupStage_0_27',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_13',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -593,8 +593,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_28',
-                    nextMatchId: '0_14',
+                    id: 'DoubleElimLargeGroupStage_0_28',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_14',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -614,8 +614,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_29',
-                    nextMatchId: '0_14',
+                    id: 'DoubleElimLargeGroupStage_0_29',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_14',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -635,8 +635,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_30',
-                    nextMatchId: '0_15',
+                    id: 'DoubleElimLargeGroupStage_0_30',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_15',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -656,8 +656,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_31',
-                    nextMatchId: '0_15',
+                    id: 'DoubleElimLargeGroupStage_0_31',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_15',
                     roundNumber: 2,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -677,8 +677,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_32',
-                    nextMatchId: '0_17',
+                    id: 'DoubleElimLargeGroupStage_0_32',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_17',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -698,8 +698,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_33',
-                    nextMatchId: '0_21',
+                    id: 'DoubleElimLargeGroupStage_0_33',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_21',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -719,8 +719,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_34',
-                    nextMatchId: '0_23',
+                    id: 'DoubleElimLargeGroupStage_0_34',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_23',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -740,8 +740,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_35',
-                    nextMatchId: '0_25',
+                    id: 'DoubleElimLargeGroupStage_0_35',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_25',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -761,8 +761,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_36',
-                    nextMatchId: '0_29',
+                    id: 'DoubleElimLargeGroupStage_0_36',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_29',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -782,8 +782,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_37',
-                    nextMatchId: '0_31',
+                    id: 'DoubleElimLargeGroupStage_0_37',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_31',
                     roundNumber: 1,
                     type: MatchType.LOSERS,
                     state: MatchState.COMPLETED,
@@ -803,8 +803,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_38',
-                    nextMatchId: '0_72',
+                    id: 'DoubleElimLargeGroupStage_0_38',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_72',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -824,8 +824,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_39',
-                    nextMatchId: '0_73',
+                    id: 'DoubleElimLargeGroupStage_0_39',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_73',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -845,8 +845,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_40',
-                    nextMatchId: '0_73',
+                    id: 'DoubleElimLargeGroupStage_0_40',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_73',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -866,8 +866,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_41',
-                    nextMatchId: '0_74',
+                    id: 'DoubleElimLargeGroupStage_0_41',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_74',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -887,8 +887,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_42',
-                    nextMatchId: '0_75',
+                    id: 'DoubleElimLargeGroupStage_0_42',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_75',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -908,8 +908,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_43',
-                    nextMatchId: '0_60',
+                    id: 'DoubleElimLargeGroupStage_0_43',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_60',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -929,8 +929,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_44',
-                    nextMatchId: '0_61',
+                    id: 'DoubleElimLargeGroupStage_0_44',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_61',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -950,8 +950,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_45',
-                    nextMatchId: '0_61',
+                    id: 'DoubleElimLargeGroupStage_0_45',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_61',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -971,8 +971,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_46',
-                    nextMatchId: '0_62',
+                    id: 'DoubleElimLargeGroupStage_0_46',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_62',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -992,8 +992,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_47',
-                    nextMatchId: '0_63',
+                    id: 'DoubleElimLargeGroupStage_0_47',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_63',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1013,8 +1013,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_48',
-                    nextMatchId: '0_63',
+                    id: 'DoubleElimLargeGroupStage_0_48',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_63',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1034,8 +1034,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_49',
-                    nextMatchId: '0_64',
+                    id: 'DoubleElimLargeGroupStage_0_49',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_64',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1055,8 +1055,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_50',
-                    nextMatchId: '0_65',
+                    id: 'DoubleElimLargeGroupStage_0_50',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_65',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1076,8 +1076,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_51',
-                    nextMatchId: '0_65',
+                    id: 'DoubleElimLargeGroupStage_0_51',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_65',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1097,8 +1097,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_52',
-                    nextMatchId: '0_66',
+                    id: 'DoubleElimLargeGroupStage_0_52',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_66',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1118,8 +1118,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_53',
-                    nextMatchId: '0_67',
+                    id: 'DoubleElimLargeGroupStage_0_53',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_67',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1139,8 +1139,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_54',
-                    nextMatchId: '0_68',
+                    id: 'DoubleElimLargeGroupStage_0_54',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_68',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1160,8 +1160,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_55',
-                    nextMatchId: '0_69',
+                    id: 'DoubleElimLargeGroupStage_0_55',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_69',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1181,8 +1181,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_56',
-                    nextMatchId: '0_69',
+                    id: 'DoubleElimLargeGroupStage_0_56',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_69',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1202,8 +1202,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_57',
-                    nextMatchId: '0_70',
+                    id: 'DoubleElimLargeGroupStage_0_57',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_70',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1223,8 +1223,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_58',
-                    nextMatchId: '0_71',
+                    id: 'DoubleElimLargeGroupStage_0_58',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_71',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1244,8 +1244,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_59',
-                    nextMatchId: '0_71',
+                    id: 'DoubleElimLargeGroupStage_0_59',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_71',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1265,8 +1265,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_60',
-                    nextMatchId: '0_78',
+                    id: 'DoubleElimLargeGroupStage_0_60',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_78',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1286,8 +1286,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_61',
-                    nextMatchId: '0_78',
+                    id: 'DoubleElimLargeGroupStage_0_61',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_78',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1307,8 +1307,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_62',
-                    nextMatchId: '0_79',
+                    id: 'DoubleElimLargeGroupStage_0_62',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_79',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1328,8 +1328,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_63',
-                    nextMatchId: '0_79',
+                    id: 'DoubleElimLargeGroupStage_0_63',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_79',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1349,8 +1349,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_64',
-                    nextMatchId: '0_80',
+                    id: 'DoubleElimLargeGroupStage_0_64',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_80',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1370,8 +1370,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_65',
-                    nextMatchId: '0_80',
+                    id: 'DoubleElimLargeGroupStage_0_65',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_80',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1391,8 +1391,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_66',
-                    nextMatchId: '0_81',
+                    id: 'DoubleElimLargeGroupStage_0_66',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_81',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1412,8 +1412,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_67',
-                    nextMatchId: '0_81',
+                    id: 'DoubleElimLargeGroupStage_0_67',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_81',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1433,8 +1433,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_68',
-                    nextMatchId: '0_82',
+                    id: 'DoubleElimLargeGroupStage_0_68',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_82',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1454,8 +1454,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_69',
-                    nextMatchId: '0_82',
+                    id: 'DoubleElimLargeGroupStage_0_69',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_82',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1475,8 +1475,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_70',
-                    nextMatchId: '0_83',
+                    id: 'DoubleElimLargeGroupStage_0_70',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_83',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1496,8 +1496,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_71',
-                    nextMatchId: '0_83',
+                    id: 'DoubleElimLargeGroupStage_0_71',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_83',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1517,8 +1517,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_72',
-                    nextMatchId: '0_76',
+                    id: 'DoubleElimLargeGroupStage_0_72',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_76',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1538,8 +1538,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_73',
-                    nextMatchId: '0_76',
+                    id: 'DoubleElimLargeGroupStage_0_73',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_76',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1559,8 +1559,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_74',
-                    nextMatchId: '0_77',
+                    id: 'DoubleElimLargeGroupStage_0_74',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_77',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1580,8 +1580,8 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_75',
-                    nextMatchId: '0_77',
+                    id: 'DoubleElimLargeGroupStage_0_75',
+                    nextMatchId: 'DoubleElimLargeGroupStage_0_77',
                     roundNumber: 2,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1601,7 +1601,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_76',
+                    id: 'DoubleElimLargeGroupStage_0_76',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1621,7 +1621,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_77',
+                    id: 'DoubleElimLargeGroupStage_0_77',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1641,7 +1641,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_78',
+                    id: 'DoubleElimLargeGroupStage_0_78',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1661,7 +1661,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_79',
+                    id: 'DoubleElimLargeGroupStage_0_79',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1681,7 +1681,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_80',
+                    id: 'DoubleElimLargeGroupStage_0_80',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1701,7 +1701,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_81',
+                    id: 'DoubleElimLargeGroupStage_0_81',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1721,7 +1721,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_82',
+                    id: 'DoubleElimLargeGroupStage_0_82',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -1741,7 +1741,7 @@ export const DoubleElimLargeGroupStage: Bracket = {
                     }
                 },
                 {
-                    id: '0_83',
+                    id: 'DoubleElimLargeGroupStage_0_83',
                     roundNumber: 3,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,

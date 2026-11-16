@@ -2,7 +2,7 @@ export function obfuscateBracket(bracket, baseId, verbose) {
     const oldIdToNewId = {};
     bracket.matchGroups.forEach((group, i) => {
         group.matches.forEach((match, j) => {
-            const newId = `${i}_${j}`;
+            const newId = `${baseId}_${i}_${j}`;
             oldIdToNewId[match.id] = newId;
             match.id = newId;
         });

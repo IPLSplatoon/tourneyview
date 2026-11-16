@@ -12,7 +12,7 @@ export const SingleElim1Round: Bracket = {
             name: 'Match Group #1',
             matches: [
                 {
-                    id: '0_0',
+                    id: 'SingleElim1Round_0_0',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -32,7 +32,7 @@ export const SingleElim1Round: Bracket = {
                     }
                 },
                 {
-                    id: '0_1',
+                    id: 'SingleElim1Round_0_1',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -52,7 +52,7 @@ export const SingleElim1Round: Bracket = {
                     }
                 },
                 {
-                    id: '0_2',
+                    id: 'SingleElim1Round_0_2',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,
@@ -72,7 +72,7 @@ export const SingleElim1Round: Bracket = {
                     }
                 },
                 {
-                    id: '0_3',
+                    id: 'SingleElim1Round_0_3',
                     roundNumber: 1,
                     type: MatchType.WINNERS,
                     state: MatchState.COMPLETED,

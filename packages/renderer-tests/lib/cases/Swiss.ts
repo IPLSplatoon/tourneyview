@@ -12,7 +12,7 @@ export const Swiss: Bracket = {
             name: 'Match Group #1',
             matches: [
                 {
-                    id: '0_0',
+                    id: 'Swiss_0_0',
                     roundNumber: 5,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -31,7 +31,7 @@ export const Swiss: Bracket = {
                     }
                 },
                 {
-                    id: '0_1',
+                    id: 'Swiss_0_1',
                     roundNumber: 5,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -50,7 +50,7 @@ export const Swiss: Bracket = {
                     }
                 },
                 {
-                    id: '0_2',
+                    id: 'Swiss_0_2',
                     roundNumber: 5,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -69,7 +69,7 @@ export const Swiss: Bracket = {
                     }
                 },
                 {
-                    id: '0_3',
+                    id: 'Swiss_0_3',
                     roundNumber: 5,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -88,7 +88,7 @@ export const Swiss: Bracket = {
                     }
                 },
                 {
-                    id: '0_4',
+                    id: 'Swiss_0_4',
                     roundNumber: 5,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -107,7 +107,7 @@ export const Swiss: Bracket = {
                     }
                 },
                 {
-                    id: '0_5',
+                    id: 'Swiss_0_5',
                     roundNumber: 5,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -126,7 +126,7 @@ export const Swiss: Bracket = {
                     }
                 },
                 {
-                    id: '0_6',
+                    id: 'Swiss_0_6',
                     roundNumber: 5,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -145,7 +145,7 @@ export const Swiss: Bracket = {
                     }
                 },
                 {
-                    id: '0_7',
+                    id: 'Swiss_0_7',
                     roundNumber: 5,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -164,7 +164,7 @@ export const Swiss: Bracket = {
                     }
                 },
                 {
-                    id: '0_8',
+                    id: 'Swiss_0_8',
                     roundNumber: 5,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -183,7 +183,7 @@ export const Swiss: Bracket = {
                     }
                 },
                 {
-                    id: '0_9',
+                    id: 'Swiss_0_9',
                     roundNumber: 5,
                     state: MatchState.COMPLETED,
                     topTeam: {
@@ -202,7 +202,7 @@ export const Swiss: Bracket = {
                     }
                 },
                 {
-                    id: '0_10',
+                    id: 'Swiss_0_10',
                     roundNumber: 5,
                     state: MatchState.COMPLETED,
                     topTeam: {
