@@ -1,6 +1,6 @@
 {
   "name": "@tourneyview/common",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "Common tourneyview types & functionality",
   "repository": "https://github.com/IPLSplatoon/tourneyview",
   "type": "module",

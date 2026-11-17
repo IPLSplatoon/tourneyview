@@ -1,6 +1,6 @@
 {
   "name": "@tourneyview/renderer-tests",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "Test cases for graphics using tourneyview",
   "repository": "https://github.com/IPLSplatoon/tourneyview",
   "type": "module",
@@ -28,7 +28,7 @@
     "libName": "TourneyviewRendererTests"
   },
   "dependencies": {
-    "@tourneyview/common": "^0.10.2"
+    "@tourneyview/common": "^0.10.3"
   },
   "peerDependencies": {
     "@tourneyview/renderer": "^0.10.2"
