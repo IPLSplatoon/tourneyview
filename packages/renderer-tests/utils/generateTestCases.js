@@ -47,6 +47,16 @@ const testCases = [
         },
     },
     {
+        id: 'DoubleElimSmall',
+        name: 'Small Double Elimination',
+        importer: startggImporter,
+        importOpts: {
+            phaseId: 2352793,
+            phaseGroupId: 3398382,
+            matchType: ContainedMatchType.ALL_MATCHES
+        },
+    },
+    {
         id: 'SingleElim1Round',
         name: 'Single Elimination (1 Round)',
         importer: startggImporter,
