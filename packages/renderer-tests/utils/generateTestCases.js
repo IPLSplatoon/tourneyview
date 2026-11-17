@@ -31,8 +31,8 @@ const testCases = [
         name: 'Double Elimination',
         importer: startggImporter,
         importOpts: {
-            phaseId: 2131690,
-            phaseGroupId: 3106483,
+            phaseId: 2351312,
+            phaseGroupId: 3396566,
             matchType: ContainedMatchType.ALL_MATCHES
         },
     },

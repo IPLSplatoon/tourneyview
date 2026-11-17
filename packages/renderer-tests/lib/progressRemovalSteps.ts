@@ -1,4 +1,4 @@
-import type { MatchTeam, Bracket } from '@tourneyview/common';
+import type { MatchTeam, Bracket, Match } from '@tourneyview/common';
 import { MatchState, BracketType, MatchType } from '@tourneyview/common';
 
 interface ProgressRemovalStep {
@@ -44,37 +44,54 @@ export const progressRemovalSteps: Record<string, ProgressRemovalStep[]> = {
                     state: MatchState.NOT_STARTED,
                     topTeam: null,
                     bottomTeam: { score: null }
+                },
+                '0_8': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isDisqualified: false },
+                    bottomTeam: { score: null, isWinner: false }
                 }
             }
         }
     ],
     'DoubleElim': [
         {
-            removeAfterWinnersRound: 2,
-            removeAfterLosersRound: 3,
+            removeAfterWinnersRound: 3,
+            removeAfterLosersRound: 4,
             matchOverrides: {
-                '0_1': {
+                '0_28': {
+                    state: MatchState.IN_PROGRESS,
+                    bottomTeam: { score: 1, isWinner: false }
+                },
+                '0_32': {
                     state: MatchState.NOT_STARTED,
-                    topTeam: null,
-                    bottomTeam: { score: null, isWinner: false }
+                    bottomTeam: {
+                        id: 5,
+                        name: 'Team 5',
+                        score: 0,
+                        isDisqualified: false,
+                        isWinner: false
+                    }
                 },
-                '0_8': {
+                '0_30': {
                     state: MatchState.IN_PROGRESS,
-                    topTeam: { score: 2, isWinner: false }
+                    topTeam: { score: 0, isWinner: false }
                 },
-                '0_2': {
+                '0_31': {
                     state: MatchState.IN_PROGRESS,
-                    bottomTeam: { score: 2, isWinner: false }
+                    topTeam: { score: 1, isWinner: false }
                 }
             }
         },
         {
-            removeAfterWinnersRound: 2,
-            removeAfterLosersRound: 3,
+            removeAfterWinnersRound: 5,
+            removeAfterLosersRound: 6,
             matchOverrides: {
                 '0_1': {
                     state: MatchState.IN_PROGRESS,
-                    topTeam: { score: 1 },
+                    bottomTeam: { score: 1, isWinner: false }
+                },
+                '0_34': {
+                    state: MatchState.IN_PROGRESS,
                     bottomTeam: { score: 2, isWinner: false }
                 }
             }
@@ -117,6 +134,46 @@ export const progressRemovalSteps: Record<string, ProgressRemovalStep[]> = {
                     state: MatchState.NOT_STARTED,
                     bottomTeam: { score: null },
                     topTeam: { score: null, isWinner: false }
+                },
+                '0_2': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isDisqualified: false },
+                    bottomTeam: { score: null, isWinner: false }
+                },
+                '0_7': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isDisqualified: false },
+                    bottomTeam: { score: null, isWinner: false }
+                },
+                '0_11': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isWinner: false },
+                    bottomTeam: { score: null, isDisqualified: false }
+                },
+                '0_18': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isWinner: false },
+                    bottomTeam: { score: null, isDisqualified: false }
+                },
+                '0_21': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isWinner: false },
+                    bottomTeam: { score: null, isDisqualified: false }
+                },
+                '0_26': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isWinner: false },
+                    bottomTeam: { score: null, isDisqualified: false }
+                },
+                '0_29': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isDisqualified: false },
+                    bottomTeam: { score: null, isWinner: false }
+                },
+                '0_33': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isDisqualified: false },
+                    bottomTeam: { score: null, isWinner: false }
                 }
             }
         },
@@ -126,6 +183,46 @@ export const progressRemovalSteps: Record<string, ProgressRemovalStep[]> = {
                     state: MatchState.IN_PROGRESS,
                     topTeam: { score: 1 },
                     bottomTeam: { score: 1, isWinner: false }
+                },
+                '0_2': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isDisqualified: false },
+                    bottomTeam: { score: null, isWinner: false }
+                },
+                '0_7': {
+                    state: MatchState.IN_PROGRESS,
+                    topTeam: { score: 0, isDisqualified: false },
+                    bottomTeam: { score: 0, isWinner: false }
+                },
+                '0_11': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isWinner: false },
+                    bottomTeam: { score: null, isDisqualified: false }
+                },
+                '0_18': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isWinner: false },
+                    bottomTeam: { score: null, isDisqualified: false }
+                },
+                '0_21': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isWinner: false },
+                    bottomTeam: { score: null, isDisqualified: false }
+                },
+                '0_26': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isWinner: false },
+                    bottomTeam: { score: null, isDisqualified: false }
+                },
+                '0_29': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isDisqualified: false },
+                    bottomTeam: { score: null, isWinner: false }
+                },
+                '0_33': {
+                    state: MatchState.NOT_STARTED,
+                    topTeam: { score: null, isDisqualified: false },
+                    bottomTeam: { score: null, isWinner: false }
                 }
             }
         }
@@ -168,6 +265,8 @@ export function applyProgressRemovalStep(bracket: Bracket, step: ProgressRemoval
         matchGroups: bracket.matchGroups.map((group, i) => ({
             ...group,
             matches: group.matches.map((match) => {
+                let result = { ...match };
+
                 if (bracket.type === BracketType.DOUBLE_ELIMINATION && (step.removeAfterWinnersRound != null || step.removeAfterLosersRound != null)) {
                     if (match.type == null) {
                         throw new Error(`Match ${match.id}: No match type`);
@@ -179,7 +278,7 @@ export function applyProgressRemovalStep(bracket: Bracket, step: ProgressRemoval
                         (step.removeAfterWinnersRound != null && match.type === MatchType.WINNERS && match.roundNumber > step.removeAfterWinnersRound) ||
                         (step.removeAfterLosersRound != null && match.type === MatchType.LOSERS && match.roundNumber > step.removeAfterLosersRound)
                     ) {
-                        return {
+                        result = {
                             ...match,
                             state: MatchState.NOT_STARTED,
                             topTeam: emptyMatchTeam,
@@ -192,7 +291,7 @@ export function applyProgressRemovalStep(bracket: Bracket, step: ProgressRemoval
                     }
 
                     if (match.roundNumber > step.removeAfterWinnersRound) {
-                        return {
+                        result = {
                             ...match,
                             state: MatchState.NOT_STARTED,
                             topTeam: emptyMatchTeam,
@@ -204,8 +303,6 @@ export function applyProgressRemovalStep(bracket: Bracket, step: ProgressRemoval
                 const matchIdWithoutBase = match.id.substring(String(bracket.id).length + 1);
                 const override = matchOverrides[matchIdWithoutBase];
                 if (override != null) {
-                    const result = { ...match };
-
                     if (override.topTeam === null) {
                         result.topTeam = emptyMatchTeam;
                     } else if (override.topTeam != null) {
@@ -229,10 +326,9 @@ export function applyProgressRemovalStep(bracket: Bracket, step: ProgressRemoval
                     }
 
                     delete matchOverrides[matchIdWithoutBase];
-                    return result;
                 }
 
-                return match;
+                return result;
             })
         }))
     };
