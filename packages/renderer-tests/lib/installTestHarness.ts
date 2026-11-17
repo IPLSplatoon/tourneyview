@@ -150,7 +150,15 @@ export function installTestHarness(renderer: BracketRenderer): void {
         bracketNameDisplay.setValue(formatBracketName(data));
         bracketTypeDisplay.setValue(getPrettyBracketType(data.type));
         eventNameDisplay.setValue(formatBracketEventName(data));
-        return realSetData(data);
+
+        console.time('setData returned in');
+        console.time('setData resolved in');
+        const promise = realSetData(data);
+        console.timeEnd('setData returned in');
+        return promise.then((result) => {
+            console.timeEnd('setData resolved in');
+            return result;
+        });
     };
 }
 
